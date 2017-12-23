@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-21 22:14:39
+/* Smarty version 3.1.30, created on 2017-12-23 10:30:11
   from "/home/Staging/workSpace/Juntos/application/views/templates/login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3be4f78bf3d7_26977827',
+  'unifunc' => 'content_5a3de2db850238_48447938',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '552e53703cbd468cd533833c8b6ecc4bad287a92' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/login.tpl',
-      1 => 1513874676,
+      1 => 1514005209,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3be4f78bf3d7_26977827 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
-
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
@@ -39,6 +38,11 @@ function content_5a3be4f78bf3d7_26977827 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="stylesheet" href="assets/plugins/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
+
+  <link rel="stylesheet" href="assets/css/custom-style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +64,11 @@ function content_5a3be4f78bf3d7_26977827 (Smarty_Internal_Template $_smarty_tpl)
   </style>
 </head>
 <body class="hold-transition login-page" ng-controller="login">
+<div id="loader-wrapper">
+  <div id="loader"></div>
+  <div class="loader-section section-left"></div>
+  <div class="loader-section section-right"></div>
+</div>
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>Juntos</b></a>
@@ -133,6 +142,13 @@ function content_5a3be4f78bf3d7_26977827 (Smarty_Internal_Template $_smarty_tpl)
 <!-- controller -->
 <?php echo '<script'; ?>
  src="assets/js/angular/controller/login.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
+  $(document).ready(function () {
+    $('body').addClass('loaded');
+  });
+<?php echo '</script'; ?>
 >
 <!-- Insert this line after script imports -->
 <?php echo '<script'; ?>

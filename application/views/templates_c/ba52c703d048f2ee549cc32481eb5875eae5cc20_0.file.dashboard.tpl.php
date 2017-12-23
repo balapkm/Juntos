@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-21 22:17:35
+/* Smarty version 3.1.30, created on 2017-12-23 16:27:05
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3be5a7b903a1_39568704',
+  'unifunc' => 'content_5a3e36819e6b33_55295759',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1513874853,
+      1 => 1514026623,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3be5a7b903a1_39568704 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3e36819e6b33_55295759 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <!DOCTYPE html>
@@ -82,9 +82,9 @@ function content_5a3be5a7b903a1_39568704 (Smarty_Internal_Template $_smarty_tpl)
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J</b>TS</span>
+      <span class="logo-mini"><b>T</b>MAR</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Juntos</b></span>
+      <span class="logo-lg"><b>TMAR & Sons</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -212,9 +212,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-      <div ui-view="div1"></div>      
+      <div ui-view="div1">
+        <!-- <h2>T.M ABDUL RAHMAN & SONS</h2> -->
+      </div>      
       <div ui-view="div2"></div>       
-      <div ui-view="div3"></div>   
+      <div ui-view="div3"></div>
+      <!-- <div>
+        
+      </div> -->
   </div>
   <!-- /.content-wrapper -->
 
