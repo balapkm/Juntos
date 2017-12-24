@@ -55,9 +55,76 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 			            'csv',
 			            'excel',
 			            {
-			                extend: 'pdf',
-			                messageBottom: "",
-			                messageTop : ($scope.formData['date'][0] === "")?"":"Date : "+$scope.formData['date'][0]+" - "+$scope.formData['date'][1]
+			                extend: 'pdfHtml5',
+			                text: 'Pdf',
+			                titleAttr: 'PDF',
+			                extension: ".pdf",
+			                filename: "Report",
+			                title: "",
+			                orientation: 'landscape',
+			                customize: function (doc) {
+
+			                    doc.styles.tableHeader = {
+			                        color: 'black',
+			                        background: 'grey',
+			                        alignment: 'center'
+			                    }
+
+			                    doc.styles = {
+			                        subheader: {
+			                            fontSize: 15,
+			                            bold: true,
+			                            color: 'black'
+			                        },
+			                        tableHeader: {
+			                            bold: true,
+			                            fontSize: 15,
+			                            color: 'black'
+			                        },
+			                        lastLine: {
+			                            bold: true,
+			                            fontSize: 15,
+			                            color: 'blue'
+			                        },
+			                        defaultStyle: {
+			                            fontSize: 15,
+			                            color: 'black'
+			                        }
+			                    }
+
+			                    doc['header']=(function() {
+									return {
+										columns: [
+											{
+												alignment: 'left',
+												text: ($scope.formData['date'][0] === "")?"":"Date : "+$scope.formData['date'][0]+" - "+$scope.formData['date'][1],
+												fontSize: 10,
+												bold: true
+											},
+											{
+												alignment: 'right',
+												fontSize: 10,
+												text: 'T.M.ABDUL RAHMAN & SONS',
+												bold: true
+											}
+										],
+										margin: 20
+									}
+								});
+
+			                    var objLayout = {};
+			                    objLayout['hLineWidth'] = function(i) { return .8; };
+			                    objLayout['vLineWidth'] = function(i) { return .5; };
+			                    objLayout['hLineColor'] = function(i) { return '#aaa'; };
+			                    objLayout['vLineColor'] = function(i) { return '#aaa'; };
+			                    objLayout['paddingLeft'] = function(i) { return 8; };
+			                    objLayout['paddingRight'] = function(i) { return 8; };
+			                    doc.content[0].layout = objLayout;
+
+			                },
+			                exportOptions: {
+			                    columns: ':visible'
+			                }
 			            }
 			        ]
 			    });
