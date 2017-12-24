@@ -10,7 +10,7 @@
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Add New</a></li>
+              <li class="active"><a href="#tab_1" data-toggle="tab" ng-click="addClick()">Add New</a></li>
               <li><a href="#tab_2" data-toggle="tab">Update Existing</a></li>
               <!-- <li><a href="#tab_3" data-toggle="tab">View</a></li> -->
             </ul>

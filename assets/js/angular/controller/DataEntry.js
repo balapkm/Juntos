@@ -49,6 +49,26 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     	serial_no_1 : ""
     };
 
+    $scope.addClick = function()
+    {
+        $scope.formData = {
+            leather : "",
+            query   : "",
+            description : "",
+            article : "",
+            color : "",
+            selection : "",
+            pieces : "",
+            sqfeet : "",
+            remarks : "",
+            serial_no : "",
+            date : ""
+        };
+        setTimeout(function(){
+            $("#serial_no_1").select2().select2("val","");
+        })
+    }
+
     $scope.addAction = function()
     {
     	$scope.formData['date']      = $('#datePicker').val();
@@ -97,11 +117,13 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 				    	remarks : "",
 				    	date : ""
 				    };
-				    $('#datePicker').val("");
-				    $("#description").select2().select2("val","");
-			    	$("#article").select2().select2("val","");
-			    	$("#color").select2().select2("val","");
-			    	$("#selection").select2().select2("val","");
+                    setTimeout(function(){
+                        $('#datePicker').val("");
+                        $("#description").select2().select2("val","");
+                        $("#article").select2().select2("val","");
+                        $("#color").select2().select2("val","");
+                        $("#selection").select2().select2("val","");
+                    },100);
 				    $scope.$apply();
 				  }
 				  else
