@@ -126,7 +126,12 @@
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
               	<div class="row" style="margin-top: 10px;">
-              		<div class="col-lg-4"></div>
+              		<div class="col-lg-2"></div>
+              		<div class="col-lg-3">
+              			<div class="form-group">
+		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" ng-model="formData['yearData']">
+		                </div>
+              		</div>
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  	<select class="form-control select2" style="width: 100%;" ng-model="formData['serial_no_1']" id="serial_no_1">
@@ -142,7 +147,7 @@
 		                  <input type="button" class="btn btn-primary" value="Search" ng-click="searchAction()">
 		                </div>
 		            </div>
-		            <div class="col-lg-3"></div>
+		            <div class="col-lg-1"></div>
 		        </div>
 		        <hr/>
 		        <div class="row" ng-if="showTable">

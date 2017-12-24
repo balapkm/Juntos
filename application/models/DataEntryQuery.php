@@ -67,8 +67,8 @@ class DataEntryQuery extends CI_Model
                     de.selection_id = sd.selection_id AND
                     de.description_id = dd.description_id AND
                     de.status = 'Y' AND
+                    year(de.date) = ".$data['yearData']." AND
                     de.serial_no = ".$data['serial_no_1']."";
-
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
