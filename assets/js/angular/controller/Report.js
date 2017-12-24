@@ -51,7 +51,14 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
     			$('#example').DataTable( {
 			        dom: 'Brfrtip',
 			        buttons: [
-			            'copy', 'csv', 'excel', 'pdf'
+			            'copy', 
+			            'csv',
+			            'excel',
+			            {
+			                extend: 'pdf',
+			                messageBottom: "",
+			                messageTop : ($scope.formData['date'][0] === "")?"":"Date : "+$scope.formData['date'][0]+" - "+$scope.formData['date'][1]
+			            }
 			        ]
 			    });
 			    $("body").niceScroll();
