@@ -18,7 +18,6 @@ class Service extends CI_Controller {
 		$controller_name = $this->input->post('controller_name');
 		$method_name     = $this->input->post('method_name');
 		$method_name     = empty($method_name)?"index":$method_name;
-
 		$file_name       = APPPATH."controllers/".$controller_name.".php";
 		if(!file_exists($file_name))
 		{

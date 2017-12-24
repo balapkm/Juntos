@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-24 16:35:49
+/* Smarty version 3.1.30, created on 2017-12-24 23:26:20
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3f8a0d48c667_19876147',
+  'unifunc' => 'content_5a3fea44cb5e40_56837534',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1514113540,
+      1 => 1514137651,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3f8a0d48c667_19876147 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3fea44cb5e40_56837534 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -217,7 +217,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
               	<div class="row" style="margin-top: 10px;">
-              		<div class="col-lg-4"></div>
+              		<div class="col-lg-2"></div>
+              		<div class="col-lg-3">
+              			<div class="form-group">
+		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" ng-model="formData['yearData']">
+		                </div>
+              		</div>
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  	<select class="form-control select2" style="width: 100%;" ng-model="formData['serial_no_1']" id="serial_no_1">
@@ -244,7 +249,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="button" class="btn btn-primary" value="Search" ng-click="searchAction()">
 		                </div>
 		            </div>
-		            <div class="col-lg-3"></div>
+		            <div class="col-lg-1"></div>
 		        </div>
 		        <hr/>
 		        <div class="row" ng-if="showTable">
