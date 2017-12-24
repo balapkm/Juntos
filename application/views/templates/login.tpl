@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Juntos | Log in</title>
+  <title>T.M.ABDUL RAHMAN & SONS | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -34,7 +34,7 @@
 <body class="hold-transition login-page" ng-controller="login">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Juntos</b></a>
+    <a href="#" style="font-size: 24px"><b>T.M.ABDUL RAHMAN & SONS</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -42,11 +42,11 @@
 
     <form>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" ng-model="formData.username" id="username">
+        <input type="text" class="form-control" placeholder="Username" ng-model="formData.username" id="username" autocomplete="false">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" ng-model="formData.password" id="password">
+        <input type="password" class="form-control" placeholder="Password" ng-model="formData.password" id="password" autocomplete="false">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

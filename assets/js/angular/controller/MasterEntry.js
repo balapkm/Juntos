@@ -10,7 +10,7 @@ app.controller('MasterEntry',function($scope,httpService,validateService,$state)
 	setTimeout(function(){
 		$('a[href="#'+tab_switch_name+'"]').trigger('click');
 	},100);
-	
+	$('.content-wrapper').css('background-color','#ecf0f5');
 
 	$scope.formData = {
 		field1 : ""

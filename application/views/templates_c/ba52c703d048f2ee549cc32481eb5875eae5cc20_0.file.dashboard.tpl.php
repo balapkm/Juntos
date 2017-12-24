@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-23 16:27:05
+/* Smarty version 3.1.30, created on 2017-12-24 12:17:24
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3e36819e6b33_55295759',
+  'unifunc' => 'content_5a3f4d7c2bc2a6_89989871',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1514026623,
+      1 => 1514097994,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3e36819e6b33_55295759 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3f4d7c2bc2a6_89989871 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ function content_5a3e36819e6b33_55295759 (Smarty_Internal_Template $_smarty_tpl)
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Juntos</title>
+  <title>T.M.ABDUL RAHMAN & SONS</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -115,7 +115,7 @@ function content_5a3e36819e6b33_55295759 (Smarty_Internal_Template $_smarty_tpl)
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat" ng-click="showChangePasswordModal()">Change Password</a>
                 </div>
                 <div class="pull-right">
                   <a href="" class="btn btn-default btn-flat" ng-click="logOut()">Sign out</a>
@@ -212,14 +212,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-      <div ui-view="div1">
-        <!-- <h2>T.M ABDUL RAHMAN & SONS</h2> -->
-      </div>      
-      <div ui-view="div2"></div>       
-      <div ui-view="div3"></div>
-      <!-- <div>
-        
-      </div> -->
+       <div ui-view="div1">
+            <section class="content">
+                <div class="text-center" style="position: relative;top: 150px;width: 440px;margin: auto;">
+                    <img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
+                    <h3 style="border-bottom: 4px solid #3c8dbc; ">T.M.ABDUL RAHMAN & SONS</h3>
+                    <p>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SONS</p>
+                </div>
+            </section>
+       </div>      
+       <div ui-view="div2"></div>       
+       <div ui-view="div3"></div>  
   </div>
   <!-- /.content-wrapper -->
 
@@ -230,6 +233,40 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     <strong>Copyright &copy; 2017  <a href="http://juntossoft.com">Juntos Software Solution.</a>.</strong> All rights
     reserved.
   </footer>
+
+    <div class="modal fade" id="changePassword">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Change Password</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Old Password</label>
+                  <input type="text" class="form-control" placeholder="Old Password" ng-model="formData['field1']" id="field1">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">New Password</label>
+                  <input type="text" class="form-control" placeholder="New Password" ng-model="formData['field2']" id="field2">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Confirm Password</label>
+                  <input type="text" class="form-control" placeholder="Confirm Password" ng-model="formData['field3']" id="field3">
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="changeAction()">Change</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
 
   <!-- Control Sidebar -->
   <!-- /.control-sidebar -->
@@ -368,5 +405,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 >
 </body>
 </html>
+
 <?php }
 }

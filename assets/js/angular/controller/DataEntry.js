@@ -4,12 +4,17 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 
 	$('#example2').DataTable();
 	$('.select2').select2();
+    var yearDate = new Date();
+
 	$('#datePicker,#datePicker1').datepicker({
       autoclose: true,
-      format: 'yyyy-mm-dd'
+      format: 'yyyy-mm-dd',
+      todayHighlight : true,
+      startDate : new Date(yearDate.getFullYear()+'-01-01'),
+      endDate : new Date(yearDate.getFullYear()+'-12-31')
     });
     $scope.formData = {};
-    
+    $('.content-wrapper').css('background-color','#ecf0f5');
     $('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 
@@ -71,7 +76,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     		if(data)
     		{
     			swal({
-				  title: "Do You Want Add More data for this serial_no?",
+				  title: "Do you want add more data for this serial_no?",
 				  text: "",
 				  icon: "warning",
 				  buttons: true,

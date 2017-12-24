@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-23 10:30:11
+/* Smarty version 3.1.30, created on 2017-12-24 12:52:02
   from "/home/Staging/workSpace/Juntos/application/views/templates/login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3de2db850238_48447938',
+  'unifunc' => 'content_5a3f559a3b3234_52403394',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '552e53703cbd468cd533833c8b6ecc4bad287a92' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/login.tpl',
-      1 => 1514005209,
+      1 => 1514097249,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,15 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3f559a3b3234_52403394 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
+
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Juntos | Log in</title>
+  <title>T.M.ABDUL RAHMAN & SONS | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -38,11 +39,6 @@ function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="stylesheet" href="assets/plugins/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
-
-  <link rel="stylesheet" href="assets/css/custom-style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,14 +60,9 @@ function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl)
   </style>
 </head>
 <body class="hold-transition login-page" ng-controller="login">
-<div id="loader-wrapper">
-  <div id="loader"></div>
-  <div class="loader-section section-left"></div>
-  <div class="loader-section section-right"></div>
-</div>
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Juntos</b></a>
+    <a href="#" style="font-size: 24px"><b>T.M.ABDUL RAHMAN & SONS</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -79,11 +70,11 @@ function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl)
 
     <form>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" ng-model="formData.username" id="username">
+        <input type="text" class="form-control" placeholder="Username" ng-model="formData.username" id="username" autocomplete="false">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" ng-model="formData.password" id="password">
+        <input type="password" class="form-control" placeholder="Password" ng-model="formData.password" id="password" autocomplete="false">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -142,13 +133,6 @@ function content_5a3de2db850238_48447938 (Smarty_Internal_Template $_smarty_tpl)
 <!-- controller -->
 <?php echo '<script'; ?>
  src="assets/js/angular/controller/login.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
->
-  $(document).ready(function () {
-    $('body').addClass('loaded');
-  });
-<?php echo '</script'; ?>
 >
 <!-- Insert this line after script imports -->
 <?php echo '<script'; ?>

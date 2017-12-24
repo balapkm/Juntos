@@ -12,6 +12,8 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 	});
 
+	$('.content-wrapper').css('background-color','#ecf0f5');
+
 	$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
 	      $(this).val('');
 	});
@@ -49,7 +51,7 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
     			$('#example').DataTable( {
 			        dom: 'Brfrtip',
 			        buttons: [
-			            'copy', 'csv', 'excel', 'pdf', 'print'
+			            'copy', 'csv', 'excel', 'pdf'
 			        ]
 			    });
 			    $("body").niceScroll();

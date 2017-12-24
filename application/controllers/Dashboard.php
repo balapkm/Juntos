@@ -28,4 +28,17 @@ class Dashboard extends CI_Controller
 	{
 		return $this->commonQuery->component_details();
 	}
+
+	public function changePassword()
+	{
+		$checkOldPassword = $this->commonQuery->checkOldPassword($this->data);
+		if(!$checkOldPassword)
+		{
+			return false;
+		}
+		else
+		{
+			return $this->commonQuery->changePassword($this->data);
+		}
+	}
 }
