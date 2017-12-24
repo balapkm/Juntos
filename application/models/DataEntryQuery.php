@@ -1,5 +1,5 @@
 <?php
-
+/*data entry*/
 class DataEntryQuery extends CI_Model 
 {
 
