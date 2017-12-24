@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-21 21:44:29
+/* Smarty version 3.1.30, created on 2017-12-24 16:35:49
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3bdde5d88f57_12735860',
+  'unifunc' => 'content_5a3f8a0d48c667_19876147',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1513797010,
+      1 => 1514113540,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3bdde5d88f57_12735860 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a3f8a0d48c667_19876147 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -34,7 +34,7 @@ function content_5a3bdde5d88f57_12735860 (Smarty_Internal_Template $_smarty_tpl)
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Add New</a></li>
+              <li class="active"><a href="#tab_1" data-toggle="tab" ng-click="addClick()">Add New</a></li>
               <li><a href="#tab_2" data-toggle="tab">Update Existing</a></li>
               <!-- <li><a href="#tab_3" data-toggle="tab">View</a></li> -->
             </ul>

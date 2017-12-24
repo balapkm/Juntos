@@ -168,7 +168,7 @@
                 <div class="text-center" style="position: relative;top: 150px;width: 440px;margin: auto;">
                     <img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
                     <h3 style="border-bottom: 4px solid #3c8dbc; ">T.M.ABDUL RAHMAN & SONS</h3>
-                    <p>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SONS</p>
+                    <p>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</p>
                 </div>
             </section>
        </div>      
