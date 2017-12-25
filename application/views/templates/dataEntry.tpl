@@ -28,13 +28,13 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Date</label>
-				                  <input type="text" class="form-control" id="datePicker" placeholder="Choose Date">
+				                  <input type="text" class="form-control" id="datePicker" placeholder="Choose Date" tabindex="1">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Leather</label>
-				                  <select class="form-control" ng-model="formData.leather" id="leather">
+				                  <select class="form-control" ng-model="formData.leather" id="leather" tabindex="2">
 				                  	<option value="">Choose Leather</option>
 				                  	[[foreach from=$leather key=k item=v]]
 				                  	<option value="[[$v]]">[[$v]]</option>
@@ -45,7 +45,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Query</label>
-				                  <select class="form-control" ng-model="formData.query" id="query">
+				                  <select class="form-control" ng-model="formData.query" id="query" tabindex="3">
 				                  	<option value="">Choose Query</option>
 				                  	[[foreach from=$query key=k item=v]]
 				                  	<option value="[[$v]]">[[$v]]</option>
@@ -56,7 +56,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  	<label for="exampleInputPassword1">Description</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description')" tabindex="4">
 				                  		<option value="">Choose Description</option>
 				                  	    [[foreach from=$description_data key=k item=v]]
 					                  		<option value="[[$v.description_id]]">[[$v.description_name]]</option>
@@ -67,7 +67,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Article</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.article" id="article" ng-change="clearRedMark('article')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.article" id="article" ng-change="clearRedMark('article')" tabindex="5">
 					                  	<option value="">Choose Article</option>
 				                  	    [[foreach from=$article_data key=k item=v]]
 					                  		<option value="[[$v.article_id]]">[[$v.article_name]]</option>
@@ -78,7 +78,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Color</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.color" id="color" ng-change="clearRedMark('color')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.color" id="color" ng-change="clearRedMark('color')" tabindex="6">
 					                  	<option value="">Choose Color</option>
 				                  	    [[foreach from=$color_data key=k item=v]]
 					                  		<option value="[[$v.color_id]]">[[$v.color_name]]</option>
@@ -89,7 +89,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Selection</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.selection" id="selection" ng-change="clearRedMark('selection')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.selection" id="selection" ng-change="clearRedMark('selection')" tabindex="7">
 					                  	<option value="">Choose Selection</option>
 				                  	    [[foreach from=$selection_data key=k item=v]]
 					                  		<option value="[[$v.selection_id]]">[[$v.selection_name]]</option>
@@ -100,19 +100,19 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Pieces</label>
-				                  <input type="number" class="form-control" id="pieces" placeholder="Enter Pieces" ng-model="formData.pieces">
+				                  <input type="text" class="form-control" id="pieces" placeholder="Enter Pieces" ng-model="formData.pieces" tabindex="8">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Sq.ft</label>
-				                  <input type="number" class="form-control" id="sqfeet" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
+				                  <input type="text" class="form-control" id="sqfeet" placeholder="Enter Sq.ft" ng-model="formData.sqfeet" tabindex="9">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Remark</label>
-				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks"></textarea>
+				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks" tabindex="10"></textarea>
 				                </div>
 				            </div>
 			            </div>
@@ -297,13 +297,13 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputPassword1">Pieces</label>
-		                  <input type="number" class="form-control" id="pieces1" placeholder="Enter Pieces" ng-model="formData.pieces">
+		                  <input type="text" class="form-control" id="pieces1" placeholder="Enter Pieces" ng-model="formData.pieces">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputPassword1">Sq.ft</label>
-		                  <input type="number" class="form-control" id="sqfeet1" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
+		                  <input type="text" class="form-control" id="sqfeet1" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
