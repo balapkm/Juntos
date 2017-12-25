@@ -6,6 +6,14 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 	$('.select2').select2();
     var yearDate = new Date();
 
+    $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+        $(this).one('focus', select2Focus)
+    })
+
+    function select2Focus() {
+        $(this).closest('.select2').prev('select').select2('open');
+    }
+
 	$('#datePicker,#datePicker1').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',

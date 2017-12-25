@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-24 23:26:20
+/* Smarty version 3.1.30, created on 2017-12-25 21:09:21
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3fea44cb5e40_56837534',
+  'unifunc' => 'content_5a411ba9c91c12_69792653',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1514137651,
+      1 => 1514216355,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3fea44cb5e40_56837534 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a411ba9c91c12_69792653 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -53,13 +53,13 @@ function content_5a3fea44cb5e40_56837534 (Smarty_Internal_Template $_smarty_tpl)
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Date</label>
-				                  <input type="text" class="form-control" id="datePicker" placeholder="Choose Date">
+				                  <input type="text" class="form-control" id="datePicker" placeholder="Choose Date" tabindex="1">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Leather</label>
-				                  <select class="form-control" ng-model="formData.leather" id="leather">
+				                  <select class="form-control" ng-model="formData.leather" id="leather" tabindex="2">
 				                  	<option value="">Choose Leather</option>
 				                  	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['leather']->value, 'v', false, 'k');
@@ -81,7 +81,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Query</label>
-				                  <select class="form-control" ng-model="formData.query" id="query">
+				                  <select class="form-control" ng-model="formData.query" id="query" tabindex="3">
 				                  	<option value="">Choose Query</option>
 				                  	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['query']->value, 'v', false, 'k');
@@ -103,7 +103,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  	<label for="exampleInputPassword1">Description</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description')" tabindex="4">
 				                  		<option value="">Choose Description</option>
 				                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['description_data']->value, 'v', false, 'k');
@@ -125,7 +125,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Article</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.article" id="article" ng-change="clearRedMark('article')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.article" id="article" ng-change="clearRedMark('article')" tabindex="5">
 					                  	<option value="">Choose Article</option>
 				                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['article_data']->value, 'v', false, 'k');
@@ -147,7 +147,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Color</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.color" id="color" ng-change="clearRedMark('color')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.color" id="color" ng-change="clearRedMark('color')" tabindex="6">
 					                  	<option value="">Choose Color</option>
 				                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['color_data']->value, 'v', false, 'k');
@@ -169,7 +169,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Selection</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.selection" id="selection" ng-change="clearRedMark('selection')">
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.selection" id="selection" ng-change="clearRedMark('selection')" tabindex="7">
 					                  	<option value="">Choose Selection</option>
 				                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['selection_data']->value, 'v', false, 'k');
@@ -191,19 +191,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Pieces</label>
-				                  <input type="number" class="form-control" id="pieces" placeholder="Enter Pieces" ng-model="formData.pieces">
+				                  <input type="text" class="form-control" id="pieces" placeholder="Enter Pieces" ng-model="formData.pieces" tabindex="8">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Sq.ft</label>
-				                  <input type="number" class="form-control" id="sqfeet" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
+				                  <input type="text" class="form-control" id="sqfeet" placeholder="Enter Sq.ft" ng-model="formData.sqfeet" tabindex="9">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputPassword1">Remark</label>
-				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks"></textarea>
+				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks" tabindex="10"></textarea>
 				                </div>
 				            </div>
 			            </div>
@@ -465,13 +465,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputPassword1">Pieces</label>
-		                  <input type="number" class="form-control" id="pieces1" placeholder="Enter Pieces" ng-model="formData.pieces">
+		                  <input type="text" class="form-control" id="pieces1" placeholder="Enter Pieces" ng-model="formData.pieces">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputPassword1">Sq.ft</label>
-		                  <input type="number" class="form-control" id="sqfeet1" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
+		                  <input type="text" class="form-control" id="sqfeet1" placeholder="Enter Sq.ft" ng-model="formData.sqfeet">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
