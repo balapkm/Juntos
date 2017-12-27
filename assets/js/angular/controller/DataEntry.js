@@ -240,8 +240,8 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     	$scope.formData = {
 	    	leather : data.leather,
 	    	query   : data.query,
-	    	pieces : parseInt(data.pieces),
-	    	sqfeet : parseInt(data.sqfeet),
+	    	pieces : (data.pieces),
+	    	sqfeet : (data.sqfeet),
 	    	remarks : data.remarks,
 	    	serial_no_modal : parseInt(data.serial_no),
 	    	date : data.date,
