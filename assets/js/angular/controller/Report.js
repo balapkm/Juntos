@@ -1,5 +1,5 @@
 app.controller('Report',function($scope,validateService,commonService,httpService){
-	$('#datePicker').daterangepicker({
+	$('#datePicker,#datePicker1').daterangepicker({
 	      autoUpdateInput: false,
 	      locale: {
 	          cancelLabel: 'Clear'
@@ -8,13 +8,13 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 	$('.select2').select2();
 	
 
-	$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
+	$('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
 	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 	});
 
 	$('.content-wrapper').css('background-color','#ecf0f5');
 
-	$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
+	$('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
 	      $(this).val('');
 	});
 	$scope.searchData       = [];
@@ -134,4 +134,34 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
     		
     	})
 	}
+
+	$scope.searchDataAction = function()
+	{
+		$scope.formData.date = $("#datePicker").val();
+		/*if(($scope.formData['serial_no'] === "") && ($scope.formData['date1'] === "") && ($scope.formData['query'] === "") && ($scope.formData['leather'] === ""))
+		{
+			validateService.displayMessage('error','Please choose any filter','Validation Error');
+			return false;
+		}*/
+		// $scope.formData.date1 = $scope.formData.date1.split('/');
+
+		var service_details = {
+	      method_name : "leatherSummaryReportSearcAction",
+	      controller_name : "Report",
+	      data : JSON.stringify($scope.formData)
+	    };
+    	// commonService.showLoader();
+
+    	httpService.callWebService(service_details).then(function(data){
+    		// commonService.hideLoader();
+    		console.log(data);
+
+    	});
+
+    }
+
+	$scope.clearRedMark = function(id)
+    {
+    	$("#"+id).parent('div').removeClass('has-error');
+    }
 })
