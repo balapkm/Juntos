@@ -42,7 +42,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 	{
 		setTimeout(function(){
 			$('a[href="#'+tab_switch_name+'"]').trigger('click');
-			$scope.formData['serial_no_1'] = serial_no;
+            $scope.formData['serial_no_1'] = serial_no;
 			$("#serial_no_1").select2().select2("val",serial_no);
 			$scope.searchAction();
 		},100);
@@ -294,7 +294,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     			validateService.displayMessage('success','Updated Successfully','');
     			$state.reload();
     			tab_switch_name = 'tab_2';
-    			serial_no = $scope.formData['serial_no'];
+                serial_no = $scope.formData['serial_no'];
     		}
     		else
     		{
