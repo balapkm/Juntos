@@ -22,6 +22,8 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
       endDate : new Date(yearDate.getFullYear()+'-12-31')*/
     });
 
+
+
     $('#datePicker3').datepicker({
         autoclose: true,
         format: " yyyy", // Notice the Extra space at the beginning
@@ -29,6 +31,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
         minViewMode: "years"
     });
 
+    $('#datePicker3').val(yearDate.getFullYear());
     $('#datePicker').val(yearDate.getFullYear()+'-'+(yearDate.getMonth()+1)+'-'+yearDate.getDate());
     $scope.formData = {};
     $('.content-wrapper').css('background-color','#ecf0f5');
@@ -166,6 +169,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 
     $scope.searchAction = function()
     {
+        $scope.formData['yearData'] = $('#datePicker3').val();
     	$scope.searchData = [];
     	$scope.showTable  = false;
         if(validateService.blank($scope.formData['serial_no_1'],"Please Choose serial no","serial_no_1")) return false;

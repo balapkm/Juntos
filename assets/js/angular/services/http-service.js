@@ -2,7 +2,9 @@ app.service('httpService',function($http,$q,commonService){
 
 	this.url = 'Service';
 
-	this.callWebService = function(data){
+	this.callWebService = function(data,type,url){
+		type     = (typeof type === 'undefined')?'data':'full';
+		this.url = (typeof url  === 'undefined')?this.url:url;
 		var deferred = $q.defer();
 		var config = {
 			headers : {
@@ -24,7 +26,14 @@ app.service('httpService',function($http,$q,commonService){
 			}
 			else
 			{
-				deferred.resolve(response.data['data']);
+				if(type === 'full')
+				{
+					deferred.resolve(response.data);
+				}
+				else
+				{
+					deferred.resolve(response.data['data']);
+				}
 			}
 		});
 		return deferred.promise;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-28 10:33:51
+/* Smarty version 3.1.30, created on 2018-01-01 12:07:08
   from "/home/Staging/workSpace/Juntos/application/views/templates/Report.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a447b374e8563_13924776',
+  'unifunc' => 'content_5a49d714dca0f1_70331277',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fed73e5a7e0593821cba836581d07ed8fedd8df1' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Report.tpl',
-      1 => 1514437429,
+      1 => 1514788626,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a447b374e8563_13924776 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a49d714dca0f1_70331277 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -161,7 +161,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			              		</div>
 					            <div class="col-lg-4">
 					                <div class="form-group">
-					                  	<select class="form-control" ng-model="formData.leather">
+					                  	<select class="form-control" ng-model="formData.leather" id="leather">
 						                  	<option value="">Choose Leather</option>
 						                  	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['leather']->value, 'v', false, 'k');
@@ -182,7 +182,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					            </div>
 					            <div class="col-lg-4">
 					                <div class="form-group">
-					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')">
+					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')" multiple="multiple">
 					                  		<option value="">Choose Description</option>
 					                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['description_data']->value, 'v', false, 'k');
@@ -203,7 +203,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					            </div>
 					            <div class="col-lg-12 text-center">
 					                <div class="form-group">
-					                  <input type="button" ng-click="searchDataAction()" class="btn btn-primary" value="Search">
+					                  <input type="button" ng-click="leatherSummarySearchDataAction()" class="btn btn-primary" value="Download">
 					                </div>
 					            </div>
 					            <div class="col-lg-3"></div>

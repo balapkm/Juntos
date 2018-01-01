@@ -135,29 +135,40 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
     	})
 	}
 
-	$scope.searchDataAction = function()
+	$scope.leatherSummarySearchDataAction = function()
 	{
-		$scope.formData.date = $("#datePicker").val();
-		/*if(($scope.formData['serial_no'] === "") && ($scope.formData['date1'] === "") && ($scope.formData['query'] === "") && ($scope.formData['leather'] === ""))
-		{
-			validateService.displayMessage('error','Please choose any filter','Validation Error');
-			return false;
-		}*/
-		// $scope.formData.date1 = $scope.formData.date1.split('/');
+		$scope.formData.date = $("#datePicker1").val();
 
+		if(validateService.blank($scope.formData['leather'],"Please Choose leather","leather")) return false;
+		if(validateService.blank($scope.formData['date'],"Please Choose date","datePicker1")) return false;
+		if(validateService.blank($scope.formData['description'],"Please Choose description","description")) return false;
+		
+		if($scope.formData['description'].length === 0)
+		{
+			validateService.displayMessage('error','Please choose description','Validation Error');
+			return false;
+		}
+		$scope.formData.date = $scope.formData.date.split('/');
+		var url = 'Report/leatherSummaryReportSearcAction?leather='+$scope.formData['leather']+"&date="+JSON.stringify($scope.formData['date'])+"&description="+JSON.stringify($scope.formData['description']);
+		
 		var service_details = {
-	      method_name : "leatherSummaryReportSearcAction",
+	      method_name : "leatherSummaryReportSearcAjaxAction",
 	      controller_name : "Report",
 	      data : JSON.stringify($scope.formData)
 	    };
-    	// commonService.showLoader();
-
+    	commonService.showLoader();
+    	
     	httpService.callWebService(service_details).then(function(data){
-    		// commonService.hideLoader();
-    		console.log(data);
-
+    		commonService.hideLoader();
+    		if(data.length === 0)
+    		{
+    			validateService.displayMessage('error','No Data Found..','Validation Error');
+    		}
+    		else
+    		{
+    			window.open(url);
+    		}
     	});
-
     }
 
 	$scope.clearRedMark = function(id)

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-25 21:09:21
+/* Smarty version 3.1.30, created on 2018-01-01 15:30:11
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a411ba9c91c12_69792653',
+  'unifunc' => 'content_5a4a06abc60044_64485409',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1514216355,
+      1 => 1514800793,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a411ba9c91c12_69792653 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4a06abc60044_64485409 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -220,7 +220,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
               		<div class="col-lg-2"></div>
               		<div class="col-lg-3">
               			<div class="form-group">
-		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" ng-model="formData['yearData']">
+		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" value="">
 		                </div>
               		</div>
             		<div class="col-lg-3">

@@ -104,7 +104,7 @@
 			              		</div>
 					            <div class="col-lg-4">
 					                <div class="form-group">
-					                  	<select class="form-control" ng-model="formData.leather">
+					                  	<select class="form-control" ng-model="formData.leather" id="leather">
 						                  	<option value="">Choose Leather</option>
 						                  	[[foreach from=$leather key=k item=v]]
 						                  	<option value="[[$v]]">[[$v]]</option>
@@ -114,7 +114,7 @@
 					            </div>
 					            <div class="col-lg-4">
 					                <div class="form-group">
-					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')">
+					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')" multiple="multiple">
 					                  		<option value="">Choose Description</option>
 					                  	    [[foreach from=$description_data key=k item=v]]
 						                  		<option value="[[$v.description_id]]">[[$v.description_name]]</option>
@@ -124,7 +124,7 @@
 					            </div>
 					            <div class="col-lg-12 text-center">
 					                <div class="form-group">
-					                  <input type="button" ng-click="searchDataAction()" class="btn btn-primary" value="Search">
+					                  <input type="button" ng-click="leatherSummarySearchDataAction()" class="btn btn-primary" value="Download">
 					                </div>
 					            </div>
 					            <div class="col-lg-3"></div>

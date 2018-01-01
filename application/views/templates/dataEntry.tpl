@@ -129,7 +129,7 @@
               		<div class="col-lg-2"></div>
               		<div class="col-lg-3">
               			<div class="form-group">
-		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" ng-model="formData['yearData']">
+		                  	<input type="text" id="datePicker3" placeholder="Choose Year" class="form-control" value="">
 		                </div>
               		</div>
             		<div class="col-lg-3">
