@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-24 23:15:58
+/* Smarty version 3.1.30, created on 2018-01-01 15:52:18
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3fe7d66519e5_58927841',
+  'unifunc' => 'content_5a4a0bdaad3cf6_67470477',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1514136592,
+      1 => 1514802103,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3fe7d66519e5_58927841 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4a0bdaad3cf6_67470477 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <!DOCTYPE html>
@@ -316,9 +316,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
  src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"><?php echo '</script'; ?>
 >
 <!-- NiceScroll -->
-<?php echo '<script'; ?>
+<!-- <?php echo '<script'; ?>
  src="assets/plugins/jquery.nicescroll-master/jquery.nicescroll.min.js"><?php echo '</script'; ?>
->
+> -->
 <!-- FastClick -->
 <?php echo '<script'; ?>
  src="assets/plugins/fastclick/lib/fastclick.js"><?php echo '</script'; ?>

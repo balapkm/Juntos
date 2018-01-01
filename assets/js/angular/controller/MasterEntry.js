@@ -4,8 +4,8 @@ app.controller('MasterEntry',function($scope,httpService,validateService,$state)
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 
-	$("body").niceScroll();
-    $("body").getNiceScroll().resize();
+	// $("body").niceScroll();
+ //    $("body").getNiceScroll().resize();
 
 	setTimeout(function(){
 		$('a[href="#'+tab_switch_name+'"]').trigger('click');

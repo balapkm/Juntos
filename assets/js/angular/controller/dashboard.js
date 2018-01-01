@@ -20,8 +20,8 @@ app.controller('dashboard',function($scope,commonService,validateService,httpSer
         field3 : ""
     }
 
-    $("body").niceScroll();
-    $("body").getNiceScroll().resize();
+    /*$("body").niceScroll();
+    $("body").getNiceScroll().resize();*/
 
     $scope.logOut = function()
     {

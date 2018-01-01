@@ -243,7 +243,7 @@
 <!-- SlimScroll -->
 <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- NiceScroll -->
-<script src="assets/plugins/jquery.nicescroll-master/jquery.nicescroll.min.js"></script>
+<!-- <script src="assets/plugins/jquery.nicescroll-master/jquery.nicescroll.min.js"></script> -->
 <!-- FastClick -->
 <script src="assets/plugins/fastclick/lib/fastclick.js"></script>
 <!-- Select2 -->

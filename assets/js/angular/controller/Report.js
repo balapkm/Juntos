@@ -128,8 +128,8 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 			            }
 			        ]
 			    });
-			    $("body").niceScroll();
-    			$("body").getNiceScroll().resize();
+			   /* $("body").niceScroll();
+    			$("body").getNiceScroll().resize();*/
     		},100);
     		
     	})

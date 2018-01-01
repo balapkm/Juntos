@@ -38,8 +38,8 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     $('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 
-	$("body").niceScroll();
-    $("body").getNiceScroll().resize();
+	// $("body").niceScroll();
+ //    $("body").getNiceScroll().resize();
 
 	if(tab_switch_name === 'tab_2')
 	{
