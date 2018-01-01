@@ -163,7 +163,7 @@ class Report extends CI_Controller
 						$getActiveSheet->setCellValue('D'.(string)($rowCount),$v2['sum_pieces']);
 						$getActiveSheet->setCellValue('E'.(string)($rowCount),$v2['sum_sqfeet']);
 						$getActiveSheet->setCellValue('F'.(string)($rowCount),"");
-						$getActiveSheet->setCellValue('G'.(string)($rowCount),"0.00");
+						$getActiveSheet->setCellValue('G'.(string)($rowCount),"=E".(string)($rowCount)."*F".(string)($rowCount)."");
 						$piecesCount += $v2['sum_pieces'];
 						$sqfeetCount += $v2['sum_sqfeet'];
 					}
