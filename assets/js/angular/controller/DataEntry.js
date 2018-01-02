@@ -10,9 +10,11 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
-      startDate : new Date(yearDate.getFullYear()+'-01-01'),
-      endDate : new Date(yearDate.getFullYear()+'-12-31')
+      /*startDate : new Date(yearDate.getFullYear()+'-01-01'),
+      endDate : new Date(yearDate.getFullYear()+'-12-31')*/
     });
+
+    $('#datePicker').val(yearDate.getFullYear()+'-'+(yearDate.getMonth()+1)+'-'+yearDate.getDate());
     $scope.formData = {};
     $('.content-wrapper').css('background-color','#ecf0f5');
     $('.modal-backdrop').css('display','none');

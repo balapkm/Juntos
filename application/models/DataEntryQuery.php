@@ -15,7 +15,7 @@ class DataEntryQuery extends CI_Model
 
     public function getSerialNumberHighest()
     {
-        $sql   = 'select max(serial_no) as max_serial_no from data_entry';
+        $sql   = 'select max(serial_no) as max_serial_no from data_entry where year(date) ='.date('Y');
         $data  = $this->db->query($sql)->result_array();
         if(empty($data[0]['max_serial_no']))
         {
