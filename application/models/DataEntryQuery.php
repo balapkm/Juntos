@@ -13,6 +13,44 @@ class DataEntryQuery extends CI_Model
     	return json_decode(json_encode($data),1);
     }
 
+    public function getAddTableData($data)
+    {
+        $sql = "
+                SELECT
+                    data_entry_id,
+                    serial_no,
+                    article_name,
+                    de.article_id,
+                    selection_name,
+                    de.selection_id,
+                    description_name,
+                    de.description_id,
+                    color_name,
+                    de.color_id,
+                    pieces,
+                    date,
+                    leather,
+                    query,
+                    sqfeet,
+                    remarks
+                FROM 
+                    article_details ad,
+                    color_details cd,
+                    selection_details sd,
+                    description_details dd,
+                    data_entry de
+                WHERE
+                    de.article_id = ad.article_id AND
+                    de.color_id   = cd.color_id AND
+                    de.selection_id = sd.selection_id AND
+                    de.description_id = dd.description_id AND
+                    de.status = 'Y' AND
+                    year(de.date) = ".date("Y",strtotime($data['date']))." AND
+                    de.serial_no = ".$data['serial_no']."";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function getSerialNumberHighest()
     {
         $sql   = 'select max(serial_no) as max_serial_no from data_entry where year(date) ='.date('Y');

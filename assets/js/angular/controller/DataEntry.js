@@ -1,18 +1,20 @@
 var tab_switch_name = 'tab_1';
 var serial_no = null;
+function select2Focus() {
+    $(this).closest('.select2').prev('select').select2('open');
+    $(this).closest('.select2-selection').addClass('border-focus');
+}
+
 app.controller('DataEntry',function($scope,validateService,httpService,$state,commonService){
 
-	$('#example2').DataTable();
+	$('#example2,#example3').DataTable();
 	$('.select2').select2();
     var yearDate = new Date();
 
     $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
         $(this).one('focus', select2Focus)
+        $(this).closest('.select2-selection').removeClass('border-focus');
     })
-
-    function select2Focus() {
-        $(this).closest('.select2').prev('select').select2('open');
-    }
 
 	$('#datePicker,#datePicker1').datepicker({
       autoclose: true,
@@ -115,7 +117,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     	httpService.callWebService(service_details).then(function(data){
     		if(data)
     		{
-    			swal({
+            	swal({
 				  title: "Do you want add more data for this serial_no?",
 				  text: "",
 				  icon: "warning",
@@ -129,22 +131,40 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 				    	leather : "",
 				    	query   : "",
 				    	description : "",
+                        serial_no : $('#serial_no').val(),
 				    	article : "",
 				    	color : "",
 				    	selection : "",
 				    	pieces : "",
 				    	sqfeet : "",
 				    	remarks : "",
-				    	date : ""
+				    	date : $('#datePicker').val()
 				    };
+                    var yearDate = new Date();
                     setTimeout(function(){
-                        $('#datePicker').val("");
+                        $('#datePicker').val(yearDate.getFullYear()+'-'+(yearDate.getMonth()+1)+'-'+yearDate.getDate());
                         $("#description").select2().select2("val","");
                         $("#article").select2().select2("val","");
                         $("#color").select2().select2("val","");
                         $("#selection").select2().select2("val","");
+                        $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+                            $(this).one('focus', select2Focus)
+                            $(this).closest('.select2-selection').removeClass('border-focus');
+                        });
                     },100);
 				    $scope.$apply();
+                    var service_details = {
+                      method_name : "getAddTableData",
+                      controller_name : "DataEntry",
+                      data : JSON.stringify($scope.formData)
+                    };
+                    
+                    httpService.callWebService(service_details).then(function(data){
+                        $("#addTableData").html(data);
+                        setTimeout(function(){
+                            $('#example3').DataTable();
+                        },50);
+                    });
 				  }
 				  else
 				  {
@@ -252,12 +272,19 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 	    	id : data.data_entry_id
 	    };
 
+        
+
 	    setTimeout(function(){
-	    	$("#description1").select2().select2("val",data.description_id);
-	    	$("#article1").select2().select2("val",data.article_id);
-	    	$("#color1").select2().select2("val",data.color_id);
-	    	$("#selection1").select2().select2("val",data.selection_id);
+            $('#description1').select2().val(data.description_id).trigger("change");
+            $('#article1').select2().val(data.article_id).trigger("change");
+            $('#color1').select2().val(data.color_id).trigger("change");
+            $('#selection1').select2().val(data.selection_id).trigger("change");
 	    	$("#datePicker1").val(data.date);
+
+            $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+                $(this).one('focus', select2Focus);
+                $(this).closest('.select2-selection').removeClass('border-focus');
+            });
 	    },100)
 	    
 	    

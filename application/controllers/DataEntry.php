@@ -33,6 +33,12 @@ class DataEntry extends CI_Controller
 		$this->data['query']   = $this->config->item('query', 'leather_details');
 	}
 
+	public function getAddTableData()
+	{
+		$this->data['add_table_data'] = $this->DataEntryQuery->getAddTableData($this->data);
+		return $this->mysmarty->view('addTableData.tpl',$this->data,TRUE);
+	}
+
 	public function addAction()
 	{
 		return $this->DataEntryQuery->insertDataEntry($this->data);

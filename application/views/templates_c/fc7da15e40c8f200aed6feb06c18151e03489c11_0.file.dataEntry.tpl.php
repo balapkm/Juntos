@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 15:30:11
+/* Smarty version 3.1.30, created on 2018-01-05 13:34:08
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4a06abc60044_64485409',
+  'unifunc' => 'content_5a4f3178059ff8_48513534',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1514800793,
+      1 => 1515139445,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a4a06abc60044_64485409 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4f3178059ff8_48513534 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -206,12 +206,21 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks" tabindex="10"></textarea>
 				                </div>
 				            </div>
+				            <div class="col-lg-12 text-center">
+				            	<button type="submit" class="btn btn-primary" ng-click="addAction()" tabindex="11">Add</button>
+				            </div>
 			            </div>
+			            <hr/>
+			            <div class="row">
+				        	<div class="col-lg-12" id="addTableData">
+				                
+				            </div>
+			        	</div>
 		            </div>
 	              	<!-- /.box-body -->
-	              	<div class="box-footer text-center">
+	              	<!-- <div class="box-footer text-center">
 	                	<button type="submit" class="btn btn-primary" ng-click="addAction()">Add</button>
-	              	</div>
+	              	</div> -->
 	            </form>
               </div>
               <!-- /.tab-pane -->

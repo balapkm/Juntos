@@ -115,12 +115,21 @@
 				                  <textarea class="form-control" id="remarks" ng-model="formData.remarks" tabindex="10"></textarea>
 				                </div>
 				            </div>
+				            <div class="col-lg-12 text-center">
+				            	<button type="submit" class="btn btn-primary" ng-click="addAction()" tabindex="11">Add</button>
+				            </div>
 			            </div>
+			            <hr/>
+			            <div class="row">
+				        	<div class="col-lg-12" id="addTableData">
+				                
+				            </div>
+			        	</div>
 		            </div>
 	              	<!-- /.box-body -->
-	              	<div class="box-footer text-center">
+	              	<!-- <div class="box-footer text-center">
 	                	<button type="submit" class="btn btn-primary" ng-click="addAction()">Add</button>
-	              	</div>
+	              	</div> -->
 	            </form>
               </div>
               <!-- /.tab-pane -->

@@ -141,9 +141,14 @@
     color: #222222;
 } 
 
-.form-control:focus 
+.form-control:focus
 {
     border-color: #333;
     border: 2px solid;
+    box-shadow: none;
+}
+
+.border-focus{
+    border: 2px solid #333 !important;
     box-shadow: none;
 }
