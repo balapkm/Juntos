@@ -33,6 +33,11 @@ class DataEntry extends CI_Controller
 		$this->data['query']   = $this->config->item('query', 'leather_details');
 	}
 
+	public function updateDataEntryForAllSerialNo()
+	{
+		return $this->DataEntryQuery->updateDataEntryForAllSerialNo($this->data);
+	}
+
 	public function getAddTableData()
 	{
 		$this->data['add_table_data'] = $this->DataEntryQuery->getAddTableData($this->data);

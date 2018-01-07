@@ -246,12 +246,45 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     	httpService.callWebService(service_details).then(function(data){
     		if(data)
     		{
-    			$('#modal-backdrop').css('display','none');
-    			validateService.displayMessage('success','Added Successfully','');
-    			$state.reload();
-    			tab_switch_name = 'tab_2';
-    			serial_no = $scope.formData['serial_no'];
+                swal({
+                  title: "Are you sure?",
+                  text: "Do you want update same date for all this data?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if(willDelete){
+                    var service_details = {
+                      method_name : "updateDataEntryForAllSerialNo",
+                      controller_name : "DataEntry",
+                      data : JSON.stringify($scope.formData)
+                    };
 
+                    httpService.callWebService(service_details).then(function(data){
+                        if(data)
+                        {
+                            $('#modal-backdrop').css('display','none');
+                            validateService.displayMessage('success','Added Successfully','');
+                            $state.reload();
+                            tab_switch_name = 'tab_2';
+                            serial_no = $scope.formData['serial_no'];
+                        }
+                        else
+                        {
+                            validateService.displayMessage('error','Failed to delete',"");
+                        }
+                    })
+                  }
+                  else
+                  {
+                    $('#modal-backdrop').css('display','none');
+                    validateService.displayMessage('success','Added Successfully','');
+                    $state.reload();
+                    tab_switch_name = 'tab_2';
+                    serial_no = $scope.formData['serial_no'];
+                  }
+                });
     		}
     		else
     		{
@@ -321,11 +354,46 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     	httpService.callWebService(service_details).then(function(data){
     		if(data)
     		{
-    			$('#modal-backdrop').css('display','none');
-    			validateService.displayMessage('success','Updated Successfully','');
-    			$state.reload();
-    			tab_switch_name = 'tab_2';
-                serial_no = $scope.formData['serial_no'];
+                swal({
+                  title: "Are you sure?",
+                  text: "Do you want update same date for all this data?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if(willDelete){
+                    $scope.formData['yearData'] = $('#datePicker3').val();
+                    var service_details = {
+                      method_name : "updateDataEntryForAllSerialNo",
+                      controller_name : "DataEntry",
+                      data : JSON.stringify($scope.formData)
+                    };
+                    
+                    httpService.callWebService(service_details).then(function(data){
+                        if(data)
+                        {
+                            $('#modal-backdrop').css('display','none');
+                            validateService.displayMessage('success','Updated Successfully','');
+                            $state.reload();
+                            tab_switch_name = 'tab_2';
+                            serial_no = $scope.formData['serial_no'];
+                        }
+                        else
+                        {
+                            validateService.displayMessage('error','Failed to delete',"");
+                        }
+                    })
+                  }
+                  else
+                  {
+                    $('#modal-backdrop').css('display','none');
+                    validateService.displayMessage('success','Updated Successfully','');
+                    $state.reload();
+                    tab_switch_name = 'tab_2';
+                    serial_no = $scope.formData['serial_no'];
+                  }
+                });
     		}
     		else
     		{

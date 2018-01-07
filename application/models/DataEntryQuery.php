@@ -51,6 +51,18 @@ class DataEntryQuery extends CI_Model
         return $data;
     }
 
+    public function updateDataEntryForAllSerialNo($data)
+    {
+        $sql   = 'UPDATE 
+                    data_entry
+                  SET 
+                    date = "'.$data['date'].'" 
+                  WHERE 
+                    year(date) = "'.trim($data['yearData']).'" AND
+                    serial_no  = "'.$data['serial_no'].'"';
+        return $this->db->query($sql);
+    }
+
     public function getSerialNumberHighest()
     {
         $sql   = 'select max(serial_no) as max_serial_no from data_entry where year(date) ='.date('Y');
