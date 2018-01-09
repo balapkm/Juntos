@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-06 18:27:14
+/* Smarty version 3.1.30, created on 2018-01-09 09:49:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/Report.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a50c7aa3df9b8_04077286',
+  'unifunc' => 'content_5a5442df028da3_45497200',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fed73e5a7e0593821cba836581d07ed8fedd8df1' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Report.tpl',
-      1 => 1515141201,
+      1 => 1515471468,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a50c7aa3df9b8_04077286 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a5442df028da3_45497200 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -34,7 +34,7 @@ function content_5a50c7aa3df9b8_04077286 (Smarty_Internal_Template $_smarty_tpl)
 			<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab" ng-click="addClick()">Report</a></li>
-	              <!-- <li><a href="#tab_2" data-toggle="tab">Leather Summary</a></li> -->
+	              <li><a href="#tab_2" data-toggle="tab">Leather Summary</a></li>
 	            </ul>
 		        <div class="tab-content">
 		        	<div class="tab-pane active" id="tab_1">
@@ -184,6 +184,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					                <div class="form-group">
 					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')" multiple="multiple">
 					                  		<option value="">Choose Description</option>
+					                  		<option value="SA">Select All</option>
 					                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['description_data']->value, 'v', false, 'k');
 if ($_from !== null) {

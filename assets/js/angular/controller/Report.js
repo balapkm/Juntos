@@ -6,7 +6,31 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 	      }
 	});
 	$('.select2').select2();
-	
+	var selectAll = false;
+	$('#description').on('select2:select', function (e) {
+	  	if(e.params.data.id === 'SA')
+	  	{
+	  		var option  = $(this).find('option');
+	  		var SAvalue = [];
+	  		console.log(selectAll);
+	  		if(selectAll)
+	  		{
+	  			selectAll = false;
+	  		}
+	  		else
+	  		{
+	  			angular.forEach(option,function(v,k){
+		  			value = $(v).val();
+		  			if(value !== "" && value !== "SA")
+		  			{
+		  				SAvalue.push(value);
+		  			}
+		  			selectAll = true;
+		  		});
+	  		}
+	  		$(this).select2().val(SAvalue).trigger("change");
+	  	}
+	});
 
 	$('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
 	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));

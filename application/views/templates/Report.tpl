@@ -116,6 +116,7 @@
 					                <div class="form-group">
 					                  	<select class="form-control select2" style="width: 100%;" ng-model="formData.description" id="description" ng-change="clearRedMark('description1')" multiple="multiple">
 					                  		<option value="">Choose Description</option>
+					                  		<option value="SA">Select All</option>
 					                  	    [[foreach from=$description_data key=k item=v]]
 						                  		<option value="[[$v.description_id]]">[[$v.description_name]]</option>
 						                  	[[/foreach]]
