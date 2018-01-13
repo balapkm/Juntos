@@ -48,7 +48,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
 		setTimeout(function(){
 			$('a[href="#'+tab_switch_name+'"]').trigger('click');
             $scope.formData['serial_no_1'] = serial_no;
-			$("#serial_no_1").select2().select2("val",serial_no);
+            $('#serial_no_1').select2().val(serial_no).trigger("change");
 			$scope.searchAction();
 		},100);
 	}

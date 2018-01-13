@@ -12,7 +12,6 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
 	  	{
 	  		var option  = $(this).find('option');
 	  		var SAvalue = [];
-	  		console.log(selectAll);
 	  		if(selectAll)
 	  		{
 	  			selectAll = false;
@@ -190,6 +189,7 @@ app.controller('Report',function($scope,validateService,commonService,httpServic
     		}
     		else
     		{
+    			console.log(url);
     			window.open(url);
     		}
     	});

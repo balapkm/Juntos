@@ -262,7 +262,11 @@ class DataEntryQuery extends CI_Model
                     de.description_id in(".$data['description'].") AND
                     de.leather = '".$data['leather']."' AND
                     (date BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."')
-                    group by selection_name, color_name, article_name,description_name";
+                    GROUP BY selection_name, color_name, article_name,description_name
+                    ORDER BY 
+                        article_name ASC,
+                        color_name ASC,
+                        selection_name";
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }
