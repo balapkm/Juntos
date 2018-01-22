@@ -181,7 +181,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2017  <a href="http://juntossoft.com">Juntos Software Solution.</a>.</strong> All rights
+    <strong>Copyright &copy; [[$smarty.now|date_format:"%Y"]]  <a href="http://juntossoft.com">Juntos Software Solution.</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -240,12 +240,6 @@
 <script src="assets/plugins/datatables.net-bs/js/jszip.min.js"></script>
 <script src="assets/plugins/datatables.net-bs/js/pdfmake.min.js"></script>
 <script src="assets/plugins/datatables.net-bs/js/vfs_fonts.js"></script>
-<!-- SlimScroll -->
-<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- NiceScroll -->
-<!-- <script src="assets/plugins/jquery.nicescroll-master/jquery.nicescroll.min.js"></script> -->
-<!-- FastClick -->
-<script src="assets/plugins/fastclick/lib/fastclick.js"></script>
 <!-- Select2 -->
 <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
 <!-- date-range-picker -->
@@ -264,18 +258,12 @@
 <!-- Angular -->
 <script src="assets/plugins/angular/angular.min.js"></script>
 <script src="assets/plugins/angular/angular-ui-router.min.js"></script>
-
-<script src="assets/js/angular/app.js"></script>
-<script src="assets/js/angular/config.js"></script>
-<!-- services -->
-<script src="assets/js/angular/services/http-service.js"></script>
-<script src="assets/js/angular/services/common-service.js"></script>
-<script src="assets/js/angular/services/validate-service.js"></script>
-<!-- controller -->
-<script src="assets/js/angular/controller/MasterEntry.js"></script>
-<script src="assets/js/angular/controller/dashboard.js"></script>
-<script src="assets/js/angular/controller/DataEntry.js"></script>
-<script src="assets/js/angular/controller/Report.js"></script>
+<!-- jsxcompressor -->
+<script src="assets/plugins/jsxcompressor/jsxcompressor.min.js"></script>
+<!-- Auto include -->
+[[foreach from=$jsPaths key=k item=v]]
+<script src="[[$v]]"></script>
+[[/foreach]]
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();

@@ -28,7 +28,7 @@ class Response extends CI_Model
 
     private function displayResponse($array)
     {
-    	print_r(json_encode($array));
+    	print_r(base64_encode(gzencode(json_encode($array))));
     	exit();
     }
 }

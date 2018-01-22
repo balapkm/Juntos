@@ -11,14 +11,16 @@ app.service('httpService',function($http,$q,commonService){
 				'Content-Type' : 'application/x-www-form-urlencoded'
 			}
 		};
-		let loginDetails = commonService.getStorageValue('login_details');
+		var loginDetails = commonService.getStorageValue('login_details');
 	    if(loginDetails !== null)
 	    {
 	       loginDetails         = JSON.parse(loginDetails);
 	       data['session_id']   = loginDetails['session_id'];
 	    }
 		var data = $.param(data);
+		var This = this;
 		$http.post(this.url, data, config).then(function(response){
+			response.data  = JSON.parse(This.decompress(response.data));
 			if(response.data['status_code'] === 1)
 			{
 				commonService.deleteStorageValue('login_details');
@@ -38,4 +40,8 @@ app.service('httpService',function($http,$q,commonService){
 		});
 		return deferred.promise;
 	}
+
+	this.decompress = function(str) {
+       return unescape((new JXG.Util.Unzip(JXG.Util.Base64.decodeAsArray(str))).unzip()[0][0]);
+  	};
 });

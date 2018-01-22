@@ -74,7 +74,9 @@
 <!-- Angular -->
 <script src="assets/plugins/angular/angular.min.js"></script>
 <script src="assets/plugins/angular/angular-ui-router.min.js"></script>
-
+<!-- jsxcompressor -->
+<script src="assets/plugins/jsxcompressor/jsxcompressor.min.js"></script>
+<!---app-->
 <script src="assets/js/angular/app.js"></script>
 <!-- services -->
 <script src="assets/js/angular/services/common-service.js"></script>

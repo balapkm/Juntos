@@ -227,7 +227,7 @@ class DataEntryQuery extends CI_Model
 
     public function leatherSummaryReport($data)
     {
-        $sql = "SELECT
+        /*$sql = "SELECT
                     data_entry_id,
                     serial_no,
                     article_name,
@@ -266,7 +266,85 @@ class DataEntryQuery extends CI_Model
                     ORDER BY 
                         article_name ASC,
                         color_name ASC,
-                        selection_name";
+                        selection_name";*/
+        $sql = "SELECT * FROM
+                (SELECT
+                    data_entry_id,
+                    serial_no,
+                    article_name,
+                    de.article_id,
+                    selection_name,
+                    de.selection_id,
+                    description_name,
+                    de.description_id,
+                    color_name,
+                    de.color_id,
+                    pieces,
+                    date,
+                    query,
+                    leather,
+                    sqfeet,
+                    remarks,
+                    SUM(pieces) as sum_pieces,
+                    SUM(sqfeet) as sum_sqfeet
+                FROM 
+                    article_details ad,
+                    color_details cd,
+                    selection_details sd,
+                    description_details dd,
+                    data_entry de
+                WHERE
+                    de.article_id = ad.article_id AND
+                    de.color_id   = cd.color_id AND
+                    de.selection_id = sd.selection_id AND
+                    de.description_id = dd.description_id AND
+                    de.status = 'Y' AND
+                    de.description_id in(".$data['description'].") AND
+                    de.leather = '".$data['leather']."' AND
+                    de.query   = 'Return' AND
+                    (date BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."')
+                    GROUP BY selection_name, color_name, article_name,description_name
+                UNION ALL
+                SELECT
+                    data_entry_id,
+                    serial_no,
+                    article_name,
+                    de.article_id,
+                    selection_name,
+                    de.selection_id,
+                    description_name,
+                    de.description_id,
+                    color_name,
+                    de.color_id,
+                    pieces,
+                    date,
+                    query,
+                    leather,
+                    sqfeet,
+                    remarks,
+                    SUM(pieces) as sum_pieces,
+                    SUM(sqfeet) as sum_sqfeet
+                FROM 
+                    article_details ad,
+                    color_details cd,
+                    selection_details sd,
+                    description_details dd,
+                    data_entry de
+                WHERE
+                    de.article_id = ad.article_id AND
+                    de.color_id   = cd.color_id AND
+                    de.selection_id = sd.selection_id AND
+                    de.description_id = dd.description_id AND
+                    de.status = 'Y' AND
+                    de.description_id in(".$data['description'].") AND
+                    de.leather = '".$data['leather']."' AND
+                    de.query   != 'Return' AND
+                    (date BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."')
+                    GROUP BY selection_name, color_name, article_name,description_name) dum
+                ORDER BY 
+                    article_name ASC,
+                    color_name ASC,
+                    selection_name";
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

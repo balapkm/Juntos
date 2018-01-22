@@ -34,7 +34,7 @@ app.controller('DataEntry',function($scope,validateService,httpService,$state,co
     });
 
     $('#datePicker3').val(yearDate.getFullYear());
-    $('#datePicker').val(yearDate.getFullYear()+'-'+(yearDate.getMonth()+1)+'-'+yearDate.getDate());
+    $('#datePicker').val(yearDate.getFullYear()+'-'+(yearDate.getMonth()+01)+'-'+yearDate.getDate());
     $scope.formData = {};
     $('.content-wrapper').css('background-color','#ecf0f5');
     $('.modal-backdrop').css('display','none');
