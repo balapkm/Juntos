@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-24 12:52:02
+/* Smarty version 3.1.30, created on 2018-01-18 22:16:32
   from "/home/Staging/workSpace/Juntos/application/views/templates/login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a3f559a3b3234_52403394',
+  'unifunc' => 'content_5a60cf68ae2d82_79835899',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '552e53703cbd468cd533833c8b6ecc4bad287a92' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/login.tpl',
-      1 => 1514097249,
+      1 => 1516293990,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a3f559a3b3234_52403394 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a60cf68ae2d82_79835899 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +116,11 @@ function content_5a3f559a3b3234_52403394 (Smarty_Internal_Template $_smarty_tpl)
 <?php echo '<script'; ?>
  src="assets/plugins/angular/angular-ui-router.min.js"><?php echo '</script'; ?>
 >
-
+<!-- jsxcompressor -->
+<?php echo '<script'; ?>
+ src="assets/plugins/jsxcompressor/jsxcompressor.min.js"><?php echo '</script'; ?>
+>
+<!---app-->
 <?php echo '<script'; ?>
  src="assets/js/angular/app.js"><?php echo '</script'; ?>
 >

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 15:52:18
+/* Smarty version 3.1.30, created on 2018-01-18 18:24:40
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4a0bdaad3cf6_67470477',
+  'unifunc' => 'content_5a6099105b43d7_70672140',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1514802103,
+      1 => 1516280078,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a4a0bdaad3cf6_67470477 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a6099105b43d7_70672140 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
 <!DOCTYPE html>
@@ -230,7 +231,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2017  <a href="http://juntossoft.com">Juntos Software Solution.</a>.</strong> All rights
+    <strong>Copyright &copy; <?php echo smarty_modifier_date_format(time(),"%Y");?>
+  <a href="http://juntossoft.com">Juntos Software Solution.</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -311,18 +313,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
  src="assets/plugins/datatables.net-bs/js/vfs_fonts.js"><?php echo '</script'; ?>
 >
-<!-- SlimScroll -->
-<?php echo '<script'; ?>
- src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"><?php echo '</script'; ?>
->
-<!-- NiceScroll -->
-<!-- <?php echo '<script'; ?>
- src="assets/plugins/jquery.nicescroll-master/jquery.nicescroll.min.js"><?php echo '</script'; ?>
-> -->
-<!-- FastClick -->
-<?php echo '<script'; ?>
- src="assets/plugins/fastclick/lib/fastclick.js"><?php echo '</script'; ?>
->
 <!-- Select2 -->
 <?php echo '<script'; ?>
  src="assets/plugins/select2/dist/js/select2.full.min.js"><?php echo '</script'; ?>
@@ -361,36 +351,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
  src="assets/plugins/angular/angular-ui-router.min.js"><?php echo '</script'; ?>
 >
+<!-- jsxcompressor -->
+<?php echo '<script'; ?>
+ src="assets/plugins/jsxcompressor/jsxcompressor.min.js"><?php echo '</script'; ?>
+>
+<!-- Auto include -->
+<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['jsPaths']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+"><?php echo '</script'; ?>
+>
+<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
 
-<?php echo '<script'; ?>
- src="assets/js/angular/app.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/config.js"><?php echo '</script'; ?>
->
-<!-- services -->
-<?php echo '<script'; ?>
- src="assets/js/angular/services/http-service.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/services/common-service.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/services/validate-service.js"><?php echo '</script'; ?>
->
-<!-- controller -->
-<?php echo '<script'; ?>
- src="assets/js/angular/controller/MasterEntry.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/controller/dashboard.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/controller/DataEntry.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- src="assets/js/angular/controller/Report.js"><?php echo '</script'; ?>
->
 <?php echo '<script'; ?>
 >
   $(document).ready(function () {
