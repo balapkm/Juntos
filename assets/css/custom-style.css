@@ -152,3 +152,32 @@
     border: 2px solid #333 !important;
     box-shadow: none;
 }
+
+.own-table{
+    width: 100%;
+}
+
+.own-table th,.own-table td,.own-table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.own-td-1{
+    padding : 5px 5px 5px 40px;
+}
+
+.own-td-2{
+    padding: 5px;
+}
+
+.own-td-3{
+    padding-bottom: 200px;
+}
+
+.own-td-4{
+    padding-bottom: 400px;
+}
+
+.own-td-5{
+    padding-bottom: 100px;
+}

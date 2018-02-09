@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-05 13:34:08
+/* Smarty version 3.1.30, created on 2018-02-06 23:05:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4f3178059ff8_48513534',
+  'unifunc' => 'content_5a79e744499816_84988797',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fc7da15e40c8f200aed6feb06c18151e03489c11' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dataEntry.tpl',
-      1 => 1515139445,
+      1 => 1517938337,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a4f3178059ff8_48513534 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a79e744499816_84988797 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -268,40 +268,42 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                </div>
 		        	</div>
 		        	<div class="col-lg-12">
-		                <table style="margin-top: 10px;" id="example2" class="table table-bordered table-striped">
-		                    <thead>
-		                        <tr>
-		                          <th>Serial No</th>
-		                          <th>Date</th>
-		                          <th>Leather</th>
-		                          <th>Query</th>
-		                          <th>Description</th>
-		                          <th>Article</th>
-		                          <th>Color</th>
-		                          <th>Selection</th>
-		                          <th>Pieces</th>
-		                          <th>Sq.ft</th>
-		                          <th>Edit</th>
-		                          <th>Delete</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr ng-repeat="x in searchData">
-		                          <td>{{x.serial_no}}</td>
-		                          <td>{{x.date}}</td>
-		                          <td>{{x.leather}}</td>
-		                          <td>{{x.query}}</td>
-		                          <td>{{x.description_name}}</td>
-		                          <td>{{x.article_name}}</td>
-		                          <td>{{x.color_name}}</td>
-		                          <td>{{x.selection_name}}</td>
-		                          <td>{{x.pieces}}</td>
-		                          <td>{{x.sqfeet}}</td>
-		                          <td><a href="#" ng-click="editClick(x)"><i class="fa fa-edit"></i></a></td>
-		                          <td><a href="#" ng-click="deleteClick(x)"><i class="fa fa-trash"></i></a></td>
-		                        </tr>
-		                    </tbody>
-		                </table>
+		        		<div class="table-responsive">
+			                <table style="margin-top: 10px;" id="example2" class="table table-bordered table-striped">
+			                    <thead>
+			                        <tr>
+			                          <th>Serial No</th>
+			                          <th>Date</th>
+			                          <th>Leather</th>
+			                          <th>Query</th>
+			                          <th>Description</th>
+			                          <th>Article</th>
+			                          <th>Color</th>
+			                          <th>Selection</th>
+			                          <th>Pieces</th>
+			                          <th>Sq.ft</th>
+			                          <th>Edit</th>
+			                          <th>Delete</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <tr ng-repeat="x in searchData">
+			                          <td>{{x.serial_no}}</td>
+			                          <td>{{x.date}}</td>
+			                          <td>{{x.leather}}</td>
+			                          <td>{{x.query}}</td>
+			                          <td>{{x.description_name}}</td>
+			                          <td>{{x.article_name}}</td>
+			                          <td>{{x.color_name}}</td>
+			                          <td>{{x.selection_name}}</td>
+			                          <td>{{x.pieces}}</td>
+			                          <td>{{x.sqfeet}}</td>
+			                          <td><a href="#" ng-click="editClick(x)"><i class="fa fa-edit"></i></a></td>
+			                          <td><a href="#" ng-click="deleteClick(x)"><i class="fa fa-trash"></i></a></td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+		                </div>
 		            </div>
 		        </div>
               </div>

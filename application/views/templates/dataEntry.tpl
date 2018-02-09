@@ -166,40 +166,42 @@
 		                </div>
 		        	</div>
 		        	<div class="col-lg-12">
-		                <table style="margin-top: 10px;" id="example2" class="table table-bordered table-striped">
-		                    <thead>
-		                        <tr>
-		                          <th>Serial No</th>
-		                          <th>Date</th>
-		                          <th>Leather</th>
-		                          <th>Query</th>
-		                          <th>Description</th>
-		                          <th>Article</th>
-		                          <th>Color</th>
-		                          <th>Selection</th>
-		                          <th>Pieces</th>
-		                          <th>Sq.ft</th>
-		                          <th>Edit</th>
-		                          <th>Delete</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                        <tr ng-repeat="x in searchData">
-		                          <td>{{x.serial_no}}</td>
-		                          <td>{{x.date}}</td>
-		                          <td>{{x.leather}}</td>
-		                          <td>{{x.query}}</td>
-		                          <td>{{x.description_name}}</td>
-		                          <td>{{x.article_name}}</td>
-		                          <td>{{x.color_name}}</td>
-		                          <td>{{x.selection_name}}</td>
-		                          <td>{{x.pieces}}</td>
-		                          <td>{{x.sqfeet}}</td>
-		                          <td><a href="#" ng-click="editClick(x)"><i class="fa fa-edit"></i></a></td>
-		                          <td><a href="#" ng-click="deleteClick(x)"><i class="fa fa-trash"></i></a></td>
-		                        </tr>
-		                    </tbody>
-		                </table>
+		        		<div class="table-responsive">
+			                <table style="margin-top: 10px;" id="example2" class="table table-bordered table-striped">
+			                    <thead>
+			                        <tr>
+			                          <th>Serial No</th>
+			                          <th>Date</th>
+			                          <th>Leather</th>
+			                          <th>Query</th>
+			                          <th>Description</th>
+			                          <th>Article</th>
+			                          <th>Color</th>
+			                          <th>Selection</th>
+			                          <th>Pieces</th>
+			                          <th>Sq.ft</th>
+			                          <th>Edit</th>
+			                          <th>Delete</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <tr ng-repeat="x in searchData">
+			                          <td>{{x.serial_no}}</td>
+			                          <td>{{x.date}}</td>
+			                          <td>{{x.leather}}</td>
+			                          <td>{{x.query}}</td>
+			                          <td>{{x.description_name}}</td>
+			                          <td>{{x.article_name}}</td>
+			                          <td>{{x.color_name}}</td>
+			                          <td>{{x.selection_name}}</td>
+			                          <td>{{x.pieces}}</td>
+			                          <td>{{x.sqfeet}}</td>
+			                          <td><a href="#" ng-click="editClick(x)"><i class="fa fa-edit"></i></a></td>
+			                          <td><a href="#" ng-click="deleteClick(x)"><i class="fa fa-trash"></i></a></td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+		                </div>
 		            </div>
 		        </div>
               </div>

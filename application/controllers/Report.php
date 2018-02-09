@@ -42,6 +42,15 @@ class Report extends CI_Controller
 		return $this->DataEntryQuery->leatherSummaryReport($this->data);
 	}
 
+	static function cmp($a, $b)
+	{
+		$sortOrder = array('LOT'=>'0', 'Sample'=>'1', 'Return'=>'2');
+	    if ($sortOrder[$a] == $sortOrder[$b]) {
+	        return 0;
+	    }
+	    return ($sortOrder[$a] < $sortOrder[$b]) ? -1 : 1;
+	}
+
 	public function leatherSummaryReportSearcAction()
 	{
 		$request = $_GET;
@@ -56,17 +65,31 @@ class Report extends CI_Controller
 			$reportData[$value['description_id']]['description_name']= $value['description_name'];
 			$reportData[$value['description_id']]['leather']= $value['leather'];
 		}
-
-		//sorting 
-
-		/*foreach ($reportData as $key => $value) 
+		$orderArray = array('LOT','Sample','Return');
+		foreach ($reportData as $key => $value) 
 		{
-			foreach ($value as $key1 => $value1) 
-			{
-				array_multisort(array_column($value1, 'article_name'), SORT_ASC,array_column($value1, 'color_name'), SORT_ASC,$value1);
+			foreach ($value as $k => $v) {
+				foreach ($orderArray as $Okey => $Ovalue) {
+					if($Ovalue == $k)
+					{
+						$reportData[$key]['back_up_data'][$k] = $v;
+						unset($reportData[$key][$k]);
+					}
+				}
 			}
-		}*/
-		
+		}
+
+		foreach ($reportData as $key => $value) {
+			foreach ($value as $k => $v) {
+				foreach ($orderArray as $Okey => $Ovalue) {
+					if(!empty($reportData[$key]['back_up_data'][$Ovalue])){
+						$reportData[$key][$Ovalue] = $reportData[$key]['back_up_data'][$Ovalue];
+					}
+				}
+				unset($reportData[$key]['back_up_data']);
+			}
+		}
+		//print_r($reportData);exit();
 		$spreadsheet = new Spreadsheet();
 
 		// Set document properties
@@ -365,3 +388,4 @@ class Report extends CI_Controller
 		exit;
 	}
 }
+
