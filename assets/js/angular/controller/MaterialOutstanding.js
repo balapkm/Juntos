@@ -64,7 +64,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 'copy', 
                 'csv',
                 'excel',
-                'pdf'
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                }
             ]
         });
     }
