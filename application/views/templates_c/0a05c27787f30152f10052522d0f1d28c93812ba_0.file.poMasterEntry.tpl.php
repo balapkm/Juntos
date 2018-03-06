@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-02-07 22:14:18
+/* Smarty version 3.1.30, created on 2018-03-04 14:26:01
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a7b2ce21ce295_13414494',
+  'unifunc' => 'content_5a9bb4a1301fe8_72460068',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1518021622,
+      1 => 1520153753,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a7b2ce21ce295_13414494 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9bb4a1301fe8_72460068 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -116,31 +116,79 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        <div class="row">
 				        	<div class="col-lg-12">
 				        		<div class="form-group pull-right">
-				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_action()">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
 				                </div>
 				        	</div>
 				        	<div class="col-lg-12">
-				                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
-				                    <thead>
-				                        <tr>
-				                          <th>Supplier Name</th>
-				                          <th>Material Name</th>
-				                          <th>HSN Code</th>
-				                          <th>UOF</th>
-				                          <th>Currency</th>
-				                          <th>Price</th>
-				                          <th>Price Status</th>
-				                          <th>CGST</th>
-				                          <th>SGST</th>
-				                          <th>IGST</th>
-				                          <th>Discount Price Status</th>
-				                          <th>Discount</th>
-				                        </tr>
-				                    </thead>
-				                    <tbody>
-				                        
-				                    </tbody>
-				                </table>
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Supplier Name</th>
+					                          <th>Material Name</th>
+					                          <th>HSN Code</th>
+					                          <th>UOF</th>
+					                          <th>Group</th>
+					                          <th>Currency</th>
+					                          <th>Price</th>
+					                          <th>Price Status</th>
+					                          <th>CGST</th>
+					                          <th>SGST</th>
+					                          <th>IGST</th>
+					                          <th>Discount Price Status</th>
+					                          <th>Discount</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+						                        <tr>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['group'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['currency'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['price'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['discount_price_status'];?>
+</td>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['discount'];?>
+</td>
+						                          <td><button class="btn btn-primary btn-sm" onclick='materialEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Edit</button>
+						                          </td>
+				                          		  <td><button class="btn btn-primary btn-sm" onclick='materialDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Delete</button></td>
+						                        </tr>
+						                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+					                    </tbody>
+					                </table>
+					            </div>
 				            </div>
 				        </div>
 	              	</div>
@@ -256,7 +304,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <select id="supplier_name_select2" class="form-control select2" style="width: 100%;">
+		                  <select id="supplier_name_select2" ng-model="material_form_data.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
 		                  	   <option value="">Choose Supplier Name</option>
 		                  	   <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
@@ -279,37 +327,53 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <input type="text" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
-		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code">
+		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code" ng-model="material_form_data.material_hsn_code" >
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Currency</label>
-		                  <input type="text" class="form-control" id="currency" placeholder="Enter Currency">
+		                  <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Group</label>
+		                  <input type="text" class="form-control"  ng-model="material_form_data.group"  id="group" placeholder="Enter Group">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Unit Of Measurement</label>
-		                  <select class="form-control" id="material_uof">
-		                  	 <option value="">Choose Unit of measurement</option>
-		                  	 <option value="Meter">Meter</option>
-		                  	 <option value="Kilo gram">Kilo gram</option>
-		                  	 <option value="Centi Meter">Centi Meter</option>
-		                  	 <option value="Box">Box</option>
+		                  <select id="material_uom" ng-model="material_form_data.material_uom" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_uom')">
+		                  	   <option value="">Choose UOM</option>
+		                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['unit_of_measurement']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+			                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
 		                  </select>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price Status</label>
-		                  <select class="form-control" id="price_status">
+		                  <select class="form-control" id="price_status" ng-model="material_form_data.price_status"> 
 		                  	 <option value="">Choose Price Status</option>
 		                  	 <option value="Final">Final</option>
 		                  	 <option value="Approx">Approx</option>
@@ -319,31 +383,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price</label>
-		                  <input type="text" class="form-control" id="price" placeholder="Enter Price">
+		                  <input type="text" class="form-control" ng-model="material_form_data.price"  id="price" placeholder="Enter Price">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="!showGst">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">IGST</label>
-		                  <input type="text" class="form-control" id="IGST" placeholder="Enter IGST">
+		                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="showGst">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">CGST</label>
-		                  <input type="text" class="form-control" id="CGST" placeholder="Enter CGST">
+		                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="showGst">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">SGST</label>
-		                  <input type="text" class="form-control" id="SGST" placeholder="Enter SGST">
+		                  <label for="exampleInputEmail1" >SGST</label>
+		                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount Price Status</label>
-		                  <select class="form-control" id="price_status">
+		                  <select class="form-control" id="discount_price_status" ng-model="material_form_data.discount_price_status">
 		                  	 <option value="">Choose Discount Price Status</option>
 		                  	 <option value="Percentage">Percentage</option>
 		                  	 <option value="Amount">Amount</option>
@@ -353,18 +417,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount</label>
-		                  <input type="text" class="form-control" id="discount" placeholder="Enter Discount">
+		                  <input type="text" ng-model="material_form_data.discount" class="form-control" id="discount" placeholder="Enter Discount">
 		                </div>
-		            </div>
-		            <div class="col-lg-12 text-center">
-		            	<button type="submit" class="btn btn-primary">Add</button>
 		            </div>
 		        </div>
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" ng-if="material_modal.button==='Add'" class="btn btn-primary" ng-click="add_supplier_action()">{{material_modal.button}}</button>
-        		<button type="button" ng-if="material_modal.button==='Update'" class="btn btn-primary" ng-click="update_supplier_action()">{{material_modal.button}}</button>
+        		<button type="button" ng-if="material_modal.button==='Add'" class="btn btn-primary" ng-click="add_material_action()">{{material_modal.button}}</button>
+        		<button type="button" ng-if="material_modal.button==='Update'" class="btn btn-primary" ng-click="update_material_action()">{{material_modal.button}}</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->

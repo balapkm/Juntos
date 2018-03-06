@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-18 18:24:40
+/* Smarty version 3.1.30, created on 2018-03-05 12:35:12
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a6099105b43d7_70672140',
+  'unifunc' => 'content_5a9cec28b066a6_84040876',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1516280078,
+      1 => 1520233499,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a6099105b43d7_70672140 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a9cec28b066a6_84040876 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -309,6 +309,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 >
 <?php echo '<script'; ?>
  src="assets/plugins/datatables.net-bs/js/pdfmake.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="assets/plugins/number2word/number2word.min.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  src="assets/plugins/datatables.net-bs/js/vfs_fonts.js"><?php echo '</script'; ?>

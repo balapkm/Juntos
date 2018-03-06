@@ -10,17 +10,20 @@ class PoMasterEntry extends CI_Controller
 		parent::__construct();
 		$this->load->library('Mysmarty');
 		$this->load->model('PoMasterEntryQuery');
+		$this->load->config('application');
 	}
 
 	public function index()
 	{
 		$this->data['supplier_entry'] = $this->PoMasterEntryQuery->select_supplier_entry();
+		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
+		$this->data['unit_of_measurement'] = $this->config->item('UOM', 'material_details');
 		return $this->mysmarty->view('poMasterEntry.tpl',$this->data,TRUE);
 	}
 
 	public function addSupplierAction()
 	{
-		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data);
+		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'supplier_details');
 	}
 
 	public function updateSupplierAction()
@@ -31,5 +34,23 @@ class PoMasterEntry extends CI_Controller
 	public function deleteSupplierAction()
 	{
 		return $this->PoMasterEntryQuery->delete_supplier_entry($this->data);
+	}
+
+	// function to add supplier profuct data 
+	public function addMaterialAction()
+	{
+		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
+		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details');
+	}
+
+	public function updateMaterialAction()
+	{
+		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
+		return $this->PoMasterEntryQuery->update_material_entry($this->data);
+	}
+
+	public function deleteMaterialAction()
+	{
+		return $this->PoMasterEntryQuery->delete_material_entry($this->data);
 	}
 }

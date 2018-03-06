@@ -3,7 +3,9 @@
       	Generate Po
     </h4>
 </section>
+
 <!-- Main content -->
+<input type="hidden" id="po_number_details" value='[[$po_number_details|@json_encode]]'>
 <section class="content">
 	<div class="row">
         <div class="col-md-12">
@@ -19,272 +21,94 @@
 	              			<div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Unit</label>
-				                  <select class="form-control" id="unit">
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit" ng-change="getPoNumber()">
 				                  	  <option value="">Choose Unit</option>
-				                  	  <option value="upper">Upper Unit</option>
-				                  	  <option value="full_shoe">Full Shoe Unit</option>
-				                  	  <option value="sole_plant">Sole Plant Unit</option>
+				                  	  <option value="Upper">Upper</option>
+				                  	  <option value="Full Shoe">Full Shoe</option>
+				                  	  <option value="Sole">Sole</option>
 				                  </select>
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Type</label>
-				                  <select class="form-control" id="type">
+				                  <select class="form-control" id="type" ng-model="generatePoData.type" ng-change="getPoNumber()">
 				                  	  <option value="">Choose Type</option>
-				                  	  <option value="import">Import</option>
-				                  	  <option value="locale">Locale</option>
-				                  	  <option value="sample">Sample</option>
+				                  	  <option value="Import">Import</option>
+				                  	  <option value="Indigenous">Indigenous</option>
+				                  	  <option value="Sample">Sample</option>
 				                  </select>
-				                </div>
-				            </div>
-		            		<div class="col-lg-3">
-				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Order Ref</label>
-				                  <input type="text" class="form-control" id="order_ref" placeholder="Enter Order Ref">
-				                </div>
-				            </div>
-				            <div class="col-lg-3">
-				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Po Number</label>
-				                  <input type="text" class="form-control" id="po_number" placeholder="Enter Po Number">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Date</label>
-				                  <input type="text" class="form-control" id="po_date" placeholder="Choose Po Date">
+				                  <input type="text" class="form-control" id="po_date" ng-model="generatePoData.po_date" placeholder="Choose Po Date">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Delivery Date</label>
-				                  <input type="text" class="form-control" id="delivery_date" placeholder="Choose Delivery Date">
+				                  <input type="text" class="form-control" id="delivery_date" placeholder="Choose Delivery Date" ng-model="generatePoData.delivery_date">
+				                </div>
+				            </div>
+		            		<div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Order Reference</label>
+				                  <input type="text" class="form-control" id="order_reference" placeholder="Enter Order Ref" ng-model="generatePoData.order_reference">
+				                </div>
+				            </div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Number</label>
+				                  <input type="text" class="form-control" id="po_number" placeholder="Enter Po Number" ng-model="generatePoData.po_number" disabled="disabled">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Supplier Name</label>
-				                  <select class="form-control" id="supplier_name">
-				                  	  <option value="">Choose Supplier Name</option>
-				                  	  <option value="import">Import</option>
-				                  	  <option value="locale">Locale</option>
-				                  	  <option value="sample">Sample</option>
+				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id" ng-change="clearRedMark('supplier_name_select2')">
+				                  	<option value="">Choose Supplier Name</option>
+			                  	  	[[foreach from=$supplier_entry key=k item=v]]
+				                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
+				                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-12 text-center">
+				            	<button type="submit" class="btn btn-primary" ng-click="generatePo()">Generate</button>
+				            </div>
+				        </div>
+				        
+	              	</div>
+	              	<div class="tab-pane" id="tab_2">
+	              		<div class="row">
+	              			<div class="col-lg-3"></div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">PO Number</label>
+				                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="searchPoData.po_number" ng-change="clearRedMark('po_number_search')">
+				                  	<option value="">Choose Po Number</option>
+			                  	  	[[foreach from=$po_unique_number key=k item=v]]
+				                  		<option value="[[$v.unit]]|[[$v.type]]|[[$v.po_number]]|[[$v.full_po_number]]">[[$v.full_po_number]]</option>
+				                  	[[/foreach]]
 				                  </select>
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
-				                  <label for="exampleInputEmail1"></label>
-				                  <select class="form-control" id="material_name">
-				                  	  <option value="">Choose Type</option>
-				                  	  <option value="import">Import</option>
-				                  	  <option value="locale">Locale</option>
-				                  	  <option value="sample">Sample</option>
-				                  </select>
+				                  <label for="exampleInputEmail1">Po Year</label>
+				                  <input type="text" class="form-control" id="search_year_po" ng-model="searchPoData.po_year" placeholder="Choose Po Date">
 				                </div>
 				            </div>
+				            <div class="col-lg-3"></div>
 				            <div class="col-lg-12 text-center">
-				            	<button type="submit" class="btn btn-primary">Generate</button>
+				            	<button type="submit" class="btn btn-primary" ng-click="searchPo()">Search</button>
 				            </div>
 				        </div>
-				        <hr/>
-				        <div class="row" style="margin-top: 50px;">
-				        	<!-- <div class="col-lg-2" style="position: relative;left: 50px;top: 20px;">
-				        		<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
-				        	</div>
-				        	<div class="col-lg-5" style="position: relative;top: 40px;">
-				                <h4><b>T.M.ABDUL RAHMAN & SONS</b></h4>
-                    			<h6>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6>
-				        	</div>
-				        	<div class="col-lg-4" style="position: relative;left: 100px;">
-				        		<div>
-				        			<h5>43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</h5>
-				        		</div>
-				        		<div>
-				        			<h5>43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</br>
-				        			43/45 Ammar Road,Ranipet - 631053</h5>
-				        		</div>
-				        	</div> -->
-				        	<div class="col-lg-12" style="margin-top: 5px;">
-				        		<table class="own-table">
-				        			<tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td width="15%" style="padding: 20px 0px 28px 40px;border: 0px;">
-							        				<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
-							        			</td>
-									         	<td width="45%" style="border: 0px;">
-									         		<h4><b>T.M.ABDUL RAHMAN & SONS</b></h4>
-                    								<h6>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6>
-									         	</td>
-									         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
-									         		<h5>43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</h5>
-								        			<h5>43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</br>
-								        			43/45 Ammar Road,Ranipet - 631053</h5>
-									         	</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr style="font-weight: bold;">
-							        			<td align="center" class="own-td-1" width="100%">PURCHASE ORDER</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td class="own-td-1" width="40%">To</td>
-									         	<td class="own-td-1" width="30%">LH.Po.No</td>
-									         	<td class="own-td-1" width="30%">FS/545</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td class="own-td-1" width="40%">M/s Shoe Care</td>
-									         	<td class="own-td-1" width="30%">Date</td>
-									         	<td class="own-td-1" width="30%">01.01.2015</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td class="own-td-1" width="40%">Ranipet</td>
-									         	<td class="own-td-1" width="30%">Ord Ref</td>
-									         	<td class="own-td-1" width="30%">GRML</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td class="own-td-1" width="40%">GSTIN:</td>
-									         	<td class="own-td-1" width="30%">Delivery Date</td>
-									         	<td class="own-td-1" width="30%">01.01.2015</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr style="font-weight: bold;">
-							        			<td align="center" width="5%">S.No</td>
-									         	<td align="center" width="20%">DESCRIPTION</td>
-									         	<td align="center" width="10%">HSN Code</td>
-									         	<td align="center" width="5%">QTY</td>
-									         	<td align="center" width="10%">UOM</td>
-									         	<td align="center" width="10%">PRICE</td>
-									         	<td align="center" width="10%">CGST</td>
-									         	<td align="center" width="10%">SGST</td>
-									         	<td align="center" width="10%">IGST</td>
-									         	<td align="center" width="10%">TOTAL AMOUNT</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="5%"  class="own-td-2">1</td>
-									         	<td align="center" width="20%" class="own-td-2">Finish DR Brown Blue India Finish DR Finish DR</td>
-									         	<td align="center" width="10%" class="own-td-2">3008</td>
-									         	<td align="center" width="5%"  class="own-td-2">1</td>
-									         	<td align="center" width="10%" class="own-td-2">Kgs</td>
-									         	<td align="center" width="10%" class="own-td-2">657</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">-</td>
-									         	<td align="center" width="10%" class="own-td-2">5686.00</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="5%"  class="own-td-2">2</td>
-									         	<td align="center" width="20%" class="own-td-2">
-									         		<textarea class="form-control">Finish DR Brown Blue India Finish DR Finish DR</textarea>
-									         	</td>
-									         	<td align="center" width="10%" class="own-td-2">3008</td>
-									         	<td align="center" width="5%"  class="own-td-2">1</td>
-									         	<td align="center" width="10%" class="own-td-2">Kgs</td>
-									         	<td align="center" width="10%" class="own-td-2">657</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">-</td>
-									         	<td align="center" width="10%" class="own-td-2">5686.00</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="5%"  class="own-td-2">3</td>
-									         	<td align="center" width="20%" class="own-td-2">Finish DR Brown Blue India Finish DR Finish DR</td>
-									         	<td align="center" width="10%" class="own-td-2">3008</td>
-									         	<td align="center" width="5%"  class="own-td-2">1</td>
-									         	<td align="center" width="10%" class="own-td-2">Kgs</td>
-									         	<td align="center" width="10%" class="own-td-2">657</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">9%</td>
-									         	<td align="center" width="10%" class="own-td-2">-</td>
-									         	<td align="center" width="10%" class="own-td-2">5686.00</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="5%"  class="own-td-3"></td>
-									         	<td align="center" width="20%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="5%"  class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-									         	<td align="center" width="10%" class="own-td-3"></td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="5%"  class="own-td-2"></td>
-									         	<td align="center" width="45%" class="own-td-2">Amount in Words: Rupees Forty-five thousand, six hundred thirty-eightmount in Forty-five thousand, six hundred thirty-eight</td>
-									         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT INR</td>
-									         	<td align="center" width="20%" class="own-td-2">23344.23</td>
-							        		</tr>
-							        	</table>
-							        </tr>
-							        <tr>
-							        	<table class="own-table">
-							        		<tr>
-							        			<td align="center" width="50%"  class="own-td-4"></td>
-									         	<td align="center" width="50%"  class="own-td-4"></td>
-							        		</tr>
-							        	</table>
-							        </tr>
-								</table>
-				        	</div>
+				        <div class="row" id="showPoSearch">	
+							   	
 				        </div>
-	              	</div>
-	              	<div class="tab-pane" id="tab_2">
-	              		
 	              	</div>
 	            </div>
         	</div>
@@ -292,23 +116,36 @@
    	</div>
 </section>
 
-<div class="modal fade" id="modal-default">
-	<div class="modal-dialog">
+<div class="modal fade" id="po_modal">
+	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Add Supplier Details</h4>
+		        <h4 class="modal-title">Edit Po</h4>
 		    </div>
 		    <div class="modal-body">
-		        
+		    	<div class="row">
+		    		<div class="col-lg-3"></div>
+			    	<div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name"></textarea>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Quantity</label>
+		                  <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" ng-model="poEditFormData.qty">
+		                </div>
+		            </div>
+		            <div class="col-lg-3"></div>
+	            </div>
 		    </div>
-	        <div class="modal-footer">
+		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary">Add</button>
+        		<button type="button" class="btn btn-primary" ng-click="edit_po_action()">Update</button>
 	        </div>
-	    </div>
-	    <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+		</div>
+	</div>
 </div>

@@ -1,3 +1,4 @@
+var tab_switch_name = 'tab_1';
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
 	$('#supplier_table,#material_table').DataTable();
 	$('.modal-backdrop').css('display','none');
@@ -13,13 +14,25 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$scope.$apply();
 	});
 
-	$scope.reset();
-	$scope.material_reset();
+	$('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+        $(this).one('focus', select2Focus)
+        $(this).closest('.select2-selection').removeClass('border-focus');
+    })
+	
+	if(tab_switch_name === 'tab_2')
+	{
+		setTimeout(function(){
+			$('a[href="#'+tab_switch_name+'"]').trigger('click');
+		},100);
+	}
+
 	$scope.showGst = true;
-	$scope.supplier_form_data = {};
-	$scope.material_form_data = {};
-
-
+	
+	$scope.clearRedMark = function(id)
+    {
+    	$("#"+id).parent('div').removeClass('has-error');
+    }
+    
 	$scope.supplier_modal = {
 		title : "Add Supplier Details",
 		button : "Add"
@@ -31,6 +44,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 	$scope.reset = function()
 	{
+		$scope.supplier_form_data = {};
 		$scope.supplier_form_data = {
 			supplier_name : "",
 			supplier_code : "",
@@ -48,27 +62,32 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 	$scope.material_reset = function()
 	{
+		$scope.material_form_data = {};
 		$scope.material_form_data = {
-			supplier_id : "",
 			material_name : "",
+			supplier_id : "",
 			group : "",
 			material_hsn_code : "",
 			material_uom : "",
-			currency : "",
+			currency : "INR",
 			price_status : "",
 			price : "",
 			CGST : "",
 			SGST : "",
-			IGST : ""
+			IGST : "",
+			discount_price_status:"",
 			discount : ""
 		};
 	}
+
+	$scope.reset();
+	$scope.material_reset();
 
 	$scope.add_supplier = function(){
 		$('#supplier_modal').modal('show');
 	}
 
-	$scope.add_material_action = function(){
+	$scope.add_material_click = function(){
 		$('#material_modal').modal('show');
 	}
 
@@ -79,6 +98,25 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		}
 		$scope.supplier_form_data = data;
 		$('#supplier_modal').modal('show');
+	}
+
+	$scope.materialEditClick = function(data){
+		$scope.material_modal = {
+			title : "Edit Material Details",
+			button : "Update"
+		}
+		$scope.material_form_data = data;
+
+		if(data.state_code === "22")
+			$scope.showGst = false;
+		else
+			$scope.showGst = true;
+
+		setTimeout(function(){
+            $('#material_uom').select2().val(data.material_uom).trigger("change");
+            $('#supplier_name_select2').select2().val(data.supplier_id+"|"+data.state_code).trigger("change");
+	    },100);
+		$('#material_modal').modal('show');
 	}
 
 	$scope.supplierDeleteClick = function(data){
@@ -103,6 +141,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	    		{
 	    			validateService.displayMessage('success','Deleted Successfully','');
 	    			$state.reload();
+	    			tab_switch_name = 'tab_1';
 	    		}
 	    		else
 	    		{
@@ -114,6 +153,18 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 
 	$scope.update_supplier_action = function(){
+		if(validateService.blank($scope.supplier_form_data['supplier_name'],"Please Choose Supplier Name","supplier_name")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
+    	if(validateService.blank($scope.supplier_form_data['origin'],"Please enter Origin","origin")) return false;
+    	if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
+    	if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
+    	if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
+
 		var service_details = {
 	      method_name : "updateSupplierAction",
 	      controller_name : "PoMasterEntry",
@@ -127,6 +178,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     			$('#modal-backdrop').css('display','none');
     			validateService.displayMessage('success','Updated Successfully','');
     			$state.reload();
+    			tab_switch_name = 'tab_1';
     		}
     		else
     		{
@@ -136,6 +188,19 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 
 	$scope.add_supplier_action = function(){
+
+		if(validateService.blank($scope.supplier_form_data['supplier_name'],"Please Choose Supplier Name","supplier_name")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
+    	if(validateService.blank($scope.supplier_form_data['origin'],"Please enter Origin","origin")) return false;
+    	if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
+    	if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
+    	if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
+
 		var service_details = {
 	      method_name : "addSupplierAction",
 	      controller_name : "PoMasterEntry",
@@ -149,6 +214,42 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     			$('#modal-backdrop').css('display','none');
     			validateService.displayMessage('success','Added Successfully','');
     			$state.reload();
+    			tab_switch_name = 'tab_1';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','Failed...Duplicate Entry',"");
+    		}
+    	})
+	}
+
+	// function to add supplier data 
+	$scope.add_material_action = function(){
+
+		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
+		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
+    	if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
+    	if(validateService.blank($scope.material_form_data['group'],"Please Choose Group","group")) return false;
+    	if(validateService.blank($scope.material_form_data['material_uom'],"Please enter material uom","material_uom")) return false;
+    	if(validateService.blank($scope.material_form_data['price_status'],"Please Choose price status","price_status")) return false;
+    	if(validateService.blank($scope.material_form_data['price'],"Please enter price","price")) return false;
+    	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
+    	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
+
+		var service_details = {
+	      method_name : "addMaterialAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.material_form_data)
+	    };
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Added Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_2';
     		}
     		else
     		{
@@ -157,6 +258,73 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	})
 	}
 	
+	$scope.update_material_action = function(){
+
+		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
+		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
+    	if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
+    	if(validateService.blank($scope.material_form_data['group'],"Please Choose Group","group")) return false;
+    	if(validateService.blank($scope.material_form_data['material_uom'],"Please enter material uom","material_uom")) return false;
+    	if(validateService.blank($scope.material_form_data['price_status'],"Please Choose price status","price_status")) return false;
+    	if(validateService.blank($scope.material_form_data['price'],"Please enter price","price")) return false;
+    	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
+    	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
+
+		var service_details = {
+	      method_name : "updateMaterialAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.material_form_data)
+	    };
+	    
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Updated Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_2';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','Failed...Duplicate Entry',"");
+    		}
+    	})
+	}
+
+	$scope.materialDeleteClick = function(data){
+		$scope.supplier_form_data = data;
+		var service_details = {
+	      method_name : "deleteMaterialAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.supplier_form_data)
+	    };
+
+		swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this imaginary file!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if(willDelete){
+	    	httpService.callWebService(service_details).then(function(data){
+	    		if(data)
+	    		{
+	    			validateService.displayMessage('success','Deleted Successfully','');
+	    			$state.reload();
+	    			tab_switch_name = 'tab_2';
+	    		}
+	    		else
+	    		{
+	    			validateService.displayMessage('error','Failed to delete',"");
+	    		}
+	    	})
+		  }
+		});
+	}
 });
 
 function supplierEditClick(data)
@@ -166,9 +334,23 @@ function supplierEditClick(data)
 	scope.$apply();
 }
 
+function materialEditClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.materialEditClick(data);
+	scope.$apply();
+}
+
 function supplierDeleteClick(data)
 {
 	var scope = angular.element($('[ui-view=div1]')).scope();
 	scope.supplierDeleteClick(data);
+	scope.$apply();
+}
+
+function materialDeleteClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.materialDeleteClick(data);
 	scope.$apply();
 }

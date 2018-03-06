@@ -35,9 +35,10 @@ class Mysmarty extends Smarty {
         $this->assign( 'APPPATH', APPPATH );   // path to application directory
         $this->assign( 'BASEPATH', BASEPATH ); // path to system directory
 
+
         log_message('debug', "Smarty Class Initialized");
     }
-
+    
     function setDebug( $debug=true )
     {
         $this->debug = $debug;

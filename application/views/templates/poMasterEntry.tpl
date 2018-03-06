@@ -70,31 +70,55 @@
 				        <div class="row">
 				        	<div class="col-lg-12">
 				        		<div class="form-group pull-right">
-				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_action()">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
 				                </div>
 				        	</div>
 				        	<div class="col-lg-12">
-				                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
-				                    <thead>
-				                        <tr>
-				                          <th>Supplier Name</th>
-				                          <th>Material Name</th>
-				                          <th>HSN Code</th>
-				                          <th>UOF</th>
-				                          <th>Currency</th>
-				                          <th>Price</th>
-				                          <th>Price Status</th>
-				                          <th>CGST</th>
-				                          <th>SGST</th>
-				                          <th>IGST</th>
-				                          <th>Discount Price Status</th>
-				                          <th>Discount</th>
-				                        </tr>
-				                    </thead>
-				                    <tbody>
-				                        
-				                    </tbody>
-				                </table>
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Supplier Name</th>
+					                          <th>Material Name</th>
+					                          <th>HSN Code</th>
+					                          <th>UOF</th>
+					                          <th>Group</th>
+					                          <th>Currency</th>
+					                          <th>Price</th>
+					                          <th>Price Status</th>
+					                          <th>CGST</th>
+					                          <th>SGST</th>
+					                          <th>IGST</th>
+					                          <th>Discount Price Status</th>
+					                          <th>Discount</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                        [[foreach from=$material_entry key=k item=v]]
+						                        <tr>
+						                          <td>[[$v.supplier_name]]</td>
+						                          <td>[[$v.material_name]]</td>
+						                          <td>[[$v.material_hsn_code]]</td>
+						                          <td>[[$v.material_uom]]</td>
+						                          <td>[[$v.group]]</td>
+						                          <td>[[$v.currency]]</td>
+						                          <td>[[$v.price]]</td>
+						                          <td>[[$v.price_status]]</td>
+						                          <td>[[$v.CGST]]</td>
+						                          <td>[[$v.SGST]]</td>
+						                          <td>[[$v.IGST]]</td>
+						                          <td>[[$v.discount_price_status]]</td>
+						                          <td>[[$v.discount]]</td>
+						                          <td><button class="btn btn-primary btn-sm" onclick='materialEditClick([[$v|@json_encode]])'>Edit</button>
+						                          </td>
+				                          		  <td><button class="btn btn-primary btn-sm" onclick='materialDeleteClick([[$v|@json_encode]])'>Delete</button></td>
+						                        </tr>
+						                        [[/foreach]]
+					                    </tbody>
+					                </table>
+					            </div>
 				            </div>
 				        </div>
 	              	</div>
@@ -210,7 +234,7 @@
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <select id="supplier_name_select2" class="form-control select2" style="width: 100%;">
+		                  <select id="supplier_name_select2" ng-model="material_form_data.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
 		                  	   <option value="">Choose Supplier Name</option>
 		                  	   [[foreach from=$supplier_entry key=k item=v]]
 			                  		<option value="[[$v.supplier_id]]|[[$v.state_code]]">[[$v.supplier_name]]</option>
@@ -221,37 +245,42 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <input type="text" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
-		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code">
+		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code" ng-model="material_form_data.material_hsn_code" >
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Currency</label>
-		                  <input type="text" class="form-control" id="currency" placeholder="Enter Currency">
+		                  <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Group</label>
+		                  <input type="text" class="form-control"  ng-model="material_form_data.group"  id="group" placeholder="Enter Group">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Unit Of Measurement</label>
-		                  <select class="form-control" id="material_uof">
-		                  	 <option value="">Choose Unit of measurement</option>
-		                  	 <option value="Meter">Meter</option>
-		                  	 <option value="Kilo gram">Kilo gram</option>
-		                  	 <option value="Centi Meter">Centi Meter</option>
-		                  	 <option value="Box">Box</option>
+		                  <select id="material_uom" ng-model="material_form_data.material_uom" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_uom')">
+		                  	   <option value="">Choose UOM</option>
+		                  	   [[foreach from=$unit_of_measurement key=k item=v]]
+			                  		<option value="[[$v]]">[[$v]]</option>
+			                  	[[/foreach]]
 		                  </select>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price Status</label>
-		                  <select class="form-control" id="price_status">
+		                  <select class="form-control" id="price_status" ng-model="material_form_data.price_status"> 
 		                  	 <option value="">Choose Price Status</option>
 		                  	 <option value="Final">Final</option>
 		                  	 <option value="Approx">Approx</option>
@@ -261,31 +290,31 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price</label>
-		                  <input type="text" class="form-control" id="price" placeholder="Enter Price">
+		                  <input type="text" class="form-control" ng-model="material_form_data.price"  id="price" placeholder="Enter Price">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="!showGst">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">IGST</label>
-		                  <input type="text" class="form-control" id="IGST" placeholder="Enter IGST">
+		                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="showGst">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">CGST</label>
-		                  <input type="text" class="form-control" id="CGST" placeholder="Enter CGST">
+		                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="showGst">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">SGST</label>
-		                  <input type="text" class="form-control" id="SGST" placeholder="Enter SGST">
+		                  <label for="exampleInputEmail1" >SGST</label>
+		                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount Price Status</label>
-		                  <select class="form-control" id="price_status">
+		                  <select class="form-control" id="discount_price_status" ng-model="material_form_data.discount_price_status">
 		                  	 <option value="">Choose Discount Price Status</option>
 		                  	 <option value="Percentage">Percentage</option>
 		                  	 <option value="Amount">Amount</option>
@@ -295,15 +324,15 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount</label>
-		                  <input type="text" class="form-control" id="discount" placeholder="Enter Discount">
+		                  <input type="text" ng-model="material_form_data.discount" class="form-control" id="discount" placeholder="Enter Discount">
 		                </div>
 		            </div>
 		        </div>
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" ng-if="material_modal.button==='Add'" class="btn btn-primary" ng-click="add_supplier_action()">{{material_modal.button}}</button>
-        		<button type="button" ng-if="material_modal.button==='Update'" class="btn btn-primary" ng-click="update_supplier_action()">{{material_modal.button}}</button>
+        		<button type="button" ng-if="material_modal.button==='Add'" class="btn btn-primary" ng-click="add_material_action()">{{material_modal.button}}</button>
+        		<button type="button" ng-if="material_modal.button==='Update'" class="btn btn-primary" ng-click="update_material_action()">{{material_modal.button}}</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->
