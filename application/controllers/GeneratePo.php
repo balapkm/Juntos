@@ -115,7 +115,8 @@ class GeneratePo extends CI_Controller
 		$folder_name = realpath(APPPATH."../assets/po_html");
 		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE));
 		chmod($folder_name."/".$filename.".html", 0777);
-		$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		//$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 
 		$response = exec($cmd);
 		header("Content-Type: application/octet-stream");

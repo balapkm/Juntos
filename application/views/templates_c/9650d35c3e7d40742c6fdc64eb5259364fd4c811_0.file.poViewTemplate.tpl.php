@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-07 22:36:13
+/* Smarty version 3.1.30, created on 2018-03-08 01:02:49
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa01c05b8ed72_24166947',
+  'unifunc' => 'content_5aa03e618c8841_49397154',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1520423791,
+      1 => 1520449495,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa01c05b8ed72_24166947 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa03e618c8841_49397154 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -74,9 +74,9 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
         		<tr>
         			<td width="15%" style="padding: 20px 0px 28px 40px;border: 0px;">
         				<?php if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
-        				<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
+        				<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"/>
         				<?php } else { ?>
-        				<img src="https://www.fixpocket.com/public_assets/uploads/beats/1496218155Logo_1.png" width="100" height="100"></img>
+        				<img src="http://juntossoft.com/tmar/TMAR%20LOGO.jpg" width="100" height="100"/>
         				<?php }?>
         			</td>
 		         	<td width="45%" style="border: 0px;">

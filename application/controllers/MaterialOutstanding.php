@@ -36,7 +36,12 @@ class MaterialOutstanding extends CI_Controller
 		{
 			$this->data['po_number'] = explode("|",$this->data['po_number']);
 		}
-		return $this->PoGenerateQuery->getMaterialOutStandingData($this->data);
+		$data = $this->PoGenerateQuery->getMaterialOutStandingData($this->data);
+		foreach ($data as $key => $value) {
+			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
+			$data[$key]['po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
 	}
 
 	public function updateMaterialOutstandingAction()
