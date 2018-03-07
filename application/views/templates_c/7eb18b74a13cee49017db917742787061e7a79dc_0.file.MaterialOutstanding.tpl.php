@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-06 18:08:43
+/* Smarty version 3.1.30, created on 2018-03-07 23:04:04
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9e8bd30b1671_03200814',
+  'unifunc' => 'content_5aa0228c8b22d3_97153830',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1520339915,
+      1 => 1520444034,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,11 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a9e8bd30b1671_03200814 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa0228c8b22d3_97153830 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
-    Material OutStanding
+    Material And Bill OutStanding
   </h4>
 </section>
 <!-- Main content -->
@@ -51,6 +51,7 @@ function content_5a9e8bd30b1671_03200814 (Smarty_Internal_Template $_smarty_tpl)
 				                  </select>
 				                </div>
 				            </div>
+				            
 				            <div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Number</label>
@@ -80,6 +81,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Year</label>
 				                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Outstanding Type</label>
+				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
+				                  	  <option value="">Choose Outstanding Type</option>
+				                  	  <option value="Material">Material</option>
+				                  	  <option value="Bill">Bill</option>
+				                  </select>
 				                </div>
 				            </div>
 				            <div class="col-lg-4">
@@ -154,7 +165,29 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        </tr>
 			                    </thead>
 			                    <tbody>
-			                        <tr ng-repeat="x in materialOutStanding" ng-if="(x.qty - x.received) !== 0">
+			                        <tr ng-repeat="x in materialOutStanding" ng-if="((x.qty - x.received) !== 0) && (generatePoData.outstanding_type === 'Material')">
+			                        	<td style="text-align: center;">
+			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
+									          <span class="glyphicon glyphicon-edit"></span>
+									        </a>
+			                        	</td>
+			                        	<td>{{x.unit}}</td>
+			                        	<td>{{x.supplier_name}}</td>
+			                        	<td>{{x.po_number}}</td>
+			                        	<td>{{x.po_date}}</td>
+			                        	<td>{{x.material_name}}</td>
+			                        	<td>{{x.qty}}</td>
+			                        	<td>{{x.material_uom}}</td>
+			                        	<td>{{x.received}}</td>
+			                        	<td>{{x.received_date}}</td>
+			                        	<td>{{x.qty - x.received}}</td>
+			                        	<td>{{x.delivery_date}}</td>
+			                        	<td>0</td>
+			                        	<td>{{x.invoice_number}}</td>
+			                        	<td>{{x.bill_amount}}</td>
+			                        	<td>{{x.dc_number}}</td>
+			                        </tr>
+			                        <tr ng-repeat="x in materialOutStanding" ng-if="((x.qty - x.received) === 0) && (generatePoData.outstanding_type === 'Bill')">
 			                        	<td style="text-align: center;">
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
 									          <span class="glyphicon glyphicon-edit"></span>

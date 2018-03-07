@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-04 23:30:18
+/* Smarty version 3.1.30, created on 2018-03-07 22:27:59
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9c34323bd4d7_01401420',
+  'unifunc' => 'content_5aa01a17aee464_30121676',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1520186410,
+      1 => 1520441872,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a9c34323bd4d7_01401420 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa01a17aee464_30121676 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -92,7 +92,7 @@ function content_5a9c34323bd4d7_01401420 (Smarty_Internal_Template $_smarty_tpl)
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Supplier Name</label>
-				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id" ng-change="clearRedMark('supplier_name_select2')">
+				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id" ng-change="getMaterialDetailsAsPerSupplier('supplier_name_select2')">
 				                  	<option value="">Choose Supplier Name</option>
 			                  	  	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
@@ -108,6 +108,15 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select class="form-control select2" style="width: 100%;" id="material_id" ng-model="generatePoData.material_id" ng-change="clearRedMark('material_id')" multiple="multiple">
+				                  	<option value="">Choose Material Name</option>
+				                  	<option ng-repeat="x in materialNameDetails" value="{{x.material_id}}">{{x.material_name}}</option>
 				                  </select>
 				                </div>
 				            </div>

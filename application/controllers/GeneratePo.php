@@ -46,10 +46,14 @@ class GeneratePo extends CI_Controller
 	public function generatePoData()
 	{
 		$finalInsertData = array();
+
 		$po_raw_number   = $this->data['po_raw_number'];
 		unset($this->data['po_raw_number']);
 		$this->data['po_number'] = $po_raw_number;
-		$getMaterialdetails = $this->PoMasterEntryQuery->select_material_entry($this->data,'getPOMaterialDetails');
+		$material_id = $this->data['material_id'];
+		unset($this->data['material_id']);
+
+		$getMaterialdetails = $this->PoMasterEntryQuery->get_material_entry_in_array($material_id);
 
 		foreach ($getMaterialdetails as $key => $value) {
 			$finalInsertData[$key]                  = $this->data;
@@ -107,16 +111,16 @@ class GeneratePo extends CI_Controller
 		$this->data['view_status']     = 'Download';
 		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
 		$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
-
+		$filename    = date('YmdHis');
 		$folder_name = realpath(APPPATH."../assets/po_html");
-		file_put_contents($folder_name."/test.html",$this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE));
-		chmod($folder_name."/test.html", 0777);
-		$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/test.html '.$folder_name.'/test.pdf  2>&1';
+		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE));
+		chmod($folder_name."/".$filename.".html", 0777);
+		$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 
 		$response = exec($cmd);
 		header("Content-Type: application/octet-stream");
 
-		$file = $folder_name.'/test.pdf';
+		$file = $folder_name.'/'.$filename.'.pdf';
 		header("Content-Disposition: attachment; filename=" .$po_number[3].".pdf");   
 		header("Content-Type: application/octet-stream");
 		header("Content-Type: application/download");
@@ -130,5 +134,10 @@ class GeneratePo extends CI_Controller
 		    flush(); // this is essential for large downloads
 		} 
 		fclose($fp); 
+	}
+
+	public function getMaterialDetailsAsPerSupplier()
+	{
+		return $this->PoGenerateQuery->getMaterialDetailsAsPerSupplier($this->data['supplier_id']);
 	}
 }

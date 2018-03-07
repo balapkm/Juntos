@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-05 23:21:36
+/* Smarty version 3.1.30, created on 2018-03-07 22:36:13
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9d83a80a3160_11203819',
+  'unifunc' => 'content_5aa01c05b8ed72_24166947',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1520272291,
+      1 => 1520423791,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a9d83a80a3160_11203819 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aa01c05b8ed72_24166947 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -163,11 +163,11 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 		         	<td align="center" width="5%">UOM</td>
 		         	<td align="center" width="5%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
 		         	<td align="center" width="10%">CGST</td>
 		         	<td align="center" width="10%">SGST</td>
 		         	<?php }?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 		         	<td align="center" width="10%" >IGST</td>
 		         	<?php }?>
 		         	<td align="center" width="10%">TOTAL AMOUNT</td>
@@ -218,7 +218,7 @@ $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', $_prefixVariable1);
  ]
 		         	</td>
 
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
 			         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty'];
 $_prefixVariable2=ob_get_clean();
@@ -245,7 +245,7 @@ $_smarty_tpl->_assignInScope('SGSTTotalValue', $_prefixVariable3);
 		         	<?php }?>
 
 
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['IGST']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty'];
 $_prefixVariable4=ob_get_clean();
@@ -301,11 +301,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         	<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="5%" class="own-td-3"></td>
 		         	<td align="center" width="5%" class="own-td-3"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<?php }?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 22) {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<?php }?>
 		         	<td align="center" width="10%" class="own-td-3"></td>

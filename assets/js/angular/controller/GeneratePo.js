@@ -12,6 +12,8 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
       todayHighlight : true
     });
 
+    $scope.materialNameDetails = [];
+
     setTimeout(function(){$scope.po_reset();$scope.po_search_reset();$scope.po_edit_reset();},10);
 
     setTimeout(function(){
@@ -77,7 +79,8 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
           po_raw_number : "",
           po_date : "",
           delivery_date : "",
-          supplier_id : ""
+          supplier_id : "",
+          material_id : ""
         };
     }
 
@@ -103,6 +106,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
         if(validateService.blank($scope.generatePoData['po_date'],"Please Choose Po Date","po_date")) return false;
         if(validateService.blank($scope.generatePoData['delivery_date'],"Please Choose Delivery Date","delivery_date")) return false;
         if(validateService.blank($scope.generatePoData['supplier_id'],"Please Choose Supplier name","supplier_id")) return false;
+        if(validateService.blank($scope.generatePoData['material_id'],"Please Choose Material name","material_id")) return false;
           
         var service_details = {
             method_name : "generatePoData",
@@ -224,6 +228,23 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
                         validateService.displayMessage('error','Failed to delete',"");
                     }
                 })
+            }
+        });
+    }
+
+    $scope.getMaterialDetailsAsPerSupplier = function(id){
+        $scope.clearRedMark(id);
+        $scope.generatePoData.material_id = "";
+        var service_details = {
+            method_name : "getMaterialDetailsAsPerSupplier",
+            controller_name : "GeneratePo",
+            data : JSON.stringify($scope.generatePoData)
+        };
+        $scope.materialNameDetails = [];   
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $scope.materialNameDetails = data;
             }
         });
     }

@@ -97,6 +97,19 @@ class PoMasterEntryQuery extends CI_Model
         $result = $this->db->delete('material_details',array('material_id' => $data['material_id']));
         return $result;
     }
+
+    public function get_material_entry_in_array($material_id){
+        $material_id = implode(",",$material_id);
+
+        $sql = "SELECT
+                    md.*
+                FROM
+                    material_details md
+                WHERE
+                    md.material_id IN (".$material_id.")";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
 }
 
 ?>

@@ -52,6 +52,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         unit : "",
         material_name : "",
         supplier_name : "",
+        outstanding_type : "",
         outputData : []
     }
 
@@ -75,6 +76,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.searchAction = function()
     {
+        if(validateService.blank($scope.generatePoData['outstanding_type'],"Please Choose outstanding type","outstanding_type")) return false;
+
         dataTableVariable.destroy();
         var service_details = {
             method_name : "searchMaterialOutstandingAction",

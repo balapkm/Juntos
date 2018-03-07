@@ -144,6 +144,20 @@ class PoGenerateQuery extends CI_Model
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }
+
+    public function getMaterialDetailsAsPerSupplier($supplier_id){
+
+        $sql = "SELECT
+                    material_id,
+                    material_name
+                FROM
+                    material_details md
+                WHERE
+                    md.supplier_id = ".$supplier_id;
+
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
 }
 
 ?>

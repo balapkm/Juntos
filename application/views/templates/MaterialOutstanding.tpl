@@ -1,6 +1,6 @@
 <section class="content-header">
   <h4>
-    Material OutStanding
+    Material And Bill OutStanding
   </h4>
 </section>
 <!-- Main content -->
@@ -27,6 +27,7 @@
 				                  </select>
 				                </div>
 				            </div>
+				            
 				            <div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Number</label>
@@ -42,6 +43,16 @@
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Year</label>
 				                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Outstanding Type</label>
+				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
+				                  	  <option value="">Choose Outstanding Type</option>
+				                  	  <option value="Material">Material</option>
+				                  	  <option value="Bill">Bill</option>
+				                  </select>
 				                </div>
 				            </div>
 				            <div class="col-lg-4">
@@ -94,7 +105,29 @@
 			                        </tr>
 			                    </thead>
 			                    <tbody>
-			                        <tr ng-repeat="x in materialOutStanding" ng-if="(x.qty - x.received) !== 0">
+			                        <tr ng-repeat="x in materialOutStanding" ng-if="((x.qty - x.received) !== 0) && (generatePoData.outstanding_type === 'Material')">
+			                        	<td style="text-align: center;">
+			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
+									          <span class="glyphicon glyphicon-edit"></span>
+									        </a>
+			                        	</td>
+			                        	<td>{{x.unit}}</td>
+			                        	<td>{{x.supplier_name}}</td>
+			                        	<td>{{x.po_number}}</td>
+			                        	<td>{{x.po_date}}</td>
+			                        	<td>{{x.material_name}}</td>
+			                        	<td>{{x.qty}}</td>
+			                        	<td>{{x.material_uom}}</td>
+			                        	<td>{{x.received}}</td>
+			                        	<td>{{x.received_date}}</td>
+			                        	<td>{{x.qty - x.received}}</td>
+			                        	<td>{{x.delivery_date}}</td>
+			                        	<td>0</td>
+			                        	<td>{{x.invoice_number}}</td>
+			                        	<td>{{x.bill_amount}}</td>
+			                        	<td>{{x.dc_number}}</td>
+			                        </tr>
+			                        <tr ng-repeat="x in materialOutStanding" ng-if="((x.qty - x.received) === 0) && (generatePoData.outstanding_type === 'Bill')">
 			                        	<td style="text-align: center;">
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
 									          <span class="glyphicon glyphicon-edit"></span>

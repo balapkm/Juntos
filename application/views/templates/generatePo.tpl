@@ -67,11 +67,20 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Supplier Name</label>
-				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id" ng-change="clearRedMark('supplier_name_select2')">
+				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id" ng-change="getMaterialDetailsAsPerSupplier('supplier_name_select2')">
 				                  	<option value="">Choose Supplier Name</option>
 			                  	  	[[foreach from=$supplier_entry key=k item=v]]
 				                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
 				                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select class="form-control select2" style="width: 100%;" id="material_id" ng-model="generatePoData.material_id" ng-change="clearRedMark('material_id')" multiple="multiple">
+				                  	<option value="">Choose Material Name</option>
+				                  	<option ng-repeat="x in materialNameDetails" value="{{x.material_id}}">{{x.material_name}}</option>
 				                  </select>
 				                </div>
 				            </div>
