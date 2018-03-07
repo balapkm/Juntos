@@ -133,11 +133,11 @@
 		         	<td align="center" width="5%">UOM</td>
 		         	<td align="center" width="5%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
-		         	[[if $searchPoData[0]['state_code'] neq 22]]
+		         	[[if $searchPoData[0]['state_code'] neq 33]]
 		         	<td align="center" width="10%">CGST</td>
 		         	<td align="center" width="10%">SGST</td>
 		         	[[/if]]
-		         	[[if $searchPoData[0]['state_code'] eq 22]]
+		         	[[if $searchPoData[0]['state_code'] eq 33]]
 		         	<td align="center" width="10%" >IGST</td>
 		         	[[/if]]
 		         	<td align="center" width="10%">TOTAL AMOUNT</td>
@@ -168,7 +168,7 @@
 		         		[ [[$DISCOUNTTotalValue]] ]
 		         	</td>
 
-		         	[[if $searchPoData[0]['state_code'] neq 22]]
+		         	[[if $searchPoData[0]['state_code'] neq 33]]
 			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $v.price ) * $v.qty]]]]
 			         	<td align="center" width="10%" class="own-td-2">
 			         		[[$v.CGST]]% 
@@ -183,7 +183,7 @@
 		         	[[/if]]
 
 
-		         	[[if $searchPoData[0]['state_code'] eq 22]]
+		         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
 			         	<td align="center" width="10%" class="own-td-2">
 			         		[[$v.IGST]]% 
@@ -220,11 +220,11 @@
 		         	<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="5%" class="own-td-3"></td>
 		         	<td align="center" width="5%" class="own-td-3"></td>
-		         	[[if $searchPoData[0]['state_code'] neq 22]]
+		         	[[if $searchPoData[0]['state_code'] neq 33]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	[[/if]]
-		         	[[if $searchPoData[0]['state_code'] eq 22]]
+		         	[[if $searchPoData[0]['state_code'] eq 33]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	[[/if]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
