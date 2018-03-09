@@ -8,9 +8,9 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	$('#supplier_name_select2').on('select2:select', function (e) {
 		value = e.currentTarget.value.split('|');
 		if(value[1] === "33")
-			$scope.showGst = false;
-		else
 			$scope.showGst = true;
+		else
+			$scope.showGst = false;
 		$scope.$apply();
 	});
 
