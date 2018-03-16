@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-07 22:27:59
+/* Smarty version 3.1.30, created on 2018-03-17 00:00:25
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa01a17aee464_30121676',
+  'unifunc' => 'content_5aac0d41ddb406_23269947',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1520441872,
+      1 => 1521224812,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa01a17aee464_30121676 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aac0d41ddb406_23269947 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -61,7 +61,8 @@ function content_5aa01a17aee464_30121676 (Smarty_Internal_Template $_smarty_tpl)
 				                  	  <option value="">Choose Type</option>
 				                  	  <option value="Import">Import</option>
 				                  	  <option value="Indigenous">Indigenous</option>
-				                  	  <option value="Sample">Sample</option>
+				                  	  <option value="Sample_Import">Sample - Import</option>
+				                  	  <option value="Sample_Indigenous">Sample - Indigenous</option>
 				                  </select>
 				                </div>
 				            </div>
@@ -114,8 +115,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Material Name</label>
-				                  <select class="form-control select2" style="width: 100%;" id="material_id" ng-model="generatePoData.material_id" ng-change="clearRedMark('material_id')" multiple="multiple">
-				                  	<option value="">Choose Material Name</option>
+				                  <select class="form-control select2_multiple" style="width: 100%;" id="material_id" ng-model="generatePoData.material_id" ng-change="clearRedMark('material_id')" multiple="multiple">
+				                  	<!-- <option value="">Choose Material Name</option> -->
 				                  	<option ng-repeat="x in materialNameDetails" value="{{x.material_id}}">{{x.material_name}}</option>
 				                  </select>
 				                </div>
@@ -204,6 +205,135 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="edit_po_action()">Update</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="additional_charge_modal">
+	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Additional Charge Modal</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Charge Name</label>
+		                  <input type="text" class="form-control" id="charge_name" placeholder="Enter Charge Name" ng-model="poOtherCharge.name">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">HSN Code</label>
+		                  <input type="text" class="form-control" id="chargeHSNCode" placeholder="Enter HSN Code" ng-model="poOtherCharge.hsn_code">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Amount Type</label>
+		                  <select class="form-control" id="chargeAmountType" ng-model="poOtherCharge.amount_type">
+		                  	<option value="">Choose Amount Type</option>
+		                  	<option value="Percentage">Percentage</option>
+		                  	<option value="Amount">Amount</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Amount</label>
+		                  <input type="text" class="form-control" id="chargeAmount" placeholder="Enter Charge Amount" ng-model="poOtherCharge.amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poOtherCharge.state_code === '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">CGST</label>
+		                  <input type="text" class="form-control" id="chargeCGST" placeholder="Enter CGST" ng-model="poOtherCharge.CGST">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group" ng-if="poOtherCharge.state_code === '33'">
+		                  <label for="exampleInputEmail1">SGST</label>
+		                  <input type="text" class="form-control" id="chargeSGST" placeholder="Enter SGST" ng-model="poOtherCharge.SGST">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group" ng-if="poOtherCharge.state_code !== '33'">
+		                  <label for="exampleInputEmail1">IGST</label>
+		                  <input type="text" class="form-control" id="chargeIGST" placeholder="Enter IGST" ng-model="poOtherCharge.IGST">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="addAdditionalChargesAction()">Add</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="import_other_details_modal">
+	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit Import Other Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Delivery Date</label>
+		                  <input type="text" class="form-control" id="import_delivery_date" placeholder="Choose Delivery Date" ng-model="importOtherCharge.delivery_date">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Incoterms</label>
+		                  <select class="form-control" id="import_incoterms" ng-model="importOtherCharge.incoterms">
+		                  	 <option value="">Choose Incoterms</option>
+		                  	 <option value="EX-WORKS">EX-WORKS</option>
+		                  	 <option value="FOB">FOB</option>
+		                  	 <option value="CEAF">CEAF</option>
+		                  	 <option value="COURIER">COURIER</option>
+		                  	 <option value="EX-FACTORY">EX-FACTORY</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment Status</label>
+		                  <select class="form-control" id="import_payment_status" ng-model="importOtherCharge.payment_status">
+		                  	 <option value="">Choose Payment Status</option>
+		                  	 <option value="ADVANCE_IT">ADVANCE_IT</option>
+		                  	 <option value="TT">TT</option>
+		                  	 <option value="CAD">CAD</option>
+		                  	 <option value="LC">LC</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Shipment</label>
+		                  <select class="form-control" id="import_shipment" ng-model="importOtherCharge.Shipment">
+		                  	 <option value="">Choose Shipment</option>
+		                  	 <option value="BY TNT COURIER `OUR A/C# 20407`">BY TNT COURIER `OUR A/C# 20407`</option>
+		                  	 <option value="DHC">DHC</option>
+		                  	 <option value="AIR">AIR</option>
+		                  	 <option value="SEA">SEA</option>
+		                  </select>
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="editImportOtherDetailsAction()">Update</button>
 	        </div>
 		</div>
 	</div>

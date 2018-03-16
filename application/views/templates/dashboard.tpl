@@ -239,7 +239,6 @@
 <script src="assets/plugins/datatables.net-bs/js/dataTables.buttons.min.js"></script>
 <script src="assets/plugins/datatables.net-bs/js/jszip.min.js"></script>
 <script src="assets/plugins/datatables.net-bs/js/pdfmake.min.js"></script>
-<script src="assets/plugins/number2word/number2word.min.js"></script>
 <script src="assets/plugins/datatables.net-bs/js/vfs_fonts.js"></script>
 <!-- Select2 -->
 <script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>

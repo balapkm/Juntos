@@ -9,12 +9,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
       format: 'yyyy-mm-dd',
       todayHighlight : true
     });
-   
-    $('.select2').select2();
-    $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
-        $(this).one('focus', select2Focus)
-        $(this).closest('.select2-selection').removeClass('border-focus');
-    });
 
     $scope.showMaterialOutStandingTable = false;
 
@@ -27,23 +21,16 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         $("#"+id).parent('div').removeClass('has-error');
     }
 
-    $('#search_year_po').datepicker({
-        autoclose: true,
-        format: " yyyy",
-        viewMode: "years", 
-        minViewMode: "years"
-    });
-
-
+    $scope.editMaterialPOData = {};
     $scope.resetEditPoData = function(){
-        $scope.editMaterialPOData = {};
+        /*$scope.editMaterialPOData = {};
         $scope.editMaterialPOData = {
             received : "",
             received_date : "",
             invoice_number : "",
             bill_amount : "",
             dc_number : ""
-        }
+        }*/
     }
 
     $scope.generatePoData = {
@@ -52,7 +39,15 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         unit : "",
         material_name : "",
         supplier_name : "",
-        outstanding_type : "",
+        outstanding_type : "M",
+        filter_type_wise : "",
+        filter_type : {
+            PO : false,
+            Material : false,
+            Unit : false,
+            Supplier : false
+        },
+        show_button : false,
         outputData : []
     }
 
@@ -72,6 +67,33 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 }
             ]
         });
+    }
+
+    $scope.filterChange = function(value){
+        $scope.generatePoData['filter_type'] = {
+            PO : false,
+            Material : false,
+            Unit : false,
+            Supplier : false
+        };
+        value = $scope.generatePoData.filter_type_wise;
+        $scope.generatePoData.show_button = (value === "")?false:true;
+        $scope.generatePoData['filter_type'][value] = !$scope.generatePoData['filter_type'][value];
+
+        setTimeout(function(){
+            $('#search_year_po').datepicker({
+                autoclose: true,
+                format: " yyyy",
+                viewMode: "years", 
+                minViewMode: "years"
+            });
+
+            $('.select2').select2();
+            $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+                $(this).one('focus', select2Focus)
+                $(this).closest('.select2-selection').removeClass('border-focus');
+            });
+        },100)
     }
 
     $scope.searchAction = function()
@@ -97,25 +119,44 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     }
 
     $scope.editMaterialOutStanding = function(x){
-        $scope.editMaterialPOData = {
-            received : x.received,
-            received_date : x.received_date,
-            invoice_number : x.invoice_number,
-            bill_amount : x.bill_amount,
-            dc_number : x.dc_number,
-            id : x.po_generated_request_id
+        $scope.editMaterialPOData  = {};
+        for(var i in x)
+        {
+            $scope.editMaterialPOData[i] = x[i];
         }
+        $scope.editMaterialPOData['received_data'] = x.received;
+        $scope.editMaterialPOData['received'] = 0;
         $('#material_modal').modal();
     }
 
     $scope.edit_material_action = function(){
+
+        if(validateService.blank($scope.editMaterialPOData['received'],"Please Enter Received Data","received")) return false;
+
+        if(parseInt($scope.editMaterialPOData['received']) === 0){
+            validateService.displayMessage('error',"Must give received data","Validation Error");
+            validateService.addErrorTag(["received"]);
+            return false;
+        }
+
+        if($scope.editMaterialPOData['invoice_number'] === "" && ($scope.editMaterialPOData['bill_amount'] === "0" || $scope.editMaterialPOData['bill_amount'] === "")&& $scope.editMaterialPOData['dc_number'] === ""){
+            validateService.displayMessage('error',"Please enter any one field(invoice_number,bill_amount,dc_number)","Validation Error");
+            validateService.addErrorTag(["invoice_number","bill_amount","dc_number"]);
+            return false;
+        }
+        
+        var balance = parseInt($scope.editMaterialPOData['qty'] - $scope.editMaterialPOData['received_data']);
+        if((balance < parseInt($scope.editMaterialPOData['received'])) && $scope.editMaterialPOData['outstanding_type'] === 'M')
+        {
+           validateService.displayMessage('error',"Invalid Received Data","Validation Error");
+           return false;
+        }
 
         var service_details = {
             method_name : "updateMaterialOutstandingAction",
             controller_name : "MaterialOutstanding",
             data : JSON.stringify($scope.editMaterialPOData)
         };
-
         httpService.callWebService(service_details).then(function(data){
             if(data)
             { 
@@ -127,6 +168,38 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             else
             {
                 validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
+
+    $scope.deleteMaterialOutStanding = function(data){
+        var service_details = {
+            method_name : "deleteMaterialOutstandingAction",
+            controller_name : "MaterialOutstanding",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Are you sure?",
+          text: "",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+           if(willDelete)
+           {
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    { 
+                        validateService.displayMessage('success','Deleted Successfully','');
+                        $scope.searchAction();
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Update Error',"");
+                    }
+                });
             }
         });
     }

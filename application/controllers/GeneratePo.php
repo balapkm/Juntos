@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-use mikehaertl\wkhtmlto\Pdf;
 
 class GeneratePo extends CI_Controller 
 {
@@ -70,10 +69,31 @@ class GeneratePo extends CI_Controller
 			$finalInsertData[$key]['SGST'] = $value['SGST'];
 			$finalInsertData[$key]['discount'] = $value['discount'];
 			$finalInsertData[$key]['discount_price_status'] = $value['discount_price_status'];
+			$finalInsertData[$key]['outstanding_type'] = "M";
 			$finalInsertData[$key]['created_date'] = date('Y-m-d');
+		}
+
+		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Indigenous')
+		{
+			$this->PoGenerateQuery->insert_import_other_details($finalInsertData[0]);
 		}
 		return $this->PoGenerateQuery->insert_po_generated_request_details($finalInsertData);
 
+	}
+
+	public function addAdditionalChargesAction()
+	{
+		return $this->PoGenerateQuery->insert_po_other_additional_charges($this->data);
+	}
+
+	public function editImportOtherDetailsAction()
+	{
+		return $this->PoGenerateQuery->edit_import_other_details($this->data);
+	}
+
+	public function deletePoOtherAdditionalCharges()
+	{
+		return $this->PoGenerateQuery->delete_po_other_additional_charges($this->data);
 	}
 
 	public function viewPoData(){
@@ -81,7 +101,9 @@ class GeneratePo extends CI_Controller
 		$this->data['unit'] = $po_number[0];
 		$this->data['type'] = $po_number[1];
 		$this->data['po_number']       = $po_number[2];
-		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+		$this->data['searchPoData']              =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
+		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
 		if(count($this->data['searchPoData']) == 0)
 		{
 			return false;
@@ -109,14 +131,20 @@ class GeneratePo extends CI_Controller
 		$this->data['type'] = $po_number[1];
 		$this->data['po_number']       = $po_number[2];
 		$this->data['view_status']     = 'Download';
-		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+		$this->data['searchPoData']              =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
+		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
 		$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
 		$filename    = date('YmdHis');
 		$folder_name = realpath(APPPATH."../assets/po_html");
 		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE));
 		chmod($folder_name."/".$filename.".html", 0777);
-		//$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
-		$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		}
+		else{
+			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		}
 
 		$response = exec($cmd);
 		header("Content-Type: application/octet-stream");

@@ -11,17 +11,20 @@ $config['po_generate_details'] = array(
 							'Upper'     =>  array(
 					    						'Import' => array("format" => "SU/IMP/"),
 						    					'Indigenous' => array("format" => "SU/"),
-						    					'Sample' => array("format" => "SU/SMPL/")
+						    					'Sample_Import' => array("format" => "SU/SMPL/"),
+						    					'Sample_Indigenous' => array("format" => "SU/SMPL/")
 						    				), 
 						    'Full Shoe' =>  array(
 						    					'Import' => array("format" => "FS/IMP/"),
 						    					'Indigenous' => array("format" => "FS/"),
-						    					'Sample' => array("format" => "FS/SMPL/")
+						    					'Sample_Import' => array("format" => "FS/SMPL/"),
+						    					'Sample_Indigenous' => array("format" => "FS/SMPL/")
 						    				), 
 						    'Sole'      =>  array(
 						    					'Import' => array("format" => "SP/IMP/"),
 						    					'Indigenous' => array("format" => "SP/"),
-						    					'Sample' => array("format" => "SP/SMPL/")
+						    					'Sample_Import' => array("format" => "SP/SMPL/"),
+						    					'Sample_Indigenous' => array("format" => "SP/SMPL/")
 						    				)
 	)
 );

@@ -1,12 +1,16 @@
 var tab_switch_name = 'tab_1';
 var po_year = "";
 var po_number = "";
-app.controller('GeneratePo',function($scope,httpService,validateService,$state){
+function select2Focus() {
+    $(this).closest('.select2').prev('select').select2('open');
+    $(this).closest('.select2-selection').addClass('border-focus');
+}
+app.controller('GeneratePo',function($scope,httpService,validateService,$state,commonService){
 
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-	$('#po_date,#delivery_date').datepicker({
+	$('#po_date,#delivery_date,#import_delivery_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true
@@ -14,7 +18,13 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
 
     $scope.materialNameDetails = [];
 
-    setTimeout(function(){$scope.po_reset();$scope.po_search_reset();$scope.po_edit_reset();},10);
+    setTimeout(function(){
+        $scope.po_reset();
+        $scope.po_search_reset();
+        $scope.po_edit_reset();
+        $scope.po_other_charge_reset();
+        $scope.import_other_charge_reset();
+    },10);
 
     setTimeout(function(){
         if(tab_switch_name === 'tab_2')
@@ -44,11 +54,38 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
 
 
     $('.select2').select2();
+    $('.select2_multiple').select2();
     $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
         $(this).one('focus', select2Focus)
         $(this).closest('.select2-selection').removeClass('border-focus');
     });
 
+    $scope.po_other_charge_reset = function(){
+        $scope.poOtherCharge   = {};
+        $scope.poOtherCharge = {
+          unit : "",
+          type : "",
+          po_number : "",
+          po_date : "",
+          name : "",
+          hsn_code : "",
+          amount_type : "",
+          amount : "",
+          CGST : "",
+          SGST : "",
+          IGST : ""
+        };
+    }
+
+    $scope.import_other_charge_reset = function(){
+        $scope.importOtherCharge   = {};
+        $scope.importOtherCharge = {
+          delivery_date : "",
+          incoterms : "",
+          Shipment : "",
+          payment_status : ""
+        };
+    }
 
     $scope.po_search_reset = function(){
         $scope.searchPoData   = {};
@@ -106,8 +143,14 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
         if(validateService.blank($scope.generatePoData['po_date'],"Please Choose Po Date","po_date")) return false;
         if(validateService.blank($scope.generatePoData['delivery_date'],"Please Choose Delivery Date","delivery_date")) return false;
         if(validateService.blank($scope.generatePoData['supplier_id'],"Please Choose Supplier name","supplier_id")) return false;
-        if(validateService.blank($scope.generatePoData['material_id'],"Please Choose Material name","material_id")) return false;
+        // if(validateService.blank($scope.generatePoData['material_id'],"Please Choose Material name","material_id")) return false;
           
+        if($scope.generatePoData['material_id'].length === 0)
+        {
+            validateService.displayMessage('error','Please Choose Material Name','');
+            validateService.addErrorTag(['material_id']);
+        }
+
         var service_details = {
             method_name : "generatePoData",
             controller_name : "GeneratePo",
@@ -140,22 +183,22 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
             controller_name : "GeneratePo",
             data : JSON.stringify($scope.searchPoData)
         };
-
+        commonService.showLoader();
         po_year = $scope.searchPoData['po_year'];
         po_number = $scope.searchPoData['po_number'];
 
         httpService.callWebService(service_details).then(function(data){
+            commonService.hideLoader();
             if(!data)
             {
                 validateService.displayMessage('error','No data Found..',"");
             }
             else
             {
-                var translator = new T2W("EN_US");
                 $scope.showPoSearch = true;
                 $('#showPoSearch').html(data);
-                var number = parseInt($("#GrandTotal").text());
-                $('#numberToWord').html("<b>Amount In Words : </b>"+translator.toWords(number).toUpperCase());
+                var number = $("#GrandTotal").text();
+                $('#numberToWord').html("<b>Amount In Words : </b>"+commonService.number2text(number).toUpperCase());
             }
         });
     }
@@ -166,7 +209,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
     }
 
     $scope.poEditClick = function(data){
-        console.log(data);
         $scope.poEditFormData.material_name = data.material_name;
         $scope.poEditFormData.qty           = data.qty;
         $scope.poEditFormData.id            = data.po_generated_request_id;
@@ -248,6 +290,124 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state){
             }
         });
     }
+
+    $scope.addAdditionalCharges = function(data)
+    {
+        $scope.poOtherCharge['unit'] = data['unit'];
+        $scope.poOtherCharge['type'] = data['type'];
+        $scope.poOtherCharge['po_date'] = data['po_date'];
+        $scope.poOtherCharge['po_number'] = data['po_number'];
+        $scope.poOtherCharge['state_code'] = data['state_code'];
+        $('#additional_charge_modal').modal('show');
+    }
+
+    $scope.addAdditionalChargesAction = function()
+    {
+        if(validateService.blank($scope.poOtherCharge['name'],"Please Enter Charge name","charge_name")) return false;
+        if(validateService.blank($scope.poOtherCharge['hsn_code'],"Please Enter HSN Code","chargeHSNCode")) return false;
+        if(validateService.blank($scope.poOtherCharge['amount_type'],"Please Choose Amount Type","chargeAmountType")) return false;
+        if(validateService.blank($scope.poOtherCharge['amount'],"Please Enter Amount","chargeAmount")) return false;
+        if($scope.poOtherCharge['state_code'] === "33")
+        {
+            if(validateService.blank($scope.poOtherCharge['CGST'],"Please Enter CGST","chargeCGST")) return false;
+            if(validateService.blank($scope.poOtherCharge['SGST'],"Please Enter SGST","chargeSGST")) return false;
+        }
+        else
+        {
+            if(validateService.blank($scope.poOtherCharge['IGST'],"Please Enter iGST","chargeIGST")) return false;
+        }   
+        
+        var service_details = {
+          method_name : "addAdditionalChargesAction",
+          controller_name : "GeneratePo",
+          data : JSON.stringify($scope.poOtherCharge)
+        };
+        
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            {
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Added Successfully','');
+                $state.reload();
+                tab_switch_name = "tab_2";
+            }
+            else
+            {
+                validateService.displayMessage('error','Error',"");
+            }
+        })
+    }
+
+    $scope.deletePoOtherAdditionalCharges =function(data)
+    {
+        var service_details = {
+            method_name : "deletePoOtherAdditionalCharges",
+            controller_name : "GeneratePo",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete){
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    {
+                        validateService.displayMessage('success','Deleted Successfully','');
+                        $state.reload();
+                        tab_switch_name = 'tab_2';
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Failed to delete',"");
+                    }
+                })
+            }
+        });
+    }
+
+    $scope.editImportOtherDetails = function(data)
+    {
+        $scope.importOtherCharge['id'] = data[0]['import_other_id'];
+        $scope.importOtherCharge['delivery_date'] = data[0]['delivery_date'];
+        $scope.importOtherCharge['incoterms'] = data[0]['incoterms'];
+        $scope.importOtherCharge['payment_status'] = data[0]['payment_terms'];
+        $scope.importOtherCharge['Shipment'] = data[0]['Shipment'];
+        $('#import_other_details_modal').modal('show');
+    }
+
+    $scope.editImportOtherDetailsAction = function()
+    {
+        if(validateService.blank($scope.importOtherCharge['delivery_date'],"Please Choose delivery date","import_delivery_date")) return false;
+        if(validateService.blank($scope.importOtherCharge['incoterms'],"Please Choose incoterms","import_incoterms")) return false;
+        if(validateService.blank($scope.importOtherCharge['payment_status'],"Please Choose payment Status","import_payment_status")) return false;
+        if(validateService.blank($scope.importOtherCharge['Shipment'],"Please Choose Shipment","import_shipment")) return false;
+
+        var service_details = {
+          method_name : "editImportOtherDetailsAction",
+          controller_name : "GeneratePo",
+          data : JSON.stringify($scope.importOtherCharge)
+        };
+        
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            {
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Updated Successfully','');
+                $state.reload();
+                tab_switch_name = "tab_2";
+            }
+            else
+            {
+                validateService.displayMessage('error','Error',"");
+            }
+        })
+    }
 });
 
 function editPoDetails(data)
@@ -267,5 +427,23 @@ function deletePoDetails(data)
 function downloadAsPdfPODetails(){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.downloadAsPdfPODetails();
+    scope.$apply();
+}
+
+function addAdditionalCharges(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.addAdditionalCharges(data);
+    scope.$apply();
+}
+
+function deletePoOtherAdditionalCharges(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.deletePoOtherAdditionalCharges(data);
+    scope.$apply();
+}
+
+function editImportOtherDetails(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editImportOtherDetails(data);
     scope.$apply();
 }
