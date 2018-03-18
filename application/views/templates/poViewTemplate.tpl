@@ -151,8 +151,8 @@ td
 		         	<td align="center" width="20%">DESCRIPTION</td>
 		         	<td align="center" width="10%">HSN Code</td>
 		         	<td align="center" width="5%">QTY</td>
-		         	<td align="center" width="10%">UOM</td>
-		         	<td align="center" width="5%">PRICE</td>
+		         	<td align="center" width="7%">UOM</td>
+		         	<td align="center" width="8%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
 			         	[[if $searchPoData[0]['state_code'] eq 33]]
@@ -182,8 +182,8 @@ td
 		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;">[[$v.material_name]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
-		         	<td align="center" width="10%" class="own-td-2">[[$v.material_uom]]</td>
-		         	<td align="center" width="5%" class="own-td-2">[[$v.price]]</td>
+		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
+		         	<td align="center" width="8%" class="own-td-2">[[$v.price]]</td>
 
 		         	[[if $v.discount_price_status eq 'Amount']]
 		         		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]
@@ -252,8 +252,8 @@ td
 		         	<td align="center" width="20%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="5%" class="own-td-3"></td>
+		         	<td align="center" width="7%" class="own-td-3"></td>
+		         	<td align="center" width="8%" class="own-td-3"></td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
 			         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	<td align="center" width="10%" class="own-td-3"></td>
@@ -277,7 +277,7 @@ td
         [[assign var=IGSTTotalValue value=0]]
         [[assign var=SGSTTotalValue value=0]]
         [[if $otherAdditionalCharges|@count neq 0]]
-        <tr>
+        <!-- <tr>
         	<table class="own-table">
         		<tr style="font-weight: bold;">
 		         	<td align="center" width="40%" class="own-td-2">PARTICULARS</td>
@@ -297,22 +297,26 @@ td
 		         	[[/if]]
         		</tr>
         	</table>
-        </tr>
+        </tr> -->
         [[foreach from=$otherAdditionalCharges key=k item=v]]
         <tr>
         	<table class="own-table">
         		<tr>
-		         	<td align="center" width="40%" class="own-td-2">[[$v.name]]</td>
+        			<td align="center" width="5%"  class="own-td-2"></td>
+		         	<td align="center" width="20%" class="own-td-2">[[$v.name]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.hsn_code]]</td>
+		         	<td align="center" width="5%"  class="own-td-2"></td>
+		         	<td align="center" width="7%"  class="own-td-2"></td>
 		         	[[if $v.amount_type eq 'Amount']]
 		         		[[assign var=other_total_amount value=[[$v.amount]]]]
 		         	[[else]]
 		         		[[assign var=other_total_amount value=[[(($v.amount/100) * $GrandTotal )]]]]
 		         	[[/if]]
-		         	<td align="center" width="10%" class="own-td-2">
+		         	<td align="center" width="8%" class="own-td-2">
 		         		[[if $v.amount_type neq 'Amount']] [[$v.amount]] % <br/>[[/if]]
 		         		[ [[$other_total_amount]] ]
 		         	</td>
+		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
 		         		[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_amount )]]]]

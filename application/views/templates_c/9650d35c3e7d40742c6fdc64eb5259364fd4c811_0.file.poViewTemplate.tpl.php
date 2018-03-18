@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-18 21:39:27
+/* Smarty version 3.1.30, created on 2018-03-18 22:03:51
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aae8f37b3a702_58165852',
+  'unifunc' => 'content_5aae94ef2ac961_84058040',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521389364,
+      1 => 1521390827,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aae8f37b3a702_58165852 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aae94ef2ac961_84058040 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -182,8 +182,8 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 		         	<td align="center" width="20%">DESCRIPTION</td>
 		         	<td align="center" width="10%">HSN Code</td>
 		         	<td align="center" width="5%">QTY</td>
-		         	<td align="center" width="10%">UOM</td>
-		         	<td align="center" width="5%">PRICE</td>
+		         	<td align="center" width="7%">UOM</td>
+		         	<td align="center" width="8%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>
 			         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
@@ -225,9 +225,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
 </td>
-		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
+		         	<td align="center" width="7%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-		         	<td align="center" width="5%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['price'];?>
+		         	<td align="center" width="8%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['price'];?>
 </td>
 
 		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] == 'Amount') {?>
@@ -329,8 +329,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         	<td align="center" width="20%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="5%" class="own-td-3"></td>
+		         	<td align="center" width="7%" class="own-td-3"></td>
+		         	<td align="center" width="8%" class="own-td-3"></td>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>
 			         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<td align="center" width="10%" class="own-td-3"></td>
@@ -359,7 +359,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
 ?>
         <?php if (count($_smarty_tpl->tpl_vars['otherAdditionalCharges']->value) != 0) {?>
-        <tr>
+        <!-- <tr>
         	<table class="own-table">
         		<tr style="font-weight: bold;">
 		         	<td align="center" width="40%" class="own-td-2">PARTICULARS</td>
@@ -379,7 +379,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         	<?php }?>
         		</tr>
         	</table>
-        </tr>
+        </tr> -->
         <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['otherAdditionalCharges']->value, 'v', false, 'k');
 if ($_from !== null) {
@@ -388,10 +388,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         <tr>
         	<table class="own-table">
         		<tr>
-		         	<td align="center" width="40%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+        			<td align="center" width="5%"  class="own-td-2"></td>
+		         	<td align="center" width="20%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
 </td>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['hsn_code'];?>
 </td>
+		         	<td align="center" width="5%"  class="own-td-2"></td>
+		         	<td align="center" width="7%"  class="own-td-2"></td>
 		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'Amount') {?>
 		         		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
@@ -405,12 +408,13 @@ $_prefixVariable5=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_amount', $_prefixVariable5);
 ?>
 		         	<?php }?>
-		         	<td align="center" width="10%" class="own-td-2">
+		         	<td align="center" width="8%" class="own-td-2">
 		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'Amount') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
 		         		[ <?php echo $_smarty_tpl->tpl_vars['other_total_amount']->value;?>
  ]
 		         	</td>
+		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>
 		         		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<?php ob_start();
