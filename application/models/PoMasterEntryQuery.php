@@ -14,6 +14,35 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function select_supplier_entry_as_per_supplier_name($data)
+    {
+        $query = $this->db->get_where('supplier_details', 
+                                        array(
+                                            'supplier_name'     => trim($data['supplier_name'])
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function select_material_entry_as_per_supplier_name($data)
+    {
+        $query = $this->db->get_where('material_details', 
+                                        array(
+                                            'material_name' => trim($data['material_name']),
+                                            'supplier_id'   => $data['supplier_id']
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $data;
+    }
+
     public function update_supplier_entry($data)
     {
         $id = $data['supplier_id'];

@@ -253,7 +253,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		}
     		else
     		{
-    			validateService.displayMessage('error','Failed...',"");
+    			validateService.displayMessage('error','This material already exist for this supplier',"");
     		}
     	})
 	}

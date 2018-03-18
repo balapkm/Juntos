@@ -13,7 +13,8 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 	$('#po_date,#delivery_date,#import_delivery_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
-      todayHighlight : true
+      todayHighlight : true,
+      startDate : new Date()
     });
 
     $scope.materialNameDetails = [];
@@ -220,6 +221,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         if(validateService.blank($scope.poEditFormData['material_name'],"Please Enter material name","material_name")) return false;
         if(validateService.blank($scope.poEditFormData['qty'],"Please Enter quantity","Quantity")) return false;
 
+        $scope.poEditFormData['material_name'] = $scope.poEditFormData['material_name'].replace(/<br\s*\/?>/mg,"\n");
         var service_details = {
             method_name : "editPoDetailsAction",
             controller_name : "GeneratePo",

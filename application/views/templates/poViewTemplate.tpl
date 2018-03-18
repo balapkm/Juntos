@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+td
+{
+	word-wrap: break-word;
+}
 .own-table th,.own-table td,.own-table {
     border: 1px solid black;
     border-collapse: collapse;
@@ -175,7 +179,7 @@
         	<table class="own-table">
         		<tr>
         			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
-		         	<td align="center" width="20%" class="own-td-2">[[$v.material_name]]</td>
+		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;">[[$v.material_name]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_uom]]</td>
@@ -184,7 +188,7 @@
 		         	[[if $v.discount_price_status eq 'Amount']]
 		         		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]
 		         	[[else]]
-		         		[[assign var=DISCOUNTTotalValue value=[[(($v.discount/100) * $v.price ) * $v.qty]]]]
+		         		[[assign var=DISCOUNTTotalValue value=(($v.discount/100) * $v.price ) * $v.qty]]
 		         	[[/if]]
 
 		         	<td align="center" width="10%" class="own-td-2">
@@ -196,13 +200,13 @@
 		         	</td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
 			         	[[if $searchPoData[0]['state_code'] eq 33]]
-				         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $v.price ) * $v.qty]]]]
+				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.CGST]]% 
 				         		</br>[ [[$CGSTTotalValue]] ]
 				         	</td>
 
-				         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $v.price ) * $v.qty]]]]
+				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.SGST]]% 
 				         		</br>[ [[$SGSTTotalValue]] ]

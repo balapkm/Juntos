@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-16 23:57:52
+/* Smarty version 3.1.30, created on 2018-03-18 15:43:23
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aac0ca8efbba4_79012201',
+  'unifunc' => 'content_5aae3bc3634105_73529509',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1521224821,
+      1 => 1521367993,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aac0ca8efbba4_79012201 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aae3bc3634105_73529509 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -202,9 +202,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
-			                          <th>Invoice Number</th>
-			                          <th>Bill Amount</th>
-			                          <th>DC Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Amount</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -230,9 +230,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
 			                        	<td>{{x.delivery_date}}</td>
 			                        	<td>{{x.delay_day}}</td>
-			                        	<td>{{x.invoice_number}}</td>
-			                        	<td>{{x.bill_amount}}</td>
-			                        	<td>{{x.dc_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_amount}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_number}}</td>
 			                        </tr>
 			                    </tbody>
 			                </table>

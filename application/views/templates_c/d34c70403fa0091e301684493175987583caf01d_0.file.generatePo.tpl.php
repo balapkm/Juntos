@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-17 00:00:25
+/* Smarty version 3.1.30, created on 2018-03-18 19:45:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aac0d41ddb406_23269947',
+  'unifunc' => 'content_5aae748f805276_69309008',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1521224812,
+      1 => 1521382540,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aac0d41ddb406_23269947 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aae748f805276_69309008 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -186,11 +186,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-		    		<div class="col-lg-3"></div>
-			    	<div class="col-lg-3">
+		    		<div class="col-lg-1"></div>
+			    	<div class="col-lg-5">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name"></textarea>
+		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="40" rows="5"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -199,7 +199,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" ng-model="poEditFormData.qty">
 		                </div>
 		            </div>
-		            <div class="col-lg-3"></div>
+		            <div class="col-lg-1"></div>
 	            </div>
 		    </div>
 		    <div class="modal-footer">
@@ -248,6 +248,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" class="form-control" id="chargeAmount" placeholder="Enter Charge Amount" ng-model="poOtherCharge.amount">
 		                </div>
 		            </div>
+		            <div ng-if="poOtherCharge.type !== 'Sample_Import' && poOtherCharge.type !== 'Import'">
 		            <div class="col-lg-3" ng-if="poOtherCharge.state_code === '33'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">CGST</label>
@@ -265,6 +266,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <label for="exampleInputEmail1">IGST</label>
 		                  <input type="text" class="form-control" id="chargeIGST" placeholder="Enter IGST" ng-model="poOtherCharge.IGST">
 		                </div>
+		            </div>
 		            </div>
 	            </div>
 		    </div>

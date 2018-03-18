@@ -136,11 +136,11 @@
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-		    		<div class="col-lg-3"></div>
-			    	<div class="col-lg-3">
+		    		<div class="col-lg-1"></div>
+			    	<div class="col-lg-5">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name"></textarea>
+		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="40" rows="5"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -149,7 +149,7 @@
 		                  <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" ng-model="poEditFormData.qty">
 		                </div>
 		            </div>
-		            <div class="col-lg-3"></div>
+		            <div class="col-lg-1"></div>
 	            </div>
 		    </div>
 		    <div class="modal-footer">
@@ -198,6 +198,7 @@
 		                  <input type="text" class="form-control" id="chargeAmount" placeholder="Enter Charge Amount" ng-model="poOtherCharge.amount">
 		                </div>
 		            </div>
+		            <div ng-if="poOtherCharge.type !== 'Sample_Import' && poOtherCharge.type !== 'Import'">
 		            <div class="col-lg-3" ng-if="poOtherCharge.state_code === '33'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">CGST</label>
@@ -215,6 +216,7 @@
 		                  <label for="exampleInputEmail1">IGST</label>
 		                  <input type="text" class="form-control" id="chargeIGST" placeholder="Enter IGST" ng-model="poOtherCharge.IGST">
 		                </div>
+		            </div>
 		            </div>
 	            </div>
 		    </div>

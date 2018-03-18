@@ -89,10 +89,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             });
 
             $('.select2').select2();
-            $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
+            /*$('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
                 $(this).one('focus', select2Focus)
                 $(this).closest('.select2-selection').removeClass('border-focus');
-            });
+            });*/
         },100)
     }
 
@@ -125,7 +125,15 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $scope.editMaterialPOData[i] = x[i];
         }
         $scope.editMaterialPOData['received_data'] = x.received;
-        $scope.editMaterialPOData['received'] = 0;
+        if($scope.generatePoData['outstanding_type'] === 'M')
+        {
+            $scope.editMaterialPOData['received'] = 0;
+            $scope.editMaterialPOData['bill_amount'] = 0;
+            $scope.editMaterialPOData['invoice_number'] = "";
+            $scope.editMaterialPOData['dc_number'] = "";
+        }
+        $('#invoice_number').parent('div').removeClass('has-error')
+        $('#dc_number').parent('div').removeClass('has-error')
         $('#material_modal').modal();
     }
 
@@ -133,17 +141,28 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
         if(validateService.blank($scope.editMaterialPOData['received'],"Please Enter Received Data","received")) return false;
 
-        if(parseInt($scope.editMaterialPOData['received']) === 0){
-            validateService.displayMessage('error',"Must give received data","Validation Error");
-            validateService.addErrorTag(["received"]);
-            return false;
+        if($scope.generatePoData['outstanding_type'] === 'M')
+        {
+            if(parseInt($scope.editMaterialPOData['received']) === 0){
+                validateService.displayMessage('error',"Must give received data","Validation Error");
+                validateService.addErrorTag(["received"]);
+                return false;
+            }
+
+            if($scope.editMaterialPOData['bill_amount'] === "0" || $scope.editMaterialPOData['bill_amount'] === "")
+            {
+                validateService.displayMessage('error',"Must give bill_amount","Validation Error");
+                validateService.addErrorTag(["bill_amount"]);
+                return false;
+            }
         }
 
-        if($scope.editMaterialPOData['invoice_number'] === "" && ($scope.editMaterialPOData['bill_amount'] === "0" || $scope.editMaterialPOData['bill_amount'] === "")&& $scope.editMaterialPOData['dc_number'] === ""){
+        if($scope.editMaterialPOData['invoice_number'] === "" && $scope.editMaterialPOData['dc_number'] === ""){
             validateService.displayMessage('error',"Please enter any one field(invoice_number,bill_amount,dc_number)","Validation Error");
-            validateService.addErrorTag(["invoice_number","bill_amount","dc_number"]);
+            validateService.addErrorTag(["invoice_number","dc_number"]);
             return false;
         }
+        
         
         var balance = parseInt($scope.editMaterialPOData['qty'] - $scope.editMaterialPOData['received_data']);
         if((balance < parseInt($scope.editMaterialPOData['received'])) && $scope.editMaterialPOData['outstanding_type'] === 'M')

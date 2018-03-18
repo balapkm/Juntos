@@ -23,6 +23,8 @@ class PoMasterEntry extends CI_Controller
 
 	public function addSupplierAction()
 	{
+		$count = count($this->PoMasterEntryQuery->select_supplier_entry_as_per_supplier_name($this->data));
+		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'supplier_details');
 	}
 
@@ -40,6 +42,8 @@ class PoMasterEntry extends CI_Controller
 	public function addMaterialAction()
 	{
 		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
+		$count = count($this->PoMasterEntryQuery->select_material_entry_as_per_supplier_name($this->data));
+		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details');
 	}
 

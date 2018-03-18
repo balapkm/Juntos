@@ -142,9 +142,9 @@
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
-			                          <th>Invoice Number</th>
-			                          <th>Bill Amount</th>
-			                          <th>DC Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Amount</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -170,9 +170,9 @@
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
 			                        	<td>{{x.delivery_date}}</td>
 			                        	<td>{{x.delay_day}}</td>
-			                        	<td>{{x.invoice_number}}</td>
-			                        	<td>{{x.bill_amount}}</td>
-			                        	<td>{{x.dc_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_amount}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_number}}</td>
 			                        </tr>
 			                    </tbody>
 			                </table>
