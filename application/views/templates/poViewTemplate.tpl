@@ -84,7 +84,7 @@ td
 		         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
 		         		<h5 style="text-align: justify;margin-left:50px;"><b>45J / 46C Ammoor Road,RANIPET - 632-401</br>
 	        			Tel : 91-4172-272470,272480</br>
-	        			Email : purchaseddept@tmargroup.in </br>
+	        			Email : purchasedept@tmargroup.in </br>
 	        			Email : soles@tmargroup.in</b></h5>
 
 	        			<h5 style="text-align: justify;margin-left:50px;"><b>
@@ -92,7 +92,7 @@ td
 	        			Periamet,CHENNAI-600 003.INDIA</br>
 	        			Tel : 91-44-25612164,25610078</br>
 	        			Email : headoffice@tmargroup.in</br>
-	        			GSTIN : 33AABFT2029F1Z0</b></h5>
+	        			GSTIN : 33AABFT2029F1ZO</b></h5>
 		         	</td>
         		</tr>
         	</table>
