@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-18 22:03:51
+/* Smarty version 3.1.30, created on 2018-03-18 22:31:17
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aae94ef2ac961_84058040',
+  'unifunc' => 'content_5aae9b5d8e12c7_24905606',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521390827,
+      1 => 1521392471,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aae94ef2ac961_84058040 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aae9b5d8e12c7_24905606 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -108,7 +108,7 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 		         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
 		         		<h5 style="text-align: justify;margin-left:50px;"><b>45J / 46C Ammoor Road,RANIPET - 632-401</br>
 	        			Tel : 91-4172-272470,272480</br>
-	        			Email : purchaseddept@tmargroup.in </br>
+	        			Email : purchasedept@tmargroup.in </br>
 	        			Email : soles@tmargroup.in</b></h5>
 
 	        			<h5 style="text-align: justify;margin-left:50px;"><b>
@@ -116,7 +116,7 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 	        			Periamet,CHENNAI-600 003.INDIA</br>
 	        			Tel : 91-44-25612164,25610078</br>
 	        			Email : headoffice@tmargroup.in</br>
-	        			GSTIN : 33AABFT2029F1Z0</b></h5>
+	        			GSTIN : 33AABFT2029F1ZO</b></h5>
 		         	</td>
         		</tr>
         	</table>
@@ -411,8 +411,8 @@ $_smarty_tpl->_assignInScope('other_total_amount', $_prefixVariable5);
 		         	<td align="center" width="8%" class="own-td-2">
 		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'Amount') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
-		         		[ <?php echo $_smarty_tpl->tpl_vars['other_total_amount']->value;?>
- ]
+		         		<?php echo $_smarty_tpl->tpl_vars['other_total_amount']->value;?>
+
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>

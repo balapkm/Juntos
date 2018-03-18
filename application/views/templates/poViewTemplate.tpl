@@ -314,7 +314,7 @@ td
 		         	[[/if]]
 		         	<td align="center" width="8%" class="own-td-2">
 		         		[[if $v.amount_type neq 'Amount']] [[$v.amount]] % <br/>[[/if]]
-		         		[ [[$other_total_amount]] ]
+		         		[[$other_total_amount]]
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
