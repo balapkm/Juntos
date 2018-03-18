@@ -82,7 +82,7 @@ td
 		         	</td>
 		         	[[/if]]
 		         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
-		         		<h5 style="text-align: justify;margin-left:50px;"><b>43J / 45C Ammoor Road,RANIPET - 632-401</br>
+		         		<h5 style="text-align: justify;margin-left:50px;"><b>45J / 46C Ammoor Road,RANIPET - 632-401</br>
 	        			Tel : 91-4172-272470,272480</br>
 	        			Email : purchaseddept@tmargroup.in </br>
 	        			Email : soles@tmargroup.in</b></h5>
@@ -318,8 +318,8 @@ td
 			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_amount )]]]]
 			         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_amount )]]]]
 
-			         	<td align="center" width="10%" class="own-td-2">[[$CGSTTotalValue]]</td>
-			         	<td align="center" width="10%" class="own-td-2">[[$SGSTTotalValue]]</td>
+			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue]] ]</td>
+			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue]] ]</td>
 			         	[[else]]
 			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_amount )]]]]
 			         	<td align="center" width="10%" class="own-td-2">[[$IGSTTotalValue]]</td>
@@ -418,7 +418,7 @@ td
 [[if $view_status eq 'Download']]
 <script>
 	[[literal]]
-	var number = [[/literal]] [[$GrandTotal]]; [[literal]]
+	var number = document.getElementById('GrandTotal').innerText;
 	document.getElementById('numberToWord').innerHTML = "<b>Amount In Words : </b> "+number2text(parseInt(number));
     
 	function number2text(value) {

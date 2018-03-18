@@ -173,7 +173,27 @@
 			    	<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Charge Name</label>
-		                  <input type="text" class="form-control" id="charge_name" placeholder="Enter Charge Name" ng-model="poOtherCharge.name">
+		                  <select class="form-control select2" style="width: 100%;" id="charge_name" ng-model="poOtherCharge.name" ng-change="changeOtherCharges('charge_name')">
+		                  	<option value="">Choose Charge Name</option>
+	                  	  	<option value="FREIGHT">FREIGHT</option>
+	                  	  	<option value="INSURANCE">INSURANCE</option>
+	                  	  	<option value="PACKING CHARGES">PACKING CHARGES</option>
+	                  	  	<option value="ERECTION CHARGES">ERECTION CHARGES</option>
+	                  	  	<option value="INSTALLATION CHARGES">INSTALLATION CHARGES</option>
+	                  	  	<option value="FREIGHT AND FORWORDING">FREIGHT AND FORWORDING</option>
+	                  	  	<option value="COURIER CHARGES">COURIER CHARGES</option>
+	                  	  	<option value="DELIVERY CHARGES">DELIVERY CHARGES</option>
+	                  	  	<option value="TRANSPORT CHARGES">TRANSPORT CHARGES</option>
+	                  	  	<option value="SERVICE CHARGES">SERVICE CHARGES</option>
+	                  	  	<option value="CLEARING AND DOCUMENTS CHARGES">CLEARING AND DOCUMENTS CHARGES</option>
+	                  	  	<option value="OTHER">OTHER</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="showOtherChargeName">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Other Charge Name</label>
+		                  <input type="text" class="form-control" id="otherChargeName" placeholder="Enter Other Charge Name" ng-model="poOtherCharge.other_charge_name">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -251,7 +271,7 @@
 		                  	 <option value="">Choose Incoterms</option>
 		                  	 <option value="EX-WORKS">EX-WORKS</option>
 		                  	 <option value="FOB">FOB</option>
-		                  	 <option value="CEAF">CEAF</option>
+		                  	 <option value="C & AF">C & AF</option>
 		                  	 <option value="COURIER">COURIER</option>
 		                  	 <option value="EX-FACTORY">EX-FACTORY</option>
 		                  </select>
@@ -259,13 +279,15 @@
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Payment Status</label>
+		                  <label for="exampleInputEmail1">Payment Terms</label>
 		                  <select class="form-control" id="import_payment_status" ng-model="importOtherCharge.payment_status">
 		                  	 <option value="">Choose Payment Status</option>
 		                  	 <option value="ADVANCE_IT">ADVANCE_IT</option>
 		                  	 <option value="TT">TT</option>
 		                  	 <option value="CAD">CAD</option>
 		                  	 <option value="LC">LC</option>
+		                  	 <option value="DA">DA</option>
+		                  	 <option value="30% ADVANCE, 40% AFTER 60 DAYS, 30% AFTER 90 DAYS">30% ADVANCE, 40% AFTER 60 DAYS, 30% AFTER 90 DAYS</option>
 		                  </select>
 		                </div>
 		            </div>

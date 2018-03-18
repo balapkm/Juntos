@@ -16,7 +16,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
       todayHighlight : true,
       startDate : new Date()
     });
-
+    $scope.showOtherChargeName = false;
     $scope.materialNameDetails = [];
 
     setTimeout(function(){
@@ -305,18 +305,29 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.addAdditionalChargesAction = function()
     {
+        if($scope.poOtherCharge.name === 'OTHER')
+        {
+            $scope.showOtherChargeName   = !$scope.showOtherChargeName;
+            $scope.poOtherCharge['name'] = $scope.poOtherCharge.other_charge_name;
+            delete $scope.poOtherCharge.other_charge_name;
+        }
+
         if(validateService.blank($scope.poOtherCharge['name'],"Please Enter Charge name","charge_name")) return false;
         if(validateService.blank($scope.poOtherCharge['hsn_code'],"Please Enter HSN Code","chargeHSNCode")) return false;
         if(validateService.blank($scope.poOtherCharge['amount_type'],"Please Choose Amount Type","chargeAmountType")) return false;
         if(validateService.blank($scope.poOtherCharge['amount'],"Please Enter Amount","chargeAmount")) return false;
-        if($scope.poOtherCharge['state_code'] === "33")
+        
+        if($scope.poOtherCharge['type'] !== 'Import' && $scope.poOtherCharge['type'] !== 'Sample_Import')
         {
-            if(validateService.blank($scope.poOtherCharge['CGST'],"Please Enter CGST","chargeCGST")) return false;
-            if(validateService.blank($scope.poOtherCharge['SGST'],"Please Enter SGST","chargeSGST")) return false;
-        }
-        else
-        {
-            if(validateService.blank($scope.poOtherCharge['IGST'],"Please Enter iGST","chargeIGST")) return false;
+            if($scope.poOtherCharge['state_code'] === "33")
+            {
+                if(validateService.blank($scope.poOtherCharge['CGST'],"Please Enter CGST","chargeCGST")) return false;
+                if(validateService.blank($scope.poOtherCharge['SGST'],"Please Enter SGST","chargeSGST")) return false;
+            }
+            else
+            {
+                if(validateService.blank($scope.poOtherCharge['IGST'],"Please Enter iGST","chargeIGST")) return false;
+            }
         }   
         
         var service_details = {
@@ -371,6 +382,15 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
                 })
             }
         });
+    }
+
+    $scope.changeOtherCharges = function(id)
+    {
+        $scope.clearRedMark(id);
+        if($scope.poOtherCharge.name === 'OTHER')
+        {
+            $scope.showOtherChargeName = !$scope.showOtherChargeName;
+        }
     }
 
     $scope.editImportOtherDetails = function(data)
