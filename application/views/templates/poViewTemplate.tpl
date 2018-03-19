@@ -183,7 +183,7 @@ td
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
-		         	<td align="center" width="8%" class="own-td-2">[[$v.price]]</td>
+		         	<td align="center" width="8%" class="own-td-2">[[$v.price|number_format:2]]</td>
 
 		         	[[if $v.discount_price_status eq 'Amount']]
 		         		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]
@@ -192,10 +192,10 @@ td
 		         	[[/if]]
 
 		         	<td align="center" width="10%" class="own-td-2">
-		         		[[$v.discount]][[if $v.discount_price_status neq 'Amount']] % [[/if]]
+		         		[[$v.discount|number_format:2]][[if $v.discount_price_status neq 'Amount']] % [[/if]]
 		         		[[if $v.discount_price_status neq 'Amount']]
 		         		</br>
-		         		[ [[$DISCOUNTTotalValue]] ]
+		         		[ [[$DISCOUNTTotalValue|number_format:2]] ]
 		         		[[/if]]
 		         	</td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
@@ -203,13 +203,13 @@ td
 				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.CGST]]% 
-				         		</br>[ [[$CGSTTotalValue]] ]
+				         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
 				         	</td>
 
 				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.SGST]]% 
-				         		</br>[ [[$SGSTTotalValue]] ]
+				         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
 				         	</td>
 			         	[[/if]]
 
@@ -218,14 +218,14 @@ td
 				         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.IGST]]% 
-				         		</br>[ [[$IGSTTotalValue]] ]
+				         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
 				         	</td>
 			         	[[/if]]
 			        [[/if]]
 
 		         	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
-		         	<td align="center" width="10%" class="own-td-2"><b>[[$totalPriceValue]]</b></td>
+		         	<td align="center" width="10%" class="own-td-2"><b>[[$totalPriceValue|number_format:2]]</b></td>
 
 		         	
 		         	[[$GrandTotal = $GrandTotal + $totalPriceValue]]
@@ -314,7 +314,7 @@ td
 		         	[[/if]]
 		         	<td align="center" width="8%" class="own-td-2">
 		         		[[if $v.amount_type neq 'Amount']] [[$v.amount]] % <br/>[[/if]]
-		         		[[$other_total_amount]]
+		         		[[$other_total_amount|number_format:2]]
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
@@ -322,11 +322,11 @@ td
 			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_amount )]]]]
 			         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_amount )]]]]
 
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue]] ]</td>
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue]] ]</td>
+			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue|number_format:2]] ]</td>
+			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue|number_format:2]] ]</td>
 			         	[[else]]
 			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_amount )]]]]
-			         	<td align="center" width="10%" class="own-td-2">[[$IGSTTotalValue]]</td>
+			         	<td align="center" width="10%" class="own-td-2">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
 			         	[[/if]]
 			        [[/if]]
 			        
@@ -334,7 +334,7 @@ td
 		         	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_amount + $IGSTTotalValue]]]]
 					[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]
 
-		         	<td align="center" width="10%" class="own-td-2">[[$totalPriceValue1]]</td>
+		         	<td align="center" width="10%" class="own-td-2">[[$totalPriceValue1|number_format:2]]</td>
 		         	[[if $view_status neq 'Download']]
 		         	<td align="center" width="10%" class="own-td-2">
 		         		<!-- <a href="#" onclick='editPoDetails([[$v|@json_encode]])'>
@@ -356,7 +356,8 @@ td
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
 		         	<td align="center" width="25%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
-		         	<td align="center" width="15%" class="own-td-2" id="GrandTotal"><b>[[$GrandTotal + $GrandTotal1]]</b></td>
+		         	<td align="center" width="15%" class="own-td-2"><b>[[($GrandTotal + $GrandTotal1)|number_format:2]]</b></td>
+		         	<td id="GrandTotal" style="display: none;">[[$GrandTotal + $GrandTotal1]]</td>
         		</tr>
         	</table>
         </tr>
@@ -379,26 +380,30 @@ td
         					<h5><b>Payment Terms        :    [[$importAdditionalCharges[0].payment_terms]]</b></h5>
         					<h5><b>Shipment             :    [[$importAdditionalCharges[0].Shipment]]</b></h5>
         					[[/if]]
+        					[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
         					<h5 style="margin-top: 5px;"><b>Terms & Condition :</b></h5>
+        					[[/if]]
         				</div>
-        				[[if $view_status eq 'Download']]
-        				<ul style="float: left;margin:2px; text-align: justify;font-size: 12px;">
-        				[[else]]
-        				<ul style="float: left;margin:2px; text-align: justify;font-size: 14px;">
-        				[[/if]]
-        					<li style="font-weight: bold;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Please quote our purchase order number on the invoice.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Freight to be paid as agreed between the parties.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Failing to file a tax return on time.We reserved the right to deduct the tax amount from your payment.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
-        				</ul>
+        				[[if $searchPoData[0]['type'] neq 'Import' AND $searchPoData[0]['type'] neq 'Sample_Import']]
+	        				[[if $view_status eq 'Download']]
+	        				<ul style="float: left;margin:2px; text-align: justify;font-size: 12px;">
+	        				[[else]]
+	        				<ul style="float: left;margin:2px; text-align: justify;font-size: 14px;">
+	        				[[/if]]
+	        					<li style="font-weight: bold;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Please quote our purchase order number on the invoice.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Freight to be paid as agreed between the parties.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Failing to file a tax return on time.We reserved the right to deduct the tax amount from your payment.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+	        				</ul>
+	        			[[/if]]
         			</td>
         			[[if $view_status eq 'Download']]
 		         	<td align="center" width="50%"  class="own-td-4">
-		         		<h4 style="float: left;margin:10px 0px 0px 20px;"><b>Incharge</b></h4>
-		         		<h4 style="float: right;margin:10px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h4>
+		         		<h4 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h4>
+		         		<h4 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h4>
 		         		</br>
 		         		</br>
 		         		<h4 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h4>
@@ -406,8 +411,8 @@ td
 		         	</td>
 		         	[[else]]
 		         	<td align="center" width="50%"  class="own-td-4">
-		         		<h5 style="float: left;margin:10px 0px 0px 20px;"><b>Incharge</b></h5>
-		         		<h5 style="float: right;margin:10px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
+		         		<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
+		         		<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-18 22:31:17
+/* Smarty version 3.1.30, created on 2018-03-19 10:23:31
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aae9b5d8e12c7_24905606',
+  'unifunc' => 'content_5aaf424bb62687_48425608',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521392471,
+      1 => 1521435209,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aae9b5d8e12c7_24905606 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaf424bb62687_48425608 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -227,7 +227,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="7%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-		         	<td align="center" width="8%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['price'];?>
+		         	<td align="center" width="8%" class="own-td-2"><?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
 </td>
 
 		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] == 'Amount') {?>
@@ -242,11 +242,11 @@ $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', $_prefixVariable1);
 		         	<?php }?>
 
 		         	<td align="center" width="10%" class="own-td-2">
-		         		<?php echo $_smarty_tpl->tpl_vars['v']->value['discount'];
+		         		<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['discount'],2);
 if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'Amount') {?> % <?php }?>
 		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'Amount') {?>
 		         		</br>
-		         		[ <?php echo $_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value;?>
+		         		[ <?php echo number_format($_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value,2);?>
  ]
 		         		<?php }?>
 		         	</td>
@@ -257,7 +257,7 @@ if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'Amount') {?>
 				         	<td align="center" width="10%" class="own-td-2">
 				         		<?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
 % 
-				         		</br>[ <?php echo $_smarty_tpl->tpl_vars['CGSTTotalValue']->value;?>
+				         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
  ]
 				         	</td>
 
@@ -266,7 +266,7 @@ if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'Amount') {?>
 				         	<td align="center" width="10%" class="own-td-2">
 				         		<?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
 % 
-				         		</br>[ <?php echo $_smarty_tpl->tpl_vars['SGSTTotalValue']->value;?>
+				         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
  ]
 				         	</td>
 			         	<?php }?>
@@ -281,7 +281,7 @@ $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable2);
 				         	<td align="center" width="10%" class="own-td-2">
 				         		<?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
 % 
-				         		</br>[ <?php echo $_smarty_tpl->tpl_vars['IGSTTotalValue']->value;?>
+				         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
  ]
 				         	</td>
 			         	<?php }?>
@@ -293,7 +293,7 @@ $_prefixVariable3=ob_get_clean();
 $_smarty_tpl->_assignInScope('totalPriceValue', $_prefixVariable3);
 ?>
 
-		         	<td align="center" width="10%" class="own-td-2"><b><?php echo $_smarty_tpl->tpl_vars['totalPriceValue']->value;?>
+		         	<td align="center" width="10%" class="own-td-2"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue']->value,2);?>
 </b></td>
 
 		         	
@@ -411,7 +411,7 @@ $_smarty_tpl->_assignInScope('other_total_amount', $_prefixVariable5);
 		         	<td align="center" width="8%" class="own-td-2">
 		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'Amount') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
-		         		<?php echo $_smarty_tpl->tpl_vars['other_total_amount']->value;?>
+		         		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_amount']->value,2);?>
 
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
@@ -429,10 +429,10 @@ $_smarty_tpl->_assignInScope('SGSTTotalValue', $_prefixVariable7);
 ?>
 
 			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
-%<br/>[ <?php echo $_smarty_tpl->tpl_vars['CGSTTotalValue']->value;?>
+%<br/>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
  ]</td>
 			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
-%<br/>[ <?php echo $_smarty_tpl->tpl_vars['SGSTTotalValue']->value;?>
+%<br/>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
  ]</td>
 			         	<?php } else { ?>
 			         	<?php ob_start();
@@ -440,7 +440,8 @@ echo (($_smarty_tpl->tpl_vars['v']->value['IGST']/100)*$_smarty_tpl->tpl_vars['o
 $_prefixVariable8=ob_get_clean();
 $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable8);
 ?>
-			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['IGSTTotalValue']->value;?>
+			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
+%<br/><?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
 </td>
 			         	<?php }?>
 			        <?php }?>
@@ -454,7 +455,7 @@ $_smarty_tpl->_assignInScope('totalPriceValue1', $_prefixVariable9);
 					<?php $_smarty_tpl->_assignInScope('GrandTotal1', $_smarty_tpl->tpl_vars['GrandTotal1']->value+$_smarty_tpl->tpl_vars['totalPriceValue1']->value);
 ?>
 
-		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['totalPriceValue1']->value;?>
+		         	<td align="center" width="10%" class="own-td-2"><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue1']->value,2);?>
 </td>
 		         	<?php if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 		         	<td align="center" width="10%" class="own-td-2">
@@ -484,8 +485,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
 		         	<td align="center" width="25%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
-		         	<td align="center" width="15%" class="own-td-2" id="GrandTotal"><b><?php echo $_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value;?>
+		         	<td align="center" width="15%" class="own-td-2"><b><?php echo number_format(($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value),2);?>
 </b></td>
+		         	<td id="GrandTotal" style="display: none;"><?php echo $_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value;?>
+</td>
         		</tr>
         	</table>
         </tr>
@@ -513,26 +516,30 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         					<h5><b>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
 </b></h5>
         					<?php }?>
+        					<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>
         					<h5 style="margin-top: 5px;"><b>Terms & Condition :</b></h5>
+        					<?php }?>
         				</div>
-        				<?php if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
-        				<ul style="float: left;margin:2px; text-align: justify;font-size: 12px;">
-        				<?php } else { ?>
-        				<ul style="float: left;margin:2px; text-align: justify;font-size: 14px;">
-        				<?php }?>
-        					<li style="font-weight: bold;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Please quote our purchase order number on the invoice.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Freight to be paid as agreed between the parties.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">Failing to file a tax return on time.We reserved the right to deduct the tax amount from your payment.</li>
-        					<li style="margin-top: 3px;font-weight: bold;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
-        				</ul>
+        				<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Import' && $_smarty_tpl->tpl_vars['searchPoData']->value[0]['type'] != 'Sample_Import') {?>
+	        				<?php if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
+	        				<ul style="float: left;margin:2px; text-align: justify;font-size: 12px;">
+	        				<?php } else { ?>
+	        				<ul style="float: left;margin:2px; text-align: justify;font-size: 14px;">
+	        				<?php }?>
+	        					<li style="font-weight: bold;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Please quote our purchase order number on the invoice.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Freight to be paid as agreed between the parties.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Failing to file a tax return on time.We reserved the right to deduct the tax amount from your payment.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+	        				</ul>
+	        			<?php }?>
         			</td>
         			<?php if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 		         	<td align="center" width="50%"  class="own-td-4">
-		         		<h4 style="float: left;margin:10px 0px 0px 20px;"><b>Incharge</b></h4>
-		         		<h4 style="float: right;margin:10px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h4>
+		         		<h4 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h4>
+		         		<h4 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h4>
 		         		</br>
 		         		</br>
 		         		<h4 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h4>
@@ -540,8 +547,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         	</td>
 		         	<?php } else { ?>
 		         	<td align="center" width="50%"  class="own-td-4">
-		         		<h5 style="float: left;margin:10px 0px 0px 20px;"><b>Incharge</b></h5>
-		         		<h5 style="float: right;margin:10px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
+		         		<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
+		         		<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
