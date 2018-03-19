@@ -427,8 +427,8 @@ td
 [[if $view_status eq 'Download']]
 <script>
 	[[literal]]
-	var number = document.getElementById('GrandTotal').innerText;
-	document.getElementById('numberToWord').innerHTML = "<b>Amount In Words : </b> "+number2text(parseInt(number));
+	var number = document.getElementById('GrandTotal').innerHTML;
+	document.getElementById('numberToWord').innerHTML = "<b>Amount In Words : </b> "+number2text(number);
     
 	function number2text(value) {
 	    var fraction = Math.round(frac(value)*100);

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-19 10:23:31
+/* Smarty version 3.1.30, created on 2018-03-19 10:46:03
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaf424bb62687_48425608',
+  'unifunc' => 'content_5aaf47935a9535_77833916',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521435209,
+      1 => 1521436555,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aaf424bb62687_48425608 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aaf47935a9535_77833916 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -564,8 +564,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 echo '<script'; ?>
 >
 	
-	var number = document.getElementById('GrandTotal').innerText;
-	document.getElementById('numberToWord').innerHTML = "<b>Amount In Words : </b> "+number2text(parseInt(number));
+	var number = document.getElementById('GrandTotal').innerHTML;
+	document.getElementById('numberToWord').innerHTML = "<b>Amount In Words : </b> "+number2text(number);
     
 	function number2text(value) {
 	    var fraction = Math.round(frac(value)*100);
