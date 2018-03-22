@@ -48,6 +48,7 @@ td
 <div class="col-lg-12" style="margin-top: 50px;">
 	[[if $view_status neq 'Download']]
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;" onclick="downloadAsPdfPODetails()">Download as PDF</button>
+	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addPurchaseOrder([[$searchPoData[0]|@json_encode]])'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges([[$searchPoData[0]|@json_encode]])'>Add Additional Charges</button>
 	[[/if]]
 	<table class="own-table">
@@ -183,7 +184,10 @@ td
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
-		         	<td align="center" width="8%" class="own-td-2">[[$v.price|number_format:2]]</td>
+		         	<td align="center" width="8%" class="own-td-2">
+		         			[[$v.price|number_format:2]]<br/>
+		         			[ [[$v.price_status]] ]
+		         	</td>
 
 		         	[[if $v.discount_price_status eq 'Amount']]
 		         		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]

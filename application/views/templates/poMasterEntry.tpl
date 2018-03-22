@@ -37,8 +37,10 @@
 					                          <th>GST No</th>
 					                          <th>State Code</th>
 					                          <th>Supplier tax</th>
+					                          <th>Status</th>
+					                          <th>Bank Details</th>
 					                          <th>Edit</th>
-					                          <th>Delete</th>
+					                          <!-- <th>Delete</th> -->
 					                        </tr>
 					                    </thead>
 					                    <tbody>
@@ -55,9 +57,11 @@
 					                          <td>[[$v.gst_no]]</td>
 					                          <td>[[$v.state_code]]</td>
 					                          <td>[[$v.supplier_tax_status]]</td>
+					                          <td>[[$v.supplier_status]]</td>
+					                          <td>[[$v.bank_details]]</td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick([[$v|@json_encode]])'>Edit</button>
 					                          </td>
-			                          		  <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick([[$v|@json_encode]])'>Delete</button></td>
+			                          		  <!-- <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick([[$v|@json_encode]])'>Delete</button></td> -->
 					                        </tr>
 					                        [[/foreach]]
 					                    </tbody>
@@ -198,14 +202,31 @@
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Status</label>
+		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status">
+		                  	  <option value="">Choose Supplier Status</option>
+		                  	  <option value="Registered">Registered</option>
+		                  	  <option value="Unregistered">Unregistered</option>
+		                  	  <option value="Import">Import</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Address</label>
-		                  <textarea id="supplier_address" class="form-control" placeholder="Enter Supplier Address" ng-model="supplier_form_data.supplier_address"></textarea>
+		                  <textarea id="supplier_address" class="form-control" placeholder="Enter Supplier Address" ng-model="supplier_form_data.supplier_address" style="height: 40px;"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Alternative Supplier Address</label>
 		                  <textarea id="alt_supplier_address" class="form-control" placeholder="Enter Alternative Supplier Address" ng-model="supplier_form_data.alt_supplier_address"></textarea>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bank Details</label>
+		                  <textarea id="bank_details" class="form-control" placeholder="Enter Bank Details" ng-model="supplier_form_data.bank_details"></textarea>
 		                </div>
 		            </div>
 		        </div>
@@ -237,7 +258,7 @@
 		                  <select id="supplier_name_select2" ng-model="material_form_data.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
 		                  	   <option value="">Choose Supplier Name</option>
 		                  	   [[foreach from=$supplier_entry key=k item=v]]
-			                  		<option value="[[$v.supplier_id]]|[[$v.state_code]]">[[$v.supplier_name]]</option>
+			                  		<option value="[[$v.supplier_id]]|[[$v.state_code]]|[[$v.supplier_status]]">[[$v.supplier_name]]</option>
 			                  	[[/foreach]]
 		                  </select>
 		                </div>

@@ -91,7 +91,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $scope.po_search_reset = function(){
         $scope.searchPoData   = {};
         $scope.searchPoData = {
-          po_year : "",
+          po_year : new Date().getFullYear(),
           po_number : "",
           final_po_data : {}
         };
@@ -102,7 +102,8 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $scope.poEditFormData = {
             material_name : "",
             qty : "",
-            id : ""
+            id : "",
+            price : ""
         };
     }
 
@@ -220,6 +221,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
         if(validateService.blank($scope.poEditFormData['material_name'],"Please Enter material name","material_name")) return false;
         if(validateService.blank($scope.poEditFormData['qty'],"Please Enter quantity","Quantity")) return false;
+        // if(validateService.blank($scope.poEditFormData['price'],"Please Enter price","edit_price")) return false;
 
         $scope.poEditFormData['material_name'] = $scope.poEditFormData['material_name'].replace(/<br\s*\/?>/mg,"\n");
         var service_details = {
@@ -313,7 +315,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         }
 
         if(validateService.blank($scope.poOtherCharge['name'],"Please Enter Charge name","charge_name")) return false;
-        if(validateService.blank($scope.poOtherCharge['hsn_code'],"Please Enter HSN Code","chargeHSNCode")) return false;
+        // if(validateService.blank($scope.poOtherCharge['hsn_code'],"Please Enter HSN Code","chargeHSNCode")) return false;
         if(validateService.blank($scope.poOtherCharge['amount_type'],"Please Choose Amount Type","chargeAmountType")) return false;
         if(validateService.blank($scope.poOtherCharge['amount'],"Please Enter Amount","chargeAmount")) return false;
         
@@ -430,6 +432,56 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             }
         })
     }
+
+    $scope.addPurchaseOrder = function(data)
+    {
+        var po_number_details = JSON.parse($('#po_number_details').val());
+        console.log(data,po_number_details);
+        $scope.generatePoData = {
+          unit : data.unit,
+          type : data.type,
+          order_reference : data.order_reference,
+          po_number : po_number_details[data.unit][data.type]['format']+data.po_number,
+          po_raw_number : data.po_number,
+          po_date : data.po_date,
+          delivery_date : data.delivery_date,
+          supplier_id : data.supplier_id,
+          material_id : ""
+        };
+        console.log($scope.generatePoData);
+        $scope.getMaterialDetailsAsPerSupplier('add_purchase_order');
+        $('#add_purchase_order').modal('show')
+    }
+
+    $scope.addPurchaseOrderAction = function()
+    {
+        if($scope.generatePoData['material_id'].length === 0)
+        {
+            validateService.displayMessage('error','Please Choose Material Name','');
+            validateService.addErrorTag(['material_id']);
+        }
+        console.log($scope.generatePoData);
+        var service_details = {
+            method_name : "generatePoData",
+            controller_name : "GeneratePo",
+            data : JSON.stringify($scope.generatePoData)
+        };
+        po_number = $scope.generatePoData['unit']+"|"+$scope.generatePoData['type']+"|"+$scope.generatePoData['po_raw_number']+"|"+$scope.generatePoData['po_number'];
+        po_year   = new Date($scope.generatePoData['po_date']).getFullYear();
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Added Successfully','');
+                $state.reload();
+                tab_switch_name = "tab_2";
+            }
+            else
+            {
+                validateService.displayMessage('error','Duplicate Entry',"");
+            }
+        });
+    }
 });
 
 function editPoDetails(data)
@@ -467,5 +519,11 @@ function deletePoOtherAdditionalCharges(data){
 function editImportOtherDetails(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.editImportOtherDetails(data);
+    scope.$apply();
+}
+
+function addPurchaseOrder(data) {
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.addPurchaseOrder(data);
     scope.$apply();
 }

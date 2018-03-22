@@ -144,7 +144,7 @@
 			                          <th>Delay Day</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
-			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Number</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>

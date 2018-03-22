@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-19 10:46:03
+/* Smarty version 3.1.30, created on 2018-03-22 23:02:14
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aaf47935a9535_77833916',
+  'unifunc' => 'content_5ab3e89ead9ec8_86193529',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521436555,
+      1 => 1521739928,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aaf47935a9535_77833916 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab3e89ead9ec8_86193529 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -71,6 +71,8 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 <div class="col-lg-12" style="margin-top: 50px;">
 	<?php if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;" onclick="downloadAsPdfPODetails()">Download as PDF</button>
+	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addPurchaseOrder(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>
+)'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>
 )'>Add Additional Charges</button>
 	<?php }?>
@@ -227,8 +229,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="7%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-		         	<td align="center" width="8%" class="own-td-2"><?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
-</td>
+		         	<td align="center" width="8%" class="own-td-2">
+		         			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
+<br/>
+		         			[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
+ ]
+		         	</td>
 
 		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] == 'Amount') {?>
 		         		<?php ob_start();

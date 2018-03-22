@@ -73,7 +73,7 @@ class GeneratePo extends CI_Controller
 			$finalInsertData[$key]['created_date'] = date('Y-m-d');
 		}
 
-		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Indigenous')
+		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Import')
 		{
 			$this->PoGenerateQuery->insert_import_other_details($finalInsertData[0]);
 		}

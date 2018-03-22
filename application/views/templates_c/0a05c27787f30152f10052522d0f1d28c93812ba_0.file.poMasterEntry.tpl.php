@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-04 14:26:01
+/* Smarty version 3.1.30, created on 2018-03-22 22:59:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a9bb4a1301fe8_72460068',
+  'unifunc' => 'content_5ab3e7dc181503_15900766',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1520153753,
+      1 => 1521739735,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a9bb4a1301fe8_72460068 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab3e7dc181503_15900766 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -61,8 +61,10 @@ function content_5a9bb4a1301fe8_72460068 (Smarty_Internal_Template $_smarty_tpl)
 					                          <th>GST No</th>
 					                          <th>State Code</th>
 					                          <th>Supplier tax</th>
+					                          <th>Status</th>
+					                          <th>Bank Details</th>
 					                          <th>Edit</th>
-					                          <th>Delete</th>
+					                          <!-- <th>Delete</th> -->
 					                        </tr>
 					                    </thead>
 					                    <tbody>
@@ -94,11 +96,15 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_tax_status'];?>
 </td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_status'];?>
+</td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['bank_details'];?>
+</td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
 )'>Edit</button>
 					                          </td>
-			                          		  <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Delete</button></td>
+			                          		  <!-- <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Delete</button></td> -->
 					                        </tr>
 					                        <?php
 }
@@ -268,14 +274,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Status</label>
+		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status">
+		                  	  <option value="">Choose Supplier Status</option>
+		                  	  <option value="Registered">Registered</option>
+		                  	  <option value="Unregistered">Unregistered</option>
+		                  	  <option value="Import">Import</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Address</label>
-		                  <textarea id="supplier_address" class="form-control" placeholder="Enter Supplier Address" ng-model="supplier_form_data.supplier_address"></textarea>
+		                  <textarea id="supplier_address" class="form-control" placeholder="Enter Supplier Address" ng-model="supplier_form_data.supplier_address" style="height: 40px;"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Alternative Supplier Address</label>
 		                  <textarea id="alt_supplier_address" class="form-control" placeholder="Enter Alternative Supplier Address" ng-model="supplier_form_data.alt_supplier_address"></textarea>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bank Details</label>
+		                  <textarea id="bank_details" class="form-control" placeholder="Enter Bank Details" ng-model="supplier_form_data.bank_details"></textarea>
 		                </div>
 		            </div>
 		        </div>
@@ -313,6 +336,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 ?>
 			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
 |<?php echo $_smarty_tpl->tpl_vars['v']->value['state_code'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_status'];?>
 "><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
 </option>
 			                  	<?php

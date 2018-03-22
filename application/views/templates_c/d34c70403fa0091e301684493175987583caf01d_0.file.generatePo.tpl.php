@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-18 21:43:35
+/* Smarty version 3.1.30, created on 2018-03-22 23:06:51
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aae902fe40f46_42360825',
+  'unifunc' => 'content_5ab3e9b31a8208_77969803',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1521389547,
+      1 => 1521740208,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aae902fe40f46_42360825 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab3e9b31a8208_77969803 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -186,20 +186,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-		    		<div class="col-lg-1"></div>
-			    	<div class="col-lg-5">
+			    	<div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="40" rows="5"></textarea>
+		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="30" rows="5"></textarea>
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Quantity</label>
 		                  <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" ng-model="poEditFormData.qty">
 		                </div>
 		            </div>
-		            <div class="col-lg-1"></div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Price</label>
+		                  <input type="text" class="form-control" id="edit_price" placeholder="Enter Price" ng-model="poEditFormData.price">
+		                </div>
+		            </div>
 	            </div>
 		    </div>
 		    <div class="modal-footer">
@@ -358,6 +362,35 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="editImportOtherDetailsAction()">Update</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add_purchase_order">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Add Purchase Order</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <select class="form-control select2_multiple" style="width: 100%;" id="material_id" ng-model="generatePoData.material_id" ng-change="clearRedMark('material_id')" multiple="multiple">
+		                  	<!-- <option value="">Choose Material Name</option> -->
+		                  	<option ng-repeat="x in materialNameDetails" value="{{x.material_id}}">{{x.material_name}}</option>
+		                  </select>
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="addPurchaseOrderAction()">Add</button>
 	        </div>
 		</div>
 	</div>

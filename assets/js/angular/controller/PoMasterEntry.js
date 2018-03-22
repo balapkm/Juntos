@@ -55,8 +55,10 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			gst_no : "",
 			state_code : "",
 			supplier_tax_status : "",
+			supplier_status : "",
 			supplier_address : "",
-			alt_supplier_address : ""
+			alt_supplier_address : "",
+			bank_details : ""
 		};
 	}
 
@@ -157,11 +159,12 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
     	if(validateService.blank($scope.supplier_form_data['origin'],"Please enter Origin","origin")) return false;
-    	if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
-    	if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
-    	if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
     	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_status'],"Please Choose supplier status","supplier_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
 
@@ -193,11 +196,12 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
     	if(validateService.blank($scope.supplier_form_data['origin'],"Please enter Origin","origin")) return false;
-    	if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
-    	if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
-    	if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
     	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	if(validateService.blank($scope.supplier_form_data['supplier_status'],"Please Choose supplier status","supplier_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
 
@@ -228,7 +232,12 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
-    	if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	
+    	var supplier_id = $scope.material_form_data['supplier_id'].split('|');
+    	if(supplier_id[2] === "Registered")
+    	{
+    		if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	}
     	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
     	if(validateService.blank($scope.material_form_data['group'],"Please Choose Group","group")) return false;
     	if(validateService.blank($scope.material_form_data['material_uom'],"Please enter material uom","material_uom")) return false;

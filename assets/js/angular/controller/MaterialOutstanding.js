@@ -35,7 +35,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.generatePoData = {
         po_number : "",
-        po_year : "",
+        po_year : new Date().getFullYear(),
         unit : "",
         material_name : "",
         supplier_name : "",
