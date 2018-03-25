@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-22 23:06:51
+/* Smarty version 3.1.30, created on 2018-03-24 22:51:46
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab3e9b31a8208_77969803',
+  'unifunc' => 'content_5ab6892adf65a5_56020482',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1521740208,
+      1 => 1521912099,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab3e9b31a8208_77969803 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab6892adf65a5_56020482 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -81,7 +81,7 @@ function content_5ab3e9b31a8208_77969803 (Smarty_Internal_Template $_smarty_tpl)
 		            		<div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Order Reference</label>
-				                  <input type="text" class="form-control" id="order_reference" placeholder="Enter Order Ref" ng-model="generatePoData.order_reference">
+				                  <input type="text" class="form-control" id="order_reference" placeholder="Enter Order Ref" ng-model="generatePoData.order_reference" ng-change="generatePoData.order_reference = generatePoData.order_reference.toUpperCase()">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">
@@ -189,7 +189,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			    	<div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="30" rows="5"></textarea>
+		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="30" rows="5" ng-change="poEditFormData.material_name = poEditFormData.material_name.toUpperCase()"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -321,20 +321,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Incoterms</label>
-		                  <select class="form-control" id="import_incoterms" ng-model="importOtherCharge.incoterms">
+		                  <select class="form-control" id="import_incoterms" ng-model="importOtherCharge.incoterms" ng-change="changeImportDetailsShow('incoterms')">
 		                  	 <option value="">Choose Incoterms</option>
 		                  	 <option value="EX-WORKS">EX-WORKS</option>
 		                  	 <option value="FOB">FOB</option>
 		                  	 <option value="C & AF">C & AF</option>
 		                  	 <option value="COURIER">COURIER</option>
 		                  	 <option value="EX-FACTORY">EX-FACTORY</option>
+		                  	 <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="importDetailsShow.incoterms">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Other Incoterms</label>
+		                  <input type="text" class="form-control" id="import_incoterms_other" placeholder="Enter Other Incoterms" ng-model="importOtherCharge.import_incoterms_other">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Payment Terms</label>
-		                  <select class="form-control" id="import_payment_status" ng-model="importOtherCharge.payment_status">
+		                  <select class="form-control" id="import_payment_status" ng-model="importOtherCharge.payment_status" ng-change="changeImportDetailsShow('payment_status')">
 		                  	 <option value="">Choose Payment Status</option>
 		                  	 <option value="ADVANCE_IT">ADVANCE_IT</option>
 		                  	 <option value="TT">TT</option>
@@ -342,19 +349,33 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  	 <option value="LC">LC</option>
 		                  	 <option value="DA">DA</option>
 		                  	 <option value="30% ADVANCE, 40% AFTER 60 DAYS, 30% AFTER 90 DAYS">30% ADVANCE, 40% AFTER 60 DAYS, 30% AFTER 90 DAYS</option>
+		                  	 <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="importDetailsShow.payment_status">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Other Payment Terms</label>
+		                  <input type="text" class="form-control" id="import_payment_status_other" placeholder="Enter Other Payment Terms" ng-model="importOtherCharge.import_payment_status_other">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Shipment</label>
-		                  <select class="form-control" id="import_shipment" ng-model="importOtherCharge.Shipment">
+		                  <select class="form-control" id="import_shipment" ng-model="importOtherCharge.Shipment" ng-change="changeImportDetailsShow('Shipment')">
 		                  	 <option value="">Choose Shipment</option>
 		                  	 <option value="BY TNT COURIER `OUR A/C# 20407`">BY TNT COURIER `OUR A/C# 20407`</option>
 		                  	 <option value="DHC">DHC</option>
 		                  	 <option value="AIR">AIR</option>
 		                  	 <option value="SEA">SEA</option>
+		                  	 <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="importDetailsShow.Shipment">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Other Shipment</label>
+		                  <input type="text" class="form-control" id="import_shipment" placeholder="Enter Other Shipment" ng-model="importOtherCharge.Shipment_other">
 		                </div>
 		            </div>
 	            </div>
@@ -391,6 +412,42 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="addPurchaseOrderAction()">Add</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="overall_discount_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Overall Discount</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-6">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Discount Type</label>
+		                  <select class="form-control" id="discount_type" ng-model="overAllDiscountDetails.discount_type">
+		                  	 <option value="">Choose Discount Type</option>
+		                  	 <option value="Percentage">Percentage</option>
+		                  	 <option value="Amount">Amount</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-6">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Discount</label>
+		                  <input type="text" id="overall_discount" ng-model="overAllDiscountDetails.discount" class="form-control">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="addOverAllDiscountAction()">Add</button>
 	        </div>
 		</div>
 	</div>

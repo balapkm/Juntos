@@ -26,7 +26,15 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		},100);
 	}
 
+	if(tab_switch_name === 'tab_3')
+	{
+		setTimeout(function(){
+			$('a[href="#'+tab_switch_name+'"]').trigger('click');
+		},100);
+	}
+
 	$scope.showGst = true;
+	$scope.uof_name = "";
 	
 	$scope.clearRedMark = function(id)
     {
@@ -39,6 +47,10 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 	$scope.material_modal = {
 		title : "Add Material Details",
+		button : "Add"
+	}
+	$scope.uof_modal = {
+		title : "Add Uof Details",
 		button : "Add"
 	}
 
@@ -167,7 +179,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.supplier_form_data['supplier_status'],"Please Choose supplier status","supplier_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
-
+    	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
 		var service_details = {
 	      method_name : "updateSupplierAction",
 	      controller_name : "PoMasterEntry",
@@ -205,6 +217,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
 
+    	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
 		var service_details = {
 	      method_name : "addSupplierAction",
 	      controller_name : "PoMasterEntry",
@@ -223,6 +236,80 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		else
     		{
     			validateService.displayMessage('error','Failed...Duplicate Entry',"");
+    		}
+    	})
+	}
+
+	$scope.addUof = function()
+	{
+		$('#add_uof_modal').modal('show');
+	}
+
+	$scope.addUofAction = function()
+	{
+		if(validateService.blank($scope.uof_name,"Please Enter Uof name","uof_name")) return false;
+
+		var data = {
+			uof_name : $scope.uof_name.toUpperCase()
+		}
+		var service_details = {
+	      method_name : "addUofAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Added Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_3';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','This material already exist for this supplier',"");
+    		}
+    	})
+	}
+
+	$scope.uofEditClick = function(data)
+	{
+		$scope.uof_name = data.uof_name;
+
+		$scope.uof_modal = {
+			title : "Update Uof Details",
+			button : "Update",
+			uof_id : data.uof_id
+		}
+		$('#add_uof_modal').modal('show');
+	}
+
+	$scope.uofEditClickAction = function()
+	{
+		if(validateService.blank($scope.uof_name,"Please Enter Uof name","uof_name")) return false;
+
+		var data = {
+			uof_name : $scope.uof_name.toUpperCase(),
+			uof_id : $scope.uof_modal.uof_id
+		}
+		var service_details = {
+	      method_name : "updateUofAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Updated Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_3';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','This material already exist for this supplier',"");
     		}
     	})
 	}
@@ -246,6 +333,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
     	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
 
+    	$scope.material_form_data = validateService.changeAllUpperCase($scope.material_form_data);
 		var service_details = {
 	      method_name : "addMaterialAction",
 	      controller_name : "PoMasterEntry",
@@ -280,6 +368,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
     	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
 
+    	$scope.material_form_data = validateService.changeAllUpperCase($scope.material_form_data);
 		var service_details = {
 	      method_name : "updateMaterialAction",
 	      controller_name : "PoMasterEntry",
@@ -334,6 +423,38 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		  }
 		});
 	}
+
+	$scope.uofDeleteClick = function(data){
+		var service_details = {
+	      method_name : "deleteUofAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+
+		swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this imaginary file!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if(willDelete){
+	    	httpService.callWebService(service_details).then(function(data){
+	    		if(data)
+	    		{
+	    			validateService.displayMessage('success','Deleted Successfully','');
+	    			$state.reload();
+	    			tab_switch_name = 'tab_3';
+	    		}
+	    		else
+	    		{
+	    			validateService.displayMessage('error','Failed to delete',"");
+	    		}
+	    	})
+		  }
+		});
+	}
 });
 
 function supplierEditClick(data)
@@ -361,5 +482,19 @@ function materialDeleteClick(data)
 {
 	var scope = angular.element($('[ui-view=div1]')).scope();
 	scope.materialDeleteClick(data);
+	scope.$apply();
+}
+
+function uofEditClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.uofEditClick(data);
+	scope.$apply();
+}
+
+function uofDeleteClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.uofDeleteClick(data);
 	scope.$apply();
 }

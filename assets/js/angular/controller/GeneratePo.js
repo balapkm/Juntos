@@ -61,6 +61,25 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $(this).closest('.select2-selection').removeClass('border-focus');
     });
 
+    $scope.importDetailsShow = {
+        incoterms : false,
+        Shipment  : false,
+        payment_status   : false
+    }
+
+    $scope.changeImportDetailsShow = function(id)
+    {
+        console.log($scope.importOtherCharge[id],$scope.importDetailsShow[id]);
+        if($scope.importOtherCharge[id] === 'OTHERS')
+        {
+            $scope.importDetailsShow[id] = true;
+        }
+        else
+        {
+            $scope.importDetailsShow[id] = false;
+        }
+    }
+
     $scope.po_other_charge_reset = function(){
         $scope.poOtherCharge   = {};
         $scope.poOtherCharge = {
@@ -214,6 +233,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $scope.poEditFormData.material_name = data.material_name;
         $scope.poEditFormData.qty           = data.qty;
         $scope.poEditFormData.id            = data.po_generated_request_id;
+        $scope.poEditFormData.price         = data.price;
         $('#po_modal').modal('show');
     }
 
@@ -331,7 +351,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
                 if(validateService.blank($scope.poOtherCharge['IGST'],"Please Enter iGST","chargeIGST")) return false;
             }
         }   
-        
+        $scope.poOtherCharge = validateService.changeAllUpperCase($scope.poOtherCharge);
         var service_details = {
           method_name : "addAdditionalChargesAction",
           controller_name : "GeneratePo",
@@ -412,12 +432,30 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         if(validateService.blank($scope.importOtherCharge['payment_status'],"Please Choose payment Status","import_payment_status")) return false;
         if(validateService.blank($scope.importOtherCharge['Shipment'],"Please Choose Shipment","import_shipment")) return false;
 
+        if($scope.importOtherCharge['incoterms'] === 'OTHERS')
+        {
+            $scope.importOtherCharge['incoterms'] = $scope.importOtherCharge['import_incoterms_other'];
+            delete $scope.importOtherCharge['import_incoterms_other'];
+        }
+
+        if($scope.importOtherCharge['payment_status'] === 'OTHERS')
+        {
+            $scope.importOtherCharge['incoterms'] = $scope.importOtherCharge['import_payment_status_other'];
+            delete $scope.importOtherCharge['import_payment_status_other'];
+        }
+
+        if($scope.importOtherCharge['Shipment'] === 'OTHERS')
+        {
+            $scope.importOtherCharge['Shipment'] = $scope.importOtherCharge['Shipment_other'];
+            delete $scope.importOtherCharge['Shipment_other'];
+        }
+
+        $scope.importOtherCharge = validateService.changeAllUpperCase($scope.importOtherCharge);
         var service_details = {
           method_name : "editImportOtherDetailsAction",
           controller_name : "GeneratePo",
           data : JSON.stringify($scope.importOtherCharge)
         };
-        
         httpService.callWebService(service_details).then(function(data){
             if(data)
             {
@@ -436,7 +474,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $scope.addPurchaseOrder = function(data)
     {
         var po_number_details = JSON.parse($('#po_number_details').val());
-        console.log(data,po_number_details);
         $scope.generatePoData = {
           unit : data.unit,
           type : data.type,
@@ -448,7 +485,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
           supplier_id : data.supplier_id,
           material_id : ""
         };
-        console.log($scope.generatePoData);
         $scope.getMaterialDetailsAsPerSupplier('add_purchase_order');
         $('#add_purchase_order').modal('show')
     }
@@ -460,7 +496,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             validateService.displayMessage('error','Please Choose Material Name','');
             validateService.addErrorTag(['material_id']);
         }
-        console.log($scope.generatePoData);
         var service_details = {
             method_name : "generatePoData",
             controller_name : "GeneratePo",
@@ -479,6 +514,83 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             else
             {
                 validateService.displayMessage('error','Duplicate Entry',"");
+            }
+        });
+    }
+
+    $scope.overAllDiscountDetails = {
+        discount_type : "",
+        discount : "",
+        unit : "",
+        type : "",
+        po_number: "",
+        po_date : ""
+    }
+    $scope.addOverAllDiscount = function(data)
+    {
+        $scope.overAllDiscountDetails = {
+            discount_type : "",
+            discount : "",
+            unit : data.unit,
+            type : data.type,
+            po_number: data.po_number,
+            po_date : data.po_date
+        }
+        $('#overall_discount_modal').modal('show');
+    }
+
+    $scope.addOverAllDiscountAction = function()
+    {
+        $scope.overAllDiscountDetails = validateService.changeAllUpperCase($scope.overAllDiscountDetails);
+        var service_details = {
+          method_name : "addOverAllDiscountAction",
+          controller_name : "GeneratePo",
+          data : JSON.stringify($scope.overAllDiscountDetails)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            {
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Add Successfully','');
+                $state.reload();
+                tab_switch_name = "tab_2";
+            }
+            else
+            {
+                validateService.displayMessage('error','Error',"");
+            }
+        })
+    }
+
+    $scope.deleteOverAllDiscountDetails = function(data)
+    {
+        var service_details = {
+            method_name : "deleteOverAllDiscountDetails",
+            controller_name : "GeneratePo",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete){
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    {
+                        validateService.displayMessage('success','Deleted Successfully','');
+                        $state.reload();
+                        tab_switch_name = 'tab_2';
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Failed to delete',"");
+                    }
+                })
             }
         });
     }
@@ -525,5 +637,17 @@ function editImportOtherDetails(data){
 function addPurchaseOrder(data) {
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.addPurchaseOrder(data);
+    scope.$apply();
+}
+
+function addOverAllDiscount(data) {
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.addOverAllDiscount(data);
+    scope.$apply();
+}
+
+function deleteOverAllDiscountDetails(data) {
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.deleteOverAllDiscountDetails(data);
     scope.$apply();
 }

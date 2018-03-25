@@ -137,6 +137,22 @@ class PoGenerateQuery extends CI_Model
         return $data;
     }
 
+    public function getOverAllDiscountDetails($data)
+    {
+        $sql = "SELECT 
+                    *
+                FROM
+                    overall_discount_details odd
+                WHERE
+                    unit = '".$data['unit']."' AND
+                    type = '".$data['type']."' AND
+                    po_number = '".$data['po_number']."' AND
+                    YEAR(po_date) = '".$data['po_year']."'";
+
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function insert_po_generated_request_details($data)
     {
         $result = $this->db->insert_batch('po_generated_request_details',$data);

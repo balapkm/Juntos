@@ -200,25 +200,25 @@
 		                  <input type="text" ng-model="editMaterialPOData.received" class="form-control" id="received" placeholder="Enter Received number" maxlength="10">
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received Date</label>
 		                  <input type="text" ng-model="editMaterialPOData.received_date" class="form-control" id="received_date" placeholder="Choose Received Date">
 		                </div>
-		            </div> -->
-		            <div class="col-lg-4">
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Invoice Number</label>
 		                  <input type="text" ng-model="editMaterialPOData.invoice_number" class="form-control" id="invoice_number" placeholder="Enter Invoice number">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bill Amount</label>
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
 		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">

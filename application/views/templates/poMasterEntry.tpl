@@ -12,6 +12,7 @@
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -120,6 +121,39 @@
 				                          		  <td><button class="btn btn-primary btn-sm" onclick='materialDeleteClick([[$v|@json_encode]])'>Delete</button></td>
 						                        </tr>
 						                        [[/foreach]]
+					                    </tbody>
+					                </table>
+					            </div>
+				            </div>
+				        </div>
+	              	</div>
+	              	<div class="tab-pane" id="tab_3">
+				        <div class="row">
+				        	<div class="col-lg-12">
+				        		<div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addUof()">
+				                </div>
+				        	</div>
+				        	<div class="col-lg-12">
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Uof Id</th>
+					                          <th>Uof Name</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                    	[[foreach from=$unit_of_measurement key=k item=v]]
+					                        <tr>
+					                          <td>[[$k+1]]</td>
+					                          <td>[[$v.uof_name]]</td>
+					                          <td><button class="btn btn-primary btn-sm" onclick='uofEditClick([[$v|@json_encode]])'>Edit</button></td>
+			                          		  <td><button class="btn btn-primary btn-sm" onclick='uofDeleteClick([[$v|@json_encode]])'>Delete</button></td>
+					                        </tr>
+					                        [[/foreach]]
 					                    </tbody>
 					                </table>
 					            </div>
@@ -293,7 +327,7 @@
 		                  <select id="material_uom" ng-model="material_form_data.material_uom" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_uom')">
 		                  	   <option value="">Choose UOM</option>
 		                  	   [[foreach from=$unit_of_measurement key=k item=v]]
-			                  		<option value="[[$v]]">[[$v]]</option>
+			                  		<option value="[[$v.uof_name]]">[[$v.uof_name]]</option>
 			                  	[[/foreach]]
 		                  </select>
 		                </div>
@@ -359,4 +393,30 @@
 	    <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="add_uof_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">{{uof_modal.title}}</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">UOF Name</label>
+		                  <input type="text" id="uof_name" class="form-control" ng-model="uof_name">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+        		<button type="button" ng-if="uof_modal.button==='Add'" class="btn btn-primary" ng-click="addUofAction()">{{uof_modal.button}}</button>
+        		<button type="button" ng-if="uof_modal.button==='Update'" class="btn btn-primary" ng-click="uofEditClickAction()">{{uof_modal.button}}</button>
+	        </div>
+		</div>
+	</div>
 </div>

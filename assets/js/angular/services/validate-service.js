@@ -36,4 +36,14 @@ app.service('validateService',function(){
 	            break;
       	}
   	}
+
+  	this.changeAllUpperCase = function(data)
+  	{
+  		var final = {};
+  		for(var i in data)
+  		{
+  			final[i] = data[i].toUpperCase();
+  		}
+  		return final;
+  	}
 });

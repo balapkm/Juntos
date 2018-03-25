@@ -43,6 +43,14 @@ class PoMasterEntryQuery extends CI_Model
         return $data;
     }
 
+    public function update_uof_master($data)
+    {
+        $id = $data['uof_id'];
+        unset($data['uof_id']);
+        $result = $this->db->update('uof_master',$data, array('uof_id' => $id));
+        return $result;
+    }
+
     public function update_supplier_entry($data)
     {
         $id = $data['supplier_id'];
@@ -73,6 +81,20 @@ class PoMasterEntryQuery extends CI_Model
         $query = $this->db->get_where('supplier_details', 
                                         array(
                                             'status'     => 'Y'
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $this->objectToArray($data);
+    }
+
+    public function select_uof_master()
+    {
+        $query = $this->db->get_where('uof_master', 
+                                        array(
+                                            'uof_status'     => 'Y'
                                         ));
         $data  = array();
         foreach ($query->result() as $row)
@@ -121,9 +143,21 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function del_overall_discount_details($data)
+    {
+        $result = $this->db->delete('overall_discount_details',array('overall_discount_id' => $data['overall_discount_id']));
+        return $result;
+    }
+    
     public function delete_material_entry($data)
     {
         $result = $this->db->delete('material_details',array('material_id' => $data['material_id']));
+        return $result;
+    }
+
+    public function delete_uof_master($data)
+    {
+        $result = $this->db->delete('uof_master',array('uof_id' => $data['uof_id']));
         return $result;
     }
 

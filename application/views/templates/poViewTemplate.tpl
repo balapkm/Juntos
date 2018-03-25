@@ -50,6 +50,7 @@ td
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;" onclick="downloadAsPdfPODetails()">Download as PDF</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addPurchaseOrder([[$searchPoData[0]|@json_encode]])'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges([[$searchPoData[0]|@json_encode]])'>Add Additional Charges</button>
+	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addOverAllDiscount([[$searchPoData[0]|@json_encode]])'>Add Overall Discount</button>
 	[[/if]]
 	<table class="own-table">
 		<tr>
@@ -150,7 +151,7 @@ td
         		[[/if]]
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
-		         	<td align="center" width="10%">HSN Code</td>
+		         	<td align="center" width="10%">HSN CODE</td>
 		         	<td align="center" width="5%">QTY</td>
 		         	<td align="center" width="7%">UOM</td>
 		         	<td align="center" width="8%">PRICE</td>
@@ -164,7 +165,7 @@ td
 			         		<td align="center" width="10%" >IGST</td>
 			         	[[/if]]
 			        [[/if]]
-		         	<td align="center" width="10%">TOTAL AMOUNT</td>
+		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
 		         	[[if $view_status neq 'Download']]
 		         	<td align="center" width="10%">Action</td>
 		         	[[/if]]
@@ -354,14 +355,44 @@ td
         </tr>
         [[/foreach]]
         [[/if]]
+
+        [[assign var=ODiscountValue value=0]]
+        [[if $overAllDiscountDetails|@count neq 0]]
+        [[foreach from=$overAllDiscountDetails key=k item=v]]
+        <tr>
+        	<table class="own-table">
+        		<tr>
+        			[[if $v.discount_type eq 'Amount']]
+		         		[[assign var=ODiscountValue value=[[$v.discount]]]]
+		         	[[else]]
+		         		[[assign var=ODiscountValue value=(($v.discount/100) * ($GrandTotal + $GrandTotal1))]]
+		         	[[/if]]
+
+        			<td align="center" width="65%"  class="own-td-2">DISCOUNT</td>
+        			<td align="center" width="10%"  class="own-td-2"><b>[[$ODiscountValue|number_format:2]]</b></td>
+		         	[[if $view_status neq 'Download']]
+		         	<td align="center" width="10%" class="own-td-2">
+		         		<!-- <a href="#" onclick='editPoDetails([[$v|@json_encode]])'>
+				          <span class="glyphicon glyphicon-edit"></span>
+				        </a> -->
+				        <a href="#" onclick='deleteOverAllDiscountDetails([[$v|@json_encode]])' style="margin-left: 10px;">
+				          <span class="glyphicon glyphicon-trash"></span>
+				        </a>
+		         	</td>
+		         	[[/if]]
+        		</tr>
+        	</table>
+        </tr>
+        [[/foreach]]
+        [[/if]]
         <tr>
         	<table class="own-table">
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="25%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
-		         	<td align="center" width="15%" class="own-td-2"><b>[[($GrandTotal + $GrandTotal1)|number_format:2]]</b></td>
-		         	<td id="GrandTotal" style="display: none;">[[$GrandTotal + $GrandTotal1]]</td>
+		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="18%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
+		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
         		</tr>
         	</table>
         </tr>

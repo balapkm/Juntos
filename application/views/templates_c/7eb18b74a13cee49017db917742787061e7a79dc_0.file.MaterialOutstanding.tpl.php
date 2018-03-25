@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-18 15:43:23
+/* Smarty version 3.1.30, created on 2018-03-23 19:45:21
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aae3bc3634105_73529509',
+  'unifunc' => 'content_5ab50bf96b2c46_79340478',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1521367993,
+      1 => 1521814413,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aae3bc3634105_73529509 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab50bf96b2c46_79340478 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -204,7 +204,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                          <th>Delay Day</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
-			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Amount</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Number</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -260,25 +260,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editMaterialPOData.received" class="form-control" id="received" placeholder="Enter Received number" maxlength="10">
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received Date</label>
 		                  <input type="text" ng-model="editMaterialPOData.received_date" class="form-control" id="received_date" placeholder="Choose Received Date">
 		                </div>
-		            </div> -->
-		            <div class="col-lg-4">
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Invoice Number</label>
 		                  <input type="text" ng-model="editMaterialPOData.invoice_number" class="form-control" id="invoice_number" placeholder="Enter Invoice number">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bill Amount</label>
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
 		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">

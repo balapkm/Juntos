@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-22 23:02:14
+/* Smarty version 3.1.30, created on 2018-03-24 23:09:07
   from "/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab3e89ead9ec8_86193529',
+  'unifunc' => 'content_5ab68d3b616c67_17656495',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9650d35c3e7d40742c6fdc64eb5259364fd4c811' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poViewTemplate.tpl',
-      1 => 1521739928,
+      1 => 1521912954,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab3e89ead9ec8_86193529 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab68d3b616c67_17656495 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['view_status']->value == 'Download') {?>
 <!DOCTYPE html>
 <html>
@@ -75,6 +75,8 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 )'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>
 )'>Add Additional Charges</button>
+	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addOverAllDiscount(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>
+)'>Add Overall Discount</button>
 	<?php }?>
 	<table class="own-table">
 		<tr>
@@ -182,7 +184,7 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
         		<?php }?>
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
-		         	<td align="center" width="10%">HSN Code</td>
+		         	<td align="center" width="10%">HSN CODE</td>
 		         	<td align="center" width="5%">QTY</td>
 		         	<td align="center" width="7%">UOM</td>
 		         	<td align="center" width="8%">PRICE</td>
@@ -196,7 +198,7 @@ if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 			         		<td align="center" width="10%" >IGST</td>
 			         	<?php }?>
 			        <?php }?>
-		         	<td align="center" width="10%">TOTAL AMOUNT</td>
+		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
 		         	<?php if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
 		         	<td align="center" width="10%">Action</td>
 		         	<?php }?>
@@ -485,15 +487,63 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
         <?php }?>
+
+        <?php $_smarty_tpl->_assignInScope('ODiscountValue', 0);
+?>
+        <?php if (count($_smarty_tpl->tpl_vars['overAllDiscountDetails']->value) != 0) {?>
+        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['overAllDiscountDetails']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+        <tr>
+        	<table class="own-table">
+        		<tr>
+        			<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_type'] == 'Amount') {?>
+		         		<?php ob_start();
+echo $_smarty_tpl->tpl_vars['v']->value['discount'];
+$_prefixVariable10=ob_get_clean();
+$_smarty_tpl->_assignInScope('ODiscountValue', $_prefixVariable10);
+?>
+		         	<?php } else { ?>
+		         		<?php $_smarty_tpl->_assignInScope('ODiscountValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)));
+?>
+		         	<?php }?>
+
+        			<td align="center" width="65%"  class="own-td-2">DISCOUNT</td>
+        			<td align="center" width="10%"  class="own-td-2"><b><?php echo number_format($_smarty_tpl->tpl_vars['ODiscountValue']->value,2);?>
+</b></td>
+		         	<?php if ($_smarty_tpl->tpl_vars['view_status']->value != 'Download') {?>
+		         	<td align="center" width="10%" class="own-td-2">
+		         		<!-- <a href="#" onclick='editPoDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>
+				          <span class="glyphicon glyphicon-edit"></span>
+				        </a> -->
+				        <a href="#" onclick='deleteOverAllDiscountDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)' style="margin-left: 10px;">
+				          <span class="glyphicon glyphicon-trash"></span>
+				        </a>
+		         	</td>
+		         	<?php }?>
+        		</tr>
+        	</table>
+        </tr>
+        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+        <?php }?>
         <tr>
         	<table class="own-table">
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="25%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
-		         	<td align="center" width="15%" class="own-td-2"><b><?php echo number_format(($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value),2);?>
+		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="18%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
-		         	<td id="GrandTotal" style="display: none;"><?php echo $_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value;?>
+		         	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
 </td>
         		</tr>
         	</table>

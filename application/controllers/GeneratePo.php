@@ -96,6 +96,16 @@ class GeneratePo extends CI_Controller
 		return $this->PoGenerateQuery->delete_po_other_additional_charges($this->data);
 	}
 
+	public function addOverAllDiscountAction()
+	{
+		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,"overall_discount_details");
+	}
+
+	public function deleteOverAllDiscountDetails()
+	{
+		return $this->PoMasterEntryQuery->del_overall_discount_details($this->data);
+	}
+
 	public function viewPoData(){
 		$po_number = explode("|",$this->data['po_number']);
 		$this->data['unit'] = $po_number[0];
@@ -104,6 +114,7 @@ class GeneratePo extends CI_Controller
 		$this->data['searchPoData']              =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
 		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
 		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
+		$this->data['overAllDiscountDetails']    =  $this->PoGenerateQuery->getOverAllDiscountDetails($this->data);
 		if(count($this->data['searchPoData']) == 0)
 		{
 			return false;
@@ -134,6 +145,7 @@ class GeneratePo extends CI_Controller
 		$this->data['searchPoData']              =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
 		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
 		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
+		$this->data['overAllDiscountDetails']    =  $this->PoGenerateQuery->getOverAllDiscountDetails($this->data);
 		$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
 		$filename    = date('YmdHis');
 		$folder_name = realpath(APPPATH."../assets/po_html");

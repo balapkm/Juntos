@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-22 22:59:00
+/* Smarty version 3.1.30, created on 2018-03-23 22:44:19
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab3e7dc181503_15900766',
+  'unifunc' => 'content_5ab535eb981471_61815456',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1521739735,
+      1 => 1521825244,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab3e7dc181503_15900766 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab535eb981471_61815456 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -36,6 +36,7 @@ function content_5ab3e7dc181503_15900766 (Smarty_Internal_Template $_smarty_tpl)
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -187,6 +188,52 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 )'>Delete</button></td>
 						                        </tr>
 						                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+					                    </tbody>
+					                </table>
+					            </div>
+				            </div>
+				        </div>
+	              	</div>
+	              	<div class="tab-pane" id="tab_3">
+				        <div class="row">
+				        	<div class="col-lg-12">
+				        		<div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addUof()">
+				                </div>
+				        	</div>
+				        	<div class="col-lg-12">
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Uof Id</th>
+					                          <th>Uof Name</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['unit_of_measurement']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                        <tr>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
+</td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['uof_name'];?>
+</td>
+					                          <td><button class="btn btn-primary btn-sm" onclick='uofEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Edit</button></td>
+			                          		  <td><button class="btn btn-primary btn-sm" onclick='uofDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Delete</button></td>
+					                        </tr>
+					                        <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
@@ -382,8 +429,8 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['uof_name'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['uof_name'];?>
 </option>
 			                  	<?php
 }
@@ -455,5 +502,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	    <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="add_uof_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">{{uof_modal.title}}</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">UOF Name</label>
+		                  <input type="text" id="uof_name" class="form-control" ng-model="uof_name">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+        		<button type="button" ng-if="uof_modal.button==='Add'" class="btn btn-primary" ng-click="addUofAction()">{{uof_modal.button}}</button>
+        		<button type="button" ng-if="uof_modal.button==='Update'" class="btn btn-primary" ng-click="uofEditClickAction()">{{uof_modal.button}}</button>
+	        </div>
+		</div>
+	</div>
 </div><?php }
 }

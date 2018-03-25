@@ -17,7 +17,7 @@ class PoMasterEntry extends CI_Controller
 	{
 		$this->data['supplier_entry'] = $this->PoMasterEntryQuery->select_supplier_entry();
 		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
-		$this->data['unit_of_measurement'] = $this->config->item('UOM', 'material_details');
+		$this->data['unit_of_measurement'] = $this->PoMasterEntryQuery->select_uof_master();
 		return $this->mysmarty->view('poMasterEntry.tpl',$this->data,TRUE);
 	}
 
@@ -47,6 +47,18 @@ class PoMasterEntry extends CI_Controller
 		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details');
 	}
 
+	public function addUOfAction()
+	{
+		/*$count = count($this->PoMasterEntryQuery->select_material_entry_as_per_supplier_name($this->data));
+		if($count != 0)return false;*/
+		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'uof_master');
+	}
+
+	public function updateUofAction()
+	{
+		return $this->PoMasterEntryQuery->update_uof_master($this->data);
+	}
+
 	public function updateMaterialAction()
 	{
 		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
@@ -56,5 +68,10 @@ class PoMasterEntry extends CI_Controller
 	public function deleteMaterialAction()
 	{
 		return $this->PoMasterEntryQuery->delete_material_entry($this->data);
+	}
+
+	public function deleteUofAction()
+	{
+		return $this->PoMasterEntryQuery->delete_uof_master($this->data);
 	}
 }
