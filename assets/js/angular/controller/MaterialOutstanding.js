@@ -4,7 +4,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#received_date').datepicker({
+    $('#received_date,#bill_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true
@@ -20,6 +20,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     {
         $("#"+id).parent('div').removeClass('has-error');
     }
+
+    $scope.checkEditBoxBillOutStandingArray = [];
+    $scope.checkEditBoxBillOutStandingModel = {};
+    $scope.checkEditBoxBillOutStandingShow  = false;
 
     $scope.editMaterialPOData = {};
     $scope.resetEditPoData = function(){
@@ -124,19 +128,24 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         {
             $scope.editMaterialPOData[i] = x[i];
         }
-        $scope.editMaterialPOData['received_data'] = x.received;
+        
+        var date = new Date();
         if($scope.generatePoData['outstanding_type'] === 'M')
         {
-            var date = new Date();
+            $scope.editMaterialPOData['received_data'] = x.received;
             $scope.editMaterialPOData['received'] = 0;
             $scope.editMaterialPOData['received_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
         }
         else
         {
             $scope.editMaterialPOData['bill_amount'] = 0;
+            $scope.editMaterialPOData['bill_number'] = "";
+            $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
             $scope.editMaterialPOData['invoice_number'] = "";
             $scope.editMaterialPOData['dc_number'] = "";
+            
         }
+
         $('#invoice_number').parent('div').removeClass('has-error')
         $('#dc_number').parent('div').removeClass('has-error')
         $('#material_modal').modal();
@@ -144,11 +153,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.edit_material_action = function(){
 
-        if(validateService.blank($scope.editMaterialPOData['received'],"Please Enter Received Data","received")) return false;
-        if(validateService.blank($scope.editMaterialPOData['received_date'],"Please Choose Received Date","received_date")) return false;
-
         if($scope.generatePoData['outstanding_type'] === 'M')
         {
+            if(validateService.blank($scope.editMaterialPOData['received'],"Please Enter Received Data","received")) return false;
+            if(validateService.blank($scope.editMaterialPOData['received_date'],"Please Choose Received Date","received_date")) return false;
+
             if(parseInt($scope.editMaterialPOData['received']) === 0){
                 validateService.displayMessage('error',"Must give received data","Validation Error");
                 validateService.addErrorTag(["received"]);
@@ -169,6 +178,9 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 validateService.addErrorTag(["invoice_number"]);
                 return false;
             }
+
+            if(validateService.blank($scope.editMaterialPOData['bill_date'],"Please Choose Bill date","bill_date")) return false;
+            if(validateService.blank($scope.editMaterialPOData['bill_number'],"Please Enter Bill Number","bill_number")) return false;
         }
         
         var balance = parseInt($scope.editMaterialPOData['qty'] - $scope.editMaterialPOData['received_data']);
@@ -178,6 +190,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
            return false;
         }
         $scope.editMaterialPOData = validateService.changeAllUpperCase($scope.editMaterialPOData);
+        if($scope.generatePoData['outstanding_type'] === 'B')
+        {
+            $scope.editMaterialPOData['checkEditBoxBillOutStandingArray'] = $scope.checkEditBoxBillOutStandingArray;
+        }
+        
         var service_details = {
             method_name : "updateMaterialOutstandingAction",
             controller_name : "MaterialOutstanding",
@@ -228,6 +245,35 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 });
             }
         });
+    }
+
+    $scope.checkEditBoxBillOutStanding = function(id)
+    {
+        $scope.checkEditBoxBillOutStandingArray = [];
+        $scope.checkEditBoxBillOutStandingShow  = false;
+
+        for(var i in $scope.checkEditBoxBillOutStandingModel)
+        {
+            if($scope.checkEditBoxBillOutStandingModel[i])
+            {
+                $scope.checkEditBoxBillOutStandingArray.push(i);
+            }
+            else
+            {
+                var index = $scope.checkEditBoxBillOutStandingArray.indexOf(i);
+                if (index > -1) {
+                    $scope.checkEditBoxBillOutStandingArray.splice(index, 1);
+                }
+            }
+        }
+
+        setTimeout(function(){
+            if($scope.checkEditBoxBillOutStandingArray.length != 0)
+            {
+                $scope.checkEditBoxBillOutStandingShow  = true;
+            }
+            $scope.$apply();
+        },100);
     }
 
 });

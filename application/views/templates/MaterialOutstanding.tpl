@@ -126,6 +126,7 @@
 				            </div>
 				        </div>
 				        <div class="table-responsive" style="margin-top: 50px;" ng-if="showMaterialOutStandingTable">
+				        	<button class="btn btn-primary" style="margin-bottom:20px;" ng-if="checkEditBoxBillOutStandingShow" ng-click="editMaterialOutStanding({outstanding_type:'B'})">EDIT</button>
 			                <table id="example" class="table table-bordered table-striped" >
 			                    <thead>
 			                        <tr>
@@ -143,6 +144,8 @@
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Number</th>
 			                        </tr>
@@ -150,9 +153,12 @@
 			                    <tbody>
 			                        <tr ng-repeat="x in materialOutStanding">
 			                        	<td style="text-align: center;">
-			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
+			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
+									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
+									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x.po_generated_request_id)">
+									        </div>
 									        <a href="#" ng-click="deleteMaterialOutStanding(x)" style="margin-left: 10px;" ng-if="x.outstanding_type === 'B'">
 									          <span class="glyphicon glyphicon-trash"></span>
 									        </a>
@@ -171,6 +177,8 @@
 			                        	<td>{{x.delivery_date}}</td>
 			                        	<td>{{x.delay_day}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_date}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_amount}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_number}}</td>
 			                        </tr>
@@ -216,6 +224,18 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bill Amount</label>
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bill Number</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_number" class="form-control" id="bill_number" placeholder="Enter Bill Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bill Date</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_date" class="form-control" id="bill_date" placeholder="Enter Bill Date">
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">

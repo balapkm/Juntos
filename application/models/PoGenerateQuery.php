@@ -225,6 +225,14 @@ class PoGenerateQuery extends CI_Model
         {
             $sql .= " AND (prd.qty - prd.received) != 0";
         }
+
+        if($data['outstanding_type'] == 'B')
+        {
+            $sql .= " AND (prd.bill_amount) = 0";
+            $sql .= " AND (prd.bill_number) = ''";
+            $sql .= " AND (prd.bill_date) = '0000-00-00'";
+            $sql .= " AND (prd.invoice_number) = ''";
+        }
                     
         if($data['filter_type_wise'] == 'Unit')
         {
@@ -250,7 +258,6 @@ class PoGenerateQuery extends CI_Model
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
-        
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

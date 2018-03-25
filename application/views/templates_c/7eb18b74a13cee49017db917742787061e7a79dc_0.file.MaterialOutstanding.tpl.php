@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-23 19:45:21
+/* Smarty version 3.1.30, created on 2018-03-25 21:20:41
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab50bf96b2c46_79340478',
+  'unifunc' => 'content_5ab7c551900b89_92969023',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1521814413,
+      1 => 1521993037,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab50bf96b2c46_79340478 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab7c551900b89_92969023 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -186,6 +186,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            </div>
 				        </div>
 				        <div class="table-responsive" style="margin-top: 50px;" ng-if="showMaterialOutStandingTable">
+				        	<button class="btn btn-primary" style="margin-bottom:20px;" ng-if="checkEditBoxBillOutStandingShow" ng-click="editMaterialOutStanding({outstanding_type:'B'})">EDIT</button>
 			                <table id="example" class="table table-bordered table-striped" >
 			                    <thead>
 			                        <tr>
@@ -203,6 +204,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Number</th>
 			                        </tr>
@@ -210,9 +213,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                    <tbody>
 			                        <tr ng-repeat="x in materialOutStanding">
 			                        	<td style="text-align: center;">
-			                        		<a href="#" ng-click="editMaterialOutStanding(x)">
+			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
+									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
+									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x.po_generated_request_id)">
+									        </div>
 									        <a href="#" ng-click="deleteMaterialOutStanding(x)" style="margin-left: 10px;" ng-if="x.outstanding_type === 'B'">
 									          <span class="glyphicon glyphicon-trash"></span>
 									        </a>
@@ -231,6 +237,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<td>{{x.delivery_date}}</td>
 			                        	<td>{{x.delay_day}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_date}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_amount}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_number}}</td>
 			                        </tr>
@@ -276,6 +284,18 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bill Amount</label>
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bill Number</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_number" class="form-control" id="bill_number" placeholder="Enter Bill Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Bill Date</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_date" class="form-control" id="bill_date" placeholder="Enter Bill Date">
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">

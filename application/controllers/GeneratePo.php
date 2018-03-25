@@ -121,8 +121,16 @@ class GeneratePo extends CI_Controller
 		}
 		else
 		{
+			if($this->data['type'] == 'Indigenous' || $this->data['type'] == 'Sample_Indigenous')
+			{
+				$template_name = 'Indigenous.tpl';
+			}
+			else
+			{
+				$template_name = 'Import.tpl';
+			}
 			$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
-			return $this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE);
+			return $this->mysmarty->view($template_name,$this->data,TRUE);
 		}
 	}
 
@@ -148,17 +156,43 @@ class GeneratePo extends CI_Controller
 		$this->data['overAllDiscountDetails']    =  $this->PoGenerateQuery->getOverAllDiscountDetails($this->data);
 		$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
 		$filename    = date('YmdHis');
+		$footername  = "footer";
+		$headername  = "header";
+
 		$folder_name = realpath(APPPATH."../assets/po_html");
-		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view('poViewTemplate.tpl',$this->data,TRUE));
-		chmod($folder_name."/".$filename.".html", 0777);
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		if($this->data['type'] == 'Indigenous' || $this->data['type'] == 'Sample_Indigenous')
+		{
+			$template_name = 'Indigenous_download.tpl';
+			$footer_name   = 'Indigenous_download_footer.tpl';
+			$header_name   = 'header_download.tpl';
 		}
-		else{
-			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		else
+		{
+			$template_name = 'Import_download.tpl';
+			$footer_name   = 'Import_download_footer.tpl';
+			$header_name   = 'header_download.tpl';
 		}
 
+		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$this->data,TRUE));
+		file_put_contents($folder_name."/".$footername.".html",$this->mysmarty->view($footer_name,$this->data,TRUE));
+		file_put_contents($folder_name."/".$headername.".html",$this->mysmarty->view($header_name,$this->data,TRUE));
+
+		chmod($folder_name."/".$filename.".html", 0777);
+		chmod($folder_name."/".$footername.".html", 0777);
+		chmod($folder_name."/".$headername.".html", 0777);
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+		{
+			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 3 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		}
+		else
+		{
+			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 3 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+		}
+
+		// echo $cmd;exit;
 		$response = exec($cmd);
+
+		// print_r($response);exit;
 		header("Content-Type: application/octet-stream");
 
 		$file = $folder_name.'/'.$filename.'.pdf';

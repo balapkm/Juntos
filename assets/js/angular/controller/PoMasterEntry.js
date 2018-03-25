@@ -321,7 +321,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
     	
     	var supplier_id = $scope.material_form_data['supplier_id'].split('|');
-    	if(supplier_id[2] === "Registered")
+    	if(supplier_id[2] === "REGISTERED")
     	{
     		if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
     	}
