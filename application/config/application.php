@@ -25,6 +25,24 @@ $config['po_generate_details'] = array(
 						    					'Indigenous' => array("format" => "SP/"),
 						    					'Sample_Import' => array("format" => "SP/SMPL/"),
 						    					'Sample_Indigenous' => array("format" => "SP/SMPL/")
+						    				),
+						    'UPPER'     =>  array(
+					    						'IMPORT' => array("format" => "SU/IMP/"),
+						    					'INDIGENOUS' => array("format" => "SU/"),
+						    					'SAMPLE_IMPORT' => array("format" => "SU/SMPL/"),
+						    					'SAMPLE_INDIGENOUS' => array("format" => "SU/SMPL/")
+						    				), 
+						    'FULL SHOE' =>  array(
+						    					'IMPORT' => array("format" => "FS/IMP/"),
+						    					'INDIGENOUS' => array("format" => "FS/"),
+						    					'SAMPLE_IMPORT' => array("format" => "FS/SMPL/"),
+						    					'SAMPLE_INDIGENOUS' => array("format" => "FS/SMPL/")
+						    				), 
+						    'SOLE'      =>  array(
+						    					'IMPORT' => array("format" => "SP/IMP/"),
+						    					'INDIGENOUS' => array("format" => "SP/"),
+						    					'SAMPLE_IMPORT' => array("format" => "SP/SMPL/"),
+						    					'SAMPLE_INDIGENOUS' => array("format" => "SP/SMPL/")
 						    				)
 	)
 );
