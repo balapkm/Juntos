@@ -160,13 +160,13 @@ td
 		         	<td align="center" width="10%" class="own-td-2">[[$v.hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	[[if $v.AMOUNT_type eq 'AMOUNT']]
+		         	[[if $v.amount_type eq 'AMOUNT']]
 		         		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
 		         	[[else]]
 		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $GrandTotal )]]]]
 		         	[[/if]]
 		         	<td align="center" width="10%" class="own-td-2">
-		         		[[if $v.AMOUNT_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
+		         		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
 		         		[[$other_total_AMOUNT|number_format:2]]
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>

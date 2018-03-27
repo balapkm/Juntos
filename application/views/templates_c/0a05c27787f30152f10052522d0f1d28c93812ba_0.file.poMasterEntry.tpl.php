@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-23 22:44:19
+/* Smarty version 3.1.30, created on 2018-03-27 21:47:33
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab535eb981471_61815456',
+  'unifunc' => 'content_5aba6e9dbf7fd2_04979977',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1521825244,
+      1 => 1522167437,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab535eb981471_61815456 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aba6e9dbf7fd2_04979977 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -37,6 +37,7 @@ function content_5ab535eb981471_61815456 (Smarty_Internal_Template $_smarty_tpl)
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
+	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -245,6 +246,52 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            </div>
 				        </div>
 	              	</div>
+	              	<div class="tab-pane" id="tab_4">
+				        <div class="row">
+				        	<div class="col-lg-12">
+				        		<div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addMaterialMaster()">
+				                </div>
+				        	</div>
+				        	<div class="col-lg-12">
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Master Id</th>
+					                          <th>Master Name</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                        <tr>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
+</td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</td>
+					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Edit</button></td>
+			                          		  <td><button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Delete</button></td>
+					                        </tr>
+					                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+					                    </tbody>
+					                </table>
+					            </div>
+				            </div>
+				        </div>
+	              	</div>
 	            </div>
         	</div>
    		</div>
@@ -398,9 +445,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select2')">
+		                  	   <option value="">Choose Material Name</option>
+		                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</option>
+			                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                  </select>
 		                </div>
 		            </div>
+		            <!-- <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
@@ -525,6 +594,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
         		<button type="button" ng-if="uof_modal.button==='Add'" class="btn btn-primary" ng-click="addUofAction()">{{uof_modal.button}}</button>
         		<button type="button" ng-if="uof_modal.button==='Update'" class="btn btn-primary" ng-click="uofEditClickAction()">{{uof_modal.button}}</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add_material_master_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">{{add_material_master_modal.title}}</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <input type="text" id="material_master_name" class="form-control" ng-model="material_master_name">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+        		<button type="button" ng-if="add_material_master_modal.button==='Add'" class="btn btn-primary" ng-click="addMaterialMasterAction()">{{add_material_master_modal.button}}</button>
+        		<button type="button" ng-if="add_material_master_modal.button==='Update'" class="btn btn-primary" ng-click="materialMasterEditClickAction()">{{add_material_master_modal.button}}</button>
 	        </div>
 		</div>
 	</div>

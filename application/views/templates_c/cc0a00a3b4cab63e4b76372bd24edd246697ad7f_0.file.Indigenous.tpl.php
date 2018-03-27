@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-25 22:51:51
+/* Smarty version 3.1.30, created on 2018-03-26 22:09:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab7daaf9046b6_34353526',
+  'unifunc' => 'content_5ab922249d6454_77235591',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1521998490,
+      1 => 1522082312,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab7daaf9046b6_34353526 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ab922249d6454_77235591 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
@@ -299,7 +299,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="7%"  class="own-td-2"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] == 'AMOUNT') {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
 		         		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
 $_prefixVariable4=ob_get_clean();
@@ -313,7 +313,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 ?>
 		         	<?php }?>
 		         	<td align="center" width="8%" class="own-td-2">
-		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
 		         		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
 
@@ -456,7 +456,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authozised & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

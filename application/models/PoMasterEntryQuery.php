@@ -51,6 +51,14 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function update_material_master($data)
+    {
+        $id = $data['material_id'];
+        unset($data['material_id']);
+        $result = $this->db->update('material_master',$data, array('material_id' => $id));
+        return $result;
+    }
+
     public function update_supplier_entry($data)
     {
         $id = $data['supplier_id'];
@@ -96,6 +104,32 @@ class PoMasterEntryQuery extends CI_Model
                                         array(
                                             'uof_status'     => 'Y'
                                         ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $this->objectToArray($data);
+    }
+
+    public function select_material_master($where_condition = array())
+    {
+        if(empty($where_condition))
+        {   
+            $query = $this->db->get_where('material_master', 
+                                        array(
+                                            'status'     => 'Y'
+                                        ));
+        }
+        else
+        {
+            $query = $this->db->get_where('material_master', 
+                                        array(
+                                            'status'     => 'Y',
+                                            'material_name'     => $where_condition['material_name']
+                                        ));
+        }
+        
         $data  = array();
         foreach ($query->result() as $row)
         {
@@ -158,6 +192,12 @@ class PoMasterEntryQuery extends CI_Model
     public function delete_uof_master($data)
     {
         $result = $this->db->delete('uof_master',array('uof_id' => $data['uof_id']));
+        return $result;
+    }
+
+    public function delete_material_master($data)
+    {
+        $result = $this->db->delete('material_master',array('material_id' => $data['material_id']));
         return $result;
     }
 

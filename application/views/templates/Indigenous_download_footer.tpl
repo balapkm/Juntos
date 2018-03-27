@@ -62,7 +62,7 @@ td
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authozised & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

@@ -19,19 +19,13 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
         $(this).closest('.select2-selection').removeClass('border-focus');
     })
 	
-	if(tab_switch_name === 'tab_2')
+	if(tab_switch_name === 'tab_2' || tab_switch_name === 'tab_3' || tab_switch_name === 'tab_4')
 	{
 		setTimeout(function(){
 			$('a[href="#'+tab_switch_name+'"]').trigger('click');
 		},100);
 	}
 
-	if(tab_switch_name === 'tab_3')
-	{
-		setTimeout(function(){
-			$('a[href="#'+tab_switch_name+'"]').trigger('click');
-		},100);
-	}
 
 	$scope.showGst = true;
 	$scope.uof_name = "";
@@ -245,6 +239,44 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$('#add_uof_modal').modal('show');
 	}
 
+	$scope.material_master_name      = "";
+	$scope.add_material_master_modal = {
+		button : "Add",
+		title : "Add Material Master"
+	}
+	$scope.addMaterialMaster = function()
+	{
+		$('#add_material_master_modal').modal('show');
+	}
+
+	$scope.addMaterialMasterAction = function()
+	{
+		if(validateService.blank($scope.material_master_name,"Please Enter Material name","material_master_name")) return false;
+
+		var data = {
+			material_name : $scope.material_master_name.toUpperCase()
+		}
+		var service_details = {
+	      method_name : "addMaterialMasterAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Added Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_4';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','This material already exist..',"");
+    		}
+    	})
+	}
+
 	$scope.addUofAction = function()
 	{
 		if(validateService.blank($scope.uof_name,"Please Enter Uof name","uof_name")) return false;
@@ -268,9 +300,21 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		}
     		else
     		{
-    			validateService.displayMessage('error','This material already exist for this supplier',"");
+    			validateService.displayMessage('error','Duplicate',"");
     		}
     	})
+	}
+
+	$scope.materialMasterEditClick = function(data)
+	{
+		$scope.material_master_name = data.material_name;
+
+		$scope.add_material_master_modal = {
+			title : "Update Material Details",
+			button : "Update",
+			material_id : data.material_id
+		}
+		$('#add_material_master_modal').modal('show');
 	}
 
 	$scope.uofEditClick = function(data)
@@ -310,6 +354,35 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		else
     		{
     			validateService.displayMessage('error','This material already exist for this supplier',"");
+    		}
+    	})
+	}
+
+	$scope.materialMasterEditClickAction = function()
+	{
+		if(validateService.blank($scope.material_master_name,"Please Enter Material name","material_master_name")) return false;
+
+		var data = {
+			material_name : $scope.material_master_name.toUpperCase(),
+			material_id : $scope.add_material_master_modal.material_id
+		}
+		var service_details = {
+	      method_name : "updateMaterialMasterAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+    	httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$scope.material_reset();
+    			$('#modal-backdrop').css('display','none');
+    			validateService.displayMessage('success','Updated Successfully','');
+    			$state.reload();
+    			tab_switch_name = 'tab_4';
+    		}
+    		else
+    		{
+    			validateService.displayMessage('error','This material already exist ',"");
     		}
     	})
 	}
@@ -455,6 +528,38 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		  }
 		});
 	}
+
+	$scope.materialMasterDeleteClick = function(data){
+		var service_details = {
+	      method_name : "deleteMaterialMasterAction",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify(data)
+	    };
+
+		swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this imaginary file!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if(willDelete){
+	    	httpService.callWebService(service_details).then(function(data){
+	    		if(data)
+	    		{
+	    			validateService.displayMessage('success','Deleted Successfully','');
+	    			$state.reload();
+	    			tab_switch_name = 'tab_4';
+	    		}
+	    		else
+	    		{
+	    			validateService.displayMessage('error','Failed to delete',"");
+	    		}
+	    	})
+		  }
+		});
+	}
 });
 
 function supplierEditClick(data)
@@ -496,5 +601,19 @@ function uofDeleteClick(data)
 {
 	var scope = angular.element($('[ui-view=div1]')).scope();
 	scope.uofDeleteClick(data);
+	scope.$apply();
+}
+
+function materialMasterEditClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.materialMasterEditClick(data);
+	scope.$apply();
+}
+
+function materialMasterDeleteClick(data)
+{
+	var scope = angular.element($('[ui-view=div1]')).scope();
+	scope.materialMasterDeleteClick(data);
 	scope.$apply();
 }

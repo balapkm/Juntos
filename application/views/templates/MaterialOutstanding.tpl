@@ -93,7 +93,7 @@
 					                  <select class="form-control select2" style="width: 100%;" id="material_name" ng-model="generatePoData.material_name">
 					                  	  <option value="">Choose Material Name</option>
 					                  	  [[foreach from=$material_name_details key=k item=v]]
-					                  		<option value="[[$v.material_id]]">[[$v.material_name]]</option>
+					                  		<option value="[[$v.material_name]]">[[$v.material_name]]</option>
 					                  	  [[/foreach]]
 					                  </select>
 					                </div>
@@ -216,12 +216,6 @@
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Invoice Number</label>
-		                  <input type="text" ng-model="editMaterialPOData.invoice_number" class="form-control" id="invoice_number" placeholder="Enter Invoice number">
-		                </div>
-		            </div>
-		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
-		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bill Amount</label>
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
@@ -242,6 +236,12 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
 		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DC Date</label>
+		                  <input type="text" ng-model="editMaterialPOData.dc_date" class="form-control" id="dc_date" placeholder="Choose DC Date">
 		                </div>
 		            </div>
 		        </div>

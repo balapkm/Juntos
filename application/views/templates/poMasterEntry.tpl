@@ -13,6 +13,7 @@
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
+	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -152,6 +153,39 @@
 					                          <td>[[$v.uof_name]]</td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='uofEditClick([[$v|@json_encode]])'>Edit</button></td>
 			                          		  <td><button class="btn btn-primary btn-sm" onclick='uofDeleteClick([[$v|@json_encode]])'>Delete</button></td>
+					                        </tr>
+					                        [[/foreach]]
+					                    </tbody>
+					                </table>
+					            </div>
+				            </div>
+				        </div>
+	              	</div>
+	              	<div class="tab-pane" id="tab_4">
+				        <div class="row">
+				        	<div class="col-lg-12">
+				        		<div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addMaterialMaster()">
+				                </div>
+				        	</div>
+				        	<div class="col-lg-12">
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                    <thead>
+					                        <tr>
+					                          <th>Master Id</th>
+					                          <th>Master Name</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                    	[[foreach from=$material_master_details key=k item=v]]
+					                        <tr>
+					                          <td>[[$k+1]]</td>
+					                          <td>[[$v.material_name]]</td>
+					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick([[$v|@json_encode]])'>Edit</button></td>
+			                          		  <td><button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick([[$v|@json_encode]])'>Delete</button></td>
 					                        </tr>
 					                        [[/foreach]]
 					                    </tbody>
@@ -300,9 +334,20 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select2')">
+		                  	   <option value="">Choose Material Name</option>
+		                  	   [[foreach from=$material_master_details key=k item=v]]
+			                  		<option value="[[$v.material_name]]">[[$v.material_name]]</option>
+			                  	[[/foreach]]
+		                  </select>
 		                </div>
 		            </div>
+		            <!-- <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
@@ -416,6 +461,32 @@
 		    <div class="modal-footer">
         		<button type="button" ng-if="uof_modal.button==='Add'" class="btn btn-primary" ng-click="addUofAction()">{{uof_modal.button}}</button>
         		<button type="button" ng-if="uof_modal.button==='Update'" class="btn btn-primary" ng-click="uofEditClickAction()">{{uof_modal.button}}</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add_material_master_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">{{add_material_master_modal.title}}</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Material Name</label>
+		                  <input type="text" id="material_master_name" class="form-control" ng-model="material_master_name">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+        		<button type="button" ng-if="add_material_master_modal.button==='Add'" class="btn btn-primary" ng-click="addMaterialMasterAction()">{{add_material_master_modal.button}}</button>
+        		<button type="button" ng-if="add_material_master_modal.button==='Update'" class="btn btn-primary" ng-click="materialMasterEditClickAction()">{{add_material_master_modal.button}}</button>
 	        </div>
 		</div>
 	</div>

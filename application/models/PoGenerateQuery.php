@@ -54,6 +54,7 @@ class PoGenerateQuery extends CI_Model
                 WHERE
                     prd.supplier_id = sd.supplier_id
                     group by prd.supplier_id";
+                    
          $sql = "SELECT 
                     sd.supplier_name,
                     sd.supplier_id
@@ -80,6 +81,8 @@ class PoGenerateQuery extends CI_Model
                     md.material_id
                 FROM
                     material_details md
+                GROUP BY
+                    md.material_name
                 ";
 
         $data  = $this->db->query($sql)->result_array();
@@ -231,7 +234,7 @@ class PoGenerateQuery extends CI_Model
             $sql .= " AND (prd.bill_amount) = 0";
             $sql .= " AND (prd.bill_number) = ''";
             $sql .= " AND (prd.bill_date) = '0000-00-00'";
-            $sql .= " AND (prd.invoice_number) = ''";
+            // $sql .= " AND (prd.invoice_number) = ''";
         }
                     
         if($data['filter_type_wise'] == 'Unit')
@@ -250,7 +253,7 @@ class PoGenerateQuery extends CI_Model
         if($data['filter_type_wise'] == 'Material')
         {
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
-            $sql .= " AND prd.material_id = ".$data['material_name'];
+            $sql .= " AND prd.material_id = '".$data['material_name']."'";
         }
 
         if($data['filter_type_wise'] == 'Supplier')

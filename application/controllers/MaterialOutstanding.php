@@ -10,13 +10,14 @@ class MaterialOutstanding extends CI_Controller
 		parent::__construct();
 		$this->load->library('Mysmarty');
 		$this->load->model('PoGenerateQuery');
+		$this->load->model('PoMasterEntryQuery');
 		$this->load->config('application');
 	}
 
 	public function index()
 	{
 		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
-		$this->data['material_name_details'] = $this->PoGenerateQuery->getMaterialNameDetails();
+		$this->data['material_name_details'] = $this->PoMasterEntryQuery->select_material_master();
 		$this->data['po_unique_number']      = $this->getUniquePoNumber();
 		return $this->mysmarty->view('MaterialOutstanding.tpl',$this->data,TRUE);
 	}

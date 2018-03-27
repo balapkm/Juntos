@@ -4,7 +4,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#received_date,#bill_date').datepicker({
+    $('#received_date,#bill_date,#dc_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true
@@ -141,13 +141,13 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $scope.editMaterialPOData['bill_amount'] = 0;
             $scope.editMaterialPOData['bill_number'] = "";
             $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-            $scope.editMaterialPOData['invoice_number'] = "";
+            $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
             $scope.editMaterialPOData['dc_number'] = "";
             
         }
 
-        $('#invoice_number').parent('div').removeClass('has-error')
-        $('#dc_number').parent('div').removeClass('has-error')
+        // $('#invoice_number').parent('div').removeClass('has-error')
+        // $('#dc_number').parent('div').removeClass('has-error')
         $('#material_modal').modal();
     }
 
@@ -173,11 +173,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 return false;
             }
 
-            if($scope.editMaterialPOData['invoice_number'] === ""){
+            /*if($scope.editMaterialPOData['invoice_number'] === ""){
                 validateService.displayMessage('error',"Please enter invoice number","Validation Error");
                 validateService.addErrorTag(["invoice_number"]);
                 return false;
-            }
+            }*/
 
             if(validateService.blank($scope.editMaterialPOData['bill_date'],"Please Choose Bill date","bill_date")) return false;
             if(validateService.blank($scope.editMaterialPOData['bill_number'],"Please Enter Bill Number","bill_number")) return false;
