@@ -143,11 +143,12 @@
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
-			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th>
+			                          <!-- <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th> -->
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Number</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Amount</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Number</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">DC Date</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -176,11 +177,12 @@
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
 			                        	<td>{{x.delivery_date}}</td>
 			                        	<td>{{x.delay_day}}</td>
-			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td>
+			                        	<!-- <td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td> -->
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_date}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_amount}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_number}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.dc_date}}</td>
 			                        </tr>
 			                    </tbody>
 			                </table>
