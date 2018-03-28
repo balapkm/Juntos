@@ -219,8 +219,13 @@ class PoGenerateQuery extends CI_Model
                     DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd,
-                    material_details md
+                    supplier_details sd";
+        if($data['filter_type_wise'] == 'Material')
+        {
+            $sql .= ",material_details md";
+        }
+                    
+        $sql .= "
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
                     outstanding_type = '".$data['outstanding_type']."'";
