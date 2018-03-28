@@ -219,7 +219,8 @@ class PoGenerateQuery extends CI_Model
                     DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_details md
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
                     outstanding_type = '".$data['outstanding_type']."'";
@@ -253,7 +254,8 @@ class PoGenerateQuery extends CI_Model
         if($data['filter_type_wise'] == 'Material')
         {
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
-            $sql .= " AND prd.material_id = '".$data['material_name']."'";
+            $sql .= " AND md.material_id = prd.material_id";
+            $sql .= " AND md.material_name = '".$data['material_name']."'";
         }
 
         if($data['filter_type_wise'] == 'Supplier')
@@ -261,6 +263,7 @@ class PoGenerateQuery extends CI_Model
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
+        // print_r($sql);exit;
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

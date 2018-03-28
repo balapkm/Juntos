@@ -60,8 +60,7 @@ class MaterialOutstanding extends CI_Controller
 					"id" => $this->data['po_generated_request_id'],
 					"received_date" => date('Y-m-d'),
 					"bill_amount"   => $this->data['bill_amount'],
-					"dc_number"     => $this->data['dc_number'],
-					"invoice_number"=> $this->data['invoice_number']
+					"dc_number"     => $this->data['dc_number']
 				);
 			$po_raw_number = $this->data['po_raw_number'];
 
