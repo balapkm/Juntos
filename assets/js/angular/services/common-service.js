@@ -26,7 +26,7 @@ app.service('commonService',function($http,$q){
 	    if(fraction > 0) {
 	        f_text = "AND "+this.convert_number(fraction)+" PAISE";
 	    }
-	    return this.convert_number(value)+" RUPEE "+f_text+" ONLY";
+	    return this.convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	this.frac = function(f) {

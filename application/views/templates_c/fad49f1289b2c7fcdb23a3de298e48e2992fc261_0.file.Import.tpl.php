@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-25 22:55:18
+/* Smarty version 3.1.30, created on 2018-04-01 23:18:04
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab7db7e7c18b6_29579119',
+  'unifunc' => 'content_5ac11b5415fc74_49895742',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1521998710,
+      1 => 1522604870,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab7db7e7c18b6_29579119 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac11b5415fc74_49895742 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
@@ -78,7 +78,7 @@ function content_5ab7db7e7c18b6_29579119 (Smarty_Internal_Template $_smarty_tpl)
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
+        			<td class="own-td-1" width="40%">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
 </td>
 		         	<td class="own-td-1" width="30%"><b>Date</b></td>
 		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'];?>
@@ -141,8 +141,16 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</td>
+		         	<td width="20%" class="own-td-2">
+                        <div class="top_row" <?php if ($_smarty_tpl->tpl_vars['v']->value['po_description'] != '') {?> style="border-bottom: 1px solid black;" <?php }?>>
+                            <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+                        </div>
+                        <div class="top_row">
+                            <?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+
+                        </div>
+                    </td>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
@@ -252,7 +260,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="7%"  class="own-td-2"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] == 'AMOUNT') {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
 		         		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
 $_prefixVariable3=ob_get_clean();
@@ -266,7 +274,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable4);
 ?>
 		         	<?php }?>
 		         	<td align="center" width="8%" class="own-td-2">
-		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
 		         		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
 
@@ -346,7 +354,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</b></td>
 		         	<td align="center" width="18%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
 		         	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
@@ -359,17 +368,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         		<tr>
         			<td align="center" width="60%"  class="own-td-4">
         				<div style="float: left;text-align: left;margin-left: 10px;font-size:16px;">
-        					<h5>
+        					<!-- <h5>
         						<b>Delivery Date        :    
         						<?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['delivery_date'];?>
 </b>
-        						<a href="" style="float: right;margin-left:20px;text-decoration: underline;" onclick='editImportOtherDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['importAdditionalCharges']->value);?>
-)'> 
-        							<span class="glyphicon glyphicon-edit"></span>
-        						</a>
-        					</h5>
+        						
+        					</h5> -->
         					<h5><b>Incoterms            :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['incoterms'];?>
-</b></h5>
+</b>
+                            <a href="" style="float: right;margin-left:20px;text-decoration: underline;" onclick='editImportOtherDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['importAdditionalCharges']->value);?>
+)'> 
+                                    <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            </h5>
         					<h5><b>Payment Terms        :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['payment_terms'];?>
 </b></h5>
         					<h5><b>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
@@ -383,7 +394,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authozised & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

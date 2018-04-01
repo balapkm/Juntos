@@ -53,10 +53,11 @@ class GeneratePo extends CI_Controller
 		unset($this->data['material_id']);
 
 		$getMaterialdetails = $this->PoMasterEntryQuery->get_material_entry_in_array($material_id);
-
+		
 		foreach ($getMaterialdetails as $key => $value) {
 			$finalInsertData[$key]                  = $this->data;
 			$finalInsertData[$key]['material_id']       = $value['material_id'];
+			$finalInsertData[$key]['material_master_id']= $value['material_master_id'];
 			$finalInsertData[$key]['material_name']     = $value['material_name'];
 			$finalInsertData[$key]['material_hsn_code'] = $value['material_hsn_code'];
 			$finalInsertData[$key]['qty'] = 0;

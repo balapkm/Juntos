@@ -67,6 +67,14 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function update_other_master($data)
+    {
+        $id = $data['other_master_id'];
+        unset($data['other_master_id']);
+        $result = $this->db->update('other_master_details',$data, array('other_master_id' => $id));
+        return $result;
+    }
+
     public function update_material_entry($data)
     {
         $id = $data['material_id'];
@@ -138,11 +146,42 @@ class PoMasterEntryQuery extends CI_Model
         return $this->objectToArray($data);
     }
 
+    public function select_other_master($data)
+    {
+        $query = $this->db->get_where('other_master_details', 
+                                        array(
+                                            'status'     => 'Y',
+                                            'type'       => $data['otherTypeValue']
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $this->objectToArray($data);
+    }
+
+    public function select_other_master_as_per_group_and_name($data)
+    {
+        $query = $this->db->get_where('other_master_details', 
+                                        array(
+                                            'status'     => 'Y',
+                                            'type'       => $data['type'],
+                                            'name'       => $data['name']
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $this->objectToArray($data);
+    }
+
     public function select_material_entry($data=array(),$type='getAllData')
     {
         if($type == 'getAllData')
         {
-            $this->db->select('md.*,sd.state_code,sd.supplier_id,sd.supplier_name');
+            $this->db->select('md.*,sd.state_code,sd.supplier_id,sd.supplier_name,sd.supplier_status,mm.material_name as material_master_name');
         }
         
         if($type == 'getPOMaterialDetails')
@@ -152,6 +191,7 @@ class PoMasterEntryQuery extends CI_Model
         
         $this->db->from('supplier_details sd');
         $this->db->join('material_details md', 'sd.supplier_id = md.supplier_id');
+        $this->db->join('material_master mm', 'mm.material_id = md.material_master_id');
         $this->db->where('md.status',"Y");
 
         if($type == 'getPOMaterialDetails')
@@ -189,6 +229,12 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function delete_other_master($data)
+    {
+        $result = $this->db->delete('other_master_details',array('other_master_id' => $data['other_master_id']));
+        return $result;
+    }
+
     public function delete_uof_master($data)
     {
         $result = $this->db->delete('uof_master',array('uof_id' => $data['uof_id']));
@@ -205,10 +251,13 @@ class PoMasterEntryQuery extends CI_Model
         $material_id = implode(",",$material_id);
 
         $sql = "SELECT
-                    md.*
+                   md.*,
+                   mm.material_id as material_master_id
                 FROM
-                    material_details md
+                    material_details md,
+                   material_master mm
                 WHERE
+                    md.material_master_id = mm.material_id AND
                     md.material_id IN (".$material_id.")";
         $data  = $this->db->query($sql)->result_array();
         return $data;

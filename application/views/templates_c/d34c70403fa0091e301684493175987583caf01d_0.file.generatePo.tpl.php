@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-24 22:51:46
+/* Smarty version 3.1.30, created on 2018-04-01 23:17:16
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab6892adf65a5_56020482',
+  'unifunc' => 'content_5ac11b24c9c4a1_36750112',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1521912099,
+      1 => 1522604807,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab6892adf65a5_56020482 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac11b24c9c4a1_36750112 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -188,8 +188,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    	<div class="row">
 			    	<div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="30" rows="5" ng-change="poEditFormData.material_name = poEditFormData.material_name.toUpperCase()"></textarea>
+		                  <label for="exampleInputEmail1">Material Description</label>
+		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="30" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -312,12 +312,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-			    	<div class="col-lg-3">
+			    	<!-- <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Delivery Date</label>
 		                  <input type="text" class="form-control" id="import_delivery_date" placeholder="Choose Delivery Date" ng-model="importOtherCharge.delivery_date">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Incoterms</label>

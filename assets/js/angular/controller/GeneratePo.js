@@ -69,7 +69,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.changeImportDetailsShow = function(id)
     {
-        console.log($scope.importOtherCharge[id],$scope.importDetailsShow[id]);
         if($scope.importOtherCharge[id] === 'OTHERS')
         {
             $scope.importDetailsShow[id] = true;
@@ -230,7 +229,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     }
 
     $scope.poEditClick = function(data){
-        $scope.poEditFormData.material_name = data.material_name;
+        $scope.poEditFormData.po_description = data.po_description;
         $scope.poEditFormData.qty           = data.qty;
         $scope.poEditFormData.id            = data.po_generated_request_id;
         $scope.poEditFormData.price         = data.price;
@@ -239,11 +238,11 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.edit_po_action = function(){
 
-        if(validateService.blank($scope.poEditFormData['material_name'],"Please Enter material name","material_name")) return false;
+        // if(validateService.blank($scope.poEditFormData['po_description'],"Please Enter material Description","po_description")) return false;
         if(validateService.blank($scope.poEditFormData['qty'],"Please Enter quantity","Quantity")) return false;
         // if(validateService.blank($scope.poEditFormData['price'],"Please Enter price","edit_price")) return false;
 
-        $scope.poEditFormData['material_name'] = $scope.poEditFormData['material_name'].replace(/<br\s*\/?>/mg,"\n");
+        // $scope.poEditFormData['material_name'] = $scope.poEditFormData['material_name'].replace(/<br\s*\/?>/mg,"\n");
         var service_details = {
             method_name : "editPoDetailsAction",
             controller_name : "GeneratePo",
@@ -427,7 +426,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.editImportOtherDetailsAction = function()
     {
-        if(validateService.blank($scope.importOtherCharge['delivery_date'],"Please Choose delivery date","import_delivery_date")) return false;
+        // if(validateService.blank($scope.importOtherCharge['delivery_date'],"Please Choose delivery date","import_delivery_date")) return false;
         if(validateService.blank($scope.importOtherCharge['incoterms'],"Please Choose incoterms","import_incoterms")) return false;
         if(validateService.blank($scope.importOtherCharge['payment_status'],"Please Choose payment Status","import_payment_status")) return false;
         if(validateService.blank($scope.importOtherCharge['Shipment'],"Please Choose Shipment","import_shipment")) return false;
@@ -440,7 +439,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
         if($scope.importOtherCharge['payment_status'] === 'OTHERS')
         {
-            $scope.importOtherCharge['incoterms'] = $scope.importOtherCharge['import_payment_status_other'];
+            $scope.importOtherCharge['payment_status'] = $scope.importOtherCharge['import_payment_status_other'];
             delete $scope.importOtherCharge['import_payment_status_other'];
         }
 

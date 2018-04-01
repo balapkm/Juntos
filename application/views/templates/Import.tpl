@@ -50,7 +50,7 @@
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%">[[$searchPoData[0].supplier_name]]</td>
+        			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
 		         	<td class="own-td-1" width="30%"><b>Date</b></td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date]]</td>
         		</tr>
@@ -98,7 +98,14 @@
         	<table class="own-table">
         		<tr>
         			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
-		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;">[[$v.material_name]]</td>
+		         	<td width="20%" class="own-td-2">
+                        <div class="top_row" [[if $v.po_description neq ""]] style="border-bottom: 1px solid black;" [[/if]]>
+                            [[$v.material_master_name]]
+                        </div>
+                        <div class="top_row">
+                            [[$v.po_description]]
+                        </div>
+                    </td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
@@ -227,7 +234,7 @@
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT [[$searchPoData[0].currency]]</b></td>
 		         	<td align="center" width="18%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
         		</tr>
@@ -238,14 +245,16 @@
         		<tr>
         			<td align="center" width="60%"  class="own-td-4">
         				<div style="float: left;text-align: left;margin-left: 10px;font-size:16px;">
-        					<h5>
+        					<!-- <h5>
         						<b>Delivery Date        :    
         						[[$importAdditionalCharges[0].delivery_date]]</b>
-        						<a href="" style="float: right;margin-left:20px;text-decoration: underline;" onclick='editImportOtherDetails([[$importAdditionalCharges|@json_encode]])'> 
-        							<span class="glyphicon glyphicon-edit"></span>
-        						</a>
-        					</h5>
-        					<h5><b>Incoterms            :    [[$importAdditionalCharges[0].incoterms]]</b></h5>
+        						
+        					</h5> -->
+        					<h5><b>Incoterms            :    [[$importAdditionalCharges[0].incoterms]]</b>
+                            <a href="" style="float: right;margin-left:20px;text-decoration: underline;" onclick='editImportOtherDetails([[$importAdditionalCharges|@json_encode]])'> 
+                                    <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            </h5>
         					<h5><b>Payment Terms        :    [[$importAdditionalCharges[0].payment_terms]]</b></h5>
         					<h5><b>Shipment             :    [[$importAdditionalCharges[0].Shipment]]</b></h5>
         				</div>

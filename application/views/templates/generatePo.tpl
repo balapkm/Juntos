@@ -138,8 +138,8 @@
 		    	<div class="row">
 			    	<div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <textarea id="material_name" ng-model="poEditFormData.material_name" placeholder="Enter Material Name" cols="30" rows="5" ng-change="poEditFormData.material_name = poEditFormData.material_name.toUpperCase()"></textarea>
+		                  <label for="exampleInputEmail1">Material Description</label>
+		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="30" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -262,12 +262,12 @@
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-			    	<div class="col-lg-3">
+			    	<!-- <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Delivery Date</label>
 		                  <input type="text" class="form-control" id="import_delivery_date" placeholder="Choose Delivery Date" ng-model="importOtherCharge.delivery_date">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Incoterms</label>

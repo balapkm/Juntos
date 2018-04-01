@@ -168,7 +168,7 @@
 			                        	<td>{{x.supplier_name}}</td>
 			                        	<td>{{x.po_number}}</td>
 			                        	<td>{{x.po_date}}</td>
-			                        	<td>{{x.material_name}}</td>
+			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
 			                        	<td>{{x.received}}</td>

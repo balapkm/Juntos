@@ -44,7 +44,7 @@ td
         	<table class="own-table">
         		<tr style="font-weight: bold;font-size: 10px;">
         			<td align="center" width="5%">S.No</td>
-		         	<td align="center" width="35%">DESCRIPTION</td>
+		         	<td align="center" width="20%">DESCRIPTION</td>
 		         	<td align="center" width="10%">HSN CODE</td>
 		         	<td align="center" width="10%">QTY</td>
 		         	<td align="center" width="10%">UOM</td>
@@ -63,7 +63,14 @@ td
         	<table class="own-table" style="font-size: 10px;">
         		<tr>
         			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
-		         	<td align="center" width="35%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;">[[$v.material_name]]</td>
+		         	<td width="20%" class="own-td-2">
+		         		<div class="top_row" [[if $v.po_description neq ""]] style="border-bottom: 1px solid black;" [[/if]]>
+			                [[$v.material_master_name]]
+			            </div>
+			            <div class="top_row">
+			                [[$v.po_description]]
+			            </div>
+		         	</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="10%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_uom]]</td>
@@ -170,7 +177,7 @@ td
         	<table class="own-table" >
         		<tr>
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="30%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="30%" class="own-td-2"><b>TOTAL AMOUNT [[$searchPoData[0].currency]]</b></td>
 		         	<td align="center" width="10%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
         		</tr>
@@ -188,7 +195,7 @@ td
 	    if(fraction > 0) {
 	        f_text = "AND "+convert_number(fraction)+" PAISE";
 	    }
-	    return convert_number(value)+" RUPEE "+f_text+" ONLY";
+	    return convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	function frac(f) {

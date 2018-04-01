@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 00:20:24
+/* Smarty version 3.1.30, created on 2018-04-01 19:47:08
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab7ef705b5722_66816187',
+  'unifunc' => 'content_5ac0e9e4479e08_02905934',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1522003747,
+      1 => 1522592224,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab7ef705b5722_66816187 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac0e9e4479e08_02905934 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,7 +68,7 @@ td
         	<table class="own-table">
         		<tr style="font-weight: bold;font-size: 10px;">
         			<td align="center" width="5%">S.No</td>
-		         	<td align="center" width="35%">DESCRIPTION</td>
+		         	<td align="center" width="20%">DESCRIPTION</td>
 		         	<td align="center" width="10%">HSN CODE</td>
 		         	<td align="center" width="10%">QTY</td>
 		         	<td align="center" width="10%">UOM</td>
@@ -96,8 +96,16 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-		         	<td align="center" width="35%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</td>
+		         	<td width="20%" class="own-td-2">
+		         		<div class="top_row" <?php if ($_smarty_tpl->tpl_vars['v']->value['po_description'] != '') {?> style="border-bottom: 1px solid black;" <?php }?>>
+			                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+			            </div>
+			            <div class="top_row">
+			                <?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+
+			            </div>
+		         	</td>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
 		         	<td align="center" width="10%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
@@ -194,7 +202,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] == 'AMOUNT') {?>
+		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
 		         		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
 $_prefixVariable3=ob_get_clean();
@@ -208,7 +216,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable4);
 ?>
 		         	<?php }?>
 		         	<td align="center" width="10%" class="own-td-2">
-		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['AMOUNT_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
 		         		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
 

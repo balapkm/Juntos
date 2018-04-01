@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 22:09:00
+/* Smarty version 3.1.30, created on 2018-04-01 15:11:06
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab922249d6454_77235591',
+  'unifunc' => 'content_5ac0a932f14e96_60954727',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1522082312,
+      1 => 1522575638,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab922249d6454_77235591 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac0a932f14e96_60954727 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
@@ -148,8 +148,18 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</td>
+		         	<td width="20%" class="own-td-2">
+		         		<div class="top_row" <?php if ($_smarty_tpl->tpl_vars['v']->value['po_description'] != '') {?> style="border-bottom: 1px solid black;" <?php }?>>
+			                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+			            </div>
+			            <div class="top_row">
+			                <?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+
+			            </div>
+		         	</td>
+		         	<!-- <td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</td> -->
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>

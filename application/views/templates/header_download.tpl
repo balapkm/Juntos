@@ -84,7 +84,7 @@ td
     <tr>
     	<table class="own-table">
     		<tr>
-    			<td class="own-td-1" width="40%">[[$searchPoData[0].supplier_name]]</td>
+    			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
 	         	<td class="own-td-1" width="30%"><b>Date</b></td>
 	         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date]]</td>
     		</tr>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 00:06:47
+/* Smarty version 3.1.30, created on 2018-03-30 22:08:09
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download_footer.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab7ec3f33c730_95491748',
+  'unifunc' => 'content_5abe67f12bc295_06709555',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c2065cf69df752c425f52427a5ae53775f7661b4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download_footer.tpl',
-      1 => 1522002303,
+      1 => 1522082147,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab7ec3f33c730_95491748 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5abe67f12bc295_06709555 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,7 +86,7 @@ td
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authozised & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

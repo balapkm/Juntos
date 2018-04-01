@@ -92,13 +92,17 @@ class PoGenerateQuery extends CI_Model
     public function getPoDataAsPerPONumber($data){
 
         $sql = "SELECT 
-                    *
+                    prd.*,
+                    sd.*,
+                    mm.material_name as material_master_name 
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
                     outstanding_type = 'M' AND
+                    mm.material_id   = prd.material_master_id AND
                     unit = '".$data['unit']."' AND
                     type = '".$data['type']."' AND
                     po_number = '".$data['po_number']."' AND
@@ -195,6 +199,8 @@ class PoGenerateQuery extends CI_Model
     {
         $id = $data['id'];
         unset($data['id']);
+        unset($data['material_name']);
+        // print_r($data);exit;
         $result = $this->db->update('po_generated_request_details',$data, array('po_generated_request_id' => $id));
         return $result;
     }
@@ -216,10 +222,12 @@ class PoGenerateQuery extends CI_Model
         $sql = "SELECT 
                     sd.supplier_name,
                     prd.*,
-                    DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
+                    DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day,
+                    mm.material_name as material_master_name
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd";
+                    supplier_details sd,
+                    material_master mm";
         if($data['filter_type_wise'] == 'Material')
         {
             $sql .= ",material_details md";
@@ -228,6 +236,7 @@ class PoGenerateQuery extends CI_Model
         $sql .= "
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
+                    mm.material_id = prd.material_master_id AND
                     outstanding_type = '".$data['outstanding_type']."'";
 
         if($data['outstanding_type'] == 'M')
@@ -276,11 +285,13 @@ class PoGenerateQuery extends CI_Model
     public function getMaterialDetailsAsPerSupplier($supplier_id){
 
         $sql = "SELECT
-                    material_id,
-                    material_name
+                    md.material_id,
+                    mm.material_name
                 FROM
-                    material_details md
+                    material_details md,
+                    material_master  mm
                 WHERE
+                    mm.material_id = md.material_master_id AND
                     md.supplier_id = ".$supplier_id;
 
         $data  = $this->db->query($sql)->result_array();

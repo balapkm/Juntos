@@ -181,3 +181,14 @@
 .own-td-5{
     padding-bottom: 100px;
 }
+
+.top_row {
+    display: table;
+    width: 100%;
+}
+
+.top_row > div {
+    display: table-cell;
+    width: 50%;
+    border-bottom: 1px solid #eee;
+}

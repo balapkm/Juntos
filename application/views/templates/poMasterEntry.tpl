@@ -14,6 +14,7 @@
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
+	              <li><a href="#tab_5" data-toggle="tab">Other Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -105,7 +106,7 @@
 					                        [[foreach from=$material_entry key=k item=v]]
 						                        <tr>
 						                          <td>[[$v.supplier_name]]</td>
-						                          <td>[[$v.material_name]]</td>
+						                          <td>[[$v.material_master_name]]</td>
 						                          <td>[[$v.material_hsn_code]]</td>
 						                          <td>[[$v.material_uom]]</td>
 						                          <td>[[$v.group]]</td>
@@ -194,6 +195,44 @@
 				            </div>
 				        </div>
 	              	</div>
+	              	<div class="tab-pane" id="tab_5">
+				        <div class="row">
+				        	<div class="col-lg-4"></div>
+				        	<div class="col-lg-4 text-center" >
+				        		<select class="form-control" id="other_type" ng-model="otherTypeValue" ng-change="otherTypeValueChange()">
+				        			<option value="">Choose Other Type</option>
+				        			<option value="GROUP">GROUP</option>
+				        		</select>
+				        	</div>
+				        	<div class="col-lg-12" ng-if="otherTypeValueShow">
+				        		<div class="form-group pull-right" style="margin-top: 10px;">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addOtherMasterClick()">
+				                </div>
+				        	</div>
+				        	<div class="col-lg-12" ng-if="otherTypeValueShow">
+				        		<div class="table-responsive">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="other_master_id">
+					                    <thead>
+					                        <tr>
+					                          <th>S.No</th>
+					                          <th>Name</th>
+					                          <th>Edit</th>
+					                          <th>Delete</th>
+					                        </tr>
+					                    </thead>
+					                    <tbody>
+					                        <tr  ng-repeat="x in otherTypeArray">
+					                          <td>{{$index+1}}</td>
+					                          <td>{{x.name}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click="editOtherMasterClick(x)">Edit</button></td>
+			                          		  <td><button class="btn btn-primary btn-sm" ng-click="deleteOtherMasterClickAction(x)">Delete</button></td>
+					                        </tr>
+					                    </tbody>
+					                </table>
+					            </div>
+				            </div>
+				        </div>
+	              	</div>
 	            </div>
         	</div>
    		</div>
@@ -263,8 +302,8 @@
 		                  <label for="exampleInputEmail1">Supplier tax Status</label>
 		                  <select class="form-control" id="supplier_tax_status" ng-model="supplier_form_data.supplier_tax_status">
 		                  	  <option value="">Choose Supplier Tax Status</option>
-		                  	  <option value="tax">Tax</option>
-		                  	  <option value="non_tax">Non Tax</option>
+		                  	  <option value="TAX">Tax</option>
+		                  	  <option value="NON_TAX">Non Tax</option>
 		                  </select>
 		                </div>
 		            </div>
@@ -273,9 +312,9 @@
 		                  <label for="exampleInputEmail1">Supplier Status</label>
 		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status">
 		                  	  <option value="">Choose Supplier Status</option>
-		                  	  <option value="Registered">Registered</option>
-		                  	  <option value="Unregistered">Unregistered</option>
-		                  	  <option value="Import">Import</option>
+		                  	  <option value="REGISTERED">Registered</option>
+		                  	  <option value="UNREGISTERED">Unregistered</option>
+		                  	  <option value="IMPORT">Import</option>
 		                  </select>
 		                </div>
 		            </div>
@@ -331,23 +370,24 @@
 		                  </select>
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select2')">
+		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
 		                  	   <option value="">Choose Material Name</option>
+		                  	   <option value="ADD_NEW">ADD NEW</option>
 		                  	   [[foreach from=$material_master_details key=k item=v]]
-			                  		<option value="[[$v.material_name]]">[[$v.material_name]]</option>
+			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
 			                  	[[/foreach]]
 		                  </select>
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-3">
+		            <div class="col-lg-3" ng-if="addNewMaterialNameInput">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <input type="text" ng-model="material_form_data.material_name" class="form-control" id="material_name" placeholder="Enter Material Name">
+		                  <label for="exampleInputEmail1">New Material Name</label>
+		                  <input type="text" ng-model="material_form_data.add_material_name" class="form-control" id="add_material_name" placeholder="Enter New Material Name">
 		                </div>
-		            </div> -->
+		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
@@ -363,9 +403,20 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Group</label>
-		                  <input type="text" class="form-control"  ng-model="material_form_data.group"  id="group" placeholder="Enter Group">
+		                  <select ng-model="material_form_data.group"  id="group" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('group')">
+		                  	   <option value="">Choose Group</option>
+		                  	   [[foreach from=$group_master_details key=k item=v]]
+			                  		<option value="[[$v.name]]">[[$v.name]]</option>
+			                  	[[/foreach]]
+		                  </select>
 		                </div>
 		            </div>
+		            <!-- <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Group</label>
+		                  <input type="text" class="form-control"  ng-model="material_form_data.group"  id="group" placeholder="Enter Group">
+		                </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Unit Of Measurement</label>
@@ -382,8 +433,8 @@
 		                  <label for="exampleInputEmail1">Price Status</label>
 		                  <select class="form-control" id="price_status" ng-model="material_form_data.price_status"> 
 		                  	 <option value="">Choose Price Status</option>
-		                  	 <option value="Final">Final</option>
-		                  	 <option value="Approx">Approx</option>
+		                  	 <option value="FINAL">Final</option>
+		                  	 <option value="APPROX">Approx</option>
 		                  </select>
 		                </div>
 		            </div>
@@ -416,8 +467,8 @@
 		                  <label for="exampleInputEmail1">Discount Price Status</label>
 		                  <select class="form-control" id="discount_price_status" ng-model="material_form_data.discount_price_status">
 		                  	 <option value="">Choose Discount Price Status</option>
-		                  	 <option value="Percentage">Percentage</option>
-		                  	 <option value="Amount">Amount</option>
+		                  	 <option value="PERCENTAGE">Percentage</option>
+		                  	 <option value="AMOUNT">Amount</option>
 		                  </select>
 		                </div>
 		            </div>
@@ -487,6 +538,32 @@
 		    <div class="modal-footer">
         		<button type="button" ng-if="add_material_master_modal.button==='Add'" class="btn btn-primary" ng-click="addMaterialMasterAction()">{{add_material_master_modal.button}}</button>
         		<button type="button" ng-if="add_material_master_modal.button==='Update'" class="btn btn-primary" ng-click="materialMasterEditClickAction()">{{add_material_master_modal.button}}</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="other_master_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">{{otherMasterModal.title}}</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-12">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Name</label>
+		                  <input type="text" id="other_master_name" class="form-control" ng-model="other_master_name" ng-change="other_master_name = other_master_name.toUpperCase()">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+        		<button type="button" ng-if="otherMasterModal.button==='Add'" class="btn btn-primary" ng-click="addOtherMasterClickAction()">{{otherMasterModal.button}}</button>
+        		<button type="button" ng-if="otherMasterModal.button==='Update'" class="btn btn-primary" ng-click="editOtherMasterClickAction()">{{otherMasterModal.button}}</button>
 	        </div>
 		</div>
 	</div>
