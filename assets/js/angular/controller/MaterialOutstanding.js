@@ -146,6 +146,15 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             
         }
 
+        setTimeout(function(){
+            $('#received_date,#bill_date,#dc_date').datepicker({
+              autoclose: true,
+              format: 'yyyy-mm-dd',
+              todayHighlight : true
+            });
+        },100);
+        
+
         // $('#invoice_number').parent('div').removeClass('has-error')
         // $('#dc_number').parent('div').removeClass('has-error')
         $('#material_modal').modal();
