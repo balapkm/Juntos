@@ -4,6 +4,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	$('#supplier_table,#material_table,#other_master_id').DataTable();
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
+	setTimeout(function(){$('body').css('padding-right','0px');},1000);
 	$('.select2').select2();
 	
 	$('#supplier_name_select2').on('select2:select', function (e) {

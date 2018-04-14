@@ -262,7 +262,7 @@
 <script src="assets/plugins/jsxcompressor/jsxcompressor.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]"></script>
+<script src="[[$v]]?version=1"></script>
 [[/foreach]]
 <script>
   $(document).ready(function () {

@@ -3,7 +3,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
-
+    setTimeout(function(){$('body').css('padding-right','0px');},1000);
     $('#received_date,#bill_date,#dc_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
@@ -143,7 +143,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
             $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
             $scope.editMaterialPOData['dc_number'] = "";
-            
         }
 
         setTimeout(function(){
@@ -203,7 +202,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         {
             $scope.editMaterialPOData['checkEditBoxBillOutStandingArray'] = $scope.checkEditBoxBillOutStandingArray;
         }
-        
+        console.log($scope.editMaterialPOData['checkEditBoxBillOutStandingArray']);
         var service_details = {
             method_name : "updateMaterialOutstandingAction",
             controller_name : "MaterialOutstanding",
@@ -216,6 +215,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 validateService.displayMessage('success','Updated Successfully','');
                 $scope.searchAction();
                 $('#material_modal').modal('hide');
+                $scope.checkEditBoxBillOutStandingModel = {};
             }
             else
             {

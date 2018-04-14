@@ -7,9 +7,10 @@ function select2Focus() {
 }
 app.controller('GeneratePo',function($scope,httpService,validateService,$state,commonService){
 
+
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
-
+    setTimeout(function(){$('body').css('padding-right','0px');},1000);
 	$('#po_date,#delivery_date,#import_delivery_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
@@ -25,7 +26,10 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $scope.po_edit_reset();
         $scope.po_other_charge_reset();
         $scope.import_other_charge_reset();
+
     },10);
+
+    
 
     setTimeout(function(){
         if(tab_switch_name === 'tab_2')

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-01 15:11:06
+/* Smarty version 3.1.30, created on 2018-04-08 18:57:47
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac0a932f14e96_60954727',
+  'unifunc' => 'content_5aca18d3129477_48474536',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1522575638,
+      1 => 1522604590,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac0a932f14e96_60954727 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aca18d3129477_48474536 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
@@ -78,7 +78,7 @@ function content_5ac0a932f14e96_60954727 (Smarty_Internal_Template $_smarty_tpl)
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
+        			<td class="own-td-1" width="40%">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
 </td>
 		         	<td class="own-td-1" width="30%"><b>Date</b></td>
 		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'];?>
@@ -434,7 +434,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT INR</b></td>
+		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</b></td>
 		         	<td align="center" width="18%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
 		         	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
