@@ -11,11 +11,16 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
     setTimeout(function(){$('body').css('padding-right','0px');},1000);
-	$('#po_date,#delivery_date,#import_delivery_date').datepicker({
+	$('#delivery_date,#import_delivery_date,#edit_delivery_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
       startDate : new Date()
+    });
+    $('#po_date,#edit_po_date').datepicker({
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+      todayHighlight : true
     });
     $scope.showOtherChargeName = false;
     $scope.materialNameDetails = [];
@@ -237,7 +242,51 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $scope.poEditFormData.qty           = data.qty;
         $scope.poEditFormData.id            = data.po_generated_request_id;
         $scope.poEditFormData.price         = data.price;
+        $scope.poEditFormData.material_hsn_code  = data.material_hsn_code;
+        $('#edit_material_uom').select2().val(data.material_uom).trigger("change");
+        $scope.poEditFormData.material_uom   = data.material_uom;
+        $scope.poEditFormData.discount       = data.discount;
+        $scope.poEditFormData.state_code     = data.state_code;
+        $scope.poEditFormData.CGST           = data.CGST;
+        $scope.poEditFormData.SGST           = data.SGST;
+        $scope.poEditFormData.IGST           = data.IGST;
         $('#po_modal').modal('show');
+    }
+
+    $scope.editOtherDetailsFn = function(data){
+        $scope.editOtherDetails = {};
+        $scope.editOtherDetails.po_date = data[0].po_date;
+        $scope.editOtherDetails.delivery_date = data[0].delivery_date;
+        $scope.editOtherDetails.order_reference = data[0].order_reference;
+        $scope.editOtherDetails.po_ids = [];
+        for (var i = 0;i < data.length;i++) {
+            $scope.editOtherDetails.po_ids.push(data[i].po_generated_request_id);
+        }
+        $('#edit_other_details').modal('show');
+    }
+
+    $scope.updateOtherPoDetails = function()
+    {
+        console.log($scope.editOtherDetails);
+        var service_details = {
+            method_name : "editPoOtherDetailsAction",
+            controller_name : "GeneratePo",
+            data : JSON.stringify($scope.editOtherDetails)
+        };
+
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Updated Successfully','');
+                $state.reload();
+                tab_switch_name = "tab_2";
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
     }
 
     $scope.edit_po_action = function(){
@@ -246,7 +295,8 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         if(validateService.blank($scope.poEditFormData['qty'],"Please Enter quantity","Quantity")) return false;
         // if(validateService.blank($scope.poEditFormData['price'],"Please Enter price","edit_price")) return false;
 
-        // $scope.poEditFormData['material_name'] = $scope.poEditFormData['material_name'].replace(/<br\s*\/?>/mg,"\n");
+        $scope.poEditFormData['po_description'] = $scope.poEditFormData['po_description'].replace(/<br\s*\/?>/mg,"\n");
+        delete $scope.poEditFormData.state_code;
         var service_details = {
             method_name : "editPoDetailsAction",
             controller_name : "GeneratePo",
@@ -603,6 +653,13 @@ function editPoDetails(data)
 {
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.poEditClick(data);
+    scope.$apply();
+}
+
+function editOtherDetails(data)
+{
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editOtherDetailsFn(data);
     scope.$apply();
 }
 

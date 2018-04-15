@@ -136,10 +136,10 @@
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-			    	<div class="col-lg-4">
+			    	<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Description</label>
-		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="30" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
+		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="24" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -152,6 +152,47 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price</label>
 		                  <input type="text" class="form-control" id="edit_price" placeholder="Enter Price" ng-model="poEditFormData.price">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">HSN Code</label>
+		                  <input type="text" class="form-control" id="edit_material_hsn_code" placeholder="Enter HSN Code" ng-model="poEditFormData.material_hsn_code" ng-change="poEditFormData.material_hsn_code = poEditFormData.material_hsn_code.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Unit Of Measurement</label>
+		                  <select id="edit_material_uom" ng-model="poEditFormData.material_uom" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_uom')">
+		                  	   <option value="">Choose UOM</option>
+		                  	   [[foreach from=$unit_of_measurement key=k item=v]]
+			                  		<option value="[[$v.uof_name]]">[[$v.uof_name]]</option>
+			                  	[[/foreach]]
+		                  </select>
+		                </div>
+		            </div>
+		             <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Discount</label>
+		                  <input type="text" class="form-control" id="edit_discount" placeholder="Enter Discount" ng-model="poEditFormData.discount" ng-change="poEditFormData.discount = poEditFormData.discount.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code === '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">CGST</label>
+		                  <input type="text" class="form-control" id="edit_CGST" placeholder="Enter CGST" ng-model="poEditFormData.CGST" ng-change="poEditFormData.CGST = poEditFormData.CGST.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code === '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">SGST</label>
+		                  <input type="text" class="form-control" id="edit_SGST" placeholder="Enter SGST" ng-model="poEditFormData.SGST" ng-change="poEditFormData.SGST = poEditFormData.SGST.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code !== '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">IGST</label>
+		                  <input type="text" class="form-control" id="edit_IGST" placeholder="Enter IGST" ng-model="poEditFormData.IGST" ng-change="poEditFormData.IGST = poEditFormData.IGST.toUpperCase()">
 		                </div>
 		            </div>
 	            </div>
@@ -398,6 +439,44 @@
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="addOverAllDiscountAction()">Add</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit_other_details">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit PO Other Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">PO Date</label>
+		                  <input type="text" class="form-control" id="edit_po_date" ng-model="editOtherDetails.po_date" placeholder="Choose Po Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Delivery Date</label>
+		                  <input type="text" class="form-control" id="edit_delivery_date" ng-model="editOtherDetails.delivery_date" placeholder="Choose Delivery Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Order Reference</label>
+		                  <input type="text" class="form-control" id="edit_order_reference" ng-model="editOtherDetails.order_reference" placeholder="Enter Order Reference" ng-change="editOtherDetails.order_reference = editOtherDetails.order_reference.toUpperCase()">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="updateOtherPoDetails()">Update</button>
 	        </div>
 		</div>
 	</div>

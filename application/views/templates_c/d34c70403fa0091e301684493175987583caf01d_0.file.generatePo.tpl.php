@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-01 23:17:16
+/* Smarty version 3.1.30, created on 2018-04-15 18:15:34
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac11b24c9c4a1_36750112',
+  'unifunc' => 'content_5ad3496e24f260_58332063',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1522604807,
+      1 => 1523796323,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac11b24c9c4a1_36750112 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad3496e24f260_58332063 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -186,10 +186,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-			    	<div class="col-lg-4">
+			    	<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Description</label>
-		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="30" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
+		                  <textarea id="po_description" ng-model="poEditFormData.po_description" placeholder="Enter Material Description" cols="24" rows="5" ng-change="poEditFormData.po_description = poEditFormData.po_description.toUpperCase()"></textarea>
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -202,6 +202,58 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Price</label>
 		                  <input type="text" class="form-control" id="edit_price" placeholder="Enter Price" ng-model="poEditFormData.price">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">HSN Code</label>
+		                  <input type="text" class="form-control" id="edit_material_hsn_code" placeholder="Enter HSN Code" ng-model="poEditFormData.material_hsn_code" ng-change="poEditFormData.material_hsn_code = poEditFormData.material_hsn_code.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Unit Of Measurement</label>
+		                  <select id="edit_material_uom" ng-model="poEditFormData.material_uom" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_uom')">
+		                  	   <option value="">Choose UOM</option>
+		                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['unit_of_measurement']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['uof_name'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['uof_name'];?>
+</option>
+			                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                  </select>
+		                </div>
+		            </div>
+		             <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Discount</label>
+		                  <input type="text" class="form-control" id="edit_discount" placeholder="Enter Discount" ng-model="poEditFormData.discount" ng-change="poEditFormData.discount = poEditFormData.discount.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code === '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">CGST</label>
+		                  <input type="text" class="form-control" id="edit_CGST" placeholder="Enter CGST" ng-model="poEditFormData.CGST" ng-change="poEditFormData.CGST = poEditFormData.CGST.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code === '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">SGST</label>
+		                  <input type="text" class="form-control" id="edit_SGST" placeholder="Enter SGST" ng-model="poEditFormData.SGST" ng-change="poEditFormData.SGST = poEditFormData.SGST.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="poEditFormData.state_code !== '33'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">IGST</label>
+		                  <input type="text" class="form-control" id="edit_IGST" placeholder="Enter IGST" ng-model="poEditFormData.IGST" ng-change="poEditFormData.IGST = poEditFormData.IGST.toUpperCase()">
 		                </div>
 		            </div>
 	            </div>
@@ -448,6 +500,44 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="addOverAllDiscountAction()">Add</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit_other_details">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit PO Other Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">PO Date</label>
+		                  <input type="text" class="form-control" id="edit_po_date" ng-model="editOtherDetails.po_date" placeholder="Choose Po Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Delivery Date</label>
+		                  <input type="text" class="form-control" id="edit_delivery_date" ng-model="editOtherDetails.delivery_date" placeholder="Choose Delivery Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Order Reference</label>
+		                  <input type="text" class="form-control" id="edit_order_reference" ng-model="editOtherDetails.order_reference" placeholder="Enter Order Reference" ng-change="editOtherDetails.order_reference = editOtherDetails.order_reference.toUpperCase()">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="updateOtherPoDetails()">Update</button>
 	        </div>
 		</div>
 	</div>

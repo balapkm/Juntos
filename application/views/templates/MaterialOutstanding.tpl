@@ -167,15 +167,16 @@
 			                        	<td>{{x.unit}}</td>
 			                        	<td>{{x.supplier_name}}</td>
 			                        	<td>{{x.po_number}}</td>
-			                        	<td>{{x.po_date}}</td>
+			                        	<td>{{x.po_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
 			                        	<td>{{x.received}}</td>
-			                        	<td>{{x.received_date}}</td>
+			                        	<td ng-if="x.received_date !== '0000-00-00'">{{x.received_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td ng-if="x.received_date === '0000-00-00'"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
-			                        	<td>{{x.delivery_date}}</td>
+			                        	<td>{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.delay_day}}</td>
 			                        	<!-- <td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td> -->
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>

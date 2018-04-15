@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-14 19:48:48
+/* Smarty version 3.1.30, created on 2018-04-15 12:45:25
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad20dc856eb44_89527546',
+  'unifunc' => 'content_5ad2fc0dd25bd5_78195543',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1523715473,
+      1 => 1523776523,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad20dc856eb44_89527546 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad2fc0dd25bd5_78195543 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -34,7 +34,7 @@ function content_5ad20dc856eb44_89527546 (Smarty_Internal_Template $_smarty_tpl)
           <!-- Custom Tabs -->
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
-	              <li class="active"><a href="#tab_1" data-toggle="tab"></a></li>
+	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
 	              <!-- <li><a href="#tab_2" data-toggle="tab">View</a></li> -->
 	            </ul>
 	            <div class="tab-content">

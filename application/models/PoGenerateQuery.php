@@ -15,10 +15,9 @@ class PoGenerateQuery extends CI_Model
                 FROM 
                     po_generated_request_details 
                 WHERE 
-                    YEAR(po_date) = ".date('Y')." AND 
+                    DATE(po_date) BETWEEN ('".date('Y')."-04-01' AND '".(date('Y')+1)."-03-31') AND
                     unit = '".$unit."' AND 
                     type = '".$type."'";
-
         $data  = $this->db->query($sql)->result_array();
         if(empty($data[0]['po_number']))
         {
@@ -38,7 +37,8 @@ class PoGenerateQuery extends CI_Model
                     po_generated_request_details
                 WHERE 
                     outstanding_type = 'M'
-                GROUP BY po_number,unit,type";
+                GROUP BY po_number,unit,type 
+                ORDER BY unit,type,po_number";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;

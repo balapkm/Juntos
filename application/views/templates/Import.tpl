@@ -52,7 +52,7 @@
         		<tr>
         			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
 		         	<td class="own-td-1" width="30%"><b>Date</b></td>
-		         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date]]</td>
+		         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
         		</tr>
         	</table>
         </tr>
@@ -70,7 +70,7 @@
         		<tr>
         			<td class="own-td-1" width="40%"><b>GSTIN : </b>[[$searchPoData[0].gst_no]]</td>
 		         	<td class="own-td-1" width="30%"><b>Delivery Date</b></td>
-		         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date]]</td>
+		         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
         		</tr>
         	</table>
         </tr>
@@ -93,18 +93,17 @@
         [[assign var=CGSTTotalValue value=0]]
         [[assign var=IGSTTotalValue value=0]]
         [[assign var=SGSTTotalValue value=0]]
+        [[assign var=OTHERPercGrandTotal value= 0]]
         [[foreach from=$searchPoData key=k item=v]]
         <tr>
         	<table class="own-table">
         		<tr>
         			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
 		         	<td width="20%" class="own-td-2">
-                        <div class="top_row" [[if $v.po_description neq ""]] style="border-bottom: 1px solid black;" [[/if]]>
+                        <div class="top_row">
                             [[$v.material_master_name]]
                         </div>
-                        <div class="top_row">
-                            [[$v.po_description]]
-                        </div>
+                        <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
                     </td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
@@ -119,6 +118,8 @@
 		         	[[else]]
 		         		[[assign var=DISCOUNTTotalValue value=(($v.discount/100) * $v.price ) * $v.qty]]
 		         	[[/if]]
+
+                    [[assign var=OTHERPercGrandTotal value=(($v.price* $v.qty) - $DISCOUNTTotalValue)]]
 
 		         	<td align="center" width="10%" class="own-td-2">
 		         		[[$v.discount|number_format:2]][[if $v.discount_price_status neq 'AMOUNT']] % [[/if]]
@@ -138,11 +139,13 @@
 		         		<a href="#" onclick='editPoDetails([[$v|@json_encode]])'>
 				          <span class="glyphicon glyphicon-edit"></span>
 				        </a>
+                        [[if $k neq 0]]
 				        <br/>
 				        <br/>
 				        <a href="#" onclick='deletePoDetails([[$v|@json_encode]])'>
 				          <span class="glyphicon glyphicon-trash"></span>
 				        </a>
+                        [[/if]]
 		         	</td>
         		</tr>
         	</table>
@@ -182,7 +185,7 @@
 		         	[[if $v.amount_type eq 'AMOUNT']]
 		         		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
 		         	[[else]]
-		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $GrandTotal )]]]]
+		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
 		         	[[/if]]
 		         	<td align="center" width="8%" class="own-td-2">
 		         		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]

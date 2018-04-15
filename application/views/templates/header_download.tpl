@@ -86,7 +86,7 @@ td
     		<tr>
     			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
 	         	<td class="own-td-1" width="30%"><b>Date</b></td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date]]</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
     		</tr>
     	</table>
     </tr>
@@ -104,7 +104,7 @@ td
     		<tr>
     			<td class="own-td-1" width="40%"><b>GSTIN : </b>[[$searchPoData[0].gst_no]]</td>
 	         	<td class="own-td-1" width="30%"><b>Delivery Date</b></td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date]]</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     		</tr>
     	</table>
     </tr>

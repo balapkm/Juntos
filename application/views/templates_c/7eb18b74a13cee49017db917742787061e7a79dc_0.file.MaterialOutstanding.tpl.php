@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-01 18:49:52
+/* Smarty version 3.1.30, created on 2018-04-15 12:44:02
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac0dc788ba666_16668099',
+  'unifunc' => 'content_5ad2fbba87fef5_19232565',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1522588759,
+      1 => 1523776440,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac0dc788ba666_16668099 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad2fbba87fef5_19232565 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -227,15 +227,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<td>{{x.unit}}</td>
 			                        	<td>{{x.supplier_name}}</td>
 			                        	<td>{{x.po_number}}</td>
-			                        	<td>{{x.po_date}}</td>
+			                        	<td>{{x.po_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
 			                        	<td>{{x.received}}</td>
-			                        	<td>{{x.received_date}}</td>
+			                        	<td ng-if="x.received_date !== '0000-00-00'">{{x.received_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td ng-if="x.received_date === '0000-00-00'"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
-			                        	<td>{{x.delivery_date}}</td>
+			                        	<td>{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.delay_day}}</td>
 			                        	<!-- <td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td> -->
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>

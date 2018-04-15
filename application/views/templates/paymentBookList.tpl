@@ -61,12 +61,12 @@
 	        	[[if $lastBillCnt==0 ]]
 	        	[[assign var=lastBillCnt value= $x.billCnt[$billNo] ]]
 	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_number]] </td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_date]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.payable_month]]</td>
+	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_date|date_format:"%d-%m-%Y"]]</td>
+	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.payable_month|date_format:"%d-%m-%Y"]]</td>
 	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_amount]]</td>
 	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.deduction]]</td>
 	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.cheque_no]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[if $x.cheque_date!='0000-00-00' ]] [[$x.cheque_date]] [[/if]] </td>
+	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[if $x.cheque_date!='0000-00-00' ]] [[$x.cheque_date|date_format:"%d-%m-%Y"]] [[/if]] </td>
 	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[if $x.cheque_amount!=0 ]] [[$x.cheque_amount]] [[/if]] </td>
 	        	[[/if]]
 				[[assign var=lastBillCnt value=$lastBillCnt-1 ]]
@@ -100,10 +100,10 @@
                   <th colspan="6">QUERY</th>
                   <th>PAYABLE MONTH</th>
                   <th>AMOUNT</th>
-                  <th>Dedc.</th>
+                  <!-- <th>Dedc.</th>
 		          <th>Cheque Number</th>
 		          <th>Cheque Date</th>
-		          <th>Cheque Amount</th>
+		          <th>Cheque Amount</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -123,23 +123,23 @@
                                 [[/if]]
                          </td>
                         <td>[[$x.debit_note_no]]</td>
-                        <td>[[$x.debit_note_date]]</td>
+                        <td>[[$x.debit_note_date|date_format:"%d-%m-%Y"]]</td>
                         <td>[[$x.supplier_creditnote]]</td>
-                        <td>[[$x.supplier_creditnote_date]]</td>
+                        <td>[[$x.supplier_creditnote_date|date_format:"%d-%m-%Y"]]</td>
                         <td colspan="6">[[$x.query]]</td>
-                        <td>[[$x.payable_month]]</td>
+                        <td>[[$x.payable_month|date_format:"%d-%m-%Y"]]</td>
                         <td>[[$x.amount]]</td>
+                        <!-- <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td></td> -->
                 </tr>
                 [[/foreach]]
                 <tr>
                 	<td colspan="13"></td>
                 	<td><b>Total :</b></td>	
                 	<td><b> [[$result['debitNote'][0]['totalAmount'] ]] </b></td>
-                	<td colspan="4"></td>
+                	<!-- <td colspan="4"></td> -->
                 </tr>                
             </tbody>
         </table>

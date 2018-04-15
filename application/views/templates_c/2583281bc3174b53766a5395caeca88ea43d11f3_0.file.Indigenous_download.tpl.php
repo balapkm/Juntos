@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-30 22:08:09
+/* Smarty version 3.1.30, created on 2018-04-15 14:06:53
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5abe67f10f3f30_06613401',
+  'unifunc' => 'content_5ad30f2571abd2_13013049',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1522082331,
+      1 => 1523781407,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5abe67f10f3f30_06613401 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad30f2571abd2_13013049 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,6 +86,8 @@ td
         </tr>
         <?php $_smarty_tpl->_assignInScope('GrandTotal', 0);
 ?>
+        <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', 0);
+?>
         <?php $_smarty_tpl->_assignInScope('CGSTTotalValue', 0);
 ?>
         <?php $_smarty_tpl->_assignInScope('IGSTTotalValue', 0);
@@ -102,8 +104,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-		         	<td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</td>
+		         	<td width="20%" class="own-td-2">
+		         		<div class="top_row">
+			                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+			            </div>
+			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+</div>
+		         	</td>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
 		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
@@ -137,6 +145,9 @@ if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?>
  ]
 		         		<?php }?>
 		         	</td>
+
+		         	<?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', (($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value));
+?>
 
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
@@ -248,7 +259,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable4);
 ?>
 		         	<?php } else { ?>
 		         		<?php ob_start();
-echo (($_smarty_tpl->tpl_vars['v']->value['amount']/100)*$_smarty_tpl->tpl_vars['GrandTotal']->value);
+echo (($_smarty_tpl->tpl_vars['v']->value['amount']/100)*$_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value);
 $_prefixVariable5=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 ?>
@@ -354,7 +365,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         	<table class="own-table" >
         		<tr>
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT INR</td>
+		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</td>
 		         	<td align="center" width="10%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
 		         	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
@@ -375,7 +387,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	    if(fraction > 0) {
 	        f_text = "AND "+convert_number(fraction)+" PAISE";
 	    }
-	    return convert_number(value)+" RUPEE "+f_text+" ONLY";
+	    return convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	function frac(f) {

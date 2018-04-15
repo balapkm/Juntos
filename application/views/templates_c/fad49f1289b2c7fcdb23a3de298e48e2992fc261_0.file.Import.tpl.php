@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-01 23:18:04
+/* Smarty version 3.1.30, created on 2018-04-15 14:12:06
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac11b5415fc74_49895742',
+  'unifunc' => 'content_5ad3105e1228d2_87217651',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1522604870,
+      1 => 1523781610,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac11b5415fc74_49895742 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad3105e1228d2_87217651 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
@@ -81,7 +82,7 @@ function content_5ac11b5415fc74_49895742 (Smarty_Internal_Template $_smarty_tpl)
         			<td class="own-td-1" width="40%">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
 </td>
 		         	<td class="own-td-1" width="30%"><b>Date</b></td>
-		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'];?>
+		         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'],"%d-%m-%Y");?>
 </td>
         		</tr>
         	</table>
@@ -103,7 +104,7 @@ function content_5ac11b5415fc74_49895742 (Smarty_Internal_Template $_smarty_tpl)
         			<td class="own-td-1" width="40%"><b>GSTIN : </b><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['gst_no'];?>
 </td>
 		         	<td class="own-td-1" width="30%"><b>Delivery Date</b></td>
-		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'];?>
+		         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'],"%d-%m-%Y");?>
 </td>
         		</tr>
         	</table>
@@ -131,6 +132,8 @@ function content_5ac11b5415fc74_49895742 (Smarty_Internal_Template $_smarty_tpl)
 ?>
         <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
 ?>
+        <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', 0);
+?>
         <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['searchPoData']->value, 'v', false, 'k');
 if ($_from !== null) {
@@ -142,14 +145,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
 		         	<td width="20%" class="own-td-2">
-                        <div class="top_row" <?php if ($_smarty_tpl->tpl_vars['v']->value['po_description'] != '') {?> style="border-bottom: 1px solid black;" <?php }?>>
+                        <div class="top_row">
                             <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
 
                         </div>
-                        <div class="top_row">
-                            <?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
-
-                        </div>
+                        <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+</div>
                     </td>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
@@ -174,6 +175,9 @@ $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', $_prefixVariable1);
 		         		<?php $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty']);
 ?>
 		         	<?php }?>
+
+                    <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', (($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value));
+?>
 
 		         	<td align="center" width="10%" class="own-td-2">
 		         		<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['discount'],2);
@@ -202,12 +206,14 @@ $_smarty_tpl->_assignInScope('totalPriceValue', $_prefixVariable2);
 )'>
 				          <span class="glyphicon glyphicon-edit"></span>
 				        </a>
+                        <?php if ($_smarty_tpl->tpl_vars['k']->value != 0) {?>
 				        <br/>
 				        <br/>
 				        <a href="#" onclick='deletePoDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
 )'>
 				          <span class="glyphicon glyphicon-trash"></span>
 				        </a>
+                        <?php }?>
 		         	</td>
         		</tr>
         	</table>
@@ -268,7 +274,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable3);
 ?>
 		         	<?php } else { ?>
 		         		<?php ob_start();
-echo (($_smarty_tpl->tpl_vars['v']->value['amount']/100)*$_smarty_tpl->tpl_vars['GrandTotal']->value);
+echo (($_smarty_tpl->tpl_vars['v']->value['amount']/100)*$_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value);
 $_prefixVariable4=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable4);
 ?>

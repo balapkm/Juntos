@@ -18,7 +18,8 @@ class GeneratePo extends CI_Controller
 	{
 		$this->data['supplier_entry']    = $this->PoMasterEntryQuery->select_supplier_entry();
 		$this->data['po_number_details'] = $this->getHighestIndex();
-		$this->data['po_unique_number']  = $this->getUniquePoNumber();
+		$this->data['po_unique_number']   = $this->getUniquePoNumber();
+		$this->data['unit_of_measurement'] = $this->PoMasterEntryQuery->select_uof_master();
 		return $this->mysmarty->view('generatePo.tpl',$this->data,TRUE);
 	}
 
@@ -40,6 +41,22 @@ class GeneratePo extends CI_Controller
 			}
 		}
 		return $po_number_details;
+	}
+
+	public function editPoOtherDetailsAction()
+	{
+		$ids = $this->data['po_ids'];
+		unset($this->data['po_ids']);
+		foreach ($ids as $key => $value) 
+		{
+			$data       = $this->data;
+			$data['id'] = $value;
+			if(!$this->PoGenerateQuery->update_po_generated_request_details($data))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public function generatePoData()
@@ -151,7 +168,17 @@ class GeneratePo extends CI_Controller
 		$this->data['type'] = $po_number[1];
 		$this->data['po_number']       = $po_number[2];
 		$this->data['view_status']     = 'Download';
-		$this->data['searchPoData']              =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+
+		$qty = 0;
+		foreach ($this->data['searchPoData'] as $key => $value) {
+			$qty = $qty+$value['qty'];
+		}
+		if($qty == 0)
+		{
+			echo "<script>alert('Quantity should be  greater than zero');window.close();</script>";exit;
+		}
+
 		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
 		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
 		$this->data['overAllDiscountDetails']    =  $this->PoGenerateQuery->getOverAllDiscountDetails($this->data);

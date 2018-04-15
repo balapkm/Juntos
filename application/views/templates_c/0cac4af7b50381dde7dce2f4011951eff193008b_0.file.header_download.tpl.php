@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-26 00:13:14
+/* Smarty version 3.1.30, created on 2018-04-15 13:55:11
   from "/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ab7edc29d6177_36781277',
+  'unifunc' => 'content_5ad30c67ba10b7_81323443',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cac4af7b50381dde7dce2f4011951eff193008b' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl',
-      1 => 1522003387,
+      1 => 1523777652,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ab7edc29d6177_36781277 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad30c67ba10b7_81323443 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -109,10 +110,10 @@ td
     <tr>
     	<table class="own-table">
     		<tr>
-    			<td class="own-td-1" width="40%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
+    			<td class="own-td-1" width="40%">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
 </td>
 	         	<td class="own-td-1" width="30%"><b>Date</b></td>
-	         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'];?>
+	         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'],"%d-%m-%Y");?>
 </td>
     		</tr>
     	</table>
@@ -134,7 +135,7 @@ td
     			<td class="own-td-1" width="40%"><b>GSTIN : </b><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['gst_no'];?>
 </td>
 	         	<td class="own-td-1" width="30%"><b>Delivery Date</b></td>
-	         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'];?>
+	         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'],"%d-%m-%Y");?>
 </td>
     		</tr>
     	</table>

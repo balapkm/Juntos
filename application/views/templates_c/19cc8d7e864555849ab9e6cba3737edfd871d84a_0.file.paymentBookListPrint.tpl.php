@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-14 20:23:28
+/* Smarty version 3.1.30, created on 2018-04-15 13:01:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad215e8d8e502_62065408',
+  'unifunc' => 'content_5ad2ffb4366848_96165703',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19cc8d7e864555849ab9e6cba3737edfd871d84a' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl',
-      1 => 1523717594,
+      1 => 1523777454,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad215e8d8e502_62065408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad2ffb4366848_96165703 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
  <p style="margin-top: 50px;" align="center"> Payment Book Details</p>
 <?php if (count($_smarty_tpl->tpl_vars['result']->value['paymentBookList']) <= 1) {?>
@@ -101,10 +102,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 "><?php echo $_smarty_tpl->tpl_vars['x']->value['bill_number'];?>
  </td>
 	        	<td rowspan="<?php echo $_smarty_tpl->tpl_vars['x']->value['billCnt'][$_smarty_tpl->tpl_vars['billNo']->value];?>
-"><?php echo $_smarty_tpl->tpl_vars['x']->value['bill_date'];?>
+"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['x']->value['bill_date'],"%d-%m-%Y");?>
 </td>
 	        	<td rowspan="<?php echo $_smarty_tpl->tpl_vars['x']->value['billCnt'][$_smarty_tpl->tpl_vars['billNo']->value];?>
-"><?php echo $_smarty_tpl->tpl_vars['x']->value['payable_month'];?>
+"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['x']->value['payable_month'],"%d-%m-%Y");?>
 </td>
 	        	<td rowspan="<?php echo $_smarty_tpl->tpl_vars['x']->value['billCnt'][$_smarty_tpl->tpl_vars['billNo']->value];?>
 "><?php echo $_smarty_tpl->tpl_vars['x']->value['bill_amount'];?>
@@ -116,7 +117,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 "><?php echo $_smarty_tpl->tpl_vars['x']->value['cheque_no'];?>
 </td>
 	        	<td rowspan="<?php echo $_smarty_tpl->tpl_vars['x']->value['billCnt'][$_smarty_tpl->tpl_vars['billNo']->value];?>
-"><?php if ($_smarty_tpl->tpl_vars['x']->value['cheque_date'] != '0000-00-00') {?> <?php echo $_smarty_tpl->tpl_vars['x']->value['cheque_date'];?>
+"><?php if ($_smarty_tpl->tpl_vars['x']->value['cheque_date'] != '0000-00-00') {?> <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['x']->value['cheque_date'],"%d-%m-%Y");?>
  <?php }?> </td>
 	        	<td rowspan="<?php echo $_smarty_tpl->tpl_vars['x']->value['billCnt'][$_smarty_tpl->tpl_vars['billNo']->value];?>
 "><?php if ($_smarty_tpl->tpl_vars['x']->value['cheque_amount'] != 0) {?> <?php echo $_smarty_tpl->tpl_vars['x']->value['cheque_amount'];?>
@@ -159,10 +160,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                   <th colspan="6">QUERY</th>
                   <th>PAYABLE MONTH</th>
                   <th>AMOUNT</th>
-                  <th>Dedc.</th>
+                  <!-- <th>Dedc.</th>
 		          <th>Cheque Number</th>
 		          <th>Cheque Date</th>
-		          <th>Cheque Amount</th>
+		          <th>Cheque Amount</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -183,11 +184,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
                          </td>
                         <td><?php echo $_smarty_tpl->tpl_vars['x']->value['debit_note_no'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['x']->value['debit_note_date'];?>
+                        <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['x']->value['debit_note_date'],"%d-%m-%Y");?>
 </td>
                         <td><?php echo $_smarty_tpl->tpl_vars['x']->value['supplier_creditnote'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['x']->value['supplier_creditnote_date'];?>
+                        <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['x']->value['supplier_creditnote_date'],"%d-%m-%Y");?>
 </td>
                         <td colspan="6"><?php echo $_smarty_tpl->tpl_vars['x']->value['query'];?>
 </td>
@@ -195,10 +196,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
                         <td><?php echo $_smarty_tpl->tpl_vars['x']->value['amount'];?>
 </td>
+                        <!-- <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td></td> -->
                 </tr>
                 <?php
 }
@@ -207,11 +208,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
                 <tr>
-                	<td colspan="13"></td>
+                	<td colspan="12"></td>
                 	<td><b>Total :</b></td>	
                 	<td><b> <?php echo $_smarty_tpl->tpl_vars['result']->value['debitNote'][0]['totalAmount'];?>
  </b></td>
-                	<td colspan="4"></td>
+                	<!-- <td colspan="4"></td> -->
                 </tr>                
             </tbody>
         </table>

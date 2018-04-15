@@ -61,6 +61,7 @@ td
         	</table>
         </tr>
         [[assign var=GrandTotal value= 0]]
+        [[assign var=OTHERPercGrandTotal value= 0]]
         [[assign var=CGSTTotalValue value=0]]
         [[assign var=IGSTTotalValue value=0]]
         [[assign var=SGSTTotalValue value=0]]
@@ -70,12 +71,10 @@ td
         		<tr>
         			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
 		         	<td width="20%" class="own-td-2">
-		         		<div class="top_row" [[if $v.po_description neq ""]] style="border-bottom: 1px solid black;" [[/if]]>
+		         		<div class="top_row">
 			                [[$v.material_master_name]]
 			            </div>
-			            <div class="top_row">
-			                [[$v.po_description]]
-			            </div>
+			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
 		         	</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
@@ -98,6 +97,8 @@ td
 		         		[ [[$DISCOUNTTotalValue|number_format:2]] ]
 		         		[[/if]]
 		         	</td>
+
+		         	[[assign var=OTHERPercGrandTotal value=(($v.price* $v.qty) - $DISCOUNTTotalValue)]]
 
 		         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
@@ -170,7 +171,7 @@ td
 		         	[[if $v.amount_type eq 'AMOUNT']]
 		         		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
 		         	[[else]]
-		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $GrandTotal )]]]]
+		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
 		         	[[/if]]
 		         	<td align="center" width="10%" class="own-td-2">
 		         		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
