@@ -35,6 +35,7 @@
 					                          <th>Alter.Supplier Addr</th>
 					                          <th>Supplier Code</th>
 					                          <th>Origin</th>
+					                          <th>Alter.Origin</th>
 					                          <th>Contact No</th>
 					                          <th>Email Id</th>
 					                          <th>GST No</th>
@@ -42,6 +43,8 @@
 					                          <th>Supplier tax</th>
 					                          <th>Status</th>
 					                          <th>Bank Details</th>
+					                          <th>Payment To</th>
+					                          <th>Payment Type</th>
 					                          <th>Edit</th>
 					                          <!-- <th>Delete</th> -->
 					                        </tr>
@@ -55,6 +58,7 @@
 					                          <td>[[$v.alt_supplier_address]]</td>
 					                          <td>[[$v.supplier_code]]</td>
 					                          <td>[[$v.origin]]</td>
+					                          <td>[[$v.alternative_origin]]</td>
 					                          <td>[[$v.contact_no]]</td>
 					                          <td>[[$v.email_id]]</td>
 					                          <td>[[$v.gst_no]]</td>
@@ -62,6 +66,8 @@
 					                          <td>[[$v.supplier_tax_status]]</td>
 					                          <td>[[$v.supplier_status]]</td>
 					                          <td>[[$v.bank_details]]</td>
+					                          <td>[[$v.payment_to]]</td>
+					                          <td>[[$v.payment_type]]</td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick([[$v|@json_encode]])'>Edit</button>
 					                          </td>
 			                          		  <!-- <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick([[$v|@json_encode]])'>Delete</button></td> -->
@@ -263,6 +269,17 @@
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Status</label>
+		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status" ng-change="supplierChangeInAdd()">
+		                  	  <option value="">Choose Supplier Status</option>
+		                  	  <option value="REGISTERED">Registered</option>
+		                  	  <option value="UNREGISTERED">Unregistered</option>
+		                  	  <option value="IMPORT">Import</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Alternative Supplier Name</label>
 		                  <input type="text" class="form-control" id="alt_supplier_name" placeholder="Enter Alternative Supplier Name" ng-model="supplier_form_data.alt_supplier_name">
 		                </div>
@@ -271,6 +288,12 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Origin</label>
 		                  <input type="text" class="form-control" id="origin" placeholder="Enter Origin" ng-model="supplier_form_data.origin">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Alternative Origin</label>
+		                  <input type="text" class="form-control" id="alternative_origin" placeholder="Enter Alternative Origin" ng-model="supplier_form_data.alternative_origin">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -303,21 +326,11 @@
 		                  <select class="form-control" id="supplier_tax_status" ng-model="supplier_form_data.supplier_tax_status">
 		                  	  <option value="">Choose Supplier Tax Status</option>
 		                  	  <option value="TAX">Tax</option>
-		                  	  <option value="NON_TAX">Non Tax</option>
+		                  	  <option value="NON_TAX" >Non Tax</option>
 		                  </select>
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Supplier Status</label>
-		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status">
-		                  	  <option value="">Choose Supplier Status</option>
-		                  	  <option value="REGISTERED">Registered</option>
-		                  	  <option value="UNREGISTERED">Unregistered</option>
-		                  	  <option value="IMPORT">Import</option>
-		                  </select>
-		                </div>
-		            </div>
+		            
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Address</label>
@@ -334,6 +347,23 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bank Details</label>
 		                  <textarea id="bank_details" class="form-control" placeholder="Enter Bank Details" ng-model="supplier_form_data.bank_details"></textarea>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment To</label>
+		                  <input type="text" class="form-control" id="payment_to" placeholder="Enter Payment To" ng-model="supplier_form_data.payment_to">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment Type</label>
+		                  <select class="form-control" id="payment_type" ng-model="supplier_form_data.payment_type">
+		                  	  <option value="">Choose Payment Type</option>
+		                  	  <option value="CHEQUE">CHEQUE</option>
+		                  	  <option value="D/D">D/D</option>
+		                  	  <option value="RTGS">RTGS</option>
+		                  </select>
 		                </div>
 		            </div>
 		        </div>
@@ -397,7 +427,14 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Currency</label>
-		                  <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency">
+		                  <!-- <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency"> -->
+		                  <select ng-model="material_form_data.currency"  id="currency" class="form-control">
+		                  	   <option value="">Choose Currency</option>
+		                  	   <option value="INR">INR</option>
+		                  	   <option value="EURO">EURO</option>
+		                  	   <option value="USD">USD</option>
+		                  	   <option value="HKD">HKD</option>
+		                  </select>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">

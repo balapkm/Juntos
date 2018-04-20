@@ -1,7 +1,12 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
-	$('#supplier_table,#material_table,#other_master_id').DataTable();
+	$('#supplier_table,#material_table,#other_master_id').DataTable({
+			        dom: 'Brfrtip',
+			        buttons: [
+			            'copy', 
+			            'csv',
+			            'excel']});
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 	setTimeout(function(){$('body').css('padding-right','0px');},1000);
@@ -275,11 +280,26 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$('#supplier_modal').modal('show');
 	}
 
+	$scope.supplierChangeInAdd = function()
+	{
+		if($scope.supplier_form_data.supplier_status == 'REGISTERED')
+		{
+			$scope.supplier_form_data.supplier_tax_status = 'TAX';
+		}
+		else
+		{
+			$scope.supplier_form_data.supplier_tax_status = 'NON_TAX';
+		}
+	}
+
 	$scope.add_material_click = function(){
 		$scope.material_modal = {
 			title : "Add Material Details",
 			button : "Add"
 		}
+		$scope.material_form_data.currency = "INR";
+		$scope.material_form_data.discount_price_status = "PERCENTAGE";
+		$scope.material_form_data.discount = 0;
 		$('#material_modal').modal('show');
 	}
 
@@ -353,11 +373,18 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	// if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
     	// if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
     	// if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
-    	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
-    	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_status'],"Please Choose supplier status","supplier_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
+
+    	if($scope.supplier_form_data['supplier_status'] === 'REGISTERED')
+    	{
+    		if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    		if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    		if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	}
     	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
 		var service_details = {
 	      method_name : "updateSupplierAction",
@@ -390,8 +417,8 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	// if(validateService.blank($scope.supplier_form_data['contact_no'],"Please enter contact no","contact_no")) return false;
     	// if(validateService.blank($scope.supplier_form_data['email_id'],"Please enter email id","email_id")) return false;
     	// if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
-    	if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
-    	if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    	// if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_status'],"Please Choose supplier status","supplier_status")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_address'],"Please enter supplier addresss","supplier_address")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_address'],"Please Enter remarks","alt_supplier_address")) return false;
@@ -399,6 +426,8 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if($scope.supplier_form_data['supplier_status'] === 'REGISTERED')
     	{
     		if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
+    		if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
+    		if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
     	}
     	
     	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
@@ -611,11 +640,28 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	httpService.callWebService(service_details).then(function(data){
     		if(data)
     		{
-    			$scope.material_reset();
-    			$('#modal-backdrop').css('display','none');
-    			validateService.displayMessage('success','Added Successfully','');
-    			$state.reload();
-    			tab_switch_name = 'tab_2';
+    			swal({
+				  title: "Do you want add more?",
+				  text: "Same data will retain..",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((willDelete) => {
+				  if(!willDelete){
+				  	$scope.material_reset();
+	    			$('#modal-backdrop').css('display','none');
+	    			validateService.displayMessage('success','Added Successfully','');
+	    			$state.reload();
+	    			tab_switch_name = 'tab_2';
+				  }
+				  else
+				  {
+				  	$scope.material_form_data['material_name'] = "";
+				  	$scope.material_form_data['price'] = "";
+				  }
+				});
+    			
     		}
     		else
     		{
@@ -628,7 +674,18 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
-    	if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	
+    	var supplier_id = $scope.material_form_data['supplier_id'].split('|');
+    	if(supplier_id[2] === "REGISTERED")
+    	{
+    		if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
+    	}
+
+    	if($scope.material_form_data['material_name'] === 'ADD_NEW')
+    	{
+    		if(validateService.blank($scope.material_form_data['add_material_name'],"Please Enter Material Name","add_material_name")) return false;
+    	}
+
     	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
     	if(validateService.blank($scope.material_form_data['group'],"Please Choose Group","group")) return false;
     	if(validateService.blank($scope.material_form_data['material_uom'],"Please enter material uom","material_uom")) return false;
@@ -636,6 +693,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.material_form_data['price'],"Please enter price","price")) return false;
     	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
     	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
+
 
     	$scope.material_form_data = validateService.changeAllUpperCase($scope.material_form_data);
 		var service_details = {

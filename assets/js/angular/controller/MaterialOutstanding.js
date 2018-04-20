@@ -124,6 +124,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
+        $scope.totalAmount = (x.price * x.qty);
         for(var i in x)
         {
             $scope.editMaterialPOData[i] = x[i];

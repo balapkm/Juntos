@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-01 23:01:20
+/* Smarty version 3.1.30, created on 2018-04-19 23:31:32
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac11768463329_71022481',
+  'unifunc' => 'content_5ad8d97c192060_97156900',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1522603874,
+      1 => 1524160172,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac11768463329_71022481 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ad8d97c192060_97156900 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -59,6 +59,7 @@ function content_5ac11768463329_71022481 (Smarty_Internal_Template $_smarty_tpl)
 					                          <th>Alter.Supplier Addr</th>
 					                          <th>Supplier Code</th>
 					                          <th>Origin</th>
+					                          <th>Alter.Origin</th>
 					                          <th>Contact No</th>
 					                          <th>Email Id</th>
 					                          <th>GST No</th>
@@ -66,6 +67,8 @@ function content_5ac11768463329_71022481 (Smarty_Internal_Template $_smarty_tpl)
 					                          <th>Supplier tax</th>
 					                          <th>Status</th>
 					                          <th>Bank Details</th>
+					                          <th>Payment To</th>
+					                          <th>Payment Type</th>
 					                          <th>Edit</th>
 					                          <!-- <th>Delete</th> -->
 					                        </tr>
@@ -89,6 +92,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['origin'];?>
 </td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['alternative_origin'];?>
+</td>
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['contact_no'];?>
 </td>
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['email_id'];?>
@@ -102,6 +107,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_status'];?>
 </td>
 					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['bank_details'];?>
+</td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payment_to'];?>
+</td>
+					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payment_type'];?>
 </td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
 )'>Edit</button>
@@ -361,6 +370,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Status</label>
+		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status" ng-change="supplierChangeInAdd()">
+		                  	  <option value="">Choose Supplier Status</option>
+		                  	  <option value="REGISTERED">Registered</option>
+		                  	  <option value="UNREGISTERED">Unregistered</option>
+		                  	  <option value="IMPORT">Import</option>
+		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Alternative Supplier Name</label>
 		                  <input type="text" class="form-control" id="alt_supplier_name" placeholder="Enter Alternative Supplier Name" ng-model="supplier_form_data.alt_supplier_name">
 		                </div>
@@ -369,6 +389,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Origin</label>
 		                  <input type="text" class="form-control" id="origin" placeholder="Enter Origin" ng-model="supplier_form_data.origin">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Alternative Origin</label>
+		                  <input type="text" class="form-control" id="alternative_origin" placeholder="Enter Alternative Origin" ng-model="supplier_form_data.alternative_origin">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -401,21 +427,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <select class="form-control" id="supplier_tax_status" ng-model="supplier_form_data.supplier_tax_status">
 		                  	  <option value="">Choose Supplier Tax Status</option>
 		                  	  <option value="TAX">Tax</option>
-		                  	  <option value="NON_TAX">Non Tax</option>
+		                  	  <option value="NON_TAX" >Non Tax</option>
 		                  </select>
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Supplier Status</label>
-		                  <select class="form-control" id="supplier_status" ng-model="supplier_form_data.supplier_status">
-		                  	  <option value="">Choose Supplier Status</option>
-		                  	  <option value="REGISTERED">Registered</option>
-		                  	  <option value="UNREGISTERED">Unregistered</option>
-		                  	  <option value="IMPORT">Import</option>
-		                  </select>
-		                </div>
-		            </div>
+		            
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Address</label>
@@ -432,6 +448,23 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Bank Details</label>
 		                  <textarea id="bank_details" class="form-control" placeholder="Enter Bank Details" ng-model="supplier_form_data.bank_details"></textarea>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment To</label>
+		                  <input type="text" class="form-control" id="payment_to" placeholder="Enter Payment To" ng-model="supplier_form_data.payment_to">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment Type</label>
+		                  <select class="form-control" id="payment_type" ng-model="supplier_form_data.payment_type">
+		                  	  <option value="">Choose Payment Type</option>
+		                  	  <option value="CHEQUE">CHEQUE</option>
+		                  	  <option value="D/D">D/D</option>
+		                  	  <option value="RTGS">RTGS</option>
+		                  </select>
 		                </div>
 		            </div>
 		        </div>
@@ -520,7 +553,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Currency</label>
-		                  <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency">
+		                  <!-- <input type="text" class="form-control"  ng-model="material_form_data.currency"  id="currency" placeholder="Enter Currency"> -->
+		                  <select ng-model="material_form_data.currency"  id="currency" class="form-control">
+		                  	   <option value="">Choose Currency</option>
+		                  	   <option value="INR">INR</option>
+		                  	   <option value="EURO">EURO</option>
+		                  	   <option value="USD">USD</option>
+		                  	   <option value="HKD">HKD</option>
+		                  </select>
 		                </div>
 		            </div>
 		            <div class="col-lg-3">

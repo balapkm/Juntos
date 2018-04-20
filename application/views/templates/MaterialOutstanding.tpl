@@ -133,6 +133,7 @@
 			                          <th>Edit</th>
 			                          <th>Unit</th>
 			                          <th>Supplier</th>
+			                          <th>Order Ref</th>
 			                          <th>PO Number</th>
 			                          <th style="width: 100px">PO Date</th>
 			                          <th>Material</th>
@@ -166,6 +167,7 @@
 			                        	</td>
 			                        	<td>{{x.unit}}</td>
 			                        	<td>{{x.supplier_name}}</td>
+			                        	<td>{{x.order_reference}}</td>
 			                        	<td>{{x.po_number}}</td>
 			                        	<td>{{x.po_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.material_master_name}}</td>
@@ -201,9 +203,12 @@
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Edit Material Out Standing</h4>
+		        <h4 class="modal-title">Edit Material Bill Out Standing</h4>
 		    </div>
 		    <div class="modal-body">
+		    	<div style="margin-bottom: 20px;">
+		    		<h5 class="pull-right">Total Amount : {{totalAmount}}</h5>
+		    	</div>
 		        <div class="row">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
