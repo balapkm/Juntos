@@ -356,7 +356,7 @@
 		                  <select class="form-control" id="import_shipment" ng-model="importOtherCharge.Shipment" ng-change="changeImportDetailsShow('Shipment')">
 		                  	 <option value="">Choose Shipment</option>
 		                  	 <option value="BY TNT COURIER `OUR A/C# 20407`">BY TNT COURIER `OUR A/C# 20407`</option>
-		                  	 <option value="DHC">DHC</option>
+		                  	 <option value="DHL COURIER">DHL COURIER</option>
 		                  	 <option value="AIR">AIR</option>
 		                  	 <option value="SEA">SEA</option>
 		                  	 <option value="OTHERS">OTHERS</option>

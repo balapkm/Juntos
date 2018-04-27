@@ -89,6 +89,11 @@ class GeneratePo extends CI_Controller
 			$finalInsertData[$key]['discount_price_status'] = $value['discount_price_status'];
 			$finalInsertData[$key]['outstanding_type'] = "M";
 			$finalInsertData[$key]['created_date'] = date('Y-m-d');
+			$cdata = $this->PoMasterEntryQuery->check_material_exist_for_po_number($finalInsertData[$key]);
+			if(count($cdata) != 0)
+			{
+				return false;
+			}
 		}
 
 		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Import')
@@ -170,14 +175,13 @@ class GeneratePo extends CI_Controller
 		$this->data['view_status']     = 'Download';
 		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
 
-		$qty = 0;
 		foreach ($this->data['searchPoData'] as $key => $value) {
-			$qty = $qty+$value['qty'];
+			if($value['qty'] == 0)
+			{
+				echo "<script>alert('Quantity should be  greater than zero');window.close();</script>";exit;
+			}
 		}
-		if($qty == 0)
-		{
-			echo "<script>alert('Quantity should be  greater than zero');window.close();</script>";exit;
-		}
+		
 
 		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
 		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);

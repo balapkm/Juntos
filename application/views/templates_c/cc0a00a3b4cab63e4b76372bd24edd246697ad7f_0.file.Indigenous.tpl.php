@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-15 17:50:48
+/* Smarty version 3.1.30, created on 2018-04-25 22:51:57
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad343a0087807_30697680',
+  'unifunc' => 'content_5ae0b935840947_65298145',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1523794833,
+      1 => 1524676901,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad343a0087807_30697680 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae0b935840947_65298145 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -253,7 +253,7 @@ $_smarty_tpl->_assignInScope('totalPriceValue', $_prefixVariable3);
 )'>
 				          <span class="glyphicon glyphicon-edit"></span>
 				        </a>
-				        <?php if ($_smarty_tpl->tpl_vars['k']->value != 0) {?>
+				        <?php if (count($_smarty_tpl->tpl_vars['searchPoData']->value) != 1) {?>
 				        <br/>
 				        <br/>
 				        <a href="#" onclick='deletePoDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
@@ -444,6 +444,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
+		         	<td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</td>
 		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
 </b></td>
 		         	<td align="center" width="18%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>

@@ -227,6 +227,7 @@ td
         	<table class="own-table" >
         		<tr>
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
+		         	<td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode">[[$searchPoData[0].currency]]</td>
 		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT [[$searchPoData[0].currency]]</td>
 		         	<td align="center" width="10%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
@@ -237,15 +238,24 @@ td
 <script>
 	[[literal]]
 	var number = document.getElementById('GrandTotal').innerHTML;
-	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT IN WORDS : </b> "+number2text(number);
+	var currency = document.getElementById('currencyCode').innerHTML;
+	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT In Words : </b> "+number2text(number,currency);
     
 	function number2text(value) {
-	    var fraction = Math.round(frac(value)*100);
+	    var currencyCode = {
+			"INR"  : "PAISE",
+			"EURO" : "CENTS"
+		};
+		
+		if(typeof currencyCode[currency] === 'undefined')
+			currencyCode[currency] = "";
+
+	    var fraction = Math.round(this.frac(value)*100);
 	    var f_text  = "";
 	    if(fraction > 0) {
-	        f_text = "AND "+convert_number(fraction)+" PAISE";
+	        f_text = "AND "+this.convert_number(fraction)+" "+currencyCode[currency];
 	    }
-	    return convert_number(value)+" "+f_text+" ONLY";
+	    return currency+" "+this.convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	function frac(f) {

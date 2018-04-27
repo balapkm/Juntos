@@ -262,9 +262,9 @@
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
-		                <div class="form-group">
+		                <div class="form-group" ng-init="supplier_form_data.supplier_code = 'SUP[[$max_supplier_id]]'">
 		                  <label for="exampleInputEmail1">Supplier Code</label>
-		                  <input type="text" class="form-control" id="supplier_code" placeholder="Enter Supplier Code" ng-model="supplier_form_data.supplier_code">
+		                  <input type="text" class="form-control" id="supplier_code" placeholder="Enter Supplier Code" ng-model="supplier_form_data.supplier_code" disabled="disabled">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -308,13 +308,13 @@
 		                  <input type="text" class="form-control" id="email_id" placeholder="Enter Mail Id" ng-model="supplier_form_data.email_id">
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-3" ng-if="showBasedOnSupplierStatus">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">GST No</label>
 		                  <input type="text" class="form-control" id="gst_no" placeholder="Enter GST No" ng-model="supplier_form_data.gst_no">
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-3" ng-if="showBasedOnSupplierStatus">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">State Code</label>
 		                  <input type="text" class="form-control" id="state_code" placeholder="Enter State Code" ng-model="supplier_form_data.state_code">
@@ -363,7 +363,14 @@
 		                  	  <option value="CHEQUE">CHEQUE</option>
 		                  	  <option value="D/D">D/D</option>
 		                  	  <option value="RTGS">RTGS</option>
+		                  	  <option value="OTHER">OTHER</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="supplier_form_data.payment_type === 'OTHER'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment Type</label>
+		                  <input type="text" class="form-control" id="other_payment_type" placeholder="Enter Payment Type" ng-model="supplier_form_data.other_payment_type">
 		                </div>
 		            </div>
 		        </div>
@@ -403,21 +410,29 @@
 		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
+		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
+		                  	   <!-- <option value="">Choose Material Name</option> -->
+		                  	   <!-- <option value="ADD_NEW">ADD NEW</option> -->
+		                  	   [[foreach from=$material_master_details key=k item=v]]
+			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
+			                  	[[/foreach]]
+		                  </select>
+
+		                  <!-- <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
 		                  	   <option value="">Choose Material Name</option>
 		                  	   <option value="ADD_NEW">ADD NEW</option>
 		                  	   [[foreach from=$material_master_details key=k item=v]]
 			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
 			                  	[[/foreach]]
-		                  </select>
+		                  </select> -->
 		                </div>
 		            </div>
-		            <div class="col-lg-3" ng-if="addNewMaterialNameInput">
+		            <!-- <div class="col-lg-3" ng-if="addNewMaterialNameInput">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">New Material Name</label>
 		                  <input type="text" ng-model="material_form_data.add_material_name" class="form-control" id="add_material_name" placeholder="Enter New Material Name">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
@@ -434,7 +449,14 @@
 		                  	   <option value="EURO">EURO</option>
 		                  	   <option value="USD">USD</option>
 		                  	   <option value="HKD">HKD</option>
+		                  	   <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="material_form_data.currency === 'OTHERS'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Add Currency</label>
+		                  <input type="text" class="form-control" id="add_currency" placeholder="Enter new Currency" ng-model="material_form_data.add_currency" >
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -481,24 +503,26 @@
 		                  <input type="text" class="form-control" ng-model="material_form_data.price"  id="price" placeholder="Enter Price">
 		                </div>
 		            </div>
-		            <div class="col-lg-3" ng-if="!showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">IGST</label>
-		                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
-		                </div>
-		            </div>
-		            <div class="col-lg-3" ng-if="showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">CGST</label>
-		                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
-		                </div>
-		            </div>
-		            <div class="col-lg-3" ng-if="showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1" >SGST</label>
-		                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
-		                </div>
-		            </div>
+		            <div ng-if="showUnRegTaxComp">
+			            <div class="col-lg-3" ng-if="!showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1">IGST</label>
+			                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
+			                </div>
+			            </div>
+			            <div class="col-lg-3" ng-if="showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1">CGST</label>
+			                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
+			                </div>
+			            </div>
+			            <div class="col-lg-3" ng-if="showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1" >SGST</label>
+			                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
+			                </div>
+			            </div>
+		        	</div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount Price Status</label>

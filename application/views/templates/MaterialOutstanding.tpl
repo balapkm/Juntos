@@ -206,8 +206,8 @@
 		        <h4 class="modal-title">Edit Material Bill Out Standing</h4>
 		    </div>
 		    <div class="modal-body">
-		    	<div style="margin-bottom: 20px;">
-		    		<h5 class="pull-right">Total Amount : {{totalAmount}}</h5>
+		    	<div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		    		<h5 class="pull-right">Total Amount : <b>{{totalAmount}}</b></h5>
 		    	</div>
 		        <div class="row">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
@@ -222,10 +222,16 @@
 		                  <input type="text" ng-model="editMaterialPOData.received_date" class="form-control" id="received_date" placeholder="Choose Received Date">
 		                </div>
 		            </div>
-		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Bill Amount</label>
-		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
+		                  <label for="exampleInputEmail1">DC Number</label>
+		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DC Date</label>
+		                  <input type="text" ng-model="editMaterialPOData.dc_date" class="form-control" id="dc_date" placeholder="Choose DC Date">
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
@@ -242,14 +248,8 @@
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">DC Number</label>
-		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
-		                </div>
-		            </div>
-		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">DC Date</label>
-		                  <input type="text" ng-model="editMaterialPOData.dc_date" class="form-control" id="dc_date" placeholder="Choose DC Date">
+		                  <label for="exampleInputEmail1">Bill Amount</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
 		        </div>

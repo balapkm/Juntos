@@ -42,7 +42,8 @@ app.service('validateService',function(){
   		var final = {};
   		for(var i in data)
   		{
-  			final[i] = data[i].toUpperCase();
+  			if(typeof data[i] === "string")
+  				final[i] = data[i].toUpperCase();
   		}
   		return final;
   	}

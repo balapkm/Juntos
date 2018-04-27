@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-19 23:33:54
+/* Smarty version 3.1.30, created on 2018-04-27 22:31:37
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad8da0ae69274_65103258',
+  'unifunc' => 'content_5ae35771976fe1_97383319',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1524161033,
+      1 => 1524848480,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad8da0ae69274_65103258 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae35771976fe1_97383319 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -47,6 +47,8 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
   <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Select2 -->
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
+  <!-- editable select -->
+  <link rel="stylesheet" href="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -54,6 +56,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
   <link rel="stylesheet" href="assets/css/custom-style.css">
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -355,6 +358,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
  src="assets/plugins/jsxcompressor/jsxcompressor.min.js"><?php echo '</script'; ?>
 >
+<!-- jquery editable select -->
+<?php echo '<script'; ?>
+ src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"><?php echo '</script'; ?>
+>
 <!-- Auto include -->
 <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['jsPaths']->value, 'v', false, 'k');
@@ -362,7 +369,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
-?version=5"><?php echo '</script'; ?>
+?version=10"><?php echo '</script'; ?>
 >
 <?php
 }

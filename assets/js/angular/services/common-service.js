@@ -20,13 +20,21 @@ app.service('commonService',function($http,$q){
 	    $.jStorage.deleteKey(key);
 	}
 
-	this.number2text = function (value) {
+	this.number2text = function (value,currency) {
+		var currencyCode = {
+			"INR"  : "PAISE",
+			"EURO" : "CENTS"
+		};
+		
+		if(typeof currencyCode[currency] === 'undefined')
+			currencyCode[currency] = "";
+
 	    var fraction = Math.round(this.frac(value)*100);
 	    var f_text  = "";
 	    if(fraction > 0) {
-	        f_text = "AND "+this.convert_number(fraction)+" PAISE";
+	        f_text = "AND "+this.convert_number(fraction)+" "+currencyCode[currency];
 	    }
-	    return this.convert_number(value)+" "+f_text+" ONLY";
+	    return currency+" "+this.convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	this.frac = function(f) {

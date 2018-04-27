@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-19 23:31:32
+/* Smarty version 3.1.30, created on 2018-04-24 23:37:56
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad8d97c192060_97156900',
+  'unifunc' => 'content_5adf727c1bccd2_49210040',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1524160172,
+      1 => 1524593158,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad8d97c192060_97156900 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5adf727c1bccd2_49210040 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -363,9 +363,10 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
-		                <div class="form-group">
+		                <div class="form-group" ng-init="supplier_form_data.supplier_code = 'SUP<?php echo $_smarty_tpl->tpl_vars['max_supplier_id']->value;?>
+'">
 		                  <label for="exampleInputEmail1">Supplier Code</label>
-		                  <input type="text" class="form-control" id="supplier_code" placeholder="Enter Supplier Code" ng-model="supplier_form_data.supplier_code">
+		                  <input type="text" class="form-control" id="supplier_code" placeholder="Enter Supplier Code" ng-model="supplier_form_data.supplier_code" disabled="disabled">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -409,13 +410,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" class="form-control" id="email_id" placeholder="Enter Mail Id" ng-model="supplier_form_data.email_id">
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-3" ng-if="showBasedOnSupplierStatus">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">GST No</label>
 		                  <input type="text" class="form-control" id="gst_no" placeholder="Enter GST No" ng-model="supplier_form_data.gst_no">
 		                </div>
 		            </div>
-		            <div class="col-lg-3">
+		            <div class="col-lg-3" ng-if="showBasedOnSupplierStatus">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">State Code</label>
 		                  <input type="text" class="form-control" id="state_code" placeholder="Enter State Code" ng-model="supplier_form_data.state_code">
@@ -464,7 +465,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  	  <option value="CHEQUE">CHEQUE</option>
 		                  	  <option value="D/D">D/D</option>
 		                  	  <option value="RTGS">RTGS</option>
+		                  	  <option value="OTHER">OTHER</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="supplier_form_data.payment_type === 'OTHER'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payment Type</label>
+		                  <input type="text" class="form-control" id="other_payment_type" placeholder="Enter Payment Type" ng-model="supplier_form_data.other_payment_type">
 		                </div>
 		            </div>
 		        </div>
@@ -517,7 +525,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
+		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
+		                  	   <!-- <option value="">Choose Material Name</option> -->
+		                  	   <!-- <option value="ADD_NEW">ADD NEW</option> -->
+		                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</option>
+			                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                  </select>
+
+		                  <!-- <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
 		                  	   <option value="">Choose Material Name</option>
 		                  	   <option value="ADD_NEW">ADD NEW</option>
 		                  	   <?php
@@ -535,15 +563,15 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-		                  </select>
+		                  </select> -->
 		                </div>
 		            </div>
-		            <div class="col-lg-3" ng-if="addNewMaterialNameInput">
+		            <!-- <div class="col-lg-3" ng-if="addNewMaterialNameInput">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">New Material Name</label>
 		                  <input type="text" ng-model="material_form_data.add_material_name" class="form-control" id="add_material_name" placeholder="Enter New Material Name">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
@@ -560,7 +588,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  	   <option value="EURO">EURO</option>
 		                  	   <option value="USD">USD</option>
 		                  	   <option value="HKD">HKD</option>
+		                  	   <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3" ng-if="material_form_data.currency === 'OTHERS'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Add Currency</label>
+		                  <input type="text" class="form-control" id="add_currency" placeholder="Enter new Currency" ng-model="material_form_data.add_currency" >
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
@@ -629,24 +664,26 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" class="form-control" ng-model="material_form_data.price"  id="price" placeholder="Enter Price">
 		                </div>
 		            </div>
-		            <div class="col-lg-3" ng-if="!showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">IGST</label>
-		                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
-		                </div>
-		            </div>
-		            <div class="col-lg-3" ng-if="showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">CGST</label>
-		                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
-		                </div>
-		            </div>
-		            <div class="col-lg-3" ng-if="showGst">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1" >SGST</label>
-		                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
-		                </div>
-		            </div>
+		            <div ng-if="showUnRegTaxComp">
+			            <div class="col-lg-3" ng-if="!showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1">IGST</label>
+			                  <input type="text" ng-model="material_form_data.IGST" class="form-control" id="IGST" placeholder="Enter IGST">
+			                </div>
+			            </div>
+			            <div class="col-lg-3" ng-if="showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1">CGST</label>
+			                  <input type="text" class="form-control" ng-model="material_form_data.CGST"  id="CGST" placeholder="Enter CGST">
+			                </div>
+			            </div>
+			            <div class="col-lg-3" ng-if="showGst">
+			                <div class="form-group">
+			                  <label for="exampleInputEmail1" >SGST</label>
+			                  <input type="text" class="form-control" ng-model="material_form_data.SGST" id="SGST" placeholder="Enter SGST">
+			                </div>
+			            </div>
+		        	</div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Discount Price Status</label>

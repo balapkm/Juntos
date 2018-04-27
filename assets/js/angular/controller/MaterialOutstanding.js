@@ -124,7 +124,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
+        console.log(x);
+        console.log(typeof x.price);
+        console.log(typeof x.qty);
         $scope.totalAmount = (x.price * x.qty);
+        // alert($scope.totalAmount);
         for(var i in x)
         {
             $scope.editMaterialPOData[i] = x[i];
@@ -172,6 +176,9 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 validateService.addErrorTag(["received"]);
                 return false;
             }
+
+            if(validateService.blank($scope.editMaterialPOData['dc_number'],"Please Enter DC Number","dc_number")) return false;
+            if(validateService.blank($scope.editMaterialPOData['dc_date'],"Please Choose DC Date","dc_date")) return false;
         }
         else
         {
@@ -181,12 +188,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 validateService.addErrorTag(["bill_amount"]);
                 return false;
             }
-
-            /*if($scope.editMaterialPOData['invoice_number'] === ""){
-                validateService.displayMessage('error',"Please enter invoice number","Validation Error");
-                validateService.addErrorTag(["invoice_number"]);
-                return false;
-            }*/
 
             if(validateService.blank($scope.editMaterialPOData['bill_date'],"Please Choose Bill date","bill_date")) return false;
             if(validateService.blank($scope.editMaterialPOData['bill_number'],"Please Enter Bill Number","bill_number")) return false;

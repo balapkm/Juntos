@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-15 14:06:53
+/* Smarty version 3.1.30, created on 2018-04-25 22:33:01
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad30f2571abd2_13013049',
+  'unifunc' => 'content_5ae0b4c527fce0_34706350',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1523781407,
+      1 => 1524675777,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad30f2571abd2_13013049 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae0b4c527fce0_34706350 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -365,6 +365,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         	<table class="own-table" >
         		<tr>
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
+		         	<td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</td>
 		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
 </td>
 		         	<td align="center" width="10%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
@@ -379,15 +381,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 >
 	
 	var number = document.getElementById('GrandTotal').innerHTML;
-	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT IN WORDS : </b> "+number2text(number);
+	var currency = document.getElementById('currencyCode').innerHTML;
+	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT In Words : </b> "+number2text(number,currency);
     
 	function number2text(value) {
-	    var fraction = Math.round(frac(value)*100);
+	    var currencyCode = {
+			"INR"  : "PAISE",
+			"EURO" : "CENTS"
+		};
+		
+		if(typeof currencyCode[currency] === 'undefined')
+			currencyCode[currency] = "";
+
+	    var fraction = Math.round(this.frac(value)*100);
 	    var f_text  = "";
 	    if(fraction > 0) {
-	        f_text = "AND "+convert_number(fraction)+" PAISE";
+	        f_text = "AND "+this.convert_number(fraction)+" "+currencyCode[currency];
 	    }
-	    return convert_number(value)+" "+f_text+" ONLY";
+	    return currency+" "+this.convert_number(value)+" "+f_text+" ONLY";
 	}
 
 	function frac(f) {

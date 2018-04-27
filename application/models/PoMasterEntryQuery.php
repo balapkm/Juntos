@@ -106,6 +106,13 @@ class PoMasterEntryQuery extends CI_Model
         return $this->objectToArray($data);
     }
 
+    public function get_max_supplier_id()
+    {
+        $sql = 'SELECT MAX(supplier_id)+1 AS max_supplier_id FROM supplier_details';
+        $data  = $this->db->query($sql)->result_array();
+        return $data[0]['max_supplier_id'];
+    }
+
     public function select_uof_master()
     {
         $query = $this->db->get_where('uof_master', 
@@ -259,6 +266,22 @@ class PoMasterEntryQuery extends CI_Model
                 WHERE
                     md.material_master_id = mm.material_id AND
                     md.material_id IN (".$material_id.")";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
+    public function check_material_exist_for_po_number($data)
+    {
+        $sql = "SELECT 
+                    * 
+                FROM
+                    po_generated_request_details
+                WHERE
+                    unit = '".$data['unit']."' AND
+                    type = '".$data['type']."' AND
+                    po_number = '".$data['po_number']."' AND
+                    po_date = '".$data['po_date']."' AND
+                    material_master_id = '".$data['material_master_id']."'";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

@@ -226,8 +226,9 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             {
                 $scope.showPoSearch = true;
                 $('#showPoSearch').html(data);
-                var number = $("#GrandTotal").text();
-                $('#numberToWord').html("<b>Amount In Words : </b>"+commonService.number2text(number).toUpperCase());
+                var number   = $("#GrandTotal").text();
+                var currency = $("#currencyCode").text();
+                $('#numberToWord').html("<b>Amount In Words : </b>"+commonService.number2text(number,currency).toUpperCase());
             }
         });
     }

@@ -9,15 +9,25 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			            'excel']});
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
-	setTimeout(function(){$('body').css('padding-right','0px');},1000);
+	setTimeout(function(){
+		$('body').css('padding-right','0px');
+		$('#material_name_select2').editableSelect();
+	},1000);
 	$('.select2').select2();
-	
+
+	$scope.showUnRegTaxComp = true;
 	$('#supplier_name_select2').on('select2:select', function (e) {
 		value = e.currentTarget.value.split('|');
 		if(value[1] === "33")
 			$scope.showGst = true;
 		else
 			$scope.showGst = false;
+		
+		$scope.showUnRegTaxComp = true;
+		if(value[2] === 'UNREGISTERED')
+		{
+			$scope.showUnRegTaxComp = false;
+		}
 		$scope.$apply();
 	});
 
@@ -43,7 +53,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 	$scope.changeMaterialNameDetails = function(id)
 	{
-		$scope.clearRedMark(id);
+		// $scope.clearRedMark(id);
 		if($scope.material_form_data.material_name === 'ADD_NEW')
 		{
 			$scope.addNewMaterialNameInput = true;
@@ -280,14 +290,17 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$('#supplier_modal').modal('show');
 	}
 
+	$scope.showBasedOnSupplierStatus = true;
 	$scope.supplierChangeInAdd = function()
 	{
 		if($scope.supplier_form_data.supplier_status == 'REGISTERED')
 		{
+			$scope.showBasedOnSupplierStatus = true;
 			$scope.supplier_form_data.supplier_tax_status = 'TAX';
 		}
 		else
 		{
+			$scope.showBasedOnSupplierStatus = false;
 			$scope.supplier_form_data.supplier_tax_status = 'NON_TAX';
 		}
 	}
@@ -428,6 +441,12 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		if(validateService.blank($scope.supplier_form_data['gst_no'],"Please enter GST no","gst_no")) return false;
     		if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
     		if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
+    	}
+
+    	if($scope.supplier_form_data['payment_type'] === 'OTHER')
+    	{
+    		$scope.supplier_form_data['payment_type'] = $scope.supplier_form_data['other_payment_type'];
+    		delete $scope.supplier_form_data['other_payment_type'];
     	}
     	
     	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
@@ -608,7 +627,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 	// function to add supplier data 
 	$scope.add_material_action = function(){
-
+		$scope.material_form_data['material_name'] = $('#material_name_select2').val();
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
     	
@@ -618,9 +637,13 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		if(validateService.blank($scope.material_form_data['material_hsn_code'],"Please enter material hsn code","material_hsn_code")) return false;
     	}
 
-    	if($scope.material_form_data['material_name'] === 'ADD_NEW')
+    	/*if($scope.material_form_data['material_name'] === 'ADD_NEW')
     	{
     		if(validateService.blank($scope.material_form_data['add_material_name'],"Please Enter Material Name","add_material_name")) return false;
+    	}*/
+    	if($scope.material_form_data['currency'] === 'OTHERS')
+    	{
+    		$scope.material_form_data['currency'] = $scope.material_form_data['add_currency'];
     	}
 
     	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
@@ -630,7 +653,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.material_form_data['price'],"Please enter price","price")) return false;
     	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
     	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
-
+    	console.log($scope.material_form_data);
     	$scope.material_form_data = validateService.changeAllUpperCase($scope.material_form_data);
 		var service_details = {
 	      method_name : "addMaterialAction",

@@ -139,7 +139,7 @@
 		         		<a href="#" onclick='editPoDetails([[$v|@json_encode]])'>
 				          <span class="glyphicon glyphicon-edit"></span>
 				        </a>
-                        [[if $k neq 0]]
+                        [[if $searchPoData|@count neq 1]]
 				        <br/>
 				        <br/>
 				        <a href="#" onclick='deletePoDetails([[$v|@json_encode]])'>
@@ -237,6 +237,7 @@
         		<tr>
         			<!-- <td align="center" width="5%"  class="own-td-2"></td> -->
 		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
+                    <td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode">[[$searchPoData[0].currency]]</td>
 		         	<td align="center" width="27%" class="own-td-2"><b>TOTAL AMOUNT [[$searchPoData[0].currency]]</b></td>
 		         	<td align="center" width="18%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>

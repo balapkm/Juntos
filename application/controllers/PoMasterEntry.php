@@ -16,6 +16,7 @@ class PoMasterEntry extends CI_Controller
 	public function index()
 	{
 		$this->data['supplier_entry'] = $this->PoMasterEntryQuery->select_supplier_entry();
+		$this->data['max_supplier_id'] = $this->PoMasterEntryQuery->get_max_supplier_id();
 		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
 		$this->data['unit_of_measurement'] = $this->PoMasterEntryQuery->select_uof_master();
 		$this->data['material_master_details'] = $this->PoMasterEntryQuery->select_material_master();
@@ -70,16 +71,25 @@ class PoMasterEntry extends CI_Controller
 		$material_name = $this->data['material_name'];
 		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
 		$this->data['material_name'] = explode("|",$material_name)[0];
-		$this->data['material_master_id'] = explode("|",$material_name)[1];
-		if($this->data['material_name'] == 'ADD_NEW')
-		{
-			$this->data['material_name'] = $this->data['add_material_name'];
-			$count = count($this->PoMasterEntryQuery->select_material_master($this->data));
-			if($count != 0)return false;
-			$data['material_name'] = $this->data['material_name'];
-			$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
+		// $this->data['material_master_id'] = explode("|",$material_name)[1];
+		/*if($this->data['material_name'] == 'ADD_NEW')
+		{*/
+			// $this->data['material_name'] = $this->data['add_material_name'];
+			$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
+			$count      = count($selectData);
+			if($count == 0)
+			{
+				$data['material_name'] = $this->data['material_name'];
+				$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
+				$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
+				$this->data['material_master_id'] = $selectData[0]['material_id'];
+			}
+			else
+			{
+				$this->data['material_master_id'] = $selectData[0]['material_id'];
+			}
 			unset($this->data['add_material_name']);
-		}
+		// }
 		$count = count($this->PoMasterEntryQuery->select_material_entry_as_per_supplier_name($this->data));
 		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details');

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-15 18:15:34
+/* Smarty version 3.1.30, created on 2018-04-25 23:19:15
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad3496e24f260_58332063',
+  'unifunc' => 'content_5ae0bf9c000cf1_06378935',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1523796323,
+      1 => 1524677030,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad3496e24f260_58332063 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae0bf9c000cf1_06378935 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -417,7 +417,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <select class="form-control" id="import_shipment" ng-model="importOtherCharge.Shipment" ng-change="changeImportDetailsShow('Shipment')">
 		                  	 <option value="">Choose Shipment</option>
 		                  	 <option value="BY TNT COURIER `OUR A/C# 20407`">BY TNT COURIER `OUR A/C# 20407`</option>
-		                  	 <option value="DHC">DHC</option>
+		                  	 <option value="DHL COURIER">DHL COURIER</option>
 		                  	 <option value="AIR">AIR</option>
 		                  	 <option value="SEA">SEA</option>
 		                  	 <option value="OTHERS">OTHERS</option>

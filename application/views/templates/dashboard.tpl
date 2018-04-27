@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Select2 -->
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
+  <!-- editable select -->
+  <link rel="stylesheet" href="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -29,6 +31,7 @@
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
   <link rel="stylesheet" href="assets/css/custom-style.css">
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -260,9 +263,11 @@
 <script src="assets/plugins/angular/angular-ui-router.min.js"></script>
 <!-- jsxcompressor -->
 <script src="assets/plugins/jsxcompressor/jsxcompressor.min.js"></script>
+<!-- jquery editable select -->
+<script src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]?version=5"></script>
+<script src="[[$v]]?version=10"></script>
 [[/foreach]]
 <script>
   $(document).ready(function () {

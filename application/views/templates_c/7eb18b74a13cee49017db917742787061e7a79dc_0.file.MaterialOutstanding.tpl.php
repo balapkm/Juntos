@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-19 23:36:09
+/* Smarty version 3.1.30, created on 2018-04-27 21:50:45
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad8da91856774_82043252',
+  'unifunc' => 'content_5ae34ddd0d6410_14392127',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1524161100,
+      1 => 1524680327,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad8da91856774_82043252 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae34ddd0d6410_14392127 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -266,8 +266,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		        <h4 class="modal-title">Edit Material Bill Out Standing</h4>
 		    </div>
 		    <div class="modal-body">
-		    	<div style="margin-bottom: 20px;">
-		    		<h5 class="pull-right">Total Amount : {{totalAmount}}</h5>
+		    	<div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		    		<h5 class="pull-right">Total Amount : <b>{{totalAmount}}</b></h5>
 		    	</div>
 		        <div class="row">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
@@ -282,10 +282,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editMaterialPOData.received_date" class="form-control" id="received_date" placeholder="Choose Received Date">
 		                </div>
 		            </div>
-		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Bill Amount</label>
-		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
+		                  <label for="exampleInputEmail1">DC Number</label>
+		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DC Date</label>
+		                  <input type="text" ng-model="editMaterialPOData.dc_date" class="form-control" id="dc_date" placeholder="Choose DC Date">
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
@@ -302,14 +308,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">DC Number</label>
-		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
-		                </div>
-		            </div>
-		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'B'">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">DC Date</label>
-		                  <input type="text" ng-model="editMaterialPOData.dc_date" class="form-control" id="dc_date" placeholder="Choose DC Date">
+		                  <label for="exampleInputEmail1">Bill Amount</label>
+		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
 		        </div>
