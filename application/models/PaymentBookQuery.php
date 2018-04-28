@@ -42,7 +42,7 @@ class PaymentBookQuery extends CI_Model
     public function getPaymentBookData($data)
     {
         $sql = "SELECT 
-                        sd.supplier_name,
+                    sd.supplier_name,
                     sd.state_code,
                     prd.*,
                     DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
@@ -56,7 +56,6 @@ class PaymentBookQuery extends CI_Model
                     prd.bill_number!='' AND 
                     prd.supplier_id = ".$data['supplier_name'] ;                    
         $sql.= " ORDER BY prd.bill_number";
-        // print_r($sql);exit;
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

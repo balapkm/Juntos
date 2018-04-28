@@ -1,150 +1,173 @@
- <p style="margin-top: 50px;" align="center"> Payment Book Details</p>
-[[if count($result['paymentBookList'])<=1 ]]
- <p style="margin-top: 50px;" align="center">No Data Found for this supplier!</p>
-[[else]]
-<div style="margin-top: 50px;">
-	<table style="margin-bottom: 10px;font-size: 12px;">
-	    <thead>
-	        <tr>
-	          <th>S.No</th>
-	          <th>HS CODE</th>
-	          <th>CGST</th>
-	          <th>SGST</th>
-	          <th>QTY</th>
-	          <th>UOM</th>
-	          <th>MATERAIL</th>
-	          <th>RATE</th>
-	          <th>AVG. COST</th>
-	          <th>QUERY</th>
-	          <th>PO NUMBER</th>
-	          <th>DC Number</th>
-	          <th>Bill Number</th>
-	          <th>BILL DATE</th>
-	          <th>Payable Month</th>
-	          <th>Bill Amount</th>
-	          <th>Dedc.</th>
-	          <th>Cheque Number</th>
-	          <th>Cheque Date</th>
-	          <th>Cheque Amount</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    	[[assign var=lastBillCnt  value=0]]
-	    	[[foreach from=$result['paymentBookList'] key=k item=x]]
-	        <tr>
-	        	[[assign var=billNo  value= $x.bill_number]]
-	        	[[if $lastBillCnt==0 ]]
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.s_no]]</td>
-	        	[[/if]]
-	        	<td>
-	        		[[$x.material_hsn_code]]
-	        	 </td>
-	        	 [[if $x.state_code==33 ]]
-	        	 <td> 9% </td>
-	        	 <td> 9% </td>
-	        	 [[else]]
-	        	 <td> 18 % </td>
-	        	 [[/if]]
-	        	<td>[[$x.qty]]</td>
-	        	<td>[[$x.material_uom]]</td>
-	        	<td>[[$x.material_name]]</td>
-	        	<td>[[$x.price]]</td>
-	        	<td>[[$x.avg_cost]]</td>
-	        	<td>[[$x.query]]</td>
-	        	<td>[[$x.po_number]]</td>
-	        	<td>[[$x.dc_number]]</td>
-	        	[[if $lastBillCnt==0 ]]
-	        	[[assign var=lastBillCnt value= $x.billCnt[$billNo] ]]
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_number]] </td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_date|date_format:"%d-%m-%Y"]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.payable_month|date_format:"%d-%m-%Y"]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.bill_amount]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.deduction]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[$x.cheque_no]]</td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[if $x.cheque_date!='0000-00-00' ]] [[$x.cheque_date|date_format:"%d-%m-%Y"]] [[/if]] </td>
-	        	<td rowspan="[[$x.billCnt[$billNo] ]]">[[if $x.cheque_amount!=0 ]] [[$x.cheque_amount]] [[/if]] </td>
-	        	[[/if]]
-				[[assign var=lastBillCnt value=$lastBillCnt-1 ]]
-	        </tr>
-	        [[/foreach]]
-	        <tr>
-            	<td colspan="15"></td>
-            	<td><b>Total :</b></td>	
-            	<td><b> [[$result['paymentBookList'][0]['totalAmount'] ]] </b></td>
-            	<td colspan="6"></td>
-            </tr>
-	    </tbody>
-	</table>
-</div>
-[[/if]]
+[[foreach from=$result key=k1 item=v1]]
+	<div style="margin-top: 50px;">
+		<table style="margin-bottom: 10px;" class="paymentBookListTable">
+			[[assign var=totalAmount value= 0]]
+			[[foreach from=$v1 key=k2 item=v2]]
+					[[if $k2 eq 'paymentBookList']]
+				    <thead>
+				        <tr>
+				          <th>S.No</th>
+				          <th>HSN CODE</th>
+				          <th>CGST</th>
+				          <th>SGST</th>
+				          <th>QTY</th>
+				          <th>UOM</th>
+				          <th>MATERIAL NAME</th>
+				          <th>RATE</th>
+				          <th>PO NUMBER</th>
+				          <th>DC Number</th>
+				          <th>AVG. COST</th>
+				          <th>QUERY</th>
+				          <th>BILL NUMBER</th>
+				          <th>BILL DATE</th>
+				          <th style="background-color: yellow;">PAYABLE MONTH</th>
+				          <th>Bill Amount</th>
+				          <th>DEDC.</th>
+				          <th>CHEQUE NUMBER</th>
+				          <th>CHEQUE DATE</th>
+				          <th>CHEQUE AMOUNT</th>
+				          <th>BALANCE</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    	[[foreach from=$v2 key=k3 item=v3]]
+					    	[[foreach from=$v3 key=k4 item=v4]]
 
-[[if count($result['debitNote'])<=1 ]]
- <p style="margin-top: 50px;" align="center">No Data Found in Debit/Credit Note!</p>
-[[else]]
-<div style="margin-top: 50px;">
-        <table style="margin-bottom: 10px; width: 100%;font-size: 12px;" >
-            <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>TYPE</th>
-                  <th>DEBIT NOTE NO.</th>
-                  <th>DATE</th>
-                  <th>SUPPLIER CREDIT NOTE</th>
-                  <th>DATE</th>
-                  <th colspan="6">QUERY</th>
-                  <th>PAYABLE MONTH</th>
-                  <th>AMOUNT</th>
-                  <!-- <th>Dedc.</th>
-		          <th>Cheque Number</th>
-		          <th>Cheque Date</th>
-		          <th>Cheque Amount</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                [[foreach from=$result['debitNote'] key=k item=x]]
-                <tr>
-                        <td>[[$x.s_no]]</td>
-                        <td>
-                                [[if $x.type==='D' ]] Debit Note 
-                                [[elseif $x.type==='C']] Credit Note
-                                [[elseif $x.type==='B']] Balance Amount
-                                [[elseif $x.type==='T']] TDS
-                                [[/if]]
-                         </td>
-                        <td>[[$x.debit_note_no]]</td>
-                        <td>[[$x.debit_note_date|date_format:"%d-%m-%Y"]]</td>
-                        <td>[[$x.supplier_creditnote]]</td>
-                        <td>[[$x.supplier_creditnote_date|date_format:"%d-%m-%Y"]]</td>
-                        <td colspan="6">[[$x.query]]</td>
-                        <td>[[$x.payable_month]]</td>
-                        <td>[[$x.amount]]</td>
-                        <!-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> -->
-                </tr>
-                [[/foreach]]
-                <tr>
-                	<td colspan="12"></td>
-                	<td><b>Total :</b></td>	
-                	<td><b> [[$result['debitNote'][0]['totalAmount'] ]] </b></td>
-                	<!-- <td colspan="4"></td> -->
-                </tr>                
-            </tbody>
-        </table>
-</div>
-[[/if]]
+					    		[[assign var=totalAmount value=$totalAmount + ($v4.qty * $v4.price)]]
+
+						    	<tr>
+					    	  	  [[if $k4 eq 0]]
+						          	<td rowspan="[[$v3|@count]]">[[$v4.s_no]]</td>
+					          	  [[/if]]
+						          <td>[[$v4.material_hsn_code]]</td>
+						          <td>[[$v4.CGST]]</td>
+						          <td>[[$v4.SGST]]</td>
+						          <td>[[$v4.qty]]</td>
+						          <td>[[$v4.material_name]]</td>
+						          <td>[[$v4.material_uom]]</td>
+						          <td>[[$v4.price]]</td>
+						          <td>[[$v4.po_number]]</td>
+						          <td>[[$v4.dc_number]]</td>
+						          <td>AVG. COST</td>
+						          [[if $k4 eq 0]]
+						          	  <td rowspan="[[$v3|@count]]">[[$v4.query]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.bill_date]]</td>
+							          [[if $v4.payable_month neq '0000-00-00']]
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$v4.payable_month]]</td>
+							          [[else]]
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$lastDateOfMonth]]</td>
+							          [[/if]]
+							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.deduction]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_no]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.cheque_date]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_amount]]</td>
+							          <td rowspan="[[$v3|@count]]"></td>
+							      [[/if]]
+						        </tr>
+					        [[/foreach]]
+				        [[/foreach]]
+				        <tr>
+				        	<td colspan="14"></td>
+				        	<td><b>Total</b></td>
+				        	<td><b>[[$totalAmount]]</b></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        </tr>
+				    </tbody>
+				    [[/if]]
+				    [[if $k2 eq 'debitNoteList']]
+				    <thead>
+		                <tr>
+		                  <th>S.No</th>
+		                  <th colspan="3" style="text-align: center;">TYPE</th>
+		                  <th>DEBIT NOTE NO.</th>
+		                  <th>DATE</th>
+		                  <th>SUPPLIER CREDIT NOTE</th>
+		                  <th>DATE</th>
+		                  <th colspan="6" style="text-align: center;">QUERY</th>
+		                  <th style="background-color: yellow;">PAYABLE MONTH</th>
+		                  <th>AMOUNT</th>
+		                  <th></th>
+		                  <th></th>
+		                  <th></th>
+		                  <th></th>
+		                  <th></th>
+		            </thead>
+		            <tbody>
+		            	[[foreach from=$v2 key=k3 item=v3]]
+		                <tr>
+
+		                      [[if $v3.type==='D']]
+		                      [[assign var=totalAmount value=$totalAmount - $v3.amount]]
+		                      [[elseif $v3.type==='C']] 
+		                      [[assign var=totalAmount value=$totalAmount + $v3.amount]]
+                              [[elseif $v3.type==='B']]
+                              [[assign var=totalAmount value=$totalAmount + $v3.amount]]
+                              [[elseif $v3.type==='T']]
+                              [[assign var=totalAmount value=$totalAmount - $v3.amount]]
+                              [[/if]]
+
+		                      <td>[[$k3+1]]</td>
+		                      <td colspan="3" style="text-align: center;">
+		                      		[[if $v3.type==='D' ]] DEBIT NOTE 
+	                                [[elseif $v3.type==='C']] CREDIT NOTE
+	                                [[elseif $v3.type==='B']] BALANCE AMOUNT
+	                                [[elseif $v3.type==='T']] TDS
+	                                [[/if]]</td>
+		                      <td>[[$v3.debit_note_no]]</td>
+		                      <td class="datetd">[[$v3.debit_note_date]]</td>
+		                      <td>[[$v3.supplier_creditnote]]</td>
+		                      <td class="datetd">[[$v3.supplier_creditnote_date]]</td>
+		                      <td colspan="6">[[$v3.query]]</td>
+		                      <td class="datetd" style="background-color: yellow;">[[$v3.payable_month]]</td>
+		                      <td>[[$v3.amount]]</td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                </tr>
+		                [[/foreach]]
+		                <tr>
+				        	<td colspan="14"></td>
+				        	<td><b>Total</b></td>
+				        	<td><b>[[$totalAmount]]</b></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        </tr>
+		            </tbody>
+		            [[/if]]
+		        
+	        [[/foreach]]
+		</table>
+	</div>
+[[/foreach]]
+
 <style>
-table {
+.paymentBookListTable {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     border: 1px solid #000;
 }
 
-th, td {
+.paymentBookListTable th,.paymentBookListTable td{
     text-align: left;
-    padding: 5px 30px 5px 10px;
+    padding: 5px 20px 5px 10px;
     border: 1px solid #000;
+    font-size: 12px;
+}
+
+.paymentBookListTable .datetd{
+	padding: 0px;
+	padding-left: 5px;
 }
 </style>

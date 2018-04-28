@@ -1,6 +1,6 @@
 var dataTableVariable ;
 var month_year;
-app.controller('PaymentBook',function($scope,httpService,validateService,$state){
+app.controller('PaymentBook',function($scope,httpService,validateService,$state,commonService){
 
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
@@ -71,7 +71,6 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
     $scope.searchAction = function()
     {
         dataTableVariable.destroy();
-
         var service_details = {
             method_name : "searchPaymentBookAction",
             controller_name : "PaymentBook",
@@ -79,11 +78,18 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
         };
         $scope.materialOutStanding = [];
         $scope.showMaterialOutStandingTable = false;
+        commonService.showLoader();
         httpService.callWebService(service_details).then(function(data){
             if(data)
             { 
+                commonService.hideLoader();
                 $('#showPaymentBookSearch').html(data);
                 $('#showAddNoteSearch').css('display','block');
+            }
+            else
+            {
+                commonService.hideLoader();
+                validateService.displayMessage('error','No data found..',"");
             }
         });
     }
@@ -91,7 +97,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
     $scope.add_note = function(){
         $('#debit_credit_note_modal').modal();
     }
-    $scope.getPaymentList = function(data){
+
+    $scope.editPaymentListAngular = function(data){
 
         $scope.editPaymentList = {
                 s_no        : "",
@@ -105,16 +112,16 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
                 po_generated_request_id : ""
         };
         $scope.editPaymentList.s_no          = data.s_no;
-        $scope.editPaymentList.avg_cost     = data.avg_cost;
-        $scope.editPaymentList.query        = data.query;
+        $scope.editPaymentList.avg_cost      = data.avg_cost;
+        $scope.editPaymentList.query         = data.query;
         $scope.editPaymentList.deduction     = data.deduction;
-        $scope.editPaymentList.dc_number    = data.dc_number;
-        $scope.editPaymentList.cheque_date  = data.cheque_date;
-        $scope.editPaymentList.cheque_no    = data.cheque_no;
+        // $scope.editPaymentList.dc_number     = data.dc_number;
+        $scope.editPaymentList.cheque_date   = data.cheque_date;
+        $scope.editPaymentList.cheque_no     = data.cheque_no;
         $scope.editPaymentList.cheque_amount = data.cheque_amount;
-        $scope.editPaymentList.payable_month  = data.payable_month;
+        $scope.editPaymentList.payable_month = data.payable_month;
         $scope.editPaymentList.po_generated_request_id  = data.po_generated_request_id;
-        $('#material_modal').modal();
+        $('#material_modal').modal('show');
     } 
     
     $scope.editPaymentBook = function(){
@@ -130,6 +137,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
                 $('#modal-backdrop').css('display','none');
                 $scope.searchAction();
                 validateService.displayMessage('success','Update Successfully','');
+                $('#material_modal').modal('hide');
             }
             else
             {
@@ -177,6 +185,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
             if(validateService.blank($scope.addNoteData['query'],"Please Enter Query","query")) return false;
         }
         if(validateService.blank($scope.addNoteData['amount'],"Please Enter the amount","amount")) return false;
+        if(validateService.blank($scope.addNoteData['payable_month'],"Please Enter the payable_month","payable_month")) return false;
 
         var service_details = {
             method_name : "addNoteDetails",
@@ -188,6 +197,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
             { 
                 $('#modal-backdrop').css('display','none');
                 validateService.displayMessage('success','Note Added Successfully','');
+                $scope.searchAction();
                 $('#debit_credit_note_modal').modal('hide');
             }
             else
@@ -199,18 +209,27 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state)
 });
 
 function editPaymentList(data){
-      var scope = angular.element($('[ui-view=div1]')).scope();
-    scope.getPaymentList(data);
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editPaymentListAngular(data);
     scope.$apply();
 }
+
 function deleteDepositDetails(data){
-    var confim = confirm("Are you sure want to delete?");
-    if(confim)
-    {
-        var scope = angular.element($('[ui-view=div1]')).scope();
-        scope.deleteDepositDetails(data);
-        scope.$apply();
-    }
+    swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete)
+            {
+                var scope = angular.element($('[ui-view=div1]')).scope();
+                scope.deleteDepositDetails(data);
+                scope.$apply();
+            }
+        });
 }
 
 function downloadAsPdfPaymentBookDetails(){

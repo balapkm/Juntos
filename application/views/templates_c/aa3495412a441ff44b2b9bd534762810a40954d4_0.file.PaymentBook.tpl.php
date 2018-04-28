@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-15 12:45:25
+/* Smarty version 3.1.30, created on 2018-04-28 17:50:22
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ad2fc0dd25bd5_78195543',
+  'unifunc' => 'content_5ae467069e59c7_78351076',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1523776523,
+      1 => 1524917524,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ad2fc0dd25bd5_78195543 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae467069e59c7_78351076 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -142,7 +142,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		             <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
-		                  <input type="text" ng-model="addNoteData.query" class="form-control" id="query" placeholder="Enter query">
+		                  <input type="text" ng-model="addNoteData.query" class="form-control" id="query" placeholder="Enter query" ng-change="addNoteData.query = addNoteData.query.toUpperCase()">
 		                </div>
 		            </div>
 		             <div class="col-lg-4">
@@ -186,16 +186,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editPaymentList.s_no" class="form-control" id="s_no" placeholder="Enter Serial number" maxlength="10">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Average Cost</label>
 		                  <input type="text" ng-model="editPaymentList.avg_cost" class="form-control" id="sno" placeholder="Enter average cost" maxlength="8">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
-		                  <input type="text" ng-model="editPaymentList.query" class="form-control" id="query" placeholder="Enter query">
+		                  <input type="text" ng-model="editPaymentList.query" class="form-control" id="query" placeholder="Enter query" ng-change="editPaymentList.query = editPaymentList.query.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -204,22 +204,22 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editPaymentList.deduction" class="form-control" id="deduction" placeholder="Enter deduction amount">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
 		                  <input type="text" ng-model="editPaymentList.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Number</label>
-		                  <input type="text" ng-model="editPaymentList.cheque_no" class="form-control" id="cheque_no" placeholder="Enter cheque Number">
+		                  <input type="text" ng-model="editPaymentList.cheque_no" class="form-control" id="cheque_no" placeholder="Enter cheque Number" ng-change="editPaymentList.cheque_no = editPaymentList.cheque_no.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Date</label>
-		                  <input type="text" class="form-control" id="cheque_date" ng-model="editPaymentList.cheque_date" placeholder="Choose cheque Date">
+		                  <input type="text" class="form-control" id="cheque_date" ng-model="editPaymentList.cheque_date" placeholder="Choose cheque Date" >
 		                </div>
 		            </div>
 		            <div class="col-lg-4">

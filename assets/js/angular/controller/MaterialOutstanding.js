@@ -1,5 +1,5 @@
 var dataTableVariable ;
-app.controller('MaterialOutstanding',function($scope,httpService,validateService,$state){
+app.controller('MaterialOutstanding',function($scope,httpService,validateService,$state,commonService){
 
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
@@ -112,9 +112,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         };
         $scope.materialOutStanding = [];
         $scope.showMaterialOutStandingTable = false;
+        commonService.showLoader();
         httpService.callWebService(service_details).then(function(data){
             if(data)
             { 
+                commonService.hideLoader();
                 $scope.materialOutStanding = data;   
                 $scope.showMaterialOutStandingTable = true;
                 setTimeout(function(){$scope.exampleDataTable();},100);

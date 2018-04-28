@@ -107,7 +107,7 @@
 		             <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
-		                  <input type="text" ng-model="addNoteData.query" class="form-control" id="query" placeholder="Enter query">
+		                  <input type="text" ng-model="addNoteData.query" class="form-control" id="query" placeholder="Enter query" ng-change="addNoteData.query = addNoteData.query.toUpperCase()">
 		                </div>
 		            </div>
 		             <div class="col-lg-4">
@@ -151,16 +151,16 @@
 		                  <input type="text" ng-model="editPaymentList.s_no" class="form-control" id="s_no" placeholder="Enter Serial number" maxlength="10">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Average Cost</label>
 		                  <input type="text" ng-model="editPaymentList.avg_cost" class="form-control" id="sno" placeholder="Enter average cost" maxlength="8">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
-		                  <input type="text" ng-model="editPaymentList.query" class="form-control" id="query" placeholder="Enter query">
+		                  <input type="text" ng-model="editPaymentList.query" class="form-control" id="query" placeholder="Enter query" ng-change="editPaymentList.query = editPaymentList.query.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
@@ -169,22 +169,22 @@
 		                  <input type="text" ng-model="editPaymentList.deduction" class="form-control" id="deduction" placeholder="Enter deduction amount">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
 		                  <input type="text" ng-model="editPaymentList.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Number</label>
-		                  <input type="text" ng-model="editPaymentList.cheque_no" class="form-control" id="cheque_no" placeholder="Enter cheque Number">
+		                  <input type="text" ng-model="editPaymentList.cheque_no" class="form-control" id="cheque_no" placeholder="Enter cheque Number" ng-change="editPaymentList.cheque_no = editPaymentList.cheque_no.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Date</label>
-		                  <input type="text" class="form-control" id="cheque_date" ng-model="editPaymentList.cheque_date" placeholder="Choose cheque Date">
+		                  <input type="text" class="form-control" id="cheque_date" ng-model="editPaymentList.cheque_date" placeholder="Choose cheque Date" >
 		                </div>
 		            </div>
 		            <div class="col-lg-4">

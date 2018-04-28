@@ -31,50 +31,42 @@ class PaymentBook extends CI_Controller
 
 	public function searchPaymentBookAction()
 	{
-		$data = $this->PaymentBookQuery->getPaymentBookData($this->data);
-		$billArr = array(); $totalBillAmount = 0;
-		foreach ($data as $key => $value) {
-			if(!in_array($data[$key]['bill_number'],$billArr))
-				$totalBillAmount += $data[$key]['bill_amount'];
-			$billArr[] = $data[$key]['bill_number'];
+		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
+		$result = array();
+		if(count($data) == 0)
+		{
+			return false;
 		}
-		foreach ($data as $key => $value) {
-			$data[$key]['billCnt'] = array_count_values($billArr);
-			$data[$key]['uniqueBillNo'] = array_unique(array_values($billArr));
+		
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
-		$outputArray['result']['paymentBookList'] = $data;
-		$outputArray['result']['paymentBookList'][0]['totalAmount'] = $totalBillAmount;
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
-		//print_r($data); exit;
-		$totalAmount = 0;
-		foreach ($data as $key => $value) {
-			if($value['type']=='D' || $value['type']=='T')
-				$totalAmount += $value['amount'];
-			else
-				$totalAmount -= $value['amount'];
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['debitNoteList'][] = $value;
 		}
-
-		$outputArray['result']['debitNote'] = $data;
-		$outputArray['result']['debitNote'][0]['totalAmount'] = $totalAmount + $totalBillAmount;
+		$finalResponse['result']          = $result;
+		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
 		$template_name = 'paymentBookList.tpl';
-		
-		return $this->mysmarty->view($template_name,$outputArray,TRUE);
-		//return $data;
+		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
+
 	public function updatePaymentBookDetails()
 	{
-		//print_r($this->data); 
 		return $this->PaymentBookQuery->updatePaymentListData($this->data);
 	}
+
 	public function deleteDepositDetails()
 	{
 		return $this->PaymentBookQuery->deleteDebitNoteData($this->data);	
 	}
+
 	public function debitNoteList()
 	{
 		$data = $this->PaymentBookQuery->getDebitNoteListData();
-		//print_r($data); exit;
 		$totalAmount = 0;
 		foreach ($data as $key => $value) {
 			if($value['type']=='D' || $value['type']=='T')
@@ -83,15 +75,14 @@ class PaymentBook extends CI_Controller
 				$totalAmount -= $value['amount'];
 
 		}
-
 		$template_name = 'debitNoteList.tpl';
 		$outputArray['result'] = $data;
 		$outputArray['result'][0]['totalAmount'] = $totalAmount;
 		return $this->mysmarty->view($template_name,$outputArray,TRUE);
 	}
+
 	public function addNoteDetails()
 	{
-		//supplier_id
 		$addData = array(
 				"supplier_id" => $this->data['supplier_id'],
 				"debit_note_no" =>  $this->data['debitnote_no'],
@@ -99,6 +90,7 @@ class PaymentBook extends CI_Controller
 				"type" => $this->data['type'],
 				"supplier_creditnote"   => $this->data['supplier_creditnote_no'],
 				"supplier_creditnote_date"     => $this->data['creditnote_date'],
+				"query"     => $this->data['query'],
 				"payable_month"     => $this->data['payable_month'],
 				"amount"     => $this->data['amount']
 			);
@@ -108,37 +100,27 @@ class PaymentBook extends CI_Controller
 	public function downloadAsPdfPaymentBookDetails()
 	{
 		$this->data = $_GET;
-		$data = $this->PaymentBookQuery->getPaymentBookData($this->data);
-		$billArr = array(); $totalBillAmount = 0;
-		foreach ($data as $key => $value) {
-			if(!in_array($data[$key]['bill_number'],$billArr))
-				$totalBillAmount += $data[$key]['bill_amount'];
-			$billArr[] = $data[$key]['bill_number'];
+		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
+		$result = array();
+
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
-		foreach ($data as $key => $value) {
-			$data[$key]['billCnt'] = array_count_values($billArr);
-			$data[$key]['uniqueBillNo'] = array_unique(array_values($billArr));
-		}
-		$outputArray['result']['paymentBookList'] = $data;
-		$outputArray['result']['paymentBookList'][0]['totalAmount'] = $totalBillAmount;
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
-		$totalAmount = 0;
-		foreach ($data as $key => $value) {
-			if($value['type']=='D' || $value['type']=='T')
-				$totalAmount += $value['amount'];
-			else
-				$totalAmount -= $value['amount'];
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['debitNoteList'][] = $value;
 		}
-		$outputArray['result']['debitNote'] = $data;
-		$outputArray['result']['debitNote'][0]['totalAmount'] = $totalAmount + $totalBillAmount;
+		$finalResponse['result']          = $result;
+		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
 		$template_name = 'paymentBookListPrint.tpl';
-
 		$folder_name = realpath(APPPATH."../assets/po_html");
 		
 		$filename='paymentBookListPrint';
 		
-		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$outputArray,TRUE));
+		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$finalResponse,TRUE));
 
 		chmod($folder_name."/".$filename.".html", 0777);
 	
