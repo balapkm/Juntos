@@ -241,7 +241,7 @@ class PoGenerateQuery extends CI_Model
 
         if($data['outstanding_type'] == 'M')
         {
-            $sql .= " AND (prd.qty - prd.received) != 0";
+            $sql .= " AND (prd.qty - prd.received) > 0";
         }
 
         if($data['outstanding_type'] == 'B')
@@ -269,7 +269,7 @@ class PoGenerateQuery extends CI_Model
         {
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND md.material_id = prd.material_id";
-            $sql .= " AND md.material_name = '".$data['material_name']."'";
+            $sql .= " AND mm.material_name = '".$data['material_name']."'";
         }
 
         if($data['filter_type_wise'] == 'Supplier')

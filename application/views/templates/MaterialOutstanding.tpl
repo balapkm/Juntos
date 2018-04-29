@@ -142,6 +142,7 @@
 			                          <th>Received</th>
 			                          <th>Received Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Excess Qty</th>
 			                          <th>Delivery Date</th>
 			                          <th>Delay Day</th>
 			                          <!-- <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th> -->
@@ -177,6 +178,7 @@
 			                        	<td ng-if="x.received_date !== '0000-00-00'">{{x.received_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td ng-if="x.received_date === '0000-00-00'"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
+			                        	<td ng-if="x.outstanding_type === 'B'">{{x.received - x.qty}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
 			                        	<td>{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.delay_day}}</td>
@@ -206,9 +208,9 @@
 		        <h4 class="modal-title">Edit Material Bill Out Standing</h4>
 		    </div>
 		    <div class="modal-body">
-		    	<div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
+		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
 		    		<h5 class="pull-right">Total Amount : <b>{{totalAmount}}</b></h5>
-		    	</div>
+		    	</div> -->
 		        <div class="row">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
@@ -225,7 +227,7 @@
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">DC Number</label>
-		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
+		                  <input type="text" ng-model="editMaterialPOData.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number" ng-change="editMaterialPOData.dc_number = editMaterialPOData.dc_number.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">

@@ -258,8 +258,16 @@
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <input type="text" class="form-control" id="supplier_name" placeholder="Enter Supplier Name" ng-model="supplier_form_data.supplier_name">
+		                  <!-- <input type="text" class="form-control" id="supplier_name" placeholder="Enter Supplier Name" ng-model="supplier_form_data.supplier_name"> -->
+
+		                  <select id="supplier_name" ng-model="supplier_form_data.supplier_name" class="form-control" ng-change="supplier_form_data.supplier_name = supplier_form_data.supplier_name.toUpperCase()">
+		                  	   [[foreach from=$supplier_entry key=k item=v]]
+			                  		<option value="[[$v.supplier_name]]">[[$v.supplier_name]]</option>
+			                  	[[/foreach]]
+		                  </select>
+
 		                </div>
+
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group" ng-init="supplier_form_data.supplier_code = 'SUP[[$max_supplier_id]]'">

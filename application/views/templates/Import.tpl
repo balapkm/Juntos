@@ -110,7 +110,9 @@
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
 		         	<td align="center" width="8%" class="own-td-2">
 		         			[[$v.price|number_format:2]]<br/>
+                            [[if $v.price_status neq 'FINAL']]
 		         			[ [[$v.price_status]] ]
+                            [[/if]]
 		         	</td>
 
 		         	[[if $v.discount_price_status eq 'AMOUNT']]

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-24 23:37:56
+/* Smarty version 3.1.30, created on 2018-04-29 23:07:02
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5adf727c1bccd2_49210040',
+  'unifunc' => 'content_5ae602be780395_37698687',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1524593158,
+      1 => 1525023416,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5adf727c1bccd2_49210040 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae602be780395_37698687 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -359,8 +359,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <input type="text" class="form-control" id="supplier_name" placeholder="Enter Supplier Name" ng-model="supplier_form_data.supplier_name">
+		                  <!-- <input type="text" class="form-control" id="supplier_name" placeholder="Enter Supplier Name" ng-model="supplier_form_data.supplier_name"> -->
+
+		                  <select id="supplier_name" ng-model="supplier_form_data.supplier_name" class="form-control" ng-change="supplier_form_data.supplier_name = supplier_form_data.supplier_name.toUpperCase()">
+		                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+			                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                  </select>
+
 		                </div>
+
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group" ng-init="supplier_form_data.supplier_code = 'SUP<?php echo $_smarty_tpl->tpl_vars['max_supplier_id']->value;?>

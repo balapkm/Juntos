@@ -126,9 +126,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
-        console.log(x);
-        console.log(typeof x.price);
-        console.log(typeof x.qty);
+        
         $scope.totalAmount = (x.price * x.qty);
         // alert($scope.totalAmount);
         for(var i in x)
@@ -142,14 +140,14 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $scope.editMaterialPOData['received_data'] = x.received;
             $scope.editMaterialPOData['received'] = 0;
             $scope.editMaterialPOData['received_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+            $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+            $scope.editMaterialPOData['dc_number'] = "";
         }
         else
         {
             $scope.editMaterialPOData['bill_amount'] = 0;
             $scope.editMaterialPOData['bill_number'] = "";
             $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-            $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-            $scope.editMaterialPOData['dc_number'] = "";
         }
 
         setTimeout(function(){
@@ -198,15 +196,16 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         var balance = parseInt($scope.editMaterialPOData['qty'] - $scope.editMaterialPOData['received_data']);
         if((balance < parseInt($scope.editMaterialPOData['received'])) && $scope.editMaterialPOData['outstanding_type'] === 'M')
         {
-           validateService.displayMessage('error',"Invalid Received Data","Validation Error");
-           return false;
+           $scope.editMaterialPOData['excess_qty'] = $scope.editMaterialPOData['received'] - $scope.editMaterialPOData['qty'];
+           // validateService.displayMessage('error',"Invalid Received Data","Validation Error");
+           // return false;
         }
         $scope.editMaterialPOData = validateService.changeAllUpperCase($scope.editMaterialPOData);
         if($scope.generatePoData['outstanding_type'] === 'B')
         {
             $scope.editMaterialPOData['checkEditBoxBillOutStandingArray'] = $scope.checkEditBoxBillOutStandingArray;
         }
-        console.log($scope.editMaterialPOData['checkEditBoxBillOutStandingArray']);
+        // console.log($scope.editMaterialPOData['checkEditBoxBillOutStandingArray']);
         var service_details = {
             method_name : "updateMaterialOutstandingAction",
             controller_name : "MaterialOutstanding",

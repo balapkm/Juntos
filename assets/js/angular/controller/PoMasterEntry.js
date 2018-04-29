@@ -11,7 +11,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	$('body').removeClass('modal-open');
 	setTimeout(function(){
 		$('body').css('padding-right','0px');
-		$('#material_name_select2').editableSelect();
+		$('#material_name_select2,#supplier_name').editableSelect();
 	},1000);
 	$('.select2').select2();
 
@@ -339,7 +339,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 		setTimeout(function(){
             $('#material_uom').select2().val(data.material_uom).trigger("change");
-            $('#material_name_select2').select2().val(data.material_master_name+"|"+data.material_master_id).trigger("change");
+            $('#material_name_select2').val(data.material_master_name+"|"+data.material_master_id).trigger("change");
             $('#supplier_name_select2').select2().val(data.supplier_id+"|"+data.state_code+"|"+data.supplier_status).trigger("change");
 	    },100);
 		$('#material_modal').modal('show');
@@ -422,8 +422,8 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 
 	$scope.add_supplier_action = function(){
-
-		if(validateService.blank($scope.supplier_form_data['supplier_name'],"Please Choose Supplier Name","supplier_name")) return false;
+		$scope.supplier_form_data['supplier_name'] = $('#supplier_name').val();
+		if(validateService.blank($scope.supplier_form_data['supplier_name'],"Please Enter Supplier Name","supplier_name")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
     	if(validateService.blank($scope.supplier_form_data['origin'],"Please enter Origin","origin")) return false;
