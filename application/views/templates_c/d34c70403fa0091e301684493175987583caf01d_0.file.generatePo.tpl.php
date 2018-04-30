@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-25 23:19:15
+/* Smarty version 3.1.30, created on 2018-04-30 10:36:55
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae0bf9c000cf1_06378935',
+  'unifunc' => 'content_5ae6a46f5d65c1_09136496',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1524677030,
+      1 => 1525064792,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae0bf9c000cf1_06378935 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae6a46f5d65c1_09136496 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -299,13 +299,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-3" ng-if="showOtherChargeName">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Other Charge Name</label>
-		                  <input type="text" class="form-control" id="otherChargeName" placeholder="Enter Other Charge Name" ng-model="poOtherCharge.other_charge_name">
+		                  <input type="text" class="form-control" id="otherChargeName" placeholder="Enter Other Charge Name" ng-model="poOtherCharge.other_charge_name" ng-change="poOtherCharge.other_charge_name = poOtherCharge.other_charge_name.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">HSN Code</label>
-		                  <input type="text" class="form-control" id="chargeHSNCode" placeholder="Enter HSN Code" ng-model="poOtherCharge.hsn_code">
+		                  <input type="text" class="form-control" id="chargeHSNCode" placeholder="Enter HSN Code" ng-model="poOtherCharge.hsn_code" ng-change="poOtherCharge.hsn_code = poOtherCharge.hsn_code.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">

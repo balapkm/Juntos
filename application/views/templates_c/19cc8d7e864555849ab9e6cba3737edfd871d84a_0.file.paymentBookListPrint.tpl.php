@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-28 18:41:59
+/* Smarty version 3.1.30, created on 2018-04-30 09:16:30
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae4731fb21581_48929578',
+  'unifunc' => 'content_5ae691964b67c0_13225408',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19cc8d7e864555849ab9e6cba3737edfd871d84a' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl',
-      1 => 1524921116,
+      1 => 1525059987,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae4731fb21581_48929578 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae691964b67c0_13225408 (Smarty_Internal_Template $_smarty_tpl) {
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
@@ -72,7 +72,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars['v4']->value) {
 ?>
 
-					    		<?php $_smarty_tpl->_assignInScope('totalAmount', $_smarty_tpl->tpl_vars['totalAmount']->value+($_smarty_tpl->tpl_vars['v4']->value['qty']*$_smarty_tpl->tpl_vars['v4']->value['price']));
+					    		<?php $_smarty_tpl->_assignInScope('totalAmount', $_smarty_tpl->tpl_vars['totalAmount']->value+($_smarty_tpl->tpl_vars['v4']->value['bill_amount']));
 ?>
 
 						    	<tr>
@@ -120,7 +120,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 </td>
 							          <?php }?>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
-"><?php echo $_smarty_tpl->tpl_vars['v4']->value['bill_number'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v4']->value['bill_amount'];?>
 </td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "><?php echo $_smarty_tpl->tpl_vars['v4']->value['deduction'];?>

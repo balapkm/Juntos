@@ -238,13 +238,13 @@
 		            <div class="col-lg-3" ng-if="showOtherChargeName">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Other Charge Name</label>
-		                  <input type="text" class="form-control" id="otherChargeName" placeholder="Enter Other Charge Name" ng-model="poOtherCharge.other_charge_name">
+		                  <input type="text" class="form-control" id="otherChargeName" placeholder="Enter Other Charge Name" ng-model="poOtherCharge.other_charge_name" ng-change="poOtherCharge.other_charge_name = poOtherCharge.other_charge_name.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">HSN Code</label>
-		                  <input type="text" class="form-control" id="chargeHSNCode" placeholder="Enter HSN Code" ng-model="poOtherCharge.hsn_code">
+		                  <input type="text" class="form-control" id="chargeHSNCode" placeholder="Enter HSN Code" ng-model="poOtherCharge.hsn_code" ng-change="poOtherCharge.hsn_code = poOtherCharge.hsn_code.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">

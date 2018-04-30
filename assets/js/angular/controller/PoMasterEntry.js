@@ -321,6 +321,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			title : "Edit Supplier Details",
 			button : "Update"
 		}
+		$('#supplier_name').val(data.supplier_name);
 		$scope.supplier_form_data = data;
 		$('#supplier_modal').modal('show');
 	}
@@ -339,7 +340,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 		setTimeout(function(){
             $('#material_uom').select2().val(data.material_uom).trigger("change");
-            $('#material_name_select2').val(data.material_master_name+"|"+data.material_master_id).trigger("change");
+            $('#material_name_select2').val(data.material_master_name);
             $('#supplier_name_select2').select2().val(data.supplier_id+"|"+data.state_code+"|"+data.supplier_status).trigger("change");
 	    },100);
 		$('#material_modal').modal('show');
@@ -694,7 +695,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 	
 	$scope.update_material_action = function(){
-
+		$scope.material_form_data['material_name'] = $('#material_name_select2').val();
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
     	

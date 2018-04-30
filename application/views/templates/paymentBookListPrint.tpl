@@ -1,5 +1,6 @@
 [[foreach from=$result key=k1 item=v1]]
 	<div style="margin-top: 50px;">
+		<h3><b>Payable Date : [[k1|date_format:"%d-%m-%Y"]]</b></h3>
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
 			[[foreach from=$v1 key=k2 item=v2]]
@@ -33,7 +34,7 @@
 				    	[[foreach from=$v2 key=k3 item=v3]]
 					    	[[foreach from=$v3 key=k4 item=v4]]
 
-					    		[[assign var=totalAmount value=$totalAmount + ($v4.qty * $v4.price)]]
+					    		[[assign var=totalAmount value=$totalAmount + ($v4.bill_amount)]]
 
 						    	<tr>
 					    	  	  [[if $k4 eq 0]]
@@ -52,16 +53,16 @@
 						          [[if $k4 eq 0]]
 						          	  <td rowspan="[[$v3|@count]]">[[$v4.query]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
-							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.bill_date]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.bill_date|date_format:"%d-%m-%Y"]]</td>
 							          [[if $v4.payable_month neq '0000-00-00']]
-							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$v4.payable_month]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$v4.payable_month|date_format:"%d-%m-%Y"]]</td>
 							          [[else]]
-							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$lastDateOfMonth]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$lastDateOfMonth|date_format:"%d-%m-%Y"]]</td>
 							          [[/if]]
-							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.bill_amount]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.deduction]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_no]]</td>
-							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.cheque_date]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_amount]]</td>
 							          <td rowspan="[[$v3|@count]]"></td>
 							      [[/if]]
@@ -120,11 +121,11 @@
 	                                [[elseif $v3.type==='T']] TDS
 	                                [[/if]]</td>
 		                      <td>[[$v3.debit_note_no]]</td>
-		                      <td class="datetd">[[$v3.debit_note_date]]</td>
+		                      <td class="datetd">[[$v3.debit_note_date|date_format:"%d-%m-%Y"]]</td>
 		                      <td>[[$v3.supplier_creditnote]]</td>
-		                      <td class="datetd">[[$v3.supplier_creditnote_date]]</td>
+		                      <td class="datetd">[[$v3.supplier_creditnote_date|date_format:"%d-%m-%Y"]]</td>
 		                      <td colspan="6">[[$v3.query]]</td>
-		                      <td class="datetd" style="background-color: yellow;">[[$v3.payable_month]]</td>
+		                      <td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
 		                      <td>[[$v3.amount]]</td>
 		                      <td></td>
 		                      <td></td>

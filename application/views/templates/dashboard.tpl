@@ -267,7 +267,7 @@
 <script src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]?version=14"></script>
+<script src="[[$v]]?version=17"></script>
 [[/foreach]]
 <script>
   $(document).ready(function () {

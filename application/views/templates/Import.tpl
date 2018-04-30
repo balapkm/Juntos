@@ -121,7 +121,7 @@
 		         		[[assign var=DISCOUNTTotalValue value=(($v.discount/100) * $v.price ) * $v.qty]]
 		         	[[/if]]
 
-                    [[assign var=OTHERPercGrandTotal value=(($v.price* $v.qty) - $DISCOUNTTotalValue)]]
+                    [[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
 
 		         	<td align="center" width="10%" class="own-td-2">
 		         		[[$v.discount|number_format:2]][[if $v.discount_price_status neq 'AMOUNT']] % [[/if]]

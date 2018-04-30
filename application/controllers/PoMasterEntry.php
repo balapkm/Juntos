@@ -126,16 +126,20 @@ class PoMasterEntry extends CI_Controller
 		$material_name = $this->data['material_name'];
 		$this->data['supplier_id'] = explode("|",$this->data['supplier_id'])[0];
 		$this->data['material_name'] = explode("|",$material_name)[0];
-		$this->data['material_master_id'] = explode("|",$material_name)[1];
-		if($this->data['material_name'] == 'ADD_NEW')
+		$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
+		$count      = count($selectData);
+		if($count == 0)
 		{
-			$this->data['material_name'] = $this->data['add_material_name'];
-			$count = count($this->PoMasterEntryQuery->select_material_master($this->data));
-			if($count != 0)return false;
 			$data['material_name'] = $this->data['material_name'];
 			$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
-			unset($this->data['add_material_name']);
+			$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
+			$this->data['material_master_id'] = $selectData[0]['material_id'];
 		}
+		else
+		{
+			$this->data['material_master_id'] = $selectData[0]['material_id'];
+		}
+		unset($this->data['add_material_name']);
 		unset($this->data['state_code']);
 		unset($this->data['supplier_name']);
 		unset($this->data['supplier_status']);

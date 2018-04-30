@@ -15,8 +15,9 @@ class PoGenerateQuery extends CI_Model
                 FROM 
                     po_generated_request_details 
                 WHERE 
-                    DATE(po_date) BETWEEN ('".date('Y')."-04-01' AND '".(date('Y')+1)."-03-31') AND
+                    DATE(po_date) BETWEEN '".date('Y')."-04-01' AND '".(date('Y')+1)."-03-31' AND
                     unit = '".$unit."' AND 
+                    outstanding_type = 'M' AND 
                     type = '".$type."'";
         $data  = $this->db->query($sql)->result_array();
         if(empty($data[0]['po_number']))

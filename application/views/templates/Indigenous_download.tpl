@@ -98,7 +98,7 @@ td
 		         		[[/if]]
 		         	</td>
 
-		         	[[assign var=OTHERPercGrandTotal value=(($v.price* $v.qty) - $DISCOUNTTotalValue)]]
+		         	[[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
 
 		         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
