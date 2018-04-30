@@ -61,11 +61,89 @@ class PaymentBook extends CI_Controller
 		{
 			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
 		}
+
+		foreach ($result as $key1 => $value1) 
+		{
+			foreach ($value1 as $key2 => $value2) 
+			{
+				if($key2 == 'paymentBookList')
+				{
+					foreach ($value2 as $key3 => $value3)
+					{
+						$full_qty = array_sum(array_column($value3,'received'));
+						foreach ($value3 as $key4 => $value4)
+						{
+							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty);
+						}
+					} 
+				}
+			}
+		}
+
 		$finalResponse['result']          = $result;
 		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
-		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
+	}
+
+	public function avgCostCalc($data,$full_qty)
+	{
+		$totalAmount = 0;
+		$totalAmount1 = 0;
+		$discountTotalAmt = 0;
+		$CGSTTotalAmt = 0;
+		$SGSTTotalAmt = 0;
+		$IGSTTotalAmt = 0;
+
+		if($data['discount_price_status'] == 'AMOUNT')
+		{
+			$discountTotalAmt = $data['discount'];
+		}
+		else
+		{
+			$discountTotalAmt = (($data['discount']/100) * $data['price']) * $data['qty'];
+		}
+
+		if($data['state_code'] == 33)
+		{
+			$CGSTTotalAmt = ($data['CGST']/100) * (($data['price']*$data['qty']) - $discountTotalAmt);
+			$SGSTTotalAmt = ($data['SGST']/100) * (($data['price']*$data['qty']) - $discountTotalAmt);
+		}
+		else
+		{
+			$IGSTTotalAmt = ($data['IGST']/100) * (($data['price']*$data['qty']) - $discountTotalAmt);
+		}
+
+		$totalAmount = ($data['price'] * $data['qty']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
+
+		/**received**/
+
+		if($data['discount_price_status'] == 'AMOUNT')
+		{
+			$discountTotalAmt = $data['discount'];
+		}
+		else
+		{
+			$discountTotalAmt = (($data['discount']/100) * $data['price']) * $data['received'];
+		}
+
+		if($data['state_code'] == 33)
+		{
+			$CGSTTotalAmt = ($data['CGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+			$SGSTTotalAmt = ($data['SGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+		}
+		else
+		{
+			$IGSTTotalAmt = ($data['IGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+		}
+
+		$totalAmount1 = ($data['price'] * $data['received']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
+		//end
+		$result1 = $totalAmount/$data['qty'];
+		$result2 = $data['bill_amount'] - $totalAmount1;
+		$result3 = $result2/$full_qty;
+		$final   = $result1+$result3;
+		return $final;
 	}
 
 	public function updatePaymentBookDetails()
@@ -168,6 +246,24 @@ class PaymentBook extends CI_Controller
 		foreach ($data as $key => $value) 
 		{
 			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
+		}
+
+		foreach ($result as $key1 => $value1) 
+		{
+			foreach ($value1 as $key2 => $value2) 
+			{
+				if($key2 == 'paymentBookList')
+				{
+					foreach ($value2 as $key3 => $value3)
+					{
+						$full_qty = array_sum(array_column($value3,'received'));
+						foreach ($value3 as $key4 => $value4)
+						{
+							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty);
+						}
+					} 
+				}
+			}
 		}
 
 		$finalResponse['result']          = $result;

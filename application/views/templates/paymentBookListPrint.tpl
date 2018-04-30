@@ -46,13 +46,13 @@
 						          <td>[[$v4.material_hsn_code]]</td>
 						          <td>[[$v4.CGST]]</td>
 						          <td>[[$v4.SGST]]</td>
-						          <td>[[$v4.qty]]</td>
+						          <td>[[$v4.received]]</td>
 						          <td>[[$v4.material_name]]</td>
 						          <td>[[$v4.material_uom]]</td>
 						          <td>[[$v4.price]]</td>
 						          <td>[[$v4.po_number]]</td>
 						          <td>[[$v4.dc_number]]</td>
-						          <td>AVG. COST</td>
+						          <td>[[$v4.avg_cost|number_format:2]]</td>
 						          [[if $k4 eq 0]]
 						          	  <td rowspan="[[$v3|@count]]">[[$v4.query]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
