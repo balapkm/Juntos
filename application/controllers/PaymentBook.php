@@ -142,6 +142,11 @@ class PaymentBook extends CI_Controller
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 
+		if(count($data) == 0)
+		{
+			echo "<script>alert('No Data found');window.close();</script>";exit;
+		}
+
 		foreach ($data as $key => $value) {
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
