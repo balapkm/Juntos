@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-28 17:50:22
+/* Smarty version 3.1.30, created on 2018-04-30 12:50:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae467069e59c7_78351076',
+  'unifunc' => 'content_5ae6c3a0ce3f23_22261645',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1524917524,
+      1 => 1525072641,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae467069e59c7_78351076 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae6c3a0ce3f23_22261645 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -186,12 +186,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editPaymentList.s_no" class="form-control" id="s_no" placeholder="Enter Serial number" maxlength="10">
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-4">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Average Cost</label>
-		                  <input type="text" ng-model="editPaymentList.avg_cost" class="form-control" id="sno" placeholder="Enter average cost" maxlength="8">
-		                </div>
-		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
@@ -200,16 +194,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payable Month</label>
+		                  <input type="text" class="form-control" id="list_payable_month" ng-model="editPaymentList.payable_month" placeholder="Choose payable month">
+		                </div>
+		            </div>
+		           <!--<div class="col-lg-4">
+		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Deduction</label>
 		                  <input type="text" ng-model="editPaymentList.deduction" class="form-control" id="deduction" placeholder="Enter deduction amount">
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-4">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">DC Number</label>
-		                  <input type="text" ng-model="editPaymentList.dc_number" class="form-control" id="dc_number" placeholder="Enter DC Number">
-		                </div>
-		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Number</label>
@@ -227,20 +221,58 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <label for="exampleInputEmail1">Cheque Amount</label>
 		                  <input type="text" ng-model="editPaymentList.cheque_amount" class="form-control" id="cheque_amount" placeholder="Enter amount">
 		                </div>
-		            </div>
-		            
-		             <div class="col-lg-4">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Payable Month</label>
-		                  <input type="text" class="form-control" id="list_payable_month" ng-model="editPaymentList.payable_month" placeholder="Choose payable month">
-		                </div>
-		            </div>
-
+		            </div> -->
 		        </div>
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="editPaymentBook()">Update</button>
+	        </div>
+	    </div>
+	    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="cheque_number_modal">
+	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit Cheque Number Details</h4>
+		    </div>
+		    <div class="modal-body">
+		        <div class="row">
+		           <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Deduction</label>
+		                  <input type="text" ng-model="chequeNumberDetails.deduction" class="form-control" id="deduction" placeholder="Enter deduction amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque Number</label>
+		                  <input type="text" ng-model="chequeNumberDetails.cheque_no" class="form-control" id="cheque_no" placeholder="Enter cheque Number" ng-change="editPaymentList.cheque_no = editPaymentList.cheque_no.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque Date</label>
+		                  <input type="text" class="form-control" id="cheque_date" ng-model="chequeNumberDetails.cheque_date" placeholder="Choose cheque Date" >
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque Amount</label>
+		                  <input type="text" ng-model="chequeNumberDetails.cheque_amount" class="form-control" id="cheque_amount" placeholder="Enter amount">
+		                </div>
+		            </div> 
+		        </div>
+		    </div>
+	        <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="editChequeNumberDetailsAction()">Update</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->

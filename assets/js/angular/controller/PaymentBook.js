@@ -89,6 +89,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             else
             {
                 commonService.hideLoader();
+                $('#showPaymentBookSearch').html("");
                 validateService.displayMessage('error','No data found..',"");
             }
         });
@@ -108,19 +109,17 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 cheque_date : "",
                 cheque_no   : "",
                 cheque_amount : "",
-                payable_month : "",
-                po_generated_request_id : ""
+                payable_month : ""
         };
         $scope.editPaymentList.s_no          = data.s_no;
         $scope.editPaymentList.avg_cost      = data.avg_cost;
         $scope.editPaymentList.query         = data.query;
         $scope.editPaymentList.deduction     = data.deduction;
-        // $scope.editPaymentList.dc_number     = data.dc_number;
         $scope.editPaymentList.cheque_date   = data.cheque_date;
         $scope.editPaymentList.cheque_no     = data.cheque_no;
         $scope.editPaymentList.cheque_amount = data.cheque_amount;
         $scope.editPaymentList.payable_month = data.payable_month;
-        $scope.editPaymentList.po_generated_request_id  = data.po_generated_request_id;
+        $scope.editPaymentList.bill_number   = data.bill_number;
         $('#material_modal').modal('show');
     } 
     
@@ -146,7 +145,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         });
     }
 
-    $scope.deleteDepositDetails = function(data){
+    $scope.deleteDepositDetailsFunction = function(data){
 
         $scope.deleteDepositDetails ={};
         
@@ -157,15 +156,28 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 controller_name : "PaymentBook",
                 data : JSON.stringify($scope.deleteDepositDetails)
             };
-            httpService.callWebService(service_details).then(function(data){
-                if(data)
-                { 
-                    $scope.searchAction();
-                    validateService.displayMessage('success','Data Removed Successfully','');
-                }
-                else
+
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this imaginary file!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+                if(willDelete)
                 {
-                    validateService.displayMessage('error','Delete Error',"");
+                    httpService.callWebService(service_details).then(function(data){
+                        if(data)
+                        { 
+                            $scope.searchAction();
+                            validateService.displayMessage('success','Data Removed Successfully','');
+                        }
+                        else
+                        {
+                            validateService.displayMessage('error','Delete Error',"");
+                        }
+                    });
                 }
             });
     }
@@ -206,6 +218,54 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             }
         });
     }
+
+    $scope.chequeNumberDetails = {};
+    $scope.editChequeNumberDetails = function(data)
+    {
+        $scope.chequeNumberDetails = {};
+        $scope.chequeNumberDetails = data;
+
+        var service_details = {
+            method_name : "getChequeNumberDetailsAction",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.chequeNumberDetails)
+        };
+        commonService.showLoader();
+        httpService.callWebService(service_details).then(function(data){
+            commonService.hideLoader();
+            if(data)
+            {
+                $scope.chequeNumberDetails['deduction'] = data.deduction;
+                $scope.chequeNumberDetails['cheque_no'] = data.cheque_no;
+                $scope.chequeNumberDetails['cheque_date'] = data.cheque_date;
+                $scope.chequeNumberDetails['cheque_amount'] = data.cheque_amount;
+            }
+        });
+
+        $('#cheque_number_modal').modal('show');
+    }
+
+    $scope.editChequeNumberDetailsAction = function()
+    {
+        var service_details = {
+            method_name : "editChequeNumberDetailsAction",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.chequeNumberDetails)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Cheque Number Updated..','');
+                $scope.searchAction();
+                $('#cheque_number_modal').modal('hide');
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
 });
 
 function editPaymentList(data){
@@ -215,25 +275,19 @@ function editPaymentList(data){
 }
 
 function deleteDepositDetails(data){
-    swal({
-          title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this imaginary file!",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-            if(willDelete)
-            {
-                var scope = angular.element($('[ui-view=div1]')).scope();
-                scope.deleteDepositDetails(data);
-                scope.$apply();
-            }
-        });
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.deleteDepositDetailsFunction(data);
+    scope.$apply();
 }
 
 function downloadAsPdfPaymentBookDetails(){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.downloadAsPdfPaymentBookDetails();
+    scope.$apply();
+}
+
+function editChequeNumberDetails(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editChequeNumberDetails(data);
     scope.$apply();
 }

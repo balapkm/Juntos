@@ -1,6 +1,11 @@
+<h2 class="text-center">Payment Book</h2>
 [[foreach from=$result key=k1 item=v1]]
 	<div style="margin-top: 50px;">
-		<h3><b>Payable Date : [[k1|date_format:"%d-%m-%Y"]]</b></h3>
+		[[if $k1 neq '0000-00-00']]
+		<h5><b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]]</b></h5>
+		[[else]]
+		<h5><b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]]</b></h5>
+		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
 			[[foreach from=$v1 key=k2 item=v2]]
@@ -33,11 +38,9 @@
 				    <tbody>
 				    	[[foreach from=$v2 key=k3 item=v3]]
 					    	[[foreach from=$v3 key=k4 item=v4]]
-
-					    		[[assign var=totalAmount value=$totalAmount + ($v4.bill_amount)]]
-
 						    	<tr>
 					    	  	  [[if $k4 eq 0]]
+					    	  	  	[[assign var=totalAmount value=$totalAmount + ($v4.bill_amount)]]
 						          	<td rowspan="[[$v3|@count]]">[[$v4.s_no]]</td>
 					          	  [[/if]]
 						          <td>[[$v4.material_hsn_code]]</td>
@@ -134,19 +137,24 @@
 		                      <td></td>
 		                </tr>
 		                [[/foreach]]
-		                <tr>
+		            </tbody>
+		            [[/if]]
+		            [[if $k2 eq 'chequeNumberDetails']]
+		            <tbody>
+		            	[[foreach from=$v2 key=k3 item=v3]]
+		                <tr style="font-weight: bold;">
 				        	<td colspan="14"></td>
 				        	<td><b>Total</b></td>
 				        	<td><b>[[$totalAmount]]</b></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
-				        	<td></td>
+				        	<td>[[$v3.deduction]]</td>
+				        	<td>[[$v3.cheque_no]]</td>
+				        	<td class="datetd">[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
+				        	<td>[[$v3.cheque_amount]]</td>
+				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
 				        </tr>
+				        [[/foreach]]
 		            </tbody>
 		            [[/if]]
-		        
 	        [[/foreach]]
 		</table>
 	</div>

@@ -34,9 +34,9 @@ class PaymentBookQuery extends CI_Model
 
     public function updatePaymentListData($data)
     {
-        $id = $data['po_generated_request_id'];
-        unset($data['po_generated_request_id']);
-        $result = $this->db->update('po_generated_request_details',$data, array('po_generated_request_id' => $id));
+        $id = $data['bill_number'];
+        unset($data['bill_number']);
+        $result = $this->db->update('po_generated_request_details',$data, array('bill_number' => $id));
         return $result;
     }
     public function getPaymentBookData($data)
@@ -66,8 +66,35 @@ class PaymentBookQuery extends CI_Model
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
+
     public function deleteDebitNoteData($data){
         $result = $this->db->delete('debit_note_details',array('s_no' => $data['s_no']));
+        return $result;
+    }
+
+    public function select_cheque_number_details($data)
+    {
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_id']."' AND payable_month ='".$data['payable_month']."'";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
+    public function select_all_cheque_number_details($data)
+    {
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_name']."'";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
+    public function insert_cheque_number_details($data){
+        return $this->db->insert('cheque_number_details',$data);
+    }
+
+    public function update_cheque_number_details($data)
+    {
+        $id = $data['cheque_number_id'];
+        unset($data['cheque_number_id']);
+        $result = $this->db->update('cheque_number_details',$data, array('cheque_number_id' => $id));
         return $result;
     }
 
