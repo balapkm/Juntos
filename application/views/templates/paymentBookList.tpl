@@ -24,7 +24,7 @@
 				          <th>HSN CODE</th>
 				          <th>CGST</th>
 				          <th>SGST</th>
-				          <th>QTY</th>
+				          <th>Received QTY</th>
 				          <th>UOM</th>
 				          <th>MATERIAL NAME</th>
 				          <th>RATE</th>
