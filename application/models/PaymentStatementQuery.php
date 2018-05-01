@@ -24,6 +24,54 @@ class PaymentStatementQuery extends CI_Model
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
+
+    public function getCoverLetterData($data)
+    {
+        $sql = "SELECT
+                    sd.*,
+                    prd.*
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    sd.supplier_id  = prd.supplier_id AND
+                    prd.supplier_id = '".$data['payment_statement_supplier_id']."' AND
+                    prd.payable_month = '".$data['payment_statement_date']."' AND
+                    prd.outstanding_type = 'B' AND
+                    prd.bill_amount != 0 AND
+                    prd.bill_number != '' AND
+                    prd.bill_date != '0000-00-00'
+                GROUP BY 
+                    prd.bill_number";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
+    public function getExtraBillAmountData($data)
+    {
+        $sql = "SELECT
+                    *
+                FROM
+                    debit_note_details dnd
+                WHERE
+                    dnd.supplier_id = '".$data['payment_statement_supplier_id']."' AND
+                    dnd.payable_month = '".$data['payment_statement_date']."'";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
+    public function getChequeBillAmountData($data)
+    {
+        $sql = "SELECT
+                    *
+                FROM
+                    cheque_number_details cnd
+                WHERE
+                    cnd.supplier_id = '".$data['payment_statement_supplier_id']."' AND
+                    cnd.payable_month = '".$data['payment_statement_date']."'";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
 }
 
 ?>

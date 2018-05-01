@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-30 22:18:13
+/* Smarty version 3.1.30, created on 2018-05-01 21:40:26
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae748cd762c87_35572852',
+  'unifunc' => 'content_5ae891725d4823_81121112',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1525106891,
+      1 => 1525107304,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae748cd762c87_35572852 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae891725d4823_81121112 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -62,7 +62,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars
 				          <th>HSN CODE</th>
 				          <th>CGST</th>
 				          <th>SGST</th>
-				          <th>QTY</th>
+				          <th>Received QTY</th>
 				          <th>UOM</th>
 				          <th>MATERIAL NAME</th>
 				          <th>RATE</th>
@@ -113,7 +113,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 </td>
 						          <td><?php echo $_smarty_tpl->tpl_vars['v4']->value['SGST'];?>
 </td>
-						          <td><?php echo $_smarty_tpl->tpl_vars['v4']->value['qty'];?>
+						          <td><?php echo $_smarty_tpl->tpl_vars['v4']->value['received'];?>
 </td>
 						          <td><?php echo $_smarty_tpl->tpl_vars['v4']->value['material_name'];?>
 </td>

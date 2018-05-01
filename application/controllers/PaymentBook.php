@@ -279,7 +279,7 @@ class PaymentBook extends CI_Controller
 	
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
 		{
-			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --header-html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --orientation '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 		}
 		else
 		{
