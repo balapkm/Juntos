@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-29 23:57:12
+/* Smarty version 3.1.30, created on 2018-05-12 12:09:31
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae60e80b30a10_71081378',
+  'unifunc' => 'content_5af68c232532c3_07538120',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1525026267,
+      1 => 1526106977,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae60e80b30a10_71081378 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af68c232532c3_07538120 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -178,7 +178,7 @@ $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', $_prefixVariable1);
 ?>
 		         	<?php }?>
 
-                    <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', (($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value));
+                    <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', ($_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value+(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
 
 		         	<td align="center" width="10%" class="own-td-2">
@@ -393,7 +393,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                             </h5>
         					<h5><b>Payment Terms        :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['payment_terms'];?>
 </b></h5>
-        					<h5><b>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
+                            <h5><b>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
+</b></h5>
+        					<h5><b>Query                :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['query'];?>
 </b></h5>
         				</div>
         			</td>

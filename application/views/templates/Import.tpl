@@ -262,7 +262,8 @@
                             </a>
                             </h5>
         					<h5><b>Payment Terms        :    [[$importAdditionalCharges[0].payment_terms]]</b></h5>
-        					<h5><b>Shipment             :    [[$importAdditionalCharges[0].Shipment]]</b></h5>
+                            <h5><b>Shipment             :    [[$importAdditionalCharges[0].Shipment]]</b></h5>
+        					<h5><b>Query                :    [[$importAdditionalCharges[0].query]]</b></h5>
         				</div>
         			</td>
         			

@@ -43,8 +43,8 @@
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%"><b>To</b></td>
-		         	<td class="own-td-1" width="30%"><b>LH.Po.No</b></td>
+        			<td class="own-td-1" width="40%">To</td>
+		         	<td class="own-td-1" width="30%">LH.Po.No</td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].full_po_number]]</td>
         		</tr>
         	</table>
@@ -53,7 +53,7 @@
         	<table class="own-table">
         		<tr>
         			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
-		         	<td class="own-td-1" width="30%"><b>Date</b></td>
+		         	<td class="own-td-1" width="30%">Date</td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
         		</tr>
         	</table>
@@ -62,7 +62,7 @@
         	<table class="own-table">
         		<tr>
         			<td class="own-td-1" width="40%">[[$searchPoData[0].origin]]</td>
-		         	<td class="own-td-1" width="30%"><b>Ord Ref</b></td>
+		         	<td class="own-td-1" width="30%">Ord Ref</td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].order_reference]]</td>
         		</tr>
         	</table>
@@ -70,8 +70,8 @@
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%"><b>GSTIN : </b>[[$searchPoData[0].gst_no]]</td>
-		         	<td class="own-td-1" width="30%"><b>Delivery Date</b></td>
+        			<td class="own-td-1" width="40%">GSTIN : [[$searchPoData[0].gst_no]]</td>
+		         	<td class="own-td-1" width="30%">Delivery Date</td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
         		</tr>
         	</table>
@@ -86,12 +86,14 @@
 		         	<td align="center" width="7%">UOM</td>
 		         	<td align="center" width="8%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
-		         	[[if $searchPoData[0]['state_code'] eq 33]]
-			         	<td align="center" width="10%">CGST</td>
-			         	<td align="center" width="10%">SGST</td>
-		         	[[/if]]
-		         	[[if $searchPoData[0]['state_code'] neq 33]]
-		         		<td align="center" width="10%" >IGST</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+			         	[[if $searchPoData[0]['state_code'] eq 33]]
+				         	<td align="center" width="10%">CGST</td>
+				         	<td align="center" width="10%">SGST</td>
+			         	[[/if]]
+			         	[[if $searchPoData[0]['state_code'] neq 33]]
+			         		<td align="center" width="10%" >IGST</td>
+			         	[[/if]]
 		         	[[/if]]
 		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
 		         	<td align="center" width="10%">Action</td>
@@ -120,7 +122,9 @@
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
 		         	<td align="center" width="8%" class="own-td-2">
 		         			[[$v.price|number_format:2]]<br/>
+		         			[[if $v.price_status neq 'FINAL']]
 		         			[ [[$v.price_status]] ]
+                            [[/if]]
 		         	</td>
 
 
@@ -139,29 +143,32 @@
 		         		[ [[$DISCOUNTTotalValue|number_format:2]] ]
 		         		[[/if]]
 		         	</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+			         	[[if $searchPoData[0]['state_code'] eq 33]]
+				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	<td align="center" width="10%" class="own-td-2">
+				         		[[$v.CGST]]%
+				         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
+				         	</td>
 
-		         	[[if $searchPoData[0]['state_code'] eq 33]]
-			         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.CGST]]%
-			         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
-			         	</td>
+				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	<td align="center" width="10%" class="own-td-2">
+				         		[[$v.SGST]]% 
+				         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
+				         	</td>
+			         	[[/if]]
 
-			         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.SGST]]% 
-			         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
-			         	</td>
+
+			         	[[if $searchPoData[0]['state_code'] neq 33]]
+				         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
+				         	<td align="center" width="10%" class="own-td-2">
+				         		[[$v.IGST]]% 
+				         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
+				         	</td>
+			         	[[/if]]
+
 		         	[[/if]]
 
-
-		         	[[if $searchPoData[0]['state_code'] neq 33]]
-			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.IGST]]% 
-			         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
-			         	</td>
-		         	[[/if]]
 		         	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
 		         	<td align="center" width="10%" class="own-td-2"><b>[[$totalPriceValue|number_format:2]]</b></td>
@@ -193,12 +200,14 @@
 		         	<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="7%" class="own-td-3"></td>
 		         	<td align="center" width="8%" class="own-td-3"></td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	[[if $searchPoData[0]['state_code'] eq 33]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	[[/if]]
 		         	[[if $searchPoData[0]['state_code'] neq 33]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
+		         	[[/if]]
 		         	[[/if]]
 		         	<td align="center" width="10%" class="own-td-3"></td>
 		         	<td align="center" width="10%" class="own-td-3"></td>
@@ -232,16 +241,18 @@
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 
-	         		[[if $searchPoData[0]['state_code'] eq 33]]
-			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_AMOUNT )]]]]
-			         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_AMOUNT )]]]]
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+		         		[[if $searchPoData[0]['state_code'] eq 33]]
+				         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_AMOUNT )]]]]
+				         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_AMOUNT )]]]]
 
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue|number_format:2]] ]</td>
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue|number_format:2]] ]</td>
-		         	[[else]]
-			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_AMOUNT )]]]]
-			         	<td align="center" width="10%" class="own-td-2">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
-		         	[[/if]]
+				         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue|number_format:2]] ]</td>
+				         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue|number_format:2]] ]</td>
+			         	[[else]]
+				         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_AMOUNT )]]]]
+				         	<td align="center" width="10%" class="own-td-2">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
+			         	[[/if]]
+			        [[/if]]
 
 		         	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]
 					[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]

@@ -153,6 +153,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $scope.getPoNumber = function()
     {
         if(($scope.generatePoData.unit !=="") && ($scope.generatePoData.type !=="")){
+            console.log($scope.po_number_details);
             var $object = $scope.po_number_details[$scope.generatePoData.unit][$scope.generatePoData.type];
             $scope.generatePoData.po_number     = $object['format']+$object['po_current_value'];
             $scope.generatePoData.po_raw_number = $object['po_current_value'];
@@ -471,11 +472,16 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.editImportOtherDetails = function(data)
     {
-        $scope.importOtherCharge['id'] = data[0]['import_other_id'];
-        $scope.importOtherCharge['delivery_date'] = data[0]['delivery_date'];
-        $scope.importOtherCharge['incoterms'] = data[0]['incoterms'];
-        $scope.importOtherCharge['payment_status'] = data[0]['payment_terms'];
-        $scope.importOtherCharge['Shipment'] = data[0]['Shipment'];
+        if(data.length !== 0)
+        {
+            $scope.importOtherCharge['id'] = data[0]['import_other_id'];
+            $scope.importOtherCharge['delivery_date'] = data[0]['delivery_date'];
+            $scope.importOtherCharge['incoterms'] = data[0]['incoterms'];
+            $scope.importOtherCharge['payment_status'] = data[0]['payment_terms'];
+            $scope.importOtherCharge['Shipment'] = data[0]['Shipment'];
+            $scope.importOtherCharge['query'] = data[0]['query'];
+        }
+        
         $('#import_other_details_modal').modal('show');
     }
 
@@ -483,6 +489,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     {
         // if(validateService.blank($scope.importOtherCharge['delivery_date'],"Please Choose delivery date","import_delivery_date")) return false;
         if(validateService.blank($scope.importOtherCharge['incoterms'],"Please Choose incoterms","import_incoterms")) return false;
+        if(validateService.blank($scope.importOtherCharge['query'],"Please Enter Query","import_query")) return false;
         if(validateService.blank($scope.importOtherCharge['payment_status'],"Please Choose payment Status","import_payment_status")) return false;
         if(validateService.blank($scope.importOtherCharge['Shipment'],"Please Choose Shipment","import_shipment")) return false;
 

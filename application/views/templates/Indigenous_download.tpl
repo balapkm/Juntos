@@ -49,12 +49,14 @@ td
 		         	<td align="center" width="10%">UOM</td>
 		         	<td align="center" width="10%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	<td align="center" width="10%">CGST</td>
 			         	<td align="center" width="10%">SGST</td>
 		         	[[/if]]
 		         	[[if $searchPoData[0]['state_code'] neq 33]]
 		         		<td align="center" width="10%" >IGST</td>
+		         	[[/if]]
 		         	[[/if]]
 		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
         		</tr>
@@ -100,6 +102,7 @@ td
 
 		         	[[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
 
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
 			         	<td align="center" width="10%" class="own-td-2">
@@ -121,6 +124,7 @@ td
 			         		[[$v.IGST]]% 
 			         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
 			         	</td>
+		         	[[/if]]
 		         	[[/if]]
 		         	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
@@ -178,7 +182,7 @@ td
 		         		[[$other_total_AMOUNT|number_format:2]]
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
-
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 	         		[[if $searchPoData[0]['state_code'] eq 33]]
 			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_AMOUNT )]]]]
 			         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_AMOUNT )]]]]
@@ -188,6 +192,7 @@ td
 		         	[[else]]
 			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_AMOUNT )]]]]
 			         	<td align="center" width="10%" class="own-td-2">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
+		         	[[/if]]
 		         	[[/if]]
 
 		         	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]

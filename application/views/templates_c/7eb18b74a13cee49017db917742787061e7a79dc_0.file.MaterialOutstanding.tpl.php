@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-30 00:19:49
+/* Smarty version 3.1.30, created on 2018-05-12 12:20:39
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae613cdb18619_44382771',
+  'unifunc' => 'content_5af68ebf70d785_81453406',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1525027500,
+      1 => 1526107813,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae613cdb18619_44382771 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af68ebf70d785_81453406 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -265,7 +265,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Edit Material Bill Out Standing</h4>
+		        <h4 class="modal-title">{{title}}</h4>
 		    </div>
 		    <div class="modal-body">
 		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">

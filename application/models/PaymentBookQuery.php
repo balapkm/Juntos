@@ -36,6 +36,7 @@ class PaymentBookQuery extends CI_Model
     {
         $id = $data['bill_number'];
         unset($data['bill_number']);
+        unset($data['avg_cost']);
         $result = $this->db->update('po_generated_request_details',$data, array('bill_number' => $id));
         return $result;
     }
@@ -54,15 +55,15 @@ class PaymentBookQuery extends CI_Model
                     outstanding_type = 'B' AND 
                     prd.bill_amount!=0 AND 
                     prd.bill_number!='' AND 
-                    prd.supplier_id = ".$data['supplier_name'] ;                    
-        $sql.= " ORDER BY prd.bill_number";
+                    prd.supplier_id IN (".implode(",",$data['supplier_name']).")";                    
+        $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc";
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }
 
     public function getDebitNoteListData($data){
 
-        $sql = "SELECT * FROM debit_note_details WHERE supplier_id=".$data['supplier_name'];
+        $sql = "SELECT * FROM debit_note_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
@@ -74,14 +75,14 @@ class PaymentBookQuery extends CI_Model
 
     public function select_cheque_number_details($data)
     {
-        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_id']."' AND payable_month ='".$data['payable_month']."'";
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_id']."' AND payable_month = '".$data['payable_month']."'";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
 
     public function select_all_cheque_number_details($data)
     {
-        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_name']."'";
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

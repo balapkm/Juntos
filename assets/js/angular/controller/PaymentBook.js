@@ -5,7 +5,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#debitnote_date,#creditnote_date,#cheque_date').datepicker({
+    $('#debitnote_date,#creditnote_date,#cheque_date,#dd_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
@@ -122,6 +122,12 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $scope.editPaymentList.bill_number   = data.bill_number;
         $('#material_modal').modal('show');
     } 
+
+    $scope.downloadAsPdfCoverLetter = function(data)
+    {
+        var url = 'CoveringLetter/downloadAsPdf?payment_statement_supplier_id='+data['supplier_id']+'&payment_statement_date='+data['payable_month'];
+        window.open(url);
+    }
     
     $scope.editPaymentBook = function(){
 
@@ -239,6 +245,9 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 $scope.chequeNumberDetails['cheque_no'] = data.cheque_no;
                 $scope.chequeNumberDetails['cheque_date'] = data.cheque_date;
                 $scope.chequeNumberDetails['cheque_amount'] = data.cheque_amount;
+                $scope.chequeNumberDetails['dd_number'] = data.dd_number;
+                $scope.chequeNumberDetails['dd_date'] = data.dd_date;
+                $scope.chequeNumberDetails['dd_amount'] = data.dd_amount;
             }
         });
 
@@ -289,5 +298,12 @@ function downloadAsPdfPaymentBookDetails(){
 function editChequeNumberDetails(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.editChequeNumberDetails(data);
+    scope.$apply();
+}
+
+function downloadAsPdfCoverLetter(data)
+{
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.downloadAsPdfCoverLetter(data);
     scope.$apply();
 }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-30 10:36:55
+/* Smarty version 3.1.30, created on 2018-05-12 12:09:23
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae6a46f5d65c1_09136496',
+  'unifunc' => 'content_5af68c1b546fa7_73898823',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1525064792,
+      1 => 1526107052,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae6a46f5d65c1_09136496 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af68c1b546fa7_73898823 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -382,6 +382,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  	 <option value="EX-FACTORY">EX-FACTORY</option>
 		                  	 <option value="OTHERS">OTHERS</option>
 		                  </select>
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Query</label>
+		                  <input type="text" class="form-control" id="import_query" placeholder="Enter Query" ng-model="importOtherCharge.query">
 		                </div>
 		            </div>
 		            <div class="col-lg-3" ng-if="importDetailsShow.incoterms">

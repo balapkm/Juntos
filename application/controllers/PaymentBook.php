@@ -47,6 +47,8 @@ class PaymentBook extends CI_Controller
 		
 		foreach ($data as $key => $value) 
 		{
+			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
 			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
 
@@ -73,7 +75,7 @@ class PaymentBook extends CI_Controller
 						$full_qty = array_sum(array_column($value3,'received'));
 						foreach ($value3 as $key4 => $value4)
 						{
-							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty);
+							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
 						}
 					} 
 				}
@@ -86,7 +88,7 @@ class PaymentBook extends CI_Controller
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
 
-	public function avgCostCalc($data,$full_qty)
+	public function avgCostCalc($data,$full_qty,$full_bill_data)
 	{
 		$totalAmount = 0;
 		$totalAmount1 = 0;
@@ -116,33 +118,40 @@ class PaymentBook extends CI_Controller
 
 		$totalAmount = ($data['price'] * $data['qty']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
 
+		$qty = $data['qty'];
+
 		/**received**/
 
-		if($data['discount_price_status'] == 'AMOUNT')
+		foreach ($full_bill_data as $key => $data) 
 		{
-			$discountTotalAmt = $data['discount'];
-		}
-		else
-		{
-			$discountTotalAmt = (($data['discount']/100) * $data['price']) * $data['received'];
-		}
+			if($data['discount_price_status'] == 'AMOUNT')
+			{
+				$discountTotalAmt = $data['discount'];
+			}
+			else
+			{
+				$discountTotalAmt = (($data['discount']/100) * $data['price']) * $data['received'];
+			}
 
-		if($data['state_code'] == 33)
-		{
-			$CGSTTotalAmt = ($data['CGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
-			$SGSTTotalAmt = ($data['SGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
-		}
-		else
-		{
-			$IGSTTotalAmt = ($data['IGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
-		}
+			if($data['state_code'] == 33)
+			{
+				$CGSTTotalAmt = ($data['CGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+				$SGSTTotalAmt = ($data['SGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+			}
+			else
+			{
+				$IGSTTotalAmt = ($data['IGST']/100) * (($data['price']*$data['received']) - $discountTotalAmt);
+			}
 
-		$totalAmount1 = ($data['price'] * $data['received']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
+			$totalAmount1 = (($data['price'] * $data['received']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt) + $totalAmount1;
+		}
+		
 		//end
-		$result1 = $totalAmount/$data['qty'];
+		$result1 = $totalAmount/$qty;
 		$result2 = $data['bill_amount'] - $totalAmount1;
 		$result3 = $result2/$full_qty;
 		$final   = $result1+$result3;
+		// return $result1."/".$result2."/".$result3;
 		return $final;
 	}
 
@@ -233,6 +242,8 @@ class PaymentBook extends CI_Controller
 
 		foreach ($data as $key => $value) 
 		{
+			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
 			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
 

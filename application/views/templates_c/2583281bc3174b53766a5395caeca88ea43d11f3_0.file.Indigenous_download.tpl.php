@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-30 10:44:45
+/* Smarty version 3.1.30, created on 2018-05-10 21:45:54
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae6a645e78dd9_53714687',
+  'unifunc' => 'content_5af4703ab7ff54_57780109',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1525065255,
+      1 => 1525370238,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae6a645e78dd9_53714687 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af4703ab7ff54_57780109 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,12 +73,14 @@ td
 		         	<td align="center" width="10%">UOM</td>
 		         	<td align="center" width="10%">PRICE</td>
 		         	<td align="center" width="10%">DISCOUNT</td>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<td align="center" width="10%">CGST</td>
 			         	<td align="center" width="10%">SGST</td>
 		         	<?php }?>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
 		         		<td align="center" width="10%" >IGST</td>
+		         	<?php }?>
 		         	<?php }?>
 		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
         		</tr>
@@ -149,6 +151,7 @@ if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?>
 		         	<?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', ($_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value+(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
 
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
@@ -182,6 +185,7 @@ $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable2);
 			         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
  ]
 			         	</td>
+		         	<?php }?>
 		         	<?php }?>
 		         	<?php ob_start();
 echo ($_smarty_tpl->tpl_vars['v']->value['qty']*$_smarty_tpl->tpl_vars['v']->value['price'])+$_smarty_tpl->tpl_vars['IGSTTotalValue']->value+$_smarty_tpl->tpl_vars['SGSTTotalValue']->value+$_smarty_tpl->tpl_vars['CGSTTotalValue']->value-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value;
@@ -271,7 +275,7 @@ $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 
 		         	</td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
-
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 	         		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
 			         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*$_smarty_tpl->tpl_vars['other_total_AMOUNT']->value);
@@ -299,6 +303,7 @@ $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable8);
 			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
 %<br/><?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
 </td>
+		         	<?php }?>
 		         	<?php }?>
 
 		         	<?php ob_start();

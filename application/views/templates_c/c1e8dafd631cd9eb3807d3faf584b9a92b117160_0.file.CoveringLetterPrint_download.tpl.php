@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 23:55:47
+/* Smarty version 3.1.30, created on 2018-05-12 20:22:50
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae8b12bcf5d13_53429965',
+  'unifunc' => 'content_5af6ffc275e517_70075254',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1525199145,
+      1 => 1526136753,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae8b12bcf5d13_53429965 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af6ffc275e517_70075254 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -63,7 +63,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </span>
 <span style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 </span>
-<div style="border: 2px solid black;width: 100%;margin:auto;font-size: 10px;">
+<div style="border: 2px solid black;width: 100%;margin:auto;font-size: 11px;">
 	<div style="margin-left: 20px;">
 		<p><b>TO</b></p>
 		<p><b><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['supplier_name'];?>
@@ -74,9 +74,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	</div>
 	<div style="margin-top: 50px;margin-left: 20px;">
 		<p><b>DEAR SIR,</b></p>
+		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
+		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+. <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
+ ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+		<?php } else { ?>
 		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 . <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+		<?php }?>
 	</div>
 	<div style="width: 80%;margin:auto;margin-top: 20px;">
 		<table class="coveringLetterTable">
@@ -151,9 +157,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		<p style="text-align: right;margin-right: 20px;margin-top: -60px"><b>YOURS FAITYFULLY</b></p>
 		<p style="text-align: right;margin-right: 20px;"><b>FOR T.M.ABDUL RAHMAN & SONS</b></p>
 		<p style="text-align: right;margin-right: 20px;margin-top: 80px;"><b>PARTNER / MANAGER</b></p>
+		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
+		<p style="margin-top: -30px"><b>ENCLOSED DD NO. <?php echo $_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'];?>
+ DATED <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_date'],"%d-%m-%Y");?>
+</b></p>
+		<?php } else { ?>
 		<p style="margin-top: -30px"><b>ENCLOSED CHEQUE NO. <?php echo $_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_no'];?>
  DATED <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_date'],"%d-%m-%Y");?>
 </b></p>
+		<?php }?>
 	</div>
 </div>
 <style>

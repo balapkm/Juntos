@@ -323,6 +323,12 @@
 		                  </select>
 		                </div>
 		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Query</label>
+		                  <input type="text" class="form-control" id="import_query" placeholder="Enter Query" ng-model="importOtherCharge.query">
+		                </div>
+		            </div>
 		            <div class="col-lg-3" ng-if="importDetailsShow.incoterms">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Other Incoterms</label>

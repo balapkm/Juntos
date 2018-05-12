@@ -23,8 +23,8 @@
 				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
-					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')">
-					                  	  <option value="">Choose Supplier Name</option>
+					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')" multiple="multiple">
+					                  	  <!-- <option value="">Choose Supplier Name</option> -->
 					                  	  [[foreach from=$supplier_name_details key=k item=v]]
 					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
 					                  	  [[/foreach]]
@@ -81,26 +81,26 @@
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Debit Note No</label>
+		                  <label for="exampleInputEmail1">Debit/Credit Note No</label>
 		                  <input type="text" ng-model="addNoteData.debitnote_no" class="form-control" id="debitnote_no" placeholder="Enter debitnote no" maxlength="8">
 		                </div>
 		            </div>
 		             <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Debit Note Date</label>
+		                  <label for="exampleInputEmail1">Debit/Credit Note Date</label>
 		                  <input type="text" ng-model="addNoteData.debitnote_date" class="form-control" id="debitnote_date" placeholder="Choose Debit note date">
 		                </div>
 		            </div>
 		           
 		            <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Supplier Credit Note</label>
+		                  <label for="exampleInputEmail1">Supplier Debit/Credit Note</label>
 		                  <input type="text" ng-model="addNoteData.supplier_creditnote_no" class="form-control" id="supplier_creditnote_no" placeholder="Enter supplier creditnote no">
 		                </div>
 		            </div>
 		              <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Credit Note Date</label>
+		                  <label for="exampleInputEmail1">Supplier Debit/Credit Note Date</label>
 		                  <input type="text" ng-model="addNoteData.creditnote_date" class="form-control" id="creditnote_date" placeholder="Choose Debit Note Date">
 		                </div>
 		            </div>
@@ -209,12 +209,12 @@
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
-		           <div class="col-lg-4">
+		           <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Deduction</label>
 		                  <input type="text" ng-model="chequeNumberDetails.deduction" class="form-control" id="deduction" placeholder="Enter deduction amount">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Number</label>
@@ -231,6 +231,24 @@
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Cheque Amount</label>
 		                  <input type="text" ng-model="chequeNumberDetails.cheque_amount" class="form-control" id="cheque_amount" placeholder="Enter amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DD Number</label>
+		                  <input type="text" ng-model="chequeNumberDetails.dd_number" class="form-control" id="dd_numer" placeholder="Enter DD Number">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DD Date</label>
+		                  <input type="text" ng-model="chequeNumberDetails.dd_date" class="form-control" id="dd_date" placeholder="Enter DD Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">DD Amount</label>
+		                  <input type="text" ng-model="chequeNumberDetails.dd_amount" class="form-control" id="dd_amount" placeholder="Enter DD Amount">
 		                </div>
 		            </div> 
 		        </div>

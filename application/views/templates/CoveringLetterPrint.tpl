@@ -30,7 +30,11 @@
 	</div>
 	<div style="margin-top: 50px;margin-left: 20px;">
 		<h5><b>DEAR SIR,</b></h5>
+		[[if $chequeData[0].dd_number neq '']]
+		<h5 style="text-indent: 50px;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] (<span id="numberToWord"></span>) TOWARDS YOUR FOLLOWING INVOICES.</h5>
+		[[else]]
 		<h5 style="text-indent: 50px;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] (<span id="numberToWord"></span>) TOWARDS YOUR FOLLOWING INVOICES.</h5>
+		[[/if]]
 	</div>
 	<div style="width: 80%;margin:auto;margin-top: 20px;">
 		<table class="coveringLetterTable">
@@ -80,7 +84,11 @@
 		<h5 style="text-align: right;margin-right: 20px;margin-top: -50px"><b>YOURS FAITYFULLY</b></h5>
 		<h5 style="text-align: right;margin-right: 20px;"><b>FOR T.M.ABDUL RAHMAN & SONS</b></h5>
 		<h5 style="text-align: right;margin-right: 20px;margin-top: 80px;"><b>PARTNER / MANAGER</b></h5>
+		[[if $chequeData[0].dd_number neq '']]
+		<h5 style="margin-top: -25px"><b>ENCLOSED DD NO. [[$chequeData[0].dd_number]] DATED [[$chequeData[0].dd_date|date_format:"%d-%m-%Y"]]</b></h5>
+		[[else]]
 		<h5 style="margin-top: -25px"><b>ENCLOSED CHEQUE NO. [[$chequeData[0].cheque_no]] DATED [[$chequeData[0].cheque_date|date_format:"%d-%m-%Y"]]</b></h5>
+		[[/if]]
 	</div>
 </div>
 <style>

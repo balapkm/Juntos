@@ -6,7 +6,12 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			        buttons: [
 			            'copy', 
 			            'csv',
-			            'excel']});
+			            {
+					        extend: 'excel',
+					        exportOptions: {
+					            columns: 'th:not(:last-child)'
+					        }
+					    }]});
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 	setTimeout(function(){
@@ -645,6 +650,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if($scope.material_form_data['currency'] === 'OTHERS')
     	{
     		$scope.material_form_data['currency'] = $scope.material_form_data['add_currency'];
+    		delete $scope.material_form_data['add_currency'];
     	}
 
     	if(validateService.blank($scope.material_form_data['currency'],"Please enter currency","currency")) return false;
@@ -654,7 +660,6 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     	if(validateService.blank($scope.material_form_data['price'],"Please enter price","price")) return false;
     	if(validateService.blank($scope.material_form_data['discount_price_status'],"Please enter discount price status","discount_price_status")) return false;
     	if(validateService.blank($scope.material_form_data['discount'],"Please enter discount","discount")) return false;
-    	console.log($scope.material_form_data);
     	$scope.material_form_data = validateService.changeAllUpperCase($scope.material_form_data);
 		var service_details = {
 	      method_name : "addMaterialAction",

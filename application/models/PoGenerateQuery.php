@@ -170,7 +170,7 @@ class PoGenerateQuery extends CI_Model
     public function edit_import_other_details($data)
     {
         $id                     = $data['id'];
-        $data['payment_terms'] = $data['payment_status'];
+        $data['payment_terms']  = $data['payment_status'];
         unset($data['id']);
         unset($data['payment_status']);
         $result = $this->db->update('import_other_details',$data, array('import_other_id' => $id));
