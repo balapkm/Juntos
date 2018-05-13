@@ -74,7 +74,7 @@ class PaymentBookQuery extends CI_Model
                     outstanding_type = 'B' AND 
                     prd.bill_amount!=0 AND 
                     prd.bill_number!='' AND 
-                    prd.supplier_id IN (".implode(",",$data['supplier_name']).")";                    
+                    prd.supplier_id = ".$data['supplier_name'];                    
         $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc";
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
@@ -98,16 +98,23 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function getAdvancePaymentFullDetails()
+    {
+        $sql   = "SELECT * FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id";                    
+        $data  = $this->db->query(trim($sql))->result_array();
+        return $data;
+    }
+
     public function getDebitNoteListData($data){
 
-        $sql = "SELECT * FROM debit_note_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
+        $sql = "SELECT * FROM debit_note_details WHERE supplier_id = ".$data['supplier_name'];
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
 
     public function getAdvancePaymentDetails($data)
     {
-        $sql = "SELECT * FROM advance_payment_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
+        $sql = "SELECT * FROM advance_payment_details WHERE supplier_id = ".$data['supplier_name'];
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
@@ -132,7 +139,7 @@ class PaymentBookQuery extends CI_Model
 
     public function select_all_cheque_number_details($data)
     {
-        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id = ".$data['supplier_name'];
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

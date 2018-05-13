@@ -17,6 +17,7 @@ class PaymentBook extends CI_Controller
 	public function index()
 	{
 		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
+		$this->data['advancePaymentDetails'] = $this->PaymentBookQuery->getAdvancePaymentFullDetails();
 		return $this->mysmarty->view('PaymentBook.tpl',$this->data,TRUE);
 	}
 
@@ -266,7 +267,7 @@ class PaymentBook extends CI_Controller
 	public function addNoteDetails()
 	{
 		$addData = array(
-				"supplier_id" => $this->data['supplier_id'][0],
+				"supplier_id" => $this->data['supplier_id'],
 				"debit_note_no" =>  $this->data['debitnote_no'],
 				"debit_note_date" => $this->data['debitnote_date'],
 				"type" => $this->data['type'],
@@ -281,8 +282,8 @@ class PaymentBook extends CI_Controller
 
 	public function downloadAsPdfPaymentBookDetails()
 	{
-		$this->data['supplier_name'] = json_decode($_GET['supplier_name'],1);
-		$finalResponse['supplier_id']  = $this->data['supplier_name'];
+		$this->data = $_GET;
+		$finalResponse['suplier_id']  = $this->data['supplier_name'];
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 

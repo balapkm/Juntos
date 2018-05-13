@@ -12,6 +12,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
       startDate : new Date()
     });
 
+    $('#example2').DataTable();
+
     $('#payable_month,#list_payable_month,#ap_payable_month').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
@@ -307,7 +309,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.downloadAsPdfPaymentBookDetails = function(){
         console.log($scope.generatePoData);
-        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+encodeURIComponent(JSON.stringify($scope.generatePoData['supplier_name']));
+        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name'];
         window.open(url);
     }
 

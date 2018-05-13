@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-13 16:28:17
+/* Smarty version 3.1.30, created on 2018-05-13 19:40:39
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af81a49bb7646_44490642',
+  'unifunc' => 'content_5af8475f2af961_05366758',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1526208678,
+      1 => 1526220635,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af81a49bb7646_44490642 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af8475f2af961_05366758 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -35,7 +35,7 @@ function content_5af81a49bb7646_44490642 (Smarty_Internal_Template $_smarty_tpl)
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
-	              <!-- <li><a href="#tab_2" data-toggle="tab">View</a></li> -->
+	              <li><a href="#tab_2" data-toggle="tab">Advance payment</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -47,8 +47,8 @@ function content_5af81a49bb7646_44490642 (Smarty_Internal_Template $_smarty_tpl)
 				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
-					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')" multiple="multiple">
-					                  	  <!-- <option value="">Choose Supplier Name</option> -->
+					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')">
+					                  	  <option value="">Choose Supplier Name</option>
 					                  	  <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_name_details']->value, 'v', false, 'k');
 if ($_from !== null) {
@@ -85,6 +85,53 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        </div>
 				        <div>
 				        </div>
+				    </div>
+				    <div class="tab-pane" id="tab_2">
+	              		<table id="example" class="table table-bordered table-striped" style="margin-top: 10px;">
+		                    <thead>
+		                        <tr>
+		                          <th>Supplier Name</th>
+		                          <th>PO Number</th>
+		                          <th>Supplier Date</th>
+		                          <th>Supplier PI Number</th>
+		                          <th>Date</th>
+		                          <th>Query</th>
+		                          <th>Payable Month</th>
+		                          <th>Amount</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['advancePaymentDetails']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+		                        <tr>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_date'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_pi_number'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['date'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['query'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payable_month'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+</td>
+		                        </tr>
+		                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                    </tbody>
+		                </table>
 				    </div>
 				</div>
 			</div>

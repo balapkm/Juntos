@@ -11,7 +11,7 @@
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
-	              <!-- <li><a href="#tab_2" data-toggle="tab">View</a></li> -->
+	              <li><a href="#tab_2" data-toggle="tab">Advance payment</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -23,8 +23,8 @@
 				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
-					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')" multiple="multiple">
-					                  	  <!-- <option value="">Choose Supplier Name</option> -->
+					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')">
+					                  	  <option value="">Choose Supplier Name</option>
 					                  	  [[foreach from=$supplier_name_details key=k item=v]]
 					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
 					                  	  [[/foreach]]
@@ -50,6 +50,36 @@
 				        </div>
 				        <div>
 				        </div>
+				    </div>
+				    <div class="tab-pane" id="tab_2">
+	              		<table id="example" class="table table-bordered table-striped" style="margin-top: 10px;">
+		                    <thead>
+		                        <tr>
+		                          <th>Supplier Name</th>
+		                          <th>PO Number</th>
+		                          <th>Supplier Date</th>
+		                          <th>Supplier PI Number</th>
+		                          <th>Date</th>
+		                          <th>Query</th>
+		                          <th>Payable Month</th>
+		                          <th>Amount</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	[[foreach from=$advancePaymentDetails key=k item=v]]
+		                        <tr>
+		                          <td>[[$v.supplier_name]]</td>
+		                          <td>[[$v.full_po_number]]</td>
+		                          <td>[[$v.supplier_date]]</td>
+		                          <td>[[$v.supplier_pi_number]]</td>
+		                          <td>[[$v.date]]</td>
+		                          <td>[[$v.query]]</td>
+		                          <td>[[$v.payable_month]]</td>
+		                          <td>[[$v.amount]]</td>
+		                        </tr>
+		                        [[/foreach]]
+		                    </tbody>
+		                </table>
 				    </div>
 				</div>
 			</div>
