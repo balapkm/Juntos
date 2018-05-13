@@ -87,6 +87,9 @@
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
 				        </tr>
 				    </tbody>
 				    [[/if]]
@@ -151,6 +154,62 @@
 		                [[/foreach]]
 		            </tbody>
 		            [[/if]]
+		            [[if $k2 eq 'advancePaymentDetails' AND $v2|@count neq 0]]
+		            <thead >
+		            	<tr>
+		            	<th colspan="25" style="text-align: center;">ADVANCE PAYMENT</th>
+		            	</tr>
+		            </thead>
+		            <thead>
+		            <tr>
+		            	<th>S.NO</th>
+		            	<th colspan="3" style="text-align: center;">TYPE</th>
+		            	<th>PO NUMBER</th>
+		            	<th>DATE</th>
+		            	<th>SUPPLIER PI NUMBER</th>
+		            	<th>DATE</th>
+		            	<th colspan="6" style="text-align: center;">QUERY</th>
+		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
+		            	<th>AMOUNT</th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            </tr>
+		            </thead>
+		            <tbody>
+		            	[[foreach from=$v2 key=k3 item=v3]]
+		            	[[if $v3.isAvailable eq 'Y']]
+		            	<tr>
+
+                      	[[assign var=totalAmount value=$totalAmount - $v3.amount]]
+
+		            	<td>[[$k3+1]]</td>
+		            	<td colspan="3" style="text-align: center;">Advance Payment</td>
+		            	<td>[[$v3.full_po_number]]</td>
+		            	<td class="datetd">[[$v3.supplier_date|date_format:"%d-%m-%Y"]]</td>
+		            	<td>[[$v3.supplier_pi_number]]</td>
+		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
+		            	<td colspan="6" style="text-align: center;">[[$v3.query]]</td>
+		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
+		            	<td>[[$v3.amount]]</td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	</tr>
+		            	[[/if]]
+		            	[[/foreach]]
+		            </tbody>
+		            [[/if]]
 		            [[if $k2 eq 'chequeNumberDetails']]
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
@@ -187,7 +246,7 @@
     text-align: left;
     padding: 5px 20px 5px 10px;
     border: 1px solid #000;
-    font-size: 12px;
+    font-size: 9px;
 }
 
 .paymentBookListTable .datetd{

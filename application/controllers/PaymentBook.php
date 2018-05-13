@@ -29,6 +29,32 @@ class PaymentBook extends CI_Controller
 		return $data;
 	}
 
+	public function getPoNumberAsPerSupplier()
+	{
+		$data = $this->PaymentBookQuery->getPoNumberAsPerSupplier($this->data);
+		if(count($data) == 0)
+		{
+			return false;
+		}
+
+		foreach ($data as $key => $value) {
+			$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
+			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
+	}
+
+	public function addAdvancePaymentAction()
+	{
+		return $this->PaymentBookQuery->addAdvancePayment($this->data);
+	}
+
+	public function deleteAdvancePaymentDetails()
+	{
+		return $this->PaymentBookQuery->deleteAdvancePaymentDetails($this->data);	
+	}
+
 	public function searchPaymentBookAction()
 	{
 		$finalResponse['supplier_id']  = $this->data['supplier_name'];
@@ -58,14 +84,24 @@ class PaymentBook extends CI_Controller
 			$result[$value['payable_month']]['debitNoteList'][] = $value;
 		}
 
+		$advancePaymentDetails = array();
+		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['advancePaymentDetails'][] = $value;
+		}
+
+
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
 		foreach ($data as $key => $value) 
 		{
 			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
 		}
 
+
 		foreach ($result as $key1 => $value1) 
 		{
+			$po_number_array = array();
 			foreach ($value1 as $key2 => $value2) 
 			{
 				if($key2 == 'paymentBookList')
@@ -76,14 +112,30 @@ class PaymentBook extends CI_Controller
 						foreach ($value3 as $key4 => $value4)
 						{
 							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
+							$po_number_array[] = $value4['po_number'];
 						}
 					} 
+				}
+				if($key2 == 'advancePaymentDetails')
+				{
+					foreach ($value2 as $key3 => $value3)
+					{
+						if(in_array($value3['full_po_number'],$po_number_array))
+						{
+							$result[$key1][$key2][$key3]['isAvailable'] = 'Y';
+						}
+						else
+						{
+							unset($result[$key1][$key2][$key3]);
+						}
+					}
 				}
 			}
 		}
 
 		$finalResponse['result']          = $result;
 		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
+		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -224,7 +276,7 @@ class PaymentBook extends CI_Controller
 
 	public function downloadAsPdfPaymentBookDetails()
 	{
-		$this->data = $_GET;
+		$this->data['supplier_name'] = json_decode($_GET['supplier_name'],1);
 		$finalResponse['supplier_id']  = $this->data['supplier_name'];
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
@@ -253,6 +305,13 @@ class PaymentBook extends CI_Controller
 			$result[$value['payable_month']]['debitNoteList'][] = $value;
 		}
 
+		$advancePaymentDetails = array();
+		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['advancePaymentDetails'][] = $value;
+		}
+
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
 		foreach ($data as $key => $value) 
 		{
@@ -261,6 +320,7 @@ class PaymentBook extends CI_Controller
 
 		foreach ($result as $key1 => $value1) 
 		{
+			$po_number_array = array();
 			foreach ($value1 as $key2 => $value2) 
 			{
 				if($key2 == 'paymentBookList')
@@ -270,9 +330,24 @@ class PaymentBook extends CI_Controller
 						$full_qty = array_sum(array_column($value3,'received'));
 						foreach ($value3 as $key4 => $value4)
 						{
-							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty);
+							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
+							$po_number_array[] = $value4['po_number'];
 						}
 					} 
+				}
+				if($key2 == 'advancePaymentDetails')
+				{
+					foreach ($value2 as $key3 => $value3)
+					{
+						if(in_array($value3['full_po_number'],$po_number_array))
+						{
+							$result[$key1][$key2][$key3]['isAvailable'] = 'Y';
+						}
+						else
+						{
+							unset($result[$key1][$key2][$key3]);
+						}
+					}
 				}
 			}
 		}

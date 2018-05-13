@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-12 19:51:58
+/* Smarty version 3.1.30, created on 2018-05-13 16:28:17
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af6f88673f662_00569604',
+  'unifunc' => 'content_5af81a49bb7646_44490642',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1526134746,
+      1 => 1526208678,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af6f88673f662_00569604 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af81a49bb7646_44490642 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -74,8 +74,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
-			           	<div id="showAddNoteSearch" style="display: none;">
+			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
 			        		<p align="right">
+				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
 				        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>
 				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails()">Download as PDF</button> 
 			        		</p>
@@ -163,6 +164,96 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="update_note_details()">Add Note</button>
         		
+	        </div>
+	    </div>
+	    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="advance_payment_modal">
+	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Add Advance Payment</h4>
+		    </div>
+		    <div class="modal-body">
+		        <div class="row">
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">Supplier Name</label>
+		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="advancePaymentData.supplier_id">
+		                  	  	<option value="">Choose Supplier Name</option>
+		                  	    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_name_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+		                  			<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+		                  	    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+			                </select>
+			            </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">PO Number</label>
+		                    <select class="form-control select2" style="width: 100%;" id="ap_full_po_number" ng-model="advancePaymentData.full_po_number">
+		                  	  	<option value="">Choose PO Number</option>
+		                  		<option ng-repeat="x in getPoNumberAsPerSupplierData" value="{{x.po_number}}">{{x.po_number}}</option>
+			                </select>
+			            </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Date</label>
+		                  <input type="text" ng-model="advancePaymentData.supplier_date" class="form-control" id="ap_supplier_date" placeholder="Choose Date">
+		                </div>
+		            </div>
+
+		         	<div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Pi Number</label>
+		                  <input type="text" ng-model="advancePaymentData.supplier_pi_number" class="form-control" id="ap_supplier_pi_number" placeholder="Enter Supplier Pi Number" ng-change="advancePaymentData.supplier_pi_number = advancePaymentData.supplier_pi_number.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Date</label>
+		                  <input type="text" ng-model="advancePaymentData.date" class="form-control" id="ap_date" placeholder="Choose Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Query</label>
+		                  <input type="text" ng-model="advancePaymentData.query" class="form-control" id="ap_query" placeholder="Enter Query" ng-change="advancePaymentData.query = advancePaymentData.query.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Payable Month</label>
+		                  <input type="text" ng-model="advancePaymentData.payable_month" class="form-control" id="ap_payable_month" placeholder="Choose Payable Month">
+		                </div>
+		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Amount</label>
+		                  <input type="text" ng-model="advancePaymentData.amount" class="form-control" id="ap_amount" placeholder="Enter Amount">
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+	        <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment_action()">Add</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->

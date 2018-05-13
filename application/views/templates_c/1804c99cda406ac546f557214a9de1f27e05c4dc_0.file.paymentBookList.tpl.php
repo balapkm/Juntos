@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-12 20:12:32
+/* Smarty version 3.1.30, created on 2018-05-13 16:28:20
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af6fd58a00614_35680774',
+  'unifunc' => 'content_5af81a4cb587f4_32429387',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1526136141,
+      1 => 1526208925,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af6fd58a00614_35680774 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af81a4cb587f4_32429387 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -299,6 +299,87 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'advancePaymentDetails' && count($_smarty_tpl->tpl_vars['v2']->value) != 0) {?>
+		            <thead >
+		            	<tr>
+		            	<th colspan="25" style="text-align: center;">ADVANCE PAYMENT</th>
+		            	</tr>
+		            </thead>
+		            <thead>
+		            <tr>
+		            	<th>Delete</th>
+		            	<th>S.NO</th>
+		            	<th colspan="3" style="text-align: center;">TYPE</th>
+		            	<th>PO NUMBER</th>
+		            	<th>DATE</th>
+		            	<th>SUPPLIER PI NUMBER</th>
+		            	<th>DATE</th>
+		            	<th colspan="6" style="text-align: center;">QUERY</th>
+		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
+		            	<th>AMOUNT</th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            	<th></th>
+		            </tr>
+		            </thead>
+		            <tbody>
+		            	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v2']->value, 'v3', false, 'k3');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars['v3']->value) {
+?>
+		            	<?php if ($_smarty_tpl->tpl_vars['v3']->value['isAvailable'] == 'Y') {?>
+		            	<tr>
+		            	<td style="text-align: center;">
+	                      	<a href="#" onclick='deleteAdvancePaymentDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v3']->value);?>
+)''>
+					          <span class="glyphicon glyphicon-trash"></span>
+					        </a>
+                      	</td>
+
+                      	<?php $_smarty_tpl->_assignInScope('totalAmount', $_smarty_tpl->tpl_vars['totalAmount']->value-$_smarty_tpl->tpl_vars['v3']->value['amount']);
+?>
+
+		            	<td><?php echo $_smarty_tpl->tpl_vars['k3']->value+1;?>
+</td>
+		            	<td colspan="3" style="text-align: center;">Advance Payment</td>
+		            	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['full_po_number'];?>
+</td>
+		            	<td class="datetd"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v3']->value['supplier_date'],"%d-%m-%Y");?>
+</td>
+		            	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['supplier_pi_number'];?>
+</td>
+		            	<td class="datetd"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v3']->value['date'],"%d-%m-%Y");?>
+</td>
+		            	<td colspan="6" style="text-align: center;"><?php echo $_smarty_tpl->tpl_vars['v3']->value['query'];?>
+</td>
+		            	<td class="datetd" style="background-color: yellow;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v3']->value['payable_month'],"%d-%m-%Y");?>
+</td>
+		            	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['amount'];?>
+</td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	<td></td>
+		            	</tr>
+		            	<?php }?>
+		            	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		            </tbody>
+		            <?php }?>
 		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
 		            <tbody>
 		            	<?php
@@ -336,7 +417,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
-		        
 	        <?php
 }
 }

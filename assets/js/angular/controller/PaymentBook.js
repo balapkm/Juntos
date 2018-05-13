@@ -5,14 +5,14 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#debitnote_date,#creditnote_date,#cheque_date,#dd_date').datepicker({
+    $('#debitnote_date,#creditnote_date,#cheque_date,#dd_date,#ap_date,#ap_supplier_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
       startDate : new Date()
     });
 
-    $('#payable_month,#list_payable_month').datepicker({
+    $('#payable_month,#list_payable_month,#ap_payable_month').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true
@@ -97,6 +97,58 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     
     $scope.add_note = function(){
         $('#debit_credit_note_modal').modal();
+    }
+
+    $scope.advancePaymentData = {};
+    $scope.add_advance_payment = function(){
+        $scope.advancePaymentData = {};
+        $('#advance_payment_modal').modal();
+        $scope.getPoNumberAsPerSupplierData = [];
+        $('#ap_supplier_name').on('select2:select', function (e) {
+            $scope.getPoNumberAsPerSupplierData = [];
+            var data = e.params.data;
+            var service_details = {
+                method_name : "getPoNumberAsPerSupplier",
+                controller_name : "PaymentBook",
+                data : JSON.stringify($scope.advancePaymentData)
+            };
+            commonService.showLoader();
+            httpService.callWebService(service_details).then(function(data){
+                if(data)
+                { 
+                    console.log(data);
+                    $scope.getPoNumberAsPerSupplierData = data;
+                    commonService.hideLoader();
+                }
+                else
+                {
+                    commonService.hideLoader();
+                }
+            });
+            console.log(data);
+        });
+    }
+
+    $scope.add_advance_payment_action = function()
+    {
+        var service_details = {
+            method_name : "addAdvancePaymentAction",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.advancePaymentData)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                $scope.searchAction();
+                validateService.displayMessage('success','Added Successfully','');
+                $('#advance_payment_modal').modal('hide');
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
     }
 
     $scope.editPaymentListAngular = function(data){
@@ -188,8 +240,41 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             });
     }
 
+    $scope.deleteAdvancePaymentDetails = function(data){
+        var service_details = {
+            method_name : "deleteAdvancePaymentDetails",
+            controller_name : "PaymentBook",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete)
+            {
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    { 
+                        $scope.searchAction();
+                        validateService.displayMessage('success','Data Removed Successfully','');
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Delete Error',"");
+                    }
+                });
+            }
+        });
+    }
+
     $scope.downloadAsPdfPaymentBookDetails = function(){
-        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name'];
+        console.log($scope.generatePoData);
+        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+encodeURIComponent(JSON.stringify($scope.generatePoData['supplier_name']));
         window.open(url);
     }
 
@@ -286,6 +371,12 @@ function editPaymentList(data){
 function deleteDepositDetails(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.deleteDepositDetailsFunction(data);
+    scope.$apply();
+}
+
+function deleteAdvancePaymentDetails(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.deleteAdvancePaymentDetails(data);
     scope.$apply();
 }
 

@@ -27,9 +27,28 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function getPoNumberAsPerSupplier($data)
+    {
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    `po_generated_request_details` 
+                WHERE
+                    supplier_id = ".$data['supplier_id']." AND
+                    outstanding_type = 'M'
+                    GROUP BY unit,type,po_number";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function insert_debit_note_details($data){
         $data['created_date'] = date('Y-m-d');
         return $this->db->insert('debit_note_details',$data);
+    }
+
+    public function addAdvancePayment($data)
+    {
+        return $this->db->insert('advance_payment_details',$data);
     }
 
     public function updatePaymentListData($data)
@@ -68,8 +87,21 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function getAdvancePaymentDetails($data)
+    {
+        $sql = "SELECT * FROM advance_payment_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function deleteDebitNoteData($data){
         $result = $this->db->delete('debit_note_details',array('s_no' => $data['s_no']));
+        return $result;
+    }
+
+    public function deleteAdvancePaymentDetails($data)
+    {
+        $result = $this->db->delete('advance_payment_details',array('advance_payment_id' => $data['advance_payment_id']));
         return $result;
     }
 
