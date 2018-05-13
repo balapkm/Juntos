@@ -80,6 +80,24 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function deletePaymentList($data)
+    {
+        $sql = "UPDATE 
+                    po_generated_request_details 
+                SET 
+                    bill_amount=0,
+                    bill_number='',
+                    bill_date='',
+                    payable_month = '',
+                    s_no = '',
+                    query = ''
+                WHERE 
+                    bill_number = '".$data['bill_number']."' AND
+                    outstanding_type = 'B'";
+        $data  = $this->db->query(trim($sql));
+        return $data;
+    }
+
     public function getDebitNoteListData($data){
 
         $sql = "SELECT * FROM debit_note_details WHERE supplier_id IN (".implode(",",$data['supplier_name']).")";

@@ -1,7 +1,7 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
-	$('#supplier_table,#material_table,#other_master_id').DataTable({
+	$('#supplier_table').DataTable({
 			        dom: 'Brfrtip',
 			        buttons: [
 			            'copy', 
@@ -10,6 +10,17 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 					        extend: 'excel',
 					        exportOptions: {
 					            columns: 'th:not(:last-child)'
+					        }
+					    }]});
+	$('#material_table').DataTable({
+			        dom: 'Brfrtip',
+			        buttons: [
+			            'copy', 
+			            'csv',
+			            {
+					        extend: 'excel',
+					        exportOptions: {
+					            columns: [0,1,2,3,4,5,6,7,8,9,10,11,12]
 					        }
 					    }]});
 	$('.modal-backdrop').css('display','none');

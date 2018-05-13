@@ -32,10 +32,10 @@
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
-				          <th>BALANCE</th>
 				          <th>DD Number</th>
 				          <th>DD Date</th>
 				          <th>DD Amount</th>
+				          <th>BALANCE</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -221,10 +221,10 @@
 				        	<td>[[$v3.cheque_no]]</td>
 				        	<td class="datetd">[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
 				        	<td>[[$v3.cheque_amount]]</td>
-				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
 				        	<td>[[$v3.dd_number]]</td>
 				        	<td class="datetd">[[$v3.dd_date]]</td>
 				        	<td>[[$v3.dd_amount]]</td>
+				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
 				        </tr>
 				        [[/foreach]]
 		            </tbody>

@@ -42,10 +42,10 @@
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
-				          <th>BALANCE</th>
 				          <th>DD Number</th>
 				          <th>DD Date</th>
 				          <th>DD Amount</th>
+				          <th>BALANCE</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -57,6 +57,9 @@
 						            <td rowspan="[[$v3|@count]]" style="text-align: center;">
 					            		<a href="#" onclick='editPaymentList([[$v4|@json_encode]])'>
 								          <span class="glyphicon glyphicon-edit"></span>
+								        </a>
+								        <a href="#" onclick='deletePaymentList([[$v4|@json_encode]])'>
+								          <span class="glyphicon glyphicon-trash"></span>
 								        </a>
 									</td>
 						          	<td rowspan="[[$v3|@count]]">[[$v4.s_no]]</td>
@@ -248,10 +251,10 @@
 				        	<td>[[$v3.cheque_no]]</td>
 				        	<td class="datetd">[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
 				        	<td>[[$v3.cheque_amount]]</td>
-				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
 				        	<td>[[$v3.dd_number]]</td>
 				        	<td class="datetd">[[$v3.dd_date]]</td>
 				        	<td>[[$v3.dd_amount]]</td>
+				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
 				        </tr>
 				        [[/foreach]]
 		            </tbody>

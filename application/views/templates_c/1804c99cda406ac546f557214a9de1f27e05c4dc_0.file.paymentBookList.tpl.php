@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-13 16:28:20
+/* Smarty version 3.1.30, created on 2018-05-13 18:47:52
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af81a4cb587f4_32429387',
+  'unifunc' => 'content_5af83b00291732_78363939',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1526208925,
+      1 => 1526217469,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af81a4cb587f4_32429387 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af83b00291732_78363939 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -86,10 +86,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
-				          <th>BALANCE</th>
 				          <th>DD Number</th>
 				          <th>DD Date</th>
 				          <th>DD Amount</th>
+				          <th>BALANCE</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -112,6 +112,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 					            		<a href="#" onclick='editPaymentList(<?php echo json_encode($_smarty_tpl->tpl_vars['v4']->value);?>
 )'>
 								          <span class="glyphicon glyphicon-edit"></span>
+								        </a>
+								        <a href="#" onclick='deletePaymentList(<?php echo json_encode($_smarty_tpl->tpl_vars['v4']->value);?>
+)'>
+								          <span class="glyphicon glyphicon-trash"></span>
 								        </a>
 									</td>
 						          	<td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
@@ -400,13 +404,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 </td>
 				        	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['cheque_amount'];?>
 </td>
-				        	<td><?php echo $_smarty_tpl->tpl_vars['totalAmount']->value-$_smarty_tpl->tpl_vars['v3']->value['cheque_amount'];?>
-</td>
 				        	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['dd_number'];?>
 </td>
 				        	<td class="datetd"><?php echo $_smarty_tpl->tpl_vars['v3']->value['dd_date'];?>
 </td>
 				        	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['dd_amount'];?>
+</td>
+				        	<td><?php echo $_smarty_tpl->tpl_vars['totalAmount']->value-$_smarty_tpl->tpl_vars['v3']->value['cheque_amount'];?>
 </td>
 				        </tr>
 				        <?php

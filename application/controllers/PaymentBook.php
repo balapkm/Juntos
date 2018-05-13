@@ -55,6 +55,11 @@ class PaymentBook extends CI_Controller
 		return $this->PaymentBookQuery->deleteAdvancePaymentDetails($this->data);	
 	}
 
+	public function deletePaymentList()
+	{
+		return $this->PaymentBookQuery->deletePaymentList($this->data);
+	}
+
 	public function searchPaymentBookAction()
 	{
 		$finalResponse['supplier_id']  = $this->data['supplier_name'];
@@ -261,7 +266,7 @@ class PaymentBook extends CI_Controller
 	public function addNoteDetails()
 	{
 		$addData = array(
-				"supplier_id" => $this->data['supplier_id'],
+				"supplier_id" => $this->data['supplier_id'][0],
 				"debit_note_no" =>  $this->data['debitnote_no'],
 				"debit_note_date" => $this->data['debitnote_date'],
 				"type" => $this->data['type'],

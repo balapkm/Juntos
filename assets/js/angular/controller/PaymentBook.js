@@ -203,6 +203,39 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         });
     }
 
+    $scope.deletePaymentListAngular = function(data)
+    {
+        var service_details = {
+            method_name : "deletePaymentList",
+            controller_name : "PaymentBook",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+            if(willDelete)
+            {
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    { 
+                        $scope.searchAction();
+                        validateService.displayMessage('success','Data Removed Successfully','');
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Delete Error',"");
+                    }
+                });
+            }
+        });
+    }
+
     $scope.deleteDepositDetailsFunction = function(data){
 
         $scope.deleteDepositDetails ={};
@@ -365,6 +398,12 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 function editPaymentList(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.editPaymentListAngular(data);
+    scope.$apply();
+}
+
+function deletePaymentList(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.deletePaymentListAngular(data);
     scope.$apply();
 }
 
