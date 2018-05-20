@@ -283,9 +283,32 @@ class PoGenerateQuery extends CI_Model
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
-        // print_r($sql);exit;
-        $data  = $this->db->query(trim($sql))->result_array();
-        return $data;
+
+        
+        $result1  = $this->db->query(trim($sql))->result_array();
+
+        if($data['outstanding_type'] == 'B')
+        {
+            $sql     .= " GROUP BY prd.unit,prd.type,prd.po_number,prd.po_date";
+            $explode  = explode("FROM",$sql);
+
+            $explode[0] .= ",sum(prd.received) as total_received ";
+            $sql      = implode("FROM",$explode);
+            $result2  = $this->db->query(trim($sql))->result_array();
+            
+            foreach ($result1 as $key1 => $value1) 
+            {
+                foreach ($result2 as $key2 => $value2) 
+                {
+                    if($value1['unit'] == $value2['unit'] && $value1['type'] == $value2['type'] && $value1['po_number'] == $value2['po_number'] && $value1['po_date'] == $value2['po_date'])
+                    {
+                        $result1[$key1]['total_received'] = $value2['total_received'];
+                    }
+                }
+            }
+        }
+
+        return $result1;
     }
 
     public function getMaterialDetailsAsPerSupplier($supplier_id){

@@ -178,7 +178,7 @@
 			                        	<td ng-if="x.received_date !== '0000-00-00'">{{x.received_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td ng-if="x.received_date === '0000-00-00'"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
-			                        	<td ng-if="x.outstanding_type === 'B'">{{x.received - x.qty}}</td>
+			                        	<td ng-if="x.outstanding_type === 'B'">{{x.total_received - x.qty}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
 			                        	<td>{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.delay_day}}</td>
