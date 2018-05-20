@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 20:25:27
+/* Smarty version 3.1.30, created on 2018-05-20 11:42:40
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae87fdf3ad5a0_27160103',
+  'unifunc' => 'content_5b0111d83a3056_93616710',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd70a9e9ba2e763c1079343487b88765018068484' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl',
-      1 => 1525186522,
+      1 => 1526796528,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae87fdf3ad5a0_27160103 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0111d83a3056_93616710 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -101,6 +101,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         	<table id="example" class="table table-bordered table-striped" >
                 <thead>
                     <tr style="font-weight: bold;">
+                      <th>Edit</th>
                       <th>S.NO</th>
                       <th>PAGE NO</th>
                       <th>SUPPLIER</th>
@@ -111,10 +112,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in paymentStatmentSearchData">
+                    	<td style="text-align: center;" ng-if="!$last">
+		            		<a href="#" ng-click='editpaymentStatment(x)'>
+					          <span class="glyphicon glyphicon-edit"></span>
+					        </a>
+						</td>
                     	<td ng-if="!$last">{{$index+1}}</td>
                     	<td ng-if="$last"></td>
-                    	<td></td>
-                    	<td>{{x.supplier_name}}</td>
+                    	<td ng-if="$last"></td>
+                    	<td>{{x.page_no}}</td>
+                    	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
+                    	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
                     	<td style="font-weight: bold;">{{x.cheque_amount}}</td>
@@ -124,5 +132,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     	</div>
     </div>
 </section>
-<?php }
+
+
+<div class="modal fade" id="edit_payment_statment">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit Payment Statement Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Page No</label>
+		                  <input type="text" class="form-control" id="edit_page_no" ng-model="editPaymentStatement.page_no" placeholder="Enter Page No">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="updateEditPaymentStatement()">Update</button>
+	        </div>
+		</div>
+	</div>
+</div><?php }
 }

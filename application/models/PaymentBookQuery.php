@@ -114,6 +114,10 @@ class PaymentBookQuery extends CI_Model
 
     public function getAdvancePaymentDetails($data)
     {
+        if(!empty($data['payment_statement_supplier_id']))
+        {
+            $data['supplier_name'] = $data['payment_statement_supplier_id'];
+        }
         $sql = "SELECT * FROM advance_payment_details WHERE supplier_id = ".$data['supplier_name'];
         $data  = $this->db->query($sql)->result_array();
         return $data;

@@ -240,26 +240,22 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
-		            [[if $k2 eq 'chequeNumberDetails']]
-		            <tbody>
-		            	[[foreach from=$v2 key=k3 item=v3]]
+	        [[/foreach]]
+	        		<tbody>
 		                <tr style="font-weight: bold;">
 				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
 				        	<td><b>[[$totalAmount]]</b></td>
-				        	<td>[[$v3.deduction]]</td>
-				        	<td>[[$v3.cheque_no]]</td>
-				        	<td class="datetd">[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
-				        	<td>[[$v3.cheque_amount]]</td>
-				        	<td>[[$v3.dd_number]]</td>
-				        	<td class="datetd">[[$v3.dd_date]]</td>
-				        	<td>[[$v3.dd_amount]]</td>
-				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
+				        	<td>[[$v2[0].deduction]]</td>
+				        	<td>[[$v2[0].cheque_no]]</td>
+				        	<td class="datetd">[[$v2[0].cheque_date|date_format:"%d-%m-%Y"]]</td>
+				        	<td>[[$v2[0].cheque_amount]]</td>
+				        	<td>[[$v2[0].dd_number]]</td>
+				        	<td class="datetd">[[$v2[0].dd_date]]</td>
+				        	<td>[[$v2[0].dd_amount]]</td>
+				        	<td>[[$totalAmount - $v2[0].cheque_amount]]</td>
 				        </tr>
-				        [[/foreach]]
 		            </tbody>
-		            [[/if]]
-	        [[/foreach]]
 		</table>
 	</div>
 [[/foreach]]

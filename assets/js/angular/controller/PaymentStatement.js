@@ -26,8 +26,12 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
             buttons: [
                 'copy', 
                 'csv',
-                'excel',
-                'pdf'
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: 'th:not(:first-child)'
+                    }
+                }
             ]
         });
     }
@@ -59,6 +63,38 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
                 validateService.displayMessage('error','No data found..',"");
             }
         });
+    }
+
+    $scope.updateEditPaymentStatement = function()
+    {
+        var service_details = {
+            method_name : "updateEditPaymentStatement",
+            controller_name : "PaymentStatement",
+            data : JSON.stringify($scope.editPaymentStatement)
+        };
+
+        commonService.showLoader();
+        httpService.callWebService(service_details).then(function(data){
+            commonService.hideLoader();
+            if(data)
+            { 
+                validateService.displayMessage('success','Updated Successfully','');
+                $scope.searchAction();
+                $('#edit_payment_statment').modal('hide');
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
+
+    $scope.editpaymentStatment = function(data)
+    {
+        $scope.editPaymentStatement = {};
+        $scope.editPaymentStatement['cheque_number_id'] = data.cheque_number_id;
+        $scope.editPaymentStatement['page_no'] = data.page_no;
+        $('#edit_payment_statment').modal('show');
     }
 
 });

@@ -45,7 +45,9 @@ td
         		<tr style="font-weight: bold;font-size: 10px;">
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%">HSN CODE</td>
+		         	[[/if]]
 		         	<td align="center" width="10%">QTY</td>
 		         	<td align="center" width="10%">UOM</td>
 		         	<td align="center" width="10%">PRICE</td>
@@ -70,7 +72,9 @@ td
 			            </div>
 			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
 		         	</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
+		         	[[/if]]
 		         	<td align="center" width="10%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_uom]]</td>
 		         	<td align="center" width="10%" class="own-td-2">
@@ -131,7 +135,9 @@ td
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="35%" class="own-td-2">[[$v.name]]</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%" class="own-td-2">[[$v.hsn_code]]</td>
+		         	[[/if]]
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	<td align="center" width="10%"  class="own-td-2"></td>
 		         	[[if $v.amount_type eq 'AMOUNT']]

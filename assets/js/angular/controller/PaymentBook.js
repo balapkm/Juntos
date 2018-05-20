@@ -17,7 +17,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     $('#payable_month,#list_payable_month,#ap_payable_month').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
-      todayHighlight : true
+      todayHighlight : true,
+      startDate : new Date()
     });
 
     $('.select2').select2();

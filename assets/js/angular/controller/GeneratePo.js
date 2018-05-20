@@ -48,7 +48,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
             $('a[href="#'+tab_switch_name+'"]').trigger('click');
         }
-    },100);
+    },500);
 
 
     $('#search_year_po').datepicker({
@@ -122,6 +122,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
           po_number : "",
           final_po_data : {}
         };
+        $scope.searchPoBasedOnYear();
     }
 
     $scope.po_edit_reset = function(){
@@ -153,11 +154,33 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $scope.getPoNumber = function()
     {
         if(($scope.generatePoData.unit !=="") && ($scope.generatePoData.type !=="")){
-            console.log($scope.po_number_details);
             var $object = $scope.po_number_details[$scope.generatePoData.unit][$scope.generatePoData.type];
             $scope.generatePoData.po_number     = $object['format']+$object['po_current_value'];
             $scope.generatePoData.po_raw_number = $object['po_current_value'];
         }
+    }
+
+    $scope.searchPoBasedOnYear = function()
+    {
+        if($scope.searchPoData.po_year !== "")
+        {
+            $scope.searchPoBasedOnYearData = [];
+            commonService.showLoader();
+            var service_details = {
+                method_name : "searchPoBasedOnYear",
+                controller_name : "GeneratePo",
+                data : JSON.stringify($scope.searchPoData)
+            };
+            httpService.callWebService(service_details).then(function(data){
+                commonService.hideLoader();
+                if(data)
+                { 
+                    $scope.searchPoBasedOnYearData = data;
+                    console.log(data);
+                }
+            });
+        }
+        console.log($scope.searchPoData);return;
     }
 
     $scope.clearRedMark = function(id)
@@ -181,6 +204,18 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             validateService.addErrorTag(['material_id']);
         }
 
+        $scope.generatePoData['quantity'] = [];
+        $('#add_quantity_details').modal('show');
+        // console.log($scope.generatePoData);
+        return false;
+    }
+
+    $scope.updateQuantityGeneratePo = function()
+    {
+        for(var i=0;i<$scope.generatePoData['quantity'].length;i++)
+        {
+            if(validateService.blank($scope.generatePoData['quantity'][i],"Please Enter Quantity"+i,"edit_quantity_"+i)) return false;
+        }
         var service_details = {
             method_name : "generatePoData",
             controller_name : "GeneratePo",
@@ -195,6 +230,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
                 validateService.displayMessage('success','Added Successfully','');
                 $state.reload();
                 tab_switch_name = "tab_2";
+                $('#add_quantity_details').modal('hide');
             }
             else
             {
@@ -269,7 +305,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
     $scope.updateOtherPoDetails = function()
     {
-        console.log($scope.editOtherDetails);
         var service_details = {
             method_name : "editPoOtherDetailsAction",
             controller_name : "GeneratePo",

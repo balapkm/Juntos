@@ -75,6 +75,20 @@
 		          <td><b>[[$grandAmount]]</b></td>
 		        </tr>
 		        [[/if]]
+		        [[if $advancePaymentData|@count neq 0]]
+		        [[foreach from=$advancePaymentData key=k1 item=v1]]
+		    	<tr>
+		    	  [[assign var=grandAmount value=$grandAmount - $v1.amount]]
+		          <td>Advance Payment - [[$v1.full_po_number]]</td>	
+		          <td>[[$v1.date]]</td>
+		          <td><b>[[$v1.amount]]</b></td>
+		        </tr>
+		        [[/foreach]]
+		        <tr>
+		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+		          <td><b>[[$grandAmount]]</b></td>
+		        </tr>
+		        [[/if]]
 		    </tbody>
 		</table>
 	</div>

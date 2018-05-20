@@ -30,17 +30,22 @@ class PoGenerateQuery extends CI_Model
         }
     }
 
-    public function getUniquePoNumber()
+    public function getUniquePoNumber($year="")
     {
         $sql = "SELECT 
                     unit,type,po_number
                 FROM
                     po_generated_request_details
                 WHERE 
-                    outstanding_type = 'M'
-                GROUP BY po_number,unit,type 
-                ORDER BY unit,type,po_number";
+                    outstanding_type = 'M'";
 
+        if(!empty($year))
+        {
+            $sql .= " AND YEAR(po_date) = ".$year;
+        }
+
+        $sql .= " GROUP BY po_number,unit,type 
+                ORDER BY unit,type,po_number";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

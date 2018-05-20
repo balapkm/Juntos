@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-12 10:52:25
+/* Smarty version 3.1.30, created on 2018-05-15 21:40:23
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af67a118e12a2_07277843',
+  'unifunc' => 'content_5afb066f392575_87295726',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1526005182,
+      1 => 1526400537,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af67a118e12a2_07277843 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5afb066f392575_87295726 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -117,7 +117,9 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         		<tr style="font-weight: bold;">
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%">HSN CODE</td>
+		         	<?php }?>
 		         	<td align="center" width="5%">QTY</td>
 		         	<td align="center" width="7%">UOM</td>
 		         	<td align="center" width="8%">PRICE</td>
@@ -166,8 +168,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 		         	</td>
 		         	<!-- <td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
 </td> -->
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
+		         	<?php }?>
 		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
 </td>
 		         	<td align="center" width="7%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
@@ -283,7 +287,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         		<tr>
         			<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="20%" class="own-td-3"></td>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%" class="own-td-3"></td>
+		         	<?php }?>
 		         	<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="7%" class="own-td-3"></td>
 		         	<td align="center" width="8%" class="own-td-3"></td>
@@ -324,8 +330,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
         			<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="20%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
 </td>
+		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['hsn_code'];?>
 </td>
+		         	<?php }?>
 		         	<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="7%"  class="own-td-2"></td>
 		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>

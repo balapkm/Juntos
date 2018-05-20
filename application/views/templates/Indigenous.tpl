@@ -81,7 +81,9 @@
         		<tr style="font-weight: bold;">
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%">HSN CODE</td>
+		         	[[/if]]
 		         	<td align="center" width="5%">QTY</td>
 		         	<td align="center" width="7%">UOM</td>
 		         	<td align="center" width="8%">PRICE</td>
@@ -117,7 +119,9 @@
 			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
 		         	</td>
 		         	<!-- <td align="center" width="20%" class="own-td-2" style="text-align:left;word-wrap: break-word;white-space: pre;">[[$v.material_name]]</td> -->
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
+		         	[[/if]]
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
 		         	<td align="center" width="8%" class="own-td-2">
@@ -196,7 +200,9 @@
         		<tr>
         			<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="20%" class="own-td-3"></td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%" class="own-td-3"></td>
+		         	[[/if]]
 		         	<td align="center" width="5%"  class="own-td-3"></td>
 		         	<td align="center" width="7%" class="own-td-3"></td>
 		         	<td align="center" width="8%" class="own-td-3"></td>
@@ -227,7 +233,9 @@
         		<tr>
         			<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="20%" class="own-td-2">[[$v.name]]</td>
+		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%" class="own-td-2">[[$v.hsn_code]]</td>
+		         	[[/if]]
 		         	<td align="center" width="5%"  class="own-td-2"></td>
 		         	<td align="center" width="7%"  class="own-td-2"></td>
 		         	[[if $v.amount_type eq 'AMOUNT']]

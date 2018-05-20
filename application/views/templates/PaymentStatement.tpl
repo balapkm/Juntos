@@ -66,6 +66,7 @@
         	<table id="example" class="table table-bordered table-striped" >
                 <thead>
                     <tr style="font-weight: bold;">
+                      <th>Edit</th>
                       <th>S.NO</th>
                       <th>PAGE NO</th>
                       <th>SUPPLIER</th>
@@ -76,10 +77,17 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in paymentStatmentSearchData">
+                    	<td style="text-align: center;" ng-if="!$last">
+		            		<a href="#" ng-click='editpaymentStatment(x)'>
+					          <span class="glyphicon glyphicon-edit"></span>
+					        </a>
+						</td>
                     	<td ng-if="!$last">{{$index+1}}</td>
                     	<td ng-if="$last"></td>
-                    	<td></td>
-                    	<td>{{x.supplier_name}}</td>
+                    	<td ng-if="$last"></td>
+                    	<td>{{x.page_no}}</td>
+                    	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
+                    	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
                     	<td style="font-weight: bold;">{{x.cheque_amount}}</td>
@@ -89,3 +97,30 @@
     	</div>
     </div>
 </section>
+
+
+<div class="modal fade" id="edit_payment_statment">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit Payment Statement Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Page No</label>
+		                  <input type="text" class="form-control" id="edit_page_no" ng-model="editPaymentStatement.page_no" placeholder="Enter Page No">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="updateEditPaymentStatement()">Update</button>
+	        </div>
+		</div>
+	</div>
+</div>

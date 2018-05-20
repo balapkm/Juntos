@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-12 12:09:23
+/* Smarty version 3.1.30, created on 2018-05-19 20:32:40
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af68c1b546fa7_73898823',
+  'unifunc' => 'content_5b003c90af0016_53358335',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1526107052,
+      1 => 1526742152,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af68c1b546fa7_73898823 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b003c90af0016_53358335 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -130,35 +130,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	              	<div class="tab-pane" id="tab_2">
 	              		<div class="row">
 	              			<div class="col-lg-3"></div>
+	              			<div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Year</label>
+				                  <input type="text" class="form-control" id="search_year_po" ng-model="searchPoData.po_year" placeholder="Choose Po Date" ng-change="searchPoBasedOnYear()">
+				                </div>
+				            </div>
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">PO Number</label>
 				                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="searchPoData.po_number" ng-change="clearRedMark('po_number_search')">
 				                  	<option value="">Choose Po Number</option>
-			                  	  	<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['po_unique_number']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-				                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['unit'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['po_number'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
-</option>
-				                  	<?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
+				                  	<option ng-repeat="x in searchPoBasedOnYearData" value="{{x.unit+'|'+x.type+'|'+x.po_number+'|'+x.full_po_number}}">{{x.full_po_number}}</option>
 				                  </select>
-				                </div>
-				            </div>
-				            <div class="col-lg-3">
-				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Po Year</label>
-				                  <input type="text" class="form-control" id="search_year_po" ng-model="searchPoData.po_year" placeholder="Choose Po Date">
 				                </div>
 				            </div>
 				            <div class="col-lg-3"></div>
@@ -544,6 +528,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="updateOtherPoDetails()">Update</button>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add_quantity_details">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Edit Quantity Details</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+			    	<div class="col-lg-4" ng-repeat="x in generatePoData['material_id']">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Quantity{{$index+1}}</label>
+		                  <input type="text" class="form-control" id="edit_quantity_{{$index+1}}" ng-model="generatePoData.quantity[$index]" placeholder="Enter Quantity{{$index+1}}">
+		                </div>
+		            </div>
+	            </div>
+		    </div>
+		    <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="updateQuantityGeneratePo()">Update</button>
 	        </div>
 		</div>
 	</div>

@@ -43,6 +43,16 @@ class GeneratePo extends CI_Controller
 		return $po_number_details;
 	}
 
+	public function searchPoBasedOnYear()
+	{
+		$data =  $this->PoGenerateQuery->getUniquePoNumber($this->data['po_year']);
+		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+		foreach ($data as $key => $value) {
+			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
+	}
+
 	public function editPoOtherDetailsAction()
 	{
 		$ids = $this->data['po_ids'];
@@ -61,6 +71,7 @@ class GeneratePo extends CI_Controller
 
 	public function generatePoData()
 	{
+		// print_r($this->data);exit;
 		$finalInsertData = array();
 
 		$po_raw_number   = $this->data['po_raw_number'];
@@ -68,16 +79,18 @@ class GeneratePo extends CI_Controller
 		$this->data['po_number'] = $po_raw_number;
 		$material_id = $this->data['material_id'];
 		unset($this->data['material_id']);
+		$quantity = $this->data['quantity'];
+		unset($this->data['quantity']);
 
 		$getMaterialdetails = $this->PoMasterEntryQuery->get_material_entry_in_array($material_id);
-		
+		$count = 0;
 		foreach ($getMaterialdetails as $key => $value) {
 			$finalInsertData[$key]                  = $this->data;
 			$finalInsertData[$key]['material_id']       = $value['material_id'];
 			$finalInsertData[$key]['material_master_id']= $value['material_master_id'];
 			$finalInsertData[$key]['material_name']     = $value['material_name'];
 			$finalInsertData[$key]['material_hsn_code'] = $value['material_hsn_code'];
-			$finalInsertData[$key]['qty'] = 0;
+			$finalInsertData[$key]['qty'] = $quantity[$count];
 			$finalInsertData[$key]['material_uom'] = $value['material_uom'];
 			$finalInsertData[$key]['currency'] = $value['currency'];
 			$finalInsertData[$key]['price'] = $value['price'];
@@ -94,6 +107,7 @@ class GeneratePo extends CI_Controller
 			{
 				return false;
 			}
+			$count++;
 		}
 
 		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Import')

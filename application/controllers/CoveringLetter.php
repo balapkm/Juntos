@@ -11,6 +11,7 @@ class CoveringLetter extends CI_Controller
 		$this->load->library('Mysmarty');
 		$this->load->model('PoGenerateQuery');
 		$this->load->model('PaymentStatementQuery');
+		$this->load->model('PaymentBookQuery');
 		$this->load->config('application');
 	}
 
@@ -25,15 +26,35 @@ class CoveringLetter extends CI_Controller
 		$data       = $this->PaymentStatementQuery->getCoverLetterData($this->data);
 		$extraData  = $this->PaymentStatementQuery->getExtraBillAmountData($this->data);
 		$chequeData = $this->PaymentStatementQuery->getChequeBillAmountData($this->data);
+		$advancePaymentDetails = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		
+		$po_number_array = array();
+		foreach ($data as $key => $value) 
+		{
+			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
+			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
+			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			$po_number_array[]         = $data[$key]['po_number'];
+		}
+
 		if(count($data) == 0)
 		{
 			return false;
+		}
+
+		foreach ($advancePaymentDetails as $key => $value) 
+		{
+			if(!in_array($value['full_po_number'],$po_number_array))
+			{
+				unset($advancePaymentDetails[$key]);
+			}
 		}
 
 		$finalResponse         = array();
 		$finalResponse['data']       = $data;
 		$finalResponse['extraData']  = $extraData;
 		$finalResponse['chequeData'] = $chequeData;
+		$finalResponse['advancePaymentData'] = $advancePaymentDetails;
 
 		$template_name = 'CoveringLetterPrint.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
@@ -46,15 +67,35 @@ class CoveringLetter extends CI_Controller
 		$data       = $this->PaymentStatementQuery->getCoverLetterData($this->data);
 		$extraData  = $this->PaymentStatementQuery->getExtraBillAmountData($this->data);
 		$chequeData = $this->PaymentStatementQuery->getChequeBillAmountData($this->data);
+		$advancePaymentDetails = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		
+		$po_number_array = array();
+		foreach ($data as $key => $value) 
+		{
+			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
+			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
+			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			$po_number_array[]         = $data[$key]['po_number'];
+		}
+
 		if(count($data) == 0)
 		{
 			return false;
+		}
+
+		foreach ($advancePaymentDetails as $key => $value) 
+		{
+			if(!in_array($value['full_po_number'],$po_number_array))
+			{
+				unset($advancePaymentDetails[$key]);
+			}
 		}
 
 		$finalResponse         = array();
 		$finalResponse['data']       = $data;
 		$finalResponse['extraData']  = $extraData;
 		$finalResponse['chequeData'] = $chequeData;
+		$finalResponse['advancePaymentData'] = $advancePaymentDetails;
 
 		$template_name = 'CoveringLetterPrint_download.tpl';
 

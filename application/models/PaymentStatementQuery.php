@@ -13,8 +13,11 @@ class PaymentStatementQuery extends CI_Model
         $sql = "SELECT
                     sd.origin,
                     sd.supplier_name,
+                    sd.payment_to,
                     sd.payment_type,
-                    cnd.cheque_amount
+                    cnd.cheque_amount,
+                    cnd.page_no,
+                    cnd.cheque_number_id
                 FROM
                     cheque_number_details cnd,
                     supplier_details sd
@@ -71,6 +74,14 @@ class PaymentStatementQuery extends CI_Model
                     cnd.payable_month = '".$data['payment_statement_date']."'";
         $data  = $this->db->query($sql)->result_array();
         return $data;
+    }
+
+    public function updateEditPaymentStatement($data)
+    {
+        $id     = $data['cheque_number_id'];
+        unset($data['cheque_number_id']);
+        $result = $this->db->update('cheque_number_details',$data, array('cheque_number_id' => $id));
+        return $result;
     }
 }
 

@@ -31,4 +31,9 @@ class PaymentStatement extends CI_Controller
 		$data[]['cheque_amount'] = array_sum(array_column($data,'cheque_amount'));
 		return $data;
 	}
+
+	public function updateEditPaymentStatement()
+	{
+		return $this->PaymentStatementQuery->updateEditPaymentStatement($this->data);
+	}
 }

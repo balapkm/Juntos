@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 23:47:24
+/* Smarty version 3.1.30, created on 2018-05-19 19:19:09
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae8af3461eb20_59048905',
+  'unifunc' => 'content_5b002b554cc4a2_11547993',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '10c8ac8f4ed58953b09ea42ce8de7828e7d907dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint.tpl',
-      1 => 1525198247,
+      1 => 1526737745,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae8af3461eb20_59048905 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b002b554cc4a2_11547993 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <div>
@@ -78,9 +78,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	</div>
 	<div style="margin-top: 50px;margin-left: 20px;">
 		<h5><b>DEAR SIR,</b></h5>
+		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
+		<h5 style="text-indent: 50px;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+. <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
+ (<span id="numberToWord"></span>) TOWARDS YOUR FOLLOWING INVOICES.</h5>
+		<?php } else { ?>
 		<h5 style="text-indent: 50px;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 . <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
  (<span id="numberToWord"></span>) TOWARDS YOUR FOLLOWING INVOICES.</h5>
+		<?php }?>
 	</div>
 	<div style="width: 80%;margin:auto;margin-top: 20px;">
 		<table class="coveringLetterTable">
@@ -146,6 +152,34 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </b></td>
 		        </tr>
 		        <?php }?>
+		        <?php if (count($_smarty_tpl->tpl_vars['advancePaymentData']->value) != 0) {?>
+		        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['advancePaymentData']->value, 'v1', false, 'k1');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
+?>
+		    	<tr>
+		    	  <?php $_smarty_tpl->_assignInScope('grandAmount', $_smarty_tpl->tpl_vars['grandAmount']->value-$_smarty_tpl->tpl_vars['v1']->value['amount']);
+?>
+		          <td>Advance Payment - <?php echo $_smarty_tpl->tpl_vars['v1']->value['full_po_number'];?>
+</td>	
+		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['date'];?>
+</td>
+		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+</b></td>
+		        </tr>
+		        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		        <tr>
+		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+		          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+</b></td>
+		        </tr>
+		        <?php }?>
 		    </tbody>
 		</table>
 	</div>
@@ -155,9 +189,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		<h5 style="text-align: right;margin-right: 20px;margin-top: -50px"><b>YOURS FAITYFULLY</b></h5>
 		<h5 style="text-align: right;margin-right: 20px;"><b>FOR T.M.ABDUL RAHMAN & SONS</b></h5>
 		<h5 style="text-align: right;margin-right: 20px;margin-top: 80px;"><b>PARTNER / MANAGER</b></h5>
+		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
+		<h5 style="margin-top: -25px"><b>ENCLOSED DD NO. <?php echo $_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'];?>
+ DATED <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_date'],"%d-%m-%Y");?>
+</b></h5>
+		<?php } else { ?>
 		<h5 style="margin-top: -25px"><b>ENCLOSED CHEQUE NO. <?php echo $_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_no'];?>
  DATED <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_date'],"%d-%m-%Y");?>
 </b></h5>
+		<?php }?>
 	</div>
 </div>
 <style>

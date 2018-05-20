@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-12 20:22:50
+/* Smarty version 3.1.30, created on 2018-05-19 19:21:44
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af6ffc275e517_70075254',
+  'unifunc' => 'content_5b002bf0dc6c37_67911586',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1526136753,
+      1 => 1526737778,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af6ffc275e517_70075254 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b002bf0dc6c37_67911586 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -132,6 +132,34 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
                     <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> TDS
                     <?php }?></td>	
 		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+</td>
+		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+</b></td>
+		        </tr>
+		        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		        <tr>
+		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+		          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+</b></td>
+		        </tr>
+		        <?php }?>
+		        <?php if (count($_smarty_tpl->tpl_vars['advancePaymentData']->value) != 0) {?>
+		        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['advancePaymentData']->value, 'v1', false, 'k1');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
+?>
+		    	<tr>
+		    	  <?php $_smarty_tpl->_assignInScope('grandAmount', $_smarty_tpl->tpl_vars['grandAmount']->value-$_smarty_tpl->tpl_vars['v1']->value['amount']);
+?>
+		          <td>Advance Payment - <?php echo $_smarty_tpl->tpl_vars['v1']->value['full_po_number'];?>
+</td>	
+		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['date'];?>
 </td>
 		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
 </b></td>

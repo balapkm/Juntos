@@ -697,14 +697,18 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 				  }
 				  else
 				  {
+				  	console.log($scope.material_form_data);
 				  	$scope.material_form_data['material_name'] = "";
 				  	$scope.material_form_data['price'] = "";
+				  	$scope.$apply();
+				  	$('#material_name_select2').val("");
 				  }
 				});
     			
     		}
     		else
     		{
+    			$scope.material_form_data['discount'] = 0;
     			validateService.displayMessage('error','This material already exist for this supplier / Duplicate Entry of Material Master',"");
     		}
     	})
