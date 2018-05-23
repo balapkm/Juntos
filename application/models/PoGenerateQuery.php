@@ -227,6 +227,7 @@ class PoGenerateQuery extends CI_Model
     {
         $sql = "SELECT 
                     sd.supplier_name,
+                    sd.state_code,
                     prd.*,
                     DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day,
                     mm.material_name as material_master_name

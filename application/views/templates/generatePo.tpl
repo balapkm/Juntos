@@ -498,7 +498,7 @@
 		    	<div class="row">
 			    	<div class="col-lg-4" ng-repeat="x in generatePoData['material_id']">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Quantity{{$index+1}}</label>
+		                  <label for="exampleInputEmail1" style="font-weight: normal;">{{tempMaterialNameDetails['material_'+x]}}</label>
 		                  <input type="text" class="form-control" id="edit_quantity_{{$index+1}}" ng-model="generatePoData.quantity[$index]" placeholder="Enter Quantity{{$index+1}}">
 		                </div>
 		            </div>

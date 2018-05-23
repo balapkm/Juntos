@@ -79,8 +79,11 @@ class GeneratePo extends CI_Controller
 		$this->data['po_number'] = $po_raw_number;
 		$material_id = $this->data['material_id'];
 		unset($this->data['material_id']);
-		$quantity = $this->data['quantity'];
-		unset($this->data['quantity']);
+		if(!empty($this->data['quantity']))
+		{
+			$quantity = $this->data['quantity'];
+			unset($this->data['quantity']);
+		}
 
 		$getMaterialdetails = $this->PoMasterEntryQuery->get_material_entry_in_array($material_id);
 		$count = 0;
@@ -90,7 +93,7 @@ class GeneratePo extends CI_Controller
 			$finalInsertData[$key]['material_master_id']= $value['material_master_id'];
 			$finalInsertData[$key]['material_name']     = $value['material_name'];
 			$finalInsertData[$key]['material_hsn_code'] = $value['material_hsn_code'];
-			$finalInsertData[$key]['qty'] = $quantity[$count];
+			$finalInsertData[$key]['qty'] = empty($quantity[$count])?0:$quantity[$count];
 			$finalInsertData[$key]['material_uom'] = $value['material_uom'];
 			$finalInsertData[$key]['currency'] = $value['currency'];
 			$finalInsertData[$key]['price'] = $value['price'];

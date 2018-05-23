@@ -7,7 +7,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $('#received_date,#bill_date,#dc_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
-      todayHighlight : true
+      todayHighlight : true,
+      // startDate : new Date()
     });
 
     $scope.showMaterialOutStandingTable = false;
@@ -99,7 +100,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             });*/
         },100)
     }
-
+    $scope.totalAmountData = {};
     $scope.searchAction = function()
     {
         if(validateService.blank($scope.generatePoData['outstanding_type'],"Please Choose outstanding type","outstanding_type")) return false;
@@ -117,7 +118,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             if(data)
             { 
                 commonService.hideLoader();
-                $scope.materialOutStanding = data;   
+                $scope.materialOutStanding = data;  
+                for (var i = 0; i < data.length; i++) {
+                     $scope.totalAmountData['id'+data[i]['po_generated_request_id']] = data[i]['totalAmount'];
+                } 
                 $scope.showMaterialOutStandingTable = true;
                 setTimeout(function(){$scope.exampleDataTable();},100);
             }
@@ -126,7 +130,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
-        
         $scope.totalAmount = (x.price * x.qty);
         // alert($scope.totalAmount);
         for(var i in x)
@@ -140,8 +143,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $scope.title = "Edit Material Out Standing";
             $scope.editMaterialPOData['received_data'] = x.received;
             $scope.editMaterialPOData['received'] = 0;
-            $scope.editMaterialPOData['received_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
-            $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+            $scope.editMaterialPOData['received_date'] = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            $scope.editMaterialPOData['dc_date'] = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             $scope.editMaterialPOData['dc_number'] = "";
         }
         else
@@ -156,10 +159,12 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             $('#received_date,#bill_date,#dc_date').datepicker({
               autoclose: true,
               format: 'yyyy-mm-dd',
-              todayHighlight : true
+              todayHighlight : true,
+              // startDate:new Date()
             });
+
         },100);
-        
+        $scope.totalAmount = $('#totalAmountMOS').val();
 
         // $('#invoice_number').parent('div').removeClass('has-error')
         // $('#dc_number').parent('div').removeClass('has-error')
@@ -207,7 +212,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         {
             $scope.editMaterialPOData['checkEditBoxBillOutStandingArray'] = $scope.checkEditBoxBillOutStandingArray;
         }
-        // console.log($scope.editMaterialPOData['checkEditBoxBillOutStandingArray']);
         var service_details = {
             method_name : "updateMaterialOutstandingAction",
             controller_name : "MaterialOutstanding",
@@ -261,22 +265,26 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         });
     }
 
-    $scope.checkEditBoxBillOutStanding = function(id)
+    
+    $scope.checkEditBoxBillOutStanding = function(x)
     {
         $scope.checkEditBoxBillOutStandingArray = [];
         $scope.checkEditBoxBillOutStandingShow  = false;
+        var totalAmount = 0;
 
         for(var i in $scope.checkEditBoxBillOutStandingModel)
         {
             if($scope.checkEditBoxBillOutStandingModel[i])
             {
                 $scope.checkEditBoxBillOutStandingArray.push(i);
+                totalAmount = $scope.totalAmountData['id'+i]+totalAmount;
             }
             else
             {
                 var index = $scope.checkEditBoxBillOutStandingArray.indexOf(i);
                 if (index > -1) {
                     $scope.checkEditBoxBillOutStandingArray.splice(index, 1);
+                    // $scope.totalAmount = $scope.totalAmount - $scope.totalAmountData['id'+i];
                 }
             }
         }
@@ -287,6 +295,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 $scope.checkEditBoxBillOutStandingShow  = true;
             }
             $scope.$apply();
+            $('#totalAmountMOS').val(totalAmount);
+            console.log(totalAmount);
         },100);
     }
 

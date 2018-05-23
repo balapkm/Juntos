@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-19 20:32:40
+/* Smarty version 3.1.30, created on 2018-05-23 21:51:01
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b003c90af0016_53358335',
+  'unifunc' => 'content_5b0594ed290e72_37299337',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1526742152,
+      1 => 1527090967,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b003c90af0016_53358335 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0594ed290e72_37299337 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -545,7 +545,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    	<div class="row">
 			    	<div class="col-lg-4" ng-repeat="x in generatePoData['material_id']">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Quantity{{$index+1}}</label>
+		                  <label for="exampleInputEmail1" style="font-weight: normal;">{{tempMaterialNameDetails['material_'+x]}}</label>
 		                  <input type="text" class="form-control" id="edit_quantity_{{$index+1}}" ng-model="generatePoData.quantity[$index]" placeholder="Enter Quantity{{$index+1}}">
 		                </div>
 		            </div>

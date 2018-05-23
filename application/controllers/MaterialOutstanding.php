@@ -42,6 +42,35 @@ class MaterialOutstanding extends CI_Controller
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
 			$data[$key]['po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+
+
+			$totalAmount = 0;
+			$discountTotalAmt = 0;
+			$CGSTTotalAmt = 0;
+			$SGSTTotalAmt = 0;
+			$IGSTTotalAmt = 0;
+			$value['qty'] = $value['received'];
+
+			if($value['discount_price_status'] == 'AMOUNT')
+			{
+				$discountTotalAmt = $value['discount'];
+			}
+			else
+			{
+				$discountTotalAmt = (($value['discount']/100) * $value['price']) * $value['qty'];
+			}
+
+			if($value['state_code'] == 33)
+			{
+				$CGSTTotalAmt = ($value['CGST']/100) * (($value['price']*$value['qty']) - $discountTotalAmt);
+				$SGSTTotalAmt = ($value['SGST']/100) * (($value['price']*$value['qty']) - $discountTotalAmt);
+			}
+			else
+			{
+				$IGSTTotalAmt = ($value['IGST']/100) * (($value['price']*$value['qty']) - $discountTotalAmt);
+			}
+
+			$data[$key]['totalAmount'] = ($value['price'] * $value['qty']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
 		}
 		return $data;
 	}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-20 18:59:35
+/* Smarty version 3.1.30, created on 2018-05-23 22:07:01
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b01783ff1b029_61596581',
+  'unifunc' => 'content_5b0598ad024b67_08027047',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1526822971,
+      1 => 1527093414,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b01783ff1b029_61596581 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0598ad024b67_08027047 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -220,7 +220,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
 									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
-									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x.po_generated_request_id)">
+									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x)">
 									        </div>
 									        <a href="#" ng-click="deleteMaterialOutStanding(x)" style="margin-left: 10px;" ng-if="x.outstanding_type === 'B'">
 									          <span class="glyphicon glyphicon-trash"></span>
@@ -258,14 +258,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		</div>
 	</div>
 </section>
+<input type="hidden" id="totalAmountMOS" value="0">
 
 <div class="modal fade" id="material_modal">
 	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">{{title}}</h4>
+		          <span aria-hidden="true">&times;</span>
+		      	</button>
+		        <h4 class="modal-title">{{title}}<span class="pull-right" style="margin-right: 20px;">Total Amount : {{totalAmount}}</span></h4>
 		    </div>
 		    <div class="modal-body">
 		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
@@ -276,6 +278,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received</label>
 		                  <input type="text" ng-model="editMaterialPOData.received" class="form-control" id="received" placeholder="Enter Received number" maxlength="10">
+
 		                </div>
 		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">

@@ -176,11 +176,9 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
                 if(data)
                 { 
                     $scope.searchPoBasedOnYearData = data;
-                    console.log(data);
                 }
             });
         }
-        console.log($scope.searchPoData);return;
     }
 
     $scope.clearRedMark = function(id)
@@ -197,7 +195,14 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         if(validateService.blank($scope.generatePoData['delivery_date'],"Please Choose Delivery Date","delivery_date")) return false;
         if(validateService.blank($scope.generatePoData['supplier_id'],"Please Choose Supplier name","supplier_id")) return false;
         // if(validateService.blank($scope.generatePoData['material_id'],"Please Choose Material name","material_id")) return false;
-          
+        
+        $scope.tempMaterialNameDetails = {};
+        for (var i = 0; i < $scope.materialNameDetails.length; i++) {
+            $scope.tempMaterialNameDetails['material_'+$scope.materialNameDetails[i]['material_id']] = $scope.materialNameDetails[i]['material_name'];
+        }
+
+        console.log($scope.generatePoData,$scope.materialNameDetails,$scope.tempMaterialNameDetails);
+
         if($scope.generatePoData['material_id'].length === 0)
         {
             validateService.displayMessage('error','Please Choose Material Name','');
