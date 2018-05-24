@@ -21,7 +21,7 @@
 	              			<div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Unit</label>
-				                  <select class="form-control" id="unit" ng-model="generatePoData.unit" ng-change="getPoNumber()">
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit" ng-change="getPONumberHighestBasedPODate()">
 				                  	  <option value="">Choose Unit</option>
 				                  	  <option value="Upper">Upper</option>
 				                  	  <option value="Full Shoe">Full Shoe</option>
@@ -32,7 +32,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Type</label>
-				                  <select class="form-control" id="type" ng-model="generatePoData.type" ng-change="getPoNumber()">
+				                  <select class="form-control" id="type" ng-model="generatePoData.type" ng-change="getPONumberHighestBasedPODate()">
 				                  	  <option value="">Choose Type</option>
 				                  	  <option value="Import">Import</option>
 				                  	  <option value="Indigenous">Indigenous</option>
@@ -44,7 +44,7 @@
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Date</label>
-				                  <input type="text" class="form-control" id="po_date" ng-model="generatePoData.po_date" placeholder="Choose Po Date">
+				                  <input type="text" class="form-control" id="po_date" ng-model="generatePoData.po_date" placeholder="Choose Po Date" ng-change="getPONumberHighestBasedPODate()">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">

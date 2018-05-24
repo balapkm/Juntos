@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 21:51:01
+/* Smarty version 3.1.30, created on 2018-05-23 22:50:09
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0594ed290e72_37299337',
+  'unifunc' => 'content_5b05a2c9223cc9_27036317',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1527090967,
+      1 => 1527095929,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0594ed290e72_37299337 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b05a2c9223cc9_27036317 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -46,7 +46,7 @@ function content_5b0594ed290e72_37299337 (Smarty_Internal_Template $_smarty_tpl)
 	              			<div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Unit</label>
-				                  <select class="form-control" id="unit" ng-model="generatePoData.unit" ng-change="getPoNumber()">
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit" ng-change="getPONumberHighestBasedPODate()">
 				                  	  <option value="">Choose Unit</option>
 				                  	  <option value="Upper">Upper</option>
 				                  	  <option value="Full Shoe">Full Shoe</option>
@@ -57,7 +57,7 @@ function content_5b0594ed290e72_37299337 (Smarty_Internal_Template $_smarty_tpl)
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Type</label>
-				                  <select class="form-control" id="type" ng-model="generatePoData.type" ng-change="getPoNumber()">
+				                  <select class="form-control" id="type" ng-model="generatePoData.type" ng-change="getPONumberHighestBasedPODate()">
 				                  	  <option value="">Choose Type</option>
 				                  	  <option value="Import">Import</option>
 				                  	  <option value="Indigenous">Indigenous</option>
@@ -69,7 +69,7 @@ function content_5b0594ed290e72_37299337 (Smarty_Internal_Template $_smarty_tpl)
 				            <div class="col-lg-3">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Po Date</label>
-				                  <input type="text" class="form-control" id="po_date" ng-model="generatePoData.po_date" placeholder="Choose Po Date">
+				                  <input type="text" class="form-control" id="po_date" ng-model="generatePoData.po_date" placeholder="Choose Po Date" ng-change="getPONumberHighestBasedPODate()">
 				                </div>
 				            </div>
 				            <div class="col-lg-3">

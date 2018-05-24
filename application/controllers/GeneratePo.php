@@ -32,6 +32,29 @@ class GeneratePo extends CI_Controller
 		return $data;
 	}
 
+	public function getPONumberHighestBasedPODate()
+	{
+		$year  = date('Y',strtotime($this->data['po_date']));
+		$month = (int)date('m',strtotime($this->data['po_date']));
+		if($month > 3)
+		{
+			$startDate = $year.'-04-01';
+			$endDate   = ($year+1).'-03-31';
+		}
+		else
+		{
+			$startDate = ($year-1).'-04-01';
+			$endDate   = $year.'-03-31';
+		}
+
+		$number = $this->PoGenerateQuery->getPONumberHighestBasedPODate($this->data['unit'],$this->data['type'],$startDate,$endDate);
+		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+		$format            = $po_number_details[$this->data['unit']][$this->data['type']]['format'];
+		$data['po_number']     = $format.$number;
+		$data['po_raw_number'] = $number;
+		return $data;
+	}
+
 	public function getHighestIndex()
 	{
 		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');

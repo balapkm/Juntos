@@ -19,6 +19,7 @@ class PoGenerateQuery extends CI_Model
                     unit = '".$unit."' AND 
                     outstanding_type = 'M' AND 
                     type = '".$type."'";
+                    
         $data  = $this->db->query($sql)->result_array();
         if(empty($data[0]['po_number']))
         {
@@ -28,6 +29,21 @@ class PoGenerateQuery extends CI_Model
         {
             return ($data[0]['po_number']+1);
         }
+    }
+
+    public function getPONumberHighestBasedPODate($unit,$type,$startDate,$endDate)
+    {
+        $sql = "SELECT 
+                    MAX(po_number)+1 AS po_number 
+                FROM 
+                    po_generated_request_details 
+                WHERE 
+                    DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."' AND
+                    unit = '".$unit."' AND 
+                    outstanding_type = 'M' AND 
+                    type = '".$type."'";
+        $data  = $this->db->query($sql)->result_array();
+        return ($data[0]['po_number']+1);
     }
 
     public function getUniquePoNumber($year="")

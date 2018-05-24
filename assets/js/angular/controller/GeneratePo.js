@@ -186,6 +186,27 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $("#"+id).parent('div').removeClass('has-error');
     }
 
+    $scope.getPONumberHighestBasedPODate = function()
+    {
+        if(($scope.generatePoData.unit !=="") && ($scope.generatePoData.type !=="") && ($scope.generatePoData.po_date !== ""))
+        {
+            commonService.showLoader();
+            var service_details = {
+                method_name : "getPONumberHighestBasedPODate",
+                controller_name : "GeneratePo",
+                data : JSON.stringify($scope.generatePoData)
+            };
+            httpService.callWebService(service_details).then(function(data){
+                commonService.hideLoader();
+                if(data)
+                { 
+                    $scope.generatePoData.po_number     = data['po_number']
+                    $scope.generatePoData.po_raw_number = data['po_raw_number'];
+                }
+            });
+        }
+    }
+
     $scope.generatePo = function()
     {
         if(validateService.blank($scope.generatePoData['unit'],"Please Choose type","unit")) return false;
@@ -201,7 +222,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
             $scope.tempMaterialNameDetails['material_'+$scope.materialNameDetails[i]['material_id']] = $scope.materialNameDetails[i]['material_name'];
         }
 
-        console.log($scope.generatePoData,$scope.materialNameDetails,$scope.tempMaterialNameDetails);
 
         if($scope.generatePoData['material_id'].length === 0)
         {
