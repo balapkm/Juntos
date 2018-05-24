@@ -105,6 +105,7 @@ class MaterialOutstanding extends CI_Controller
 			unset($this->data['po_raw_number']);
 			unset($this->data['received_data']);
 			unset($this->data['material_master_name']);
+			unset($this->data['state_code']);
 
 			$this->data['outstanding_type'] = 'B';
 			$data    = array();

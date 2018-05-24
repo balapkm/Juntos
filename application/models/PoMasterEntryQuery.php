@@ -150,7 +150,31 @@ class PoMasterEntryQuery extends CI_Model
         {
              $data[] = $row;
         }
-        return $this->objectToArray($data);
+        $data = $this->objectToArray($data);
+
+        $sql  ="SELECT
+                   material_master_id
+                FROM
+                    po_generated_request_details prd
+                WHERE 
+                    outstanding_type = 'M'
+                GROUP BY material_master_id";
+                    
+        $prdData  = $this->db->query($sql)->result_array();
+        $prdData  = array_column($prdData,"material_master_id");
+
+        foreach ($data as $key => $value) 
+        {
+            if(in_array($value['material_id'],$prdData))
+            {
+                $data[$key]['show_delete'] = 'N';
+            }
+            else
+            {
+                $data[$key]['show_delete'] = 'Y';
+            }
+        }
+        return $data;
     }
 
     public function select_other_master($data)

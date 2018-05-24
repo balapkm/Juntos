@@ -207,7 +207,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		      	</button>
-		        <h4 class="modal-title">{{title}}<span class="pull-right" style="margin-right: 20px;">Total Amount : {{totalAmount}}</span></h4>
+		        <h4 class="modal-title">{{title}}<span ng-if="editMaterialPOData.outstanding_type === 'B'" class="pull-right" style="margin-right: 20px;">Total Amount : {{totalAmount}}</span></h4>
 		    </div>
 		    <div class="modal-body">
 		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">

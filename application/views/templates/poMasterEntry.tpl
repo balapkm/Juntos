@@ -198,7 +198,11 @@
 					                          <td>[[$k+1]]</td>
 					                          <td>[[$v.material_name]]</td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick([[$v|@json_encode]])'>Edit</button></td>
-			                          		  <td><button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick([[$v|@json_encode]])'>Delete</button></td>
+			                          		  <td>
+			                          		  	[[if $v.show_delete eq 'Y']]
+			                          		  	<button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick([[$v|@json_encode]])'>Delete</button>
+			                          		  	[[/if]]
+			                          		  </td>
 					                        </tr>
 					                        [[/foreach]]
 					                    </tbody>

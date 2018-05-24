@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-16 22:49:21
+/* Smarty version 3.1.30, created on 2018-05-24 22:07:17
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afc68198baa11_16533990',
+  'unifunc' => 'content_5b06ea3d8d7637_48826848',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1526491159,
+      1 => 1527179814,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afc68198baa11_16533990 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b06ea3d8d7637_48826848 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -293,8 +293,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
 )'>Edit</button></td>
-			                          		  <td><button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Delete</button></td>
+			                          		  <td>
+			                          		  	<?php if ($_smarty_tpl->tpl_vars['v']->value['show_delete'] == 'Y') {?>
+			                          		  	<button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>Delete</button>
+			                          		  	<?php }?>
+			                          		  </td>
 					                        </tr>
 					                        <?php
 }
