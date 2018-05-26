@@ -57,6 +57,8 @@ class PoMasterEntry extends CI_Controller
 
 	public function updateSupplierAction()
 	{
+		$count = count($this->PoMasterEntryQuery->select_supplier_entry_as_per_supplier_name($this->data));
+		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->update_supplier_entry($this->data);
 	}
 

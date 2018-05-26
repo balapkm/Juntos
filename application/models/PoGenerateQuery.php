@@ -34,7 +34,7 @@ class PoGenerateQuery extends CI_Model
     public function getPONumberHighestBasedPODate($unit,$type,$startDate,$endDate)
     {
         $sql = "SELECT 
-                    MAX(po_number)+1 AS po_number 
+                    MAX(po_number) AS po_number 
                 FROM 
                     po_generated_request_details 
                 WHERE 

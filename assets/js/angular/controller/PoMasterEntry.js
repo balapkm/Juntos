@@ -396,6 +396,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	}
 
 	$scope.update_supplier_action = function(){
+		$scope.supplier_form_data['supplier_name'] = $('#supplier_name').val();
 		if(validateService.blank($scope.supplier_form_data['supplier_name'],"Please Choose Supplier Name","supplier_name")) return false;
     	if(validateService.blank($scope.supplier_form_data['supplier_code'],"Please Choose Supplier Code","supplier_code")) return false;
     	// if(validateService.blank($scope.supplier_form_data['alt_supplier_name'],"Please Choose Supplier name","alt_supplier_name")) return false;
