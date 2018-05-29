@@ -254,11 +254,12 @@ class GeneratePo extends CI_Controller
 		chmod($folder_name."/".$headername.".html", 0777);
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
 		{
-			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 0 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			// $cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 0 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 		}
 		else
 		{
-			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 3 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 		}
 
 		// echo $cmd;exit;

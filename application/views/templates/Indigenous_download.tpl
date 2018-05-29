@@ -1,256 +1,344 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Juntos Download</title>
 </head>
 <style>
-.own-table{
-    width: 100%;
-    font-size: 12px;
-}
-td
+table td
 {
-	word-wrap: break-word;
-}
-.own-table th,.own-table td,.own-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-.own-td-1{
-    padding : 5px 5px 5px 40px;
-}
-
-.own-td-2{
-    padding: 5px;
-}
-
-.own-td-3{
-    padding-bottom: 200px;
-}
-
-.own-td-4{
-    padding-bottom: 10px;
-}
-
-.own-td-5{
-    padding-bottom: 100px;
+	border-bottom:1px solid #000;
+	border-right:1px solid #000;
+	padding:4px 3px;
+	font-size: 12px;
 }
 </style>
 <body>
-	<table class="own-table">
-        <tr>
-        	<table class="own-table">
-        		<tr style="font-weight: bold;font-size: 10px;">
-        			<td align="center" width="5%">S.No</td>
-		         	<td align="center" width="20%">DESCRIPTION</td>
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-		         	<td align="center" width="10%">HSN CODE</td>
-		         	[[/if]]
-		         	<td align="center" width="5%">QTY</td>
-		         	<td align="center" width="10%">UOM</td>
-		         	<td align="center" width="10%">PRICE</td>
-		         	<td align="center" width="10%">DISCOUNT</td>
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-		         	[[if $searchPoData[0]['state_code'] eq 33]]
-			         	<td align="center" width="10%">CGST</td>
-			         	<td align="center" width="10%">SGST</td>
-		         	[[/if]]
-		         	[[if $searchPoData[0]['state_code'] neq 33]]
-		         		<td align="center" width="10%" >IGST</td>
-		         	[[/if]]
-		         	[[/if]]
-		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
-        		</tr>
-        	</table>
-        </tr>
-        [[assign var=GrandTotal value= 0]]
-        [[assign var=OTHERPercGrandTotal value= 0]]
-        [[assign var=CGSTTotalValue value=0]]
-        [[assign var=IGSTTotalValue value=0]]
-        [[assign var=SGSTTotalValue value=0]]
-        [[foreach from=$searchPoData key=k item=v]]
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-2">[[$k+1]]</td>
-		         	<td width="20%" class="own-td-2">
-		         		<div class="top_row">
-			                [[$v.material_master_name]]
-			            </div>
-			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
-		         	</td>
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-		         	<td align="center" width="10%" class="own-td-2">[[$v.material_hsn_code]]</td>
-		         	[[/if]]
-		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
-		         	<td align="center" width="10%" class="own-td-2">[[$v.material_uom]]</td>
-		         	<td align="center" width="10%" class="own-td-2">
-		         			[[$v.price|number_format:2]]<br/>
-		         			[ [[$v.price_status]] ]
-		         	</td>
+[[assign var=OTCcolspanCalc value=7]]
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+[[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+[[/if]]
 
-		         	[[if $v.discount_price_status eq 'AMOUNT']]
-		         		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]
-		         	[[else]]
-		         		[[assign var=DISCOUNTTotalValue value=(($v.discount/100) * $v.price ) * $v.qty]]
-		         	[[/if]]
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+	[[if $searchPoData[0]['state_code'] eq 33]]
+		[[assign var=OTCcolspanCalc value=$OTCcolspanCalc+2]]
+	[[else]]
+		[[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+	[[/if]]
+[[/if]]
+<table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
+	<tr> 
+		<td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+			<table cellspacing="0" cellpadding="0" width="100%" id="x">
+				<tr>
+					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
+					</td>
+					<td width="40%" style="border:0px;"><h3 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h3>
+					<h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td>
+					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
+        			Tel : 91-4172-272470,272480</br>
+        			Email : purchasedept@tmargroup.in </br>
+        			Email : soles@tmargroup.in</font><br/><br/>
 
-		         	<td align="center" width="10%" class="own-td-2">
-		         		[[$v.discount|number_format:2]][[if $v.discount_price_status neq 'AMOUNT']] % [[/if]]
-		         		[[if $v.discount_price_status neq 'AMOUNT']]
-		         		</br>
-		         		[ [[$DISCOUNTTotalValue|number_format:2]] ]
-		         		[[/if]]
-		         	</td>
+        			<font style="font:bold arial,helvetica,verdana; color:#000;">
+        			H.O : 48(Old No.49) Wuthucattan Street,</br>
+        			Periamet,CHENNAI-600 003.INDIA</br>
+        			Tel : 91-44-25612164,25610078</br>
+        			Email : headoffice@tmargroup.in</br>
+        			<b>GSTIN : 33AABFT2029F1ZO1</b></font></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">Purchase Order</td>
+	</tr>
+	<tr>
+		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">LH.Po.No</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].full_po_number]]</td>
+	</tr>
+	<tr>
+		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">M/s.[[$searchPoData[0].supplier_name]]</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
+	</tr>
+	<tr>
+		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$searchPoData[0].origin]]</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].order_reference]]</td>
+	</tr>
+	<tr>
+		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal; arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><b>GSTIN : [[$searchPoData[0].gst_no]]</b></td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
+	</tr>
+	<tr>
+		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">S.No</td>
+     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;">DESCRIPTION</td>
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">HSN CODE</td>
+     	[[/if]]
+     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;">QTY</td>
+     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;">UOM</td>
+     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;">PRICE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">DISCOUNT</td>
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+     	[[if $searchPoData[0]['state_code'] eq 33]]
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">CGST</td>
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">SGST</td>
+     	[[/if]]
+     	[[if $searchPoData[0]['state_code'] neq 33]]
+     		<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">IGST</td>
+     	[[/if]]
+     	[[/if]]
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">TOTAL <br/>AMOUNT</td>
+     	</div>
+    </tr>
+    [[assign var=GrandTotal value= 0]]
+    [[assign var=TcolspanCalc value=3]]
+    [[assign var=DcolspanCalc value=5]]
+    [[assign var=TCcolspanCalc value=7]]
+    [[assign var=OTHERPercGrandTotal value= 0]]
+    [[assign var=CGSTTotalValue value=0]]
+    [[assign var=IGSTTotalValue value=0]]
+    [[assign var=SGSTTotalValue value=0]]
+    [[foreach from=$searchPoData key=k item=v]]
 
-		         	[[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
+    <tr >
+		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$k+1]]</td>
+     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		<div style="text-align: left;">
+                [[$v.material_master_name]]
+            </div>
+            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
+     	</td>
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+         	[[if $k eq 0]]
+         	[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
+         	[[assign var=DcolspanCalc value=$DcolspanCalc+1]]
+         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+1]]
+         	[[/if]]
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.material_hsn_code]]</td>
+     	[[/if]]
+     	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.qty]]</td>
+     	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.material_uom]]</td>
+     	<td width="8%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     			[[$v.price|number_format:2]]<br/>
+     			[[if $v.price_status neq 'FINAL']]
+     			[ [[$v.price_status]] ]
+                [[/if]]
+     	</td>
 
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-		         	[[if $searchPoData[0]['state_code'] eq 33]]
-			         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.CGST]]% 
-			         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
-			         	</td>
+     	[[if $v.discount_price_status eq 'AMOUNT']]
+     		[[assign var=DISCOUNTTotalValue value=[[$v.discount]]]]
+     	[[else]]
+     		[[assign var=DISCOUNTTotalValue value=(($v.discount/100) * $v.price ) * $v.qty]]
+     	[[/if]]
 
-			         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.SGST]]% 
-			         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
-			         	</td>
-		         	[[/if]]
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		[[$v.discount|number_format:2]][[if $v.discount_price_status neq 'AMOUNT']] % [[/if]]
+     		[[if $v.discount_price_status neq 'AMOUNT']]
+     		</br>
+     		[ [[$DISCOUNTTotalValue|number_format:2]] ]
+     		[[/if]]
+     	</td>
+
+     	[[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
+
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+     	[[if $searchPoData[0]['state_code'] eq 33]]
+         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		[[$v.CGST]]% 
+         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
+         	</td>
+         	[[if $k eq 0]]
+         	[[assign var=TcolspanCalc value=$TcolspanCalc+2]]
+         	[[assign var=DcolspanCalc value=$DcolspanCalc+2]]
+         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+2]]
+         	[[/if]]
+         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		[[$v.SGST]]% 
+         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
+         	</td>
+     	[[/if]]
 
 
-		         	[[if $searchPoData[0]['state_code'] neq 33]]
-			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
-			         	<td align="center" width="10%" class="own-td-2">
-			         		[[$v.IGST]]% 
-			         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
-			         	</td>
-		         	[[/if]]
-		         	[[/if]]
-		         	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
+     	[[if $searchPoData[0]['state_code'] neq 33]]
+     		[[if $k eq 0]]
+     		[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
+     		[[assign var=DcolspanCalc value=$DcolspanCalc+1]]
+     		[[assign var=TCcolspanCalc value=$TCcolspanCalc+1]]
+     		[[/if]]
+         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		[[$v.IGST]]% 
+         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
+         	</td>
+     	[[/if]]
+     	[[/if]]
+     	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
-		         	<td align="center" width="10%" class="own-td-2"><b>[[$totalPriceValue|number_format:2]]</b></td>
+     	<td width="10%" align="center" style="font:bold arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue|number_format:2]]</b></td>
 
-		         	
-		         	[[$GrandTotal = $GrandTotal + $totalPriceValue]]
-        		</tr>
-        	</table>
-        </tr>
-        [[/foreach]]
-        <!-- <tr>
-        	<table class="own-table">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="20%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	[[if $searchPoData[0]['state_code'] eq 33]]
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	[[/if]]
-		         	[[if $searchPoData[0]['state_code'] neq 33]]
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	[[/if]]
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-        		</tr>
-        	</table>
-        </tr> -->
-        [[assign var=GrandTotal1 value= 0]]
-        [[assign var=totalPriceValue1 value= 0]]
-        [[assign var=CGSTTotalValue value=0]]
-        [[assign var=IGSTTotalValue value=0]]
-        [[assign var=SGSTTotalValue value=0]]
-        [[if $otherAdditionalCharges|@count neq 0]]
-        [[foreach from=$otherAdditionalCharges key=k item=v]]
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-2"></td>
-		         	<td align="center" width="20%" class="own-td-2">[[$v.name]]</td>
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-		         	<td align="center" width="10%" class="own-td-2">[[$v.hsn_code]]</td>
-		         	[[/if]]
-		         	<td align="center" width="5%"  class="own-td-2"></td>
-		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	[[if $v.amount_type eq 'AMOUNT']]
-		         		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
-		         	[[else]]
-		         		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
-		         	[[/if]]
-		         	<td align="center" width="10%" class="own-td-2">
-		         		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
-		         		[[$other_total_AMOUNT|number_format:2]]
-		         	</td>
-		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-	         		[[if $searchPoData[0]['state_code'] eq 33]]
-			         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_AMOUNT )]]]]
-			         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_AMOUNT )]]]]
+     	
+     	[[$GrandTotal = $GrandTotal + $totalPriceValue]]
+	</tr>
+	[[/foreach]]
 
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue|number_format:2]] ]</td>
-			         	<td align="center" width="10%" class="own-td-2">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue|number_format:2]] ]</td>
-		         	[[else]]
-			         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_AMOUNT )]]]]
-			         	<td align="center" width="10%" class="own-td-2">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
-		         	[[/if]]
-		         	[[/if]]
+	[[assign var=GrandTotal1 value= 0]]
+    [[assign var=totalPriceValue1 value= 0]]
+    [[assign var=CGSTTotalValue value=0]]
+    [[assign var=IGSTTotalValue value=0]]
+    [[assign var=SGSTTotalValue value=0]]
+    [[if $otherAdditionalCharges|@count neq 0]]
+    [[foreach from=$otherAdditionalCharges key=k item=v]]
+    <tr>
+		<td width="5%" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.name]]</td>
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.hsn_code]]</td>
+     	[[/if]]
+     	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	[[if $v.amount_type eq 'AMOUNT']]
+     		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
+     	[[else]]
+     		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
+     	[[/if]]
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
+     		[[$other_total_AMOUNT|number_format:2]]
+     	</td>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+ 		[[if $searchPoData[0]['state_code'] eq 33]]
+         	[[assign var=CGSTTotalValue value=[[(($v.CGST/100) * $other_total_AMOUNT )]]]]
+         	[[assign var=SGSTTotalValue value=[[(($v.SGST/100) * $other_total_AMOUNT )]]]]
 
-		         	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]
-					[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.CGST]]%<br/>[ [[$CGSTTotalValue|number_format:2]] ]</td>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.CGST]]%<br/>[ [[$SGSTTotalValue|number_format:2]] ]</td>
+     	[[else]]
+         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $other_total_AMOUNT )]]]]
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.IGST]]%<br/>[[$IGSTTotalValue|number_format:2]]</td>
+     	[[/if]]
+     	[[/if]]
 
-		         	<td align="center" width="10%" class="own-td-2">[[$totalPriceValue1|number_format:2]]</td>
-		         	
-        		</tr>
-        	</table>
-        </tr>
-        [[/foreach]]
-        [[/if]]
+     	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]
+		[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]
 
-        [[assign var=ODiscountValue value=0]]
-        [[if $overAllDiscountDetails|@count neq 0]]
-        [[foreach from=$overAllDiscountDetails key=k item=v]]
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			[[if $v.discount_type eq 'AMOUNT']]
-		         		[[assign var=ODiscountValue value=[[$v.discount]]]]
-		         	[[else]]
-		         		[[assign var=ODiscountValue value=(($v.discount/100) * ($GrandTotal + $GrandTotal1))]]
-		         	[[/if]]
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue1|number_format:2]]</b></td>
+    </tr>
+    [[/foreach]]
+    [[/if]]
+    [[assign var=ODiscountValue value=0]]
+    [[if $overAllDiscountDetails|@count neq 0]]
+    [[foreach from=$overAllDiscountDetails key=k item=v]]
+    <tr>
+		[[if $v.discount_type eq 'AMOUNT']]
+     		[[assign var=ODiscountValue value=[[$v.discount]]]]
+     	[[else]]
+     		[[assign var=ODiscountValue value=(($v.discount/100) * ($GrandTotal + $GrandTotal1))]]
+     	[[/if]]
 
-        			<td align="center" width="90%"  class="own-td-2">DISCOUNT</td>
-        			<td align="center" width="10%"  class="own-td-2">
-        				<b>[[$ODiscountValue|number_format:2]]</b>
-        			</td>
-		         	
-        		</tr>
-        	</table>
-        </tr>
-        [[/foreach]]
-        [[/if]]
-        <tr>
-        	<table class="own-table" >
-        		<tr>
-		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode">[[$searchPoData[0].currency]]</td>
-		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT [[$searchPoData[0].currency]]</td>
-		         	<td align="center" width="10%" class="own-td-2"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
-		         	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
-        		</tr>
-        	</table>
-        </tr>
-	</table>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="[[$DcolspanCalc]]">DISCOUNT</td>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+			<b>[[$ODiscountValue|number_format:2]]</b>
+		</td>
+    </tr>
+    [[/foreach]]
+    [[/if]]
+    <!-- <tr>
+    	<td id="result" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+	</tr> -->
+    <tr>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	[[if $TCcolspanCalc > 7]]
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.5)|round:0]]"></td>
+     	[[else]]
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.4)|round:0]]"></td>
+     	[[/if]]
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="[[($TCcolspanCalc*0.3)|round:0]]">TOTAL AMOUNT [[$searchPoData[0].currency]]</td> 
+     	<td colspan="1" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
+
+     	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
+     	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>
+	</tr>
+	<tr>
+		<td colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;">
+			<h4><b>Terms & Condition :</b></h4>
+			<ul>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Please quote our purchase order number on the invoice.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Freight to be paid as agreed between the parties.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Failing to file a tax return on time.We reserved the right to deduct the tax AMOUNT from your payment.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+			</ul>
+		</td>
+		<td  colspan="[[($TCcolspanCalc*0.4)|round:0]]">
+			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
+			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
+			</br>
+			</br>
+			<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
+			<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>-->
+			<div style="width:40%;float:left;">
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+			</div>
+			<div style="width:60%;float:left">
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+			</div>
+			<div style="clear: both;"></div>
+		</td>
+	</tr>
+</table>
 <script>
 	[[literal]]
+	// (function () {
+
+	//     var getPositionAtCenter = function (element) {
+	//         var data = element.getBoundingClientRect();
+	//         return {
+	//             x: data.left + data.width / 2,
+	//             y: data.top + data.height / 2
+	//         };
+	//     };
+
+	//     var getDistanceBetweenElements = function (a, b) {
+	//         var aPosition = getPositionAtCenter(a);
+	//         var bPosition = getPositionAtCenter(b);
+	//         return Math.sqrt(
+	//         Math.pow(aPosition.x - bPosition.x, 2) + Math.pow(aPosition.y - bPosition.y, 2));
+	//     };
+
+	//     document.getElementById("result").style.height = (842 - getDistanceBetweenElements(document.getElementById("x"),
+	//     document.getElementById("y")))+"px";
+
+	//    //   document.getElementById("result").textContent = getDistanceBetweenElements(document.getElementById("x"),
+ //    // document.getElementById("y"));
+	    
+	//     // document.getElementById("result").innerHTML = ;
+
+	// })();
+
 	var number = document.getElementById('GrandTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
-	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT In Words : </b> "+number2text(number,currency);
+	document.getElementById('numberToWord').innerHTML = "<b>Amount in words : </b> "+number2text(number,currency);
     
 	function number2text(value) {
 	    var currencyCode = {

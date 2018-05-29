@@ -1,28 +1,3 @@
-<?php
-/* Smarty version 3.1.30, created on 2018-05-27 19:04:41
-  from "/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl" */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.30',
-  'unifunc' => 'content_5b0ab3f1a41651_88027151',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    '0cac4af7b50381dde7dce2f4011951eff193008b' => 
-    array (
-      0 => '/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl',
-      1 => 1527427904,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_5b0ab3f1a41651_88027151 (Smarty_Internal_Template $_smarty_tpl) {
-if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,45 +78,37 @@ td
     		<tr>
     			<td class="own-td-1" width="40%">To</td>
 	         	<td class="own-td-1" width="30%">LH.Po.No</td>
-	         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['full_po_number'];?>
-</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].full_po_number]]</td>
     		</tr>
     	</table>
     </tr>
     <tr>
     	<table class="own-table">
     		<tr>
-    			<td class="own-td-1" width="40%">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
-</td>
+    			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
 	         	<td class="own-td-1" width="30%">Date</td>
-	         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'],"%d-%m-%Y");?>
-</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
     		</tr>
     	</table>
     </tr>
     <tr>
     	<table class="own-table">
     		<tr>
-    			<td class="own-td-1" width="40%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['origin'];?>
-</td>
+    			<td class="own-td-1" width="40%">[[$searchPoData[0].origin]]</td>
 	         	<td class="own-td-1" width="30%">Ord Ref</td>
-	         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['order_reference'];?>
-</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].order_reference]]</td>
     		</tr>
     	</table>
     </tr>
     <tr>
     	<table class="own-table">
     		<tr>
-    			<td class="own-td-1" width="40%">GSTIN : <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['gst_no'];?>
-</td>
+    			<td class="own-td-1" width="40%">GSTIN : [[$searchPoData[0].gst_no]]</td>
 	         	<td class="own-td-1" width="30%">Delivery Date</td>
-	         	<td class="own-td-1" width="30%"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'],"%d-%m-%Y");?>
-</td>
+	         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     		</tr>
     	</table>
     </tr>
 </table>
 </body>
-</html><?php }
-}
+</html>

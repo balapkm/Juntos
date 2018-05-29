@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 21:45:54
+/* Smarty version 3.1.30, created on 2018-05-29 23:24:06
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af4703ab7ff54_57780109',
+  'unifunc' => 'content_5b0d93be726352_90348163',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1525370238,
+      1 => 1527616444,
       2 => 'file',
     ),
   ),
@@ -20,374 +20,508 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af4703ab7ff54_57780109 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0d93be726352_90348163 (Smarty_Internal_Template $_smarty_tpl) {
+if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Juntos Download</title>
 </head>
 <style>
-.own-table{
-    width: 100%;
-    font-size: 12px;
-}
-td
+table td
 {
-	word-wrap: break-word;
-}
-.own-table th,.own-table td,.own-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-.own-td-1{
-    padding : 5px 5px 5px 40px;
-}
-
-.own-td-2{
-    padding: 5px;
-}
-
-.own-td-3{
-    padding-bottom: 200px;
-}
-
-.own-td-4{
-    padding-bottom: 10px;
-}
-
-.own-td-5{
-    padding-bottom: 100px;
+	border-bottom:1px solid #000;
+	border-right:1px solid #000;
+	padding:4px 3px;
+	font-size: 12px;
 }
 </style>
 <body>
-	<table class="own-table">
-        <tr>
-        	<table class="own-table">
-        		<tr style="font-weight: bold;font-size: 10px;">
-        			<td align="center" width="5%">S.No</td>
-		         	<td align="center" width="20%">DESCRIPTION</td>
-		         	<td align="center" width="10%">HSN CODE</td>
-		         	<td align="center" width="5%">QTY</td>
-		         	<td align="center" width="10%">UOM</td>
-		         	<td align="center" width="10%">PRICE</td>
-		         	<td align="center" width="10%">DISCOUNT</td>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-			         	<td align="center" width="10%">CGST</td>
-			         	<td align="center" width="10%">SGST</td>
-		         	<?php }?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-		         		<td align="center" width="10%" >IGST</td>
-		         	<?php }?>
-		         	<?php }?>
-		         	<td align="center" width="10%">TOTAL <br/>AMOUNT</td>
-        		</tr>
-        	</table>
-        </tr>
-        <?php $_smarty_tpl->_assignInScope('GrandTotal', 0);
+<?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', 7);
+if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {
+$_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
+}?>
+
+<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+		<?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+2);
 ?>
-        <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', 0);
+	<?php } else { ?>
+		<?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
 ?>
-        <?php $_smarty_tpl->_assignInScope('CGSTTotalValue', 0);
+	<?php }
+}?>
+<table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
+	<tr> 
+		<td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+			<table cellspacing="0" cellpadding="0" width="100%" id="x">
+				<tr>
+					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
+					</td>
+					<td width="40%" style="border:0px;"><h3 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h3>
+					<h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td>
+					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
+        			Tel : 91-4172-272470,272480</br>
+        			Email : purchasedept@tmargroup.in </br>
+        			Email : soles@tmargroup.in</font><br/><br/>
+
+        			<font style="font:bold arial,helvetica,verdana; color:#000;">
+        			H.O : 48(Old No.49) Wuthucattan Street,</br>
+        			Periamet,CHENNAI-600 003.INDIA</br>
+        			Tel : 91-44-25612164,25610078</br>
+        			Email : headoffice@tmargroup.in</br>
+        			<b>GSTIN : 33AABFT2029F1ZO1</b></font></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">Purchase Order</td>
+	</tr>
+	<tr>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;">LH.Po.No</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['full_po_number'];?>
+</td>
+	</tr>
+	<tr>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
+</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'],"%d-%m-%Y");?>
+</td>
+	</tr>
+	<tr>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['origin'];?>
+</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['order_reference'];?>
+</td>
+	</tr>
+	<tr>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
+" style="font:normal; arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><b>GSTIN : <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['gst_no'];?>
+</b></td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'],"%d-%m-%Y");?>
+</td>
+	</tr>
+	<tr>
+		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">S.No</td>
+     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;">DESCRIPTION</td>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">HSN CODE</td>
+     	<?php }?>
+     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;">QTY</td>
+     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;">UOM</td>
+     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;">PRICE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">DISCOUNT</td>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">CGST</td>
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">SGST</td>
+     	<?php }?>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+     		<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">IGST</td>
+     	<?php }?>
+     	<?php }?>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">TOTAL <br/>AMOUNT</td>
+     	</div>
+    </tr>
+    <?php $_smarty_tpl->_assignInScope('GrandTotal', 0);
 ?>
-        <?php $_smarty_tpl->_assignInScope('IGSTTotalValue', 0);
+    <?php $_smarty_tpl->_assignInScope('TcolspanCalc', 3);
 ?>
-        <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
+    <?php $_smarty_tpl->_assignInScope('DcolspanCalc', 5);
 ?>
-        <?php
+    <?php $_smarty_tpl->_assignInScope('TCcolspanCalc', 7);
+?>
+    <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', 0);
+?>
+    <?php $_smarty_tpl->_assignInScope('CGSTTotalValue', 0);
+?>
+    <?php $_smarty_tpl->_assignInScope('IGSTTotalValue', 0);
+?>
+    <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
+?>
+    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['searchPoData']->value, 'v', false, 'k');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
-</td>
-		         	<td width="20%" class="own-td-2">
-		         		<div class="top_row">
-			                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
 
-			            </div>
-			            <div class="top_row" style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+    <tr >
+		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
+</td>
+     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		<div style="text-align: left;">
+                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+            </div>
+            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
 </div>
-		         	</td>
-		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
+     	</td>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+         	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
+         	<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+1);
+?>
+         	<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+1);
+?>
+         	<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+1);
+?>
+         	<?php }?>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
 </td>
-		         	<td align="center" width="5%"  class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
+     	<?php }?>
+     	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
 </td>
-		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
+     	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-		         	<td align="center" width="10%" class="own-td-2">
-		         			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
+     	<td width="8%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
 <br/>
-		         			[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
+     			<?php if ($_smarty_tpl->tpl_vars['v']->value['price_status'] != 'FINAL') {?>
+     			[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
  ]
-		         	</td>
+                <?php }?>
+     	</td>
 
-		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] == 'AMOUNT') {?>
-		         		<?php ob_start();
+     	<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] == 'AMOUNT') {?>
+     		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['discount'];
 $_prefixVariable1=ob_get_clean();
 $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', $_prefixVariable1);
 ?>
-		         	<?php } else { ?>
-		         		<?php $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty']);
+     	<?php } else { ?>
+     		<?php $_smarty_tpl->_assignInScope('DISCOUNTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty']);
 ?>
-		         	<?php }?>
+     	<?php }?>
 
-		         	<td align="center" width="10%" class="own-td-2">
-		         		<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['discount'],2);
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['discount'],2);
 if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?> % <?php }?>
-		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?>
-		         		</br>
-		         		[ <?php echo number_format($_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value,2);?>
+     		<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?>
+     		</br>
+     		[ <?php echo number_format($_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value,2);?>
  ]
-		         		<?php }?>
-		         	</td>
+     		<?php }?>
+     	</td>
 
-		         	<?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', ($_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value+(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+     	<?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', ($_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value+(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
 
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-			         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
-			         	<td align="center" width="10%" class="own-td-2">
-			         		<?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		<?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
 % 
-			         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
+         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
  ]
-			         	</td>
-
-			         	<?php $_smarty_tpl->_assignInScope('SGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['SGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+         	</td>
+         	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
+         	<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+2);
 ?>
-			         	<td align="center" width="10%" class="own-td-2">
-			         		<?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
+         	<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+2);
+?>
+         	<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+2);
+?>
+         	<?php }?>
+         	<?php $_smarty_tpl->_assignInScope('SGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['SGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		<?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
 % 
-			         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
+         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
  ]
-			         	</td>
-		         	<?php }?>
+         	</td>
+     	<?php }?>
 
 
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-			         	<?php ob_start();
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+     		<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
+     		<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+1);
+?>
+     		<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+1);
+?>
+     		<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+1);
+?>
+     		<?php }?>
+         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['IGST']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty'];
 $_prefixVariable2=ob_get_clean();
 $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable2);
 ?>
-			         	<td align="center" width="10%" class="own-td-2">
-			         		<?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+         		<?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
 % 
-			         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
+         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
  ]
-			         	</td>
-		         	<?php }?>
-		         	<?php }?>
-		         	<?php ob_start();
+         	</td>
+     	<?php }?>
+     	<?php }?>
+     	<?php ob_start();
 echo ($_smarty_tpl->tpl_vars['v']->value['qty']*$_smarty_tpl->tpl_vars['v']->value['price'])+$_smarty_tpl->tpl_vars['IGSTTotalValue']->value+$_smarty_tpl->tpl_vars['SGSTTotalValue']->value+$_smarty_tpl->tpl_vars['CGSTTotalValue']->value-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value;
 $_prefixVariable3=ob_get_clean();
 $_smarty_tpl->_assignInScope('totalPriceValue', $_prefixVariable3);
 ?>
 
-		         	<td align="center" width="10%" class="own-td-2"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue']->value,2);?>
+     	<td width="10%" align="center" style="font:bold arial,helvetica,verdana; color:#000;"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue']->value,2);?>
 </b></td>
 
-		         	
-		         	<?php $_smarty_tpl->_assignInScope('GrandTotal', $_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['totalPriceValue']->value);
+     	
+     	<?php $_smarty_tpl->_assignInScope('GrandTotal', $_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['totalPriceValue']->value);
 ?>
-        		</tr>
-        	</table>
-        </tr>
-        <?php
+	</tr>
+	<?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-        <!-- <tr>
-        	<table class="own-table">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="20%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="5%"  class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<?php }?>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<?php }?>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-		         	<td align="center" width="10%" class="own-td-3"></td>
-        		</tr>
-        	</table>
-        </tr> -->
-        <?php $_smarty_tpl->_assignInScope('GrandTotal1', 0);
+
+	<?php $_smarty_tpl->_assignInScope('GrandTotal1', 0);
 ?>
-        <?php $_smarty_tpl->_assignInScope('totalPriceValue1', 0);
+    <?php $_smarty_tpl->_assignInScope('totalPriceValue1', 0);
 ?>
-        <?php $_smarty_tpl->_assignInScope('CGSTTotalValue', 0);
+    <?php $_smarty_tpl->_assignInScope('CGSTTotalValue', 0);
 ?>
-        <?php $_smarty_tpl->_assignInScope('IGSTTotalValue', 0);
+    <?php $_smarty_tpl->_assignInScope('IGSTTotalValue', 0);
 ?>
-        <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
+    <?php $_smarty_tpl->_assignInScope('SGSTTotalValue', 0);
 ?>
-        <?php if (count($_smarty_tpl->tpl_vars['otherAdditionalCharges']->value) != 0) {?>
-        <?php
+    <?php if (count($_smarty_tpl->tpl_vars['otherAdditionalCharges']->value) != 0) {?>
+    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['otherAdditionalCharges']->value, 'v', false, 'k');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			<td align="center" width="5%"  class="own-td-2"></td>
-		         	<td align="center" width="20%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+    <tr>
+		<td width="5%" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
 </td>
-		         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['hsn_code'];?>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['hsn_code'];?>
 </td>
-		         	<td align="center" width="5%"  class="own-td-2"></td>
-		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
-		         		<?php ob_start();
+     	<?php }?>
+     	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
+     		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
 $_prefixVariable4=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable4);
 ?>
-		         	<?php } else { ?>
-		         		<?php ob_start();
+     	<?php } else { ?>
+     		<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['amount']/100)*$_smarty_tpl->tpl_vars['OTHERPercGrandTotal']->value);
 $_prefixVariable5=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 ?>
-		         	<?php }?>
-		         	<td align="center" width="10%" class="own-td-2">
-		         		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+     	<?php }?>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
-		         		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
+     		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
 
-		         	</td>
-		         	<td align="center" width="10%"  class="own-td-2"></td>
-		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-	         		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-			         	<?php ob_start();
+     	</td>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+ 		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*$_smarty_tpl->tpl_vars['other_total_AMOUNT']->value);
 $_prefixVariable6=ob_get_clean();
 $_smarty_tpl->_assignInScope('CGSTTotalValue', $_prefixVariable6);
 ?>
-			         	<?php ob_start();
+         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['SGST']/100)*$_smarty_tpl->tpl_vars['other_total_AMOUNT']->value);
 $_prefixVariable7=ob_get_clean();
 $_smarty_tpl->_assignInScope('SGSTTotalValue', $_prefixVariable7);
 ?>
 
-			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
 %<br/>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
  ]</td>
-			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
 %<br/>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
  ]</td>
-		         	<?php } else { ?>
-			         	<?php ob_start();
+     	<?php } else { ?>
+         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['IGST']/100)*$_smarty_tpl->tpl_vars['other_total_AMOUNT']->value);
 $_prefixVariable8=ob_get_clean();
 $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable8);
 ?>
-			         	<td align="center" width="10%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
+         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
 %<br/><?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
 </td>
-		         	<?php }?>
-		         	<?php }?>
+     	<?php }?>
+     	<?php }?>
 
-		         	<?php ob_start();
+     	<?php ob_start();
 echo $_smarty_tpl->tpl_vars['SGSTTotalValue']->value+$_smarty_tpl->tpl_vars['CGSTTotalValue']->value+$_smarty_tpl->tpl_vars['other_total_AMOUNT']->value+$_smarty_tpl->tpl_vars['IGSTTotalValue']->value;
 $_prefixVariable9=ob_get_clean();
 $_smarty_tpl->_assignInScope('totalPriceValue1', $_prefixVariable9);
 ?>
-					<?php $_smarty_tpl->_assignInScope('GrandTotal1', $_smarty_tpl->tpl_vars['GrandTotal1']->value+$_smarty_tpl->tpl_vars['totalPriceValue1']->value);
+		<?php $_smarty_tpl->_assignInScope('GrandTotal1', $_smarty_tpl->tpl_vars['GrandTotal1']->value+$_smarty_tpl->tpl_vars['totalPriceValue1']->value);
 ?>
 
-		         	<td align="center" width="10%" class="own-td-2"><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue1']->value,2);?>
-</td>
-		         	
-        		</tr>
-        	</table>
-        </tr>
-        <?php
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue1']->value,2);?>
+</b></td>
+    </tr>
+    <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-        <?php }?>
-
-        <?php $_smarty_tpl->_assignInScope('ODiscountValue', 0);
+    <?php }?>
+    <?php $_smarty_tpl->_assignInScope('ODiscountValue', 0);
 ?>
-        <?php if (count($_smarty_tpl->tpl_vars['overAllDiscountDetails']->value) != 0) {?>
-        <?php
+    <?php if (count($_smarty_tpl->tpl_vars['overAllDiscountDetails']->value) != 0) {?>
+    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['overAllDiscountDetails']->value, 'v', false, 'k');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-        <tr>
-        	<table class="own-table" style="font-size: 10px;">
-        		<tr>
-        			<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_type'] == 'AMOUNT') {?>
-		         		<?php ob_start();
+    <tr>
+		<?php if ($_smarty_tpl->tpl_vars['v']->value['discount_type'] == 'AMOUNT') {?>
+     		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['discount'];
 $_prefixVariable10=ob_get_clean();
 $_smarty_tpl->_assignInScope('ODiscountValue', $_prefixVariable10);
 ?>
-		         	<?php } else { ?>
-		         		<?php $_smarty_tpl->_assignInScope('ODiscountValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)));
+     	<?php } else { ?>
+     		<?php $_smarty_tpl->_assignInScope('ODiscountValue', (($_smarty_tpl->tpl_vars['v']->value['discount']/100)*($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)));
 ?>
-		         	<?php }?>
+     	<?php }?>
 
-        			<td align="center" width="90%"  class="own-td-2">DISCOUNT</td>
-        			<td align="center" width="10%"  class="own-td-2">
-        				<b><?php echo number_format($_smarty_tpl->tpl_vars['ODiscountValue']->value,2);?>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="<?php echo $_smarty_tpl->tpl_vars['DcolspanCalc']->value;?>
+">DISCOUNT</td>
+		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+			<b><?php echo number_format($_smarty_tpl->tpl_vars['ODiscountValue']->value,2);?>
 </b>
-        			</td>
-		         	
-        		</tr>
-        	</table>
-        </tr>
-        <?php
+		</td>
+    </tr>
+    <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-        <?php }?>
-        <tr>
-        	<table class="own-table" >
-        		<tr>
-		         	<td align="center" width="60%" class="own-td-2" id="numberToWord"></td>
-		         	<td align="center" width="60%" class="own-td-2" style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
-</td>
-		         	<td align="center" width="30%" class="own-td-2">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
-</td>
-		         	<td align="center" width="10%" class="own-td-2"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
+    <?php }?>
+    <!-- <tr>
+    	<td id="result" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+	</tr> -->
+    <tr>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	<?php if ($_smarty_tpl->tpl_vars['TCcolspanCalc']->value > 7) {?>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
+"></td>
+     	<?php } else { ?>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
+"></td>
+     	<?php }?>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.3),0);?>
+">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</td> 
+     	<td colspan="1" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
-		         	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
+
+     	<td id="GrandTotal" style="display: none;"><?php echo ($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value;?>
 </td>
-        		</tr>
-        	</table>
-        </tr>
-	</table>
+     	<td align="center" style="display: none;" id="currencyCode" ><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+</td>
+	</tr>
+	<tr>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.6),0);?>
+" style="border-left:1px solid #000;">
+			<h4><b>Terms & Condition :</b></h4>
+			<ul>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Please quote our purchase order number on the invoice.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Freight to be paid as agreed between the parties.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Failing to file a tax return on time.We reserved the right to deduct the tax AMOUNT from your payment.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+			</ul>
+		</td>
+		<td  colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
+">
+			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
+			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
+			</br>
+			</br>
+			<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
+			<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>-->
+			<div style="width:40%;float:left;">
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+			</div>
+			<div style="width:60%;float:left">
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+			</div>
+			<div style="clear: both;"></div>
+		</td>
+	</tr>
+</table>
 <?php echo '<script'; ?>
 >
 	
+	// (function () {
+
+	//     var getPositionAtCenter = function (element) {
+	//         var data = element.getBoundingClientRect();
+	//         return {
+	//             x: data.left + data.width / 2,
+	//             y: data.top + data.height / 2
+	//         };
+	//     };
+
+	//     var getDistanceBetweenElements = function (a, b) {
+	//         var aPosition = getPositionAtCenter(a);
+	//         var bPosition = getPositionAtCenter(b);
+	//         return Math.sqrt(
+	//         Math.pow(aPosition.x - bPosition.x, 2) + Math.pow(aPosition.y - bPosition.y, 2));
+	//     };
+
+	//     document.getElementById("result").style.height = (842 - getDistanceBetweenElements(document.getElementById("x"),
+	//     document.getElementById("y")))+"px";
+
+	//    //   document.getElementById("result").textContent = getDistanceBetweenElements(document.getElementById("x"),
+ //    // document.getElementById("y"));
+	    
+	//     // document.getElementById("result").innerHTML = ;
+
+	// })();
+
 	var number = document.getElementById('GrandTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
-	document.getElementById('numberToWord').innerHTML = "<b>AMOUNT In Words : </b> "+number2text(number,currency);
+	document.getElementById('numberToWord').innerHTML = "<b>Amount in words : </b> "+number2text(number,currency);
     
 	function number2text(value) {
 	    var currencyCode = {
