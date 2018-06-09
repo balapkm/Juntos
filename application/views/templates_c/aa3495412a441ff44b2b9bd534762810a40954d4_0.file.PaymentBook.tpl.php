@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-13 19:40:39
+/* Smarty version 3.1.30, created on 2018-06-09 20:02:27
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af8475f2af961_05366758',
+  'unifunc' => 'content_5b1be4fbc28c21_84511152',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1526220635,
+      1 => 1528554745,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af8475f2af961_05366758 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1be4fbc28c21_84511152 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -39,10 +39,35 @@ function content_5af8475f2af961_05366758 (Smarty_Internal_Template $_smarty_tpl)
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
+
 	              		<div class="row">
-	              			<div class="col-lg-3"></div>
+	              			<div class="col-lg-12" style="margin-top: 10px;">
+					            <div class="col-lg-3"></div>
+				                <div class="col-lg-3">
+				                	<div class="form-group">
+					                  <label for="exampleInputEmail1">Division</label>
+					                  <select class="form-control" id="division" ng-model="generatePoData.division">
+					                  	  <option value="">Choose Division</option>
+					                  	  <option value="UPPER">UPPER</option>
+					                  	  <option value="FULL SHOE">FULL SHOE</option>
+					                  	  <option value="SOLE">SOLE</option>
+					                  </select>
+					                </div>
+				                </div>
+				                <div class="col-lg-3">
+				                	<div class="form-group">
+					                  <label for="exampleInputEmail1">Type</label>
+					                  <select class="form-control" id="division" ng-model="generatePoData.type">
+					                  	  <option value="">Choose Type</option>
+					                  	  <option value="specfic">Specfic</option>
+					                  	  <option value="date">Date</option>
+					                  </select>
+					                </div>
+				                </div>
+				                <div class="col-lg-3"></div>
+				            </div>
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;">
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'specfic'">
 					            <div class="col-lg-4"></div>
 				                <div class="col-lg-4">
 					                <div class="form-group">
@@ -68,13 +93,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					            </div>
 					            <div class="col-lg-4"></div>
 					        </div>
+					         <!-- Date Wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'date'">
+					            <div class="col-lg-4"></div>
+				                <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Date Range</label>
+					                  <input type="text" id="dateRangePicker" class="form-control">
+					                </div>
+					            </div>
+					            <div class="col-lg-4"></div>
+					        </div>
+
 				            
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name">
+				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name !== '' || generatePoData.type === 'date'">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
-			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
+			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;" ng-if="generatePoData.type !== 'date'">
 			        		<p align="right">
 				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
 				        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>

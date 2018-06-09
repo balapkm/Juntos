@@ -117,7 +117,6 @@ class CoveringLetter extends CI_Controller
 		}
 		$response = exec($cmd);
 
-		// print_r($response);exit;
 		header("Content-Type: application/octet-stream");
 		$paymentBookList = 'CoveringLetter';
 		$file = $folder_name.'/'.$filename.'.pdf';

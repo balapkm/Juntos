@@ -40,6 +40,8 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
     $scope.searchAction = function()
     {
         dataTableVariable.destroy();
+
+        // if(validateService.blank($scope.paymentStatementObject['division'],"Please Enter division","division")) return false;
         var service_details = {
             method_name : "searchAction",
             controller_name : "PaymentStatement",

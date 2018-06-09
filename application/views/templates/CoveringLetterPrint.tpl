@@ -2,6 +2,16 @@
 	<button style="float: right;margin-top: -50px;margin-right: 105px;" class="btn btn-primary" onClick="downloadAsPdfCoverLetter()">Download as PDF</button> 
 </div>
 
+<style>
+table td
+{
+	border-bottom:1px solid #000;
+	border-right:1px solid #000;
+	padding:4px 3px;
+	font-size: 12px;
+}
+</style>
+
 [[assign var=totalAmount value=0]]
 [[foreach from=$data key=k1 item=v1]]
 	[[assign var=totalAmount value=$totalAmount + $v1.bill_amount]]
@@ -21,7 +31,32 @@
 [[/foreach]]
 <span style="display: none;" id="GrandTotal">[[$grandAmount]]</span>
 <span style="display: none;" id="currencyCode">[[$data[0].currency]]</span>
-<div style="border: 2px solid black;width: 80%;margin:auto;">
+<table cellspacing="0" cellpadding="0" border="0" width="80%" style="margin: auto;">
+	<tr> 
+		<td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					<td align="center" width="15%" style="border:0px;"><img src="assets/img/TMAR LOGO.jpg" width="100" height="100"/>
+					</td>
+					<td width="40%" style="border:0px;"><h3>T.M.ABDUL RAHMAN & SONS</h3>
+					<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5></td>
+					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
+        			Tel : 91-4172-272470,272480</br>
+        			Email : purchasedept@tmargroup.in </br>
+        			Email : soles@tmargroup.in</font><br/><br/>
+
+        			<font style="font:bold arial,helvetica,verdana; color:#000;">
+        			H.O : 48(Old No.49) Wuthucattan Street,</br>
+        			Periamet,CHENNAI-600 003.INDIA</br>
+        			Tel : 91-44-25612164,25610078</br>
+        			Email : headoffice@tmargroup.in</br>
+        			<b>GSTIN : 33AABFT2029F1ZO1</b></font></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<div style="border:1px solid black;width: 80%;margin:auto;">
 	<div style="margin-left: 20px;">
 		<h5><b>TO</b></h5>
 		<h5><b>[[$data[0].supplier_name]]<b></h5>

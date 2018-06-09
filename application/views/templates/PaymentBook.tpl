@@ -15,10 +15,35 @@
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
+
 	              		<div class="row">
-	              			<div class="col-lg-3"></div>
+	              			<div class="col-lg-12" style="margin-top: 10px;">
+					            <div class="col-lg-3"></div>
+				                <div class="col-lg-3">
+				                	<div class="form-group">
+					                  <label for="exampleInputEmail1">Division</label>
+					                  <select class="form-control" id="division" ng-model="generatePoData.division">
+					                  	  <option value="">Choose Division</option>
+					                  	  <option value="UPPER">UPPER</option>
+					                  	  <option value="FULL SHOE">FULL SHOE</option>
+					                  	  <option value="SOLE">SOLE</option>
+					                  </select>
+					                </div>
+				                </div>
+				                <div class="col-lg-3">
+				                	<div class="form-group">
+					                  <label for="exampleInputEmail1">Type</label>
+					                  <select class="form-control" id="division" ng-model="generatePoData.type">
+					                  	  <option value="">Choose Type</option>
+					                  	  <option value="specfic">Specfic</option>
+					                  	  <option value="date">Date</option>
+					                  </select>
+					                </div>
+				                </div>
+				                <div class="col-lg-3"></div>
+				            </div>
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;">
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'specfic'">
 					            <div class="col-lg-4"></div>
 				                <div class="col-lg-4">
 					                <div class="form-group">
@@ -33,13 +58,25 @@
 					            </div>
 					            <div class="col-lg-4"></div>
 					        </div>
+					         <!-- Date Wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'date'">
+					            <div class="col-lg-4"></div>
+				                <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Date Range</label>
+					                  <input type="text" id="dateRangePicker" class="form-control">
+					                </div>
+					            </div>
+					            <div class="col-lg-4"></div>
+					        </div>
+
 				            
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name">
+				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name !== '' || generatePoData.type === 'date'">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
-			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
+			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;" ng-if="generatePoData.type !== 'date'">
 			        		<p align="right">
 				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
 				        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>

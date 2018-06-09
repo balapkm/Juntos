@@ -9,7 +9,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
-      startDate : new Date()
+      // startDate : new Date()
     });
 
     $('#example2').DataTable();
@@ -18,7 +18,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
-      startDate : new Date()
+      // startDate : new Date()
     });
 
     $('.select2').select2();
@@ -52,7 +52,22 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         viewMode: "years", 
         minViewMode: "years"
     });
+
+    $('#dateRangePicker').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+              cancelLabel: 'Clear'
+          }
+    });
     
+    $('#dateRangePicker').on('apply.daterangepicker', function(ev, picker) {
+          $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
+    });
+
+
+    $('#dateRangePicker').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+    });
 
     $scope.exampleDataTable = function()
     {
@@ -71,9 +86,19 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         });
     }
 
+    
     $scope.searchAction = function()
     {
         dataTableVariable.destroy();
+        $scope.generatePoData['date'] = $('#dateRangePicker').val();
+        if(validateService.blank($scope.generatePoData['division'],"Please Enter division","division")) return false;
+        if(validateService.blank($scope.generatePoData['type'],"Please Enter type","type")) return false;
+        
+        if($scope.generatePoData['type'] == "date")
+        {
+            $scope.generatePoData['supplier_name'] = "";
+            if(validateService.blank($scope.generatePoData['date'],"Please Enter date","dateRangePicker")) return false;
+        }
         var service_details = {
             method_name : "searchPaymentBookAction",
             controller_name : "PaymentBook",
@@ -310,7 +335,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.downloadAsPdfPaymentBookDetails = function(){
         console.log($scope.generatePoData);
-        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name'];
+        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&division='+$scope.generatePoData['division'];
         window.open(url);
     }
 

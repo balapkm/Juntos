@@ -81,6 +81,7 @@ class PaymentBook extends CI_Controller
 		{
 			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
 			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']]['origin']   = $value['origin'];
 			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
 
@@ -141,7 +142,6 @@ class PaymentBook extends CI_Controller
 
 		$finalResponse['result']          = $result;
 		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
-		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -283,6 +283,7 @@ class PaymentBook extends CI_Controller
 	public function downloadAsPdfPaymentBookDetails()
 	{
 		$this->data = $_GET;
+		$this->data['type'] = "";
 		$finalResponse['suplier_id']  = $this->data['supplier_name'];
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
@@ -302,6 +303,7 @@ class PaymentBook extends CI_Controller
 		{
 			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
 			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']]['origin']   = $value['origin'];
 			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
 		}
 

@@ -2,9 +2,9 @@
 [[foreach from=$result key=k1 item=v1]]
 	<div style="margin-top: 50px;">
 		[[if $k1 neq '0000-00-00']]
-		<h5><b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]]</b></h5>
+		<h5><b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[else]]
-		<h5><b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]]</b></h5>
+		<h5><b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
@@ -16,9 +16,10 @@
 				          <th>HSN CODE</th>
 				          <th>CGST</th>
 				          <th>SGST</th>
+				          <th>IGST</th>
 				          <th>QTY</th>
-				          <th>UOM</th>
 				          <th>MATERIAL NAME</th>
+				          <th>UOM</th>
 				          <th>RATE</th>
 				          <th>PO NUMBER</th>
 				          <th>DC Number</th>
@@ -49,6 +50,7 @@
 						          <td>[[$v4.material_hsn_code]]</td>
 						          <td>[[$v4.CGST]]</td>
 						          <td>[[$v4.SGST]]</td>
+						          <td>[[$v4.IGST]]</td>
 						          <td>[[$v4.received]]</td>
 						          <td>[[$v4.material_name]]</td>
 						          <td>[[$v4.material_uom]]</td>
@@ -79,7 +81,7 @@
 					        [[/foreach]]
 				        [[/foreach]]
 				        <tr>
-				        	<td colspan="14"></td>
+				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
 				        	<td><b>[[$totalAmount]]</b></td>
 				        	<td></td>
@@ -102,7 +104,7 @@
 		                  <th>DATE</th>
 		                  <th>SUPPLIER CREDIT NOTE</th>
 		                  <th>DATE</th>
-		                  <th colspan="6" style="text-align: center;">QUERY</th>
+		                  <th colspan="7" style="text-align: center;">QUERY</th>
 		                  <th style="background-color: yellow;">PAYABLE MONTH</th>
 		                  <th>AMOUNT</th>
 		                  <th></th>
@@ -139,7 +141,7 @@
 		                      <td class="datetd">[[$v3.debit_note_date|date_format:"%d-%m-%Y"]]</td>
 		                      <td>[[$v3.supplier_creditnote]]</td>
 		                      <td class="datetd">[[$v3.supplier_creditnote_date|date_format:"%d-%m-%Y"]]</td>
-		                      <td colspan="6">[[$v3.query]]</td>
+		                      <td colspan="7">[[$v3.query]]</td>
 		                      <td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
 		                      <td>[[$v3.amount]]</td>
 		                      <td></td>
@@ -168,7 +170,7 @@
 		            	<th>DATE</th>
 		            	<th>SUPPLIER PI NUMBER</th>
 		            	<th>DATE</th>
-		            	<th colspan="6" style="text-align: center;">QUERY</th>
+		            	<th colspan="7" style="text-align: center;">QUERY</th>
 		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
 		            	<th>AMOUNT</th>
 		            	<th></th>
@@ -194,7 +196,7 @@
 		            	<td class="datetd">[[$v3.supplier_date|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.supplier_pi_number]]</td>
 		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
-		            	<td colspan="6" style="text-align: center;">[[$v3.query]]</td>
+		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
 		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.amount]]</td>
 		            	<td></td>
@@ -214,7 +216,7 @@
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
 		                <tr style="font-weight: bold;">
-				        	<td colspan="14"></td>
+				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
 				        	<td><b>[[$totalAmount]]</b></td>
 				        	<td>[[$v3.deduction]]</td>

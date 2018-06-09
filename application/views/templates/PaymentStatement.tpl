@@ -19,6 +19,17 @@
 				            <!-- Supplier Wise -->
 				            <div class="col-lg-12" style="margin-top: 10px;">
 				            	<div class="col-lg-4"></div>
+					            <!-- <div class="col-lg-3">
+				                	<div class="form-group">
+					                  <label for="exampleInputEmail1">Division</label>
+					                  <select class="form-control" id="division" ng-model="paymentStatementObject.division">
+					                  	  <option value="">Choose Division</option>
+					                  	  <option value="UPPER">UPPER</option>
+					                  	  <option value="FULL SHOE">FULL SHOE</option>
+					                  	  <option value="SOLE">SOLE</option>
+					                  </select>
+					                </div>
+				                </div> -->
 					            <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Month</label>
