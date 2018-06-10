@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 20:32:45
+/* Smarty version 3.1.30, created on 2018-06-10 12:51:40
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1bec15900a02_83863053',
+  'unifunc' => 'content_5b1cd184ba82e3_62513202',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1528556562,
+      1 => 1528615253,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1bec15900a02_83863053 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1cd184ba82e3_62513202 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -89,9 +89,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
-				          <th>DD Number</th>
+				          <!-- th>DD Number</th>
 				          <th>DD Date</th>
-				          <th>DD Amount</th>
+				          <th>DD Amount</th> -->
 				          <th>BALANCE</th>
 				        </tr>
 				    </thead>
@@ -181,12 +181,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "><?php echo number_format($_smarty_tpl->tpl_vars['v4']->value['cheque_amount'],2);?>
 </td>
-							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
+							          <!-- <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "></td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "></td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
-"></td>
+"></td> -->
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "></td>
 							      <?php }?>
@@ -206,15 +206,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        <tr>
 				        	<td colspan="16"></td>
 				        	<td><b>Total</b></td>
-				        	<td><b><?php echo $_smarty_tpl->tpl_vars['totalAmount']->value;?>
+				        	<td><b><?php echo number_format($_smarty_tpl->tpl_vars['totalAmount']->value,2);?>
 </b></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
+				        	<!-- <td></td>
 				        	<td></td>
-				        	<td></td>
-				        	<td></td>
+				        	<td></td> -->
 				        	<td></td>
 				        </tr>
 				    </tbody>
@@ -236,9 +236,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
+		                  <!-- <th></th>
 		                  <th></th>
-		                  <th></th>
-		                  <th></th>
+		                  <th></th> -->
 		                  <th></th>
 		            </thead>
 		            <tbody>
@@ -289,15 +289,15 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 </td>
 		                      <td class="datetd" style="background-color: yellow;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v3']->value['payable_month'],"%d-%m-%Y");?>
 </td>
-		                      <td><?php echo $_smarty_tpl->tpl_vars['v3']->value['amount'];?>
+		                      <td><?php echo number_format($_smarty_tpl->tpl_vars['v3']->value['amount'],2);?>
 </td>
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
+		                      <!-- <td></td>
 		                      <td></td>
-		                      <td></td>
-		                      <td></td>
+		                      <td></td> -->
 		                      <td></td>
 		                </tr>
 		                <?php
@@ -330,9 +330,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            	<th></th>
 		            	<th></th>
 		            	<th></th>
+		            	<!-- <th></th>
 		            	<th></th>
-		            	<th></th>
-		            	<th></th>
+		            	<th></th> -->
 		            	<th></th>
 		            </tr>
 		            </thead>
@@ -369,15 +369,15 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 </td>
 		            	<td class="datetd" style="background-color: yellow;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v3']->value['payable_month'],"%d-%m-%Y");?>
 </td>
-		            	<td><?php echo $_smarty_tpl->tpl_vars['v3']->value['amount'];?>
+		            	<td><?php echo number_format($_smarty_tpl->tpl_vars['v3']->value['amount'],2);?>
 </td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
+		            	<!-- <td></td>
 		            	<td></td>
-		            	<td></td>
-		            	<td></td>
+		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
 		            	<?php }?>
@@ -409,12 +409,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 				        	<td><?php echo number_format($_smarty_tpl->tpl_vars['v2']->value[0]['cheque_amount'],2);?>
 </td>
-				        	<td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_number'];?>
+				        	<!-- <td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_number'];?>
 </td>
 				        	<td class="datetd"><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_date'];?>
 </td>
 				        	<td><?php echo number_format($_smarty_tpl->tpl_vars['v2']->value[0]['dd_amount'],2);?>
-</td>
+</td> -->
 				        	<td><?php echo number_format(($_smarty_tpl->tpl_vars['totalAmount']->value-$_smarty_tpl->tpl_vars['v2']->value[0]['cheque_amount']),2);?>
 </td>
 				        </tr>

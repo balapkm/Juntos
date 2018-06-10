@@ -33,9 +33,9 @@
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
-				          <th>DD Number</th>
+				         <!--  <th>DD Number</th>
 				          <th>DD Date</th>
-				          <th>DD Amount</th>
+				          <th>DD Amount</th> -->
 				          <th>BALANCE</th>
 				        </tr>
 				    </thead>
@@ -67,14 +67,14 @@
 							          [[else]]
 							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$lastDateOfMonth|date_format:"%d-%m-%Y"]]</td>
 							          [[/if]]
-							          <td rowspan="[[$v3|@count]]">[[$v4.bill_amount]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.bill_amount|number_format:2]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.deduction]]</td>
 							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_no]]</td>
 							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
-							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_amount]]</td>
+							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_amount|number_format:2]]</td>
+							          <!-- <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td>
-							          <td rowspan="[[$v3|@count]]"></td>
-							          <td rowspan="[[$v3|@count]]"></td>
+							          <td rowspan="[[$v3|@count]]"></td> -->
 							          <td rowspan="[[$v3|@count]]"></td>
 							      [[/if]]
 						        </tr>
@@ -83,14 +83,14 @@
 				        <tr>
 				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
-				        	<td><b>[[$totalAmount]]</b></td>
+				        	<td><b>[[$totalAmount|number_format:2]]</b></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
+				        	<!-- <td></td>
 				        	<td></td>
-				        	<td></td>
-				        	<td></td>
+				        	<td></td> -->
 				        	<td></td>
 				        </tr>
 				    </tbody>
@@ -111,9 +111,9 @@
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
+		                  <!-- <th></th>
 		                  <th></th>
-		                  <th></th>
-		                  <th></th>
+		                  <th></th> -->
 		                  <th></th>
 		            </thead>
 		            <tbody>
@@ -143,14 +143,14 @@
 		                      <td class="datetd">[[$v3.supplier_creditnote_date|date_format:"%d-%m-%Y"]]</td>
 		                      <td colspan="7">[[$v3.query]]</td>
 		                      <td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
-		                      <td>[[$v3.amount]]</td>
+		                      <td>[[$v3.amount|number_format:2]]</td>
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
+		                      <!-- <td></td>
 		                      <td></td>
-		                      <td></td>
-		                      <td></td>
+		                      <td></td> -->
 		                      <td></td>
 		                </tr>
 		                [[/foreach]]
@@ -177,9 +177,9 @@
 		            	<th></th>
 		            	<th></th>
 		            	<th></th>
+		            	<!-- <th></th>
 		            	<th></th>
-		            	<th></th>
-		            	<th></th>
+		            	<th></th> -->
 		            	<th></th>
 		            </tr>
 		            </thead>
@@ -198,14 +198,14 @@
 		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
 		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
 		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
-		            	<td>[[$v3.amount]]</td>
+		            	<td>[[$v3.amount|number_format:2]]</td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
+		            	<!-- <td></td>
 		            	<td></td>
-		            	<td></td>
-		            	<td></td>
+		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
 		            	[[/if]]
@@ -218,15 +218,15 @@
 		                <tr style="font-weight: bold;">
 				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
-				        	<td><b>[[$totalAmount]]</b></td>
+				        	<td><b>[[$totalAmount|number_format:2]]</b></td>
 				        	<td>[[$v3.deduction]]</td>
 				        	<td>[[$v3.cheque_no]]</td>
 				        	<td class="datetd">[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
-				        	<td>[[$v3.cheque_amount]]</td>
-				        	<td>[[$v3.dd_number]]</td>
+				        	<td>[[$v3.cheque_amount|number_format:2]]</td>
+				        	<!-- <td>[[$v3.dd_number]]</td>
 				        	<td class="datetd">[[$v3.dd_date]]</td>
-				        	<td>[[$v3.dd_amount]]</td>
-				        	<td>[[$totalAmount - $v3.cheque_amount]]</td>
+				        	<td>[[$v3.dd_amount]]</td> -->
+				        	<td>[[($totalAmount - $v3.cheque_amount)|number_format:2]]</td>
 				        </tr>
 				        [[/foreach]]
 		            </tbody>

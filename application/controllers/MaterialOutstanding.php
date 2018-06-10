@@ -75,6 +75,12 @@ class MaterialOutstanding extends CI_Controller
 		return $data;
 	}
 
+	public function cancelMaterialOutstandingAction()
+	{
+		// print_r($this->data);exit;
+		return $this->PoGenerateQuery->update_po_generated_request_details($this->data);
+	}
+
 	public function updateMaterialOutstandingAction()
 	{
 		if($this->data['outstanding_type'] == 'M')

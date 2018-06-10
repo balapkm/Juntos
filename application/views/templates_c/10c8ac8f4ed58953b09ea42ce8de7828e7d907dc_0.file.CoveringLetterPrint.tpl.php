@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-30 22:56:06
+/* Smarty version 3.1.30, created on 2018-06-10 13:04:03
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0edeaf019d88_54652143',
+  'unifunc' => 'content_5b1cd46ba470d1_62678732',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '10c8ac8f4ed58953b09ea42ce8de7828e7d907dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint.tpl',
-      1 => 1527701164,
+      1 => 1528616038,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0edeaf019d88_54652143 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1cd46ba470d1_62678732 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <div>
@@ -165,10 +165,18 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 ?>
 		    	<tr>
 		          <td>
-		          	<?php if ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'D') {?> DEBIT NOTE 
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'C') {?> CREDIT NOTE
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'B') {?> BALANCE AMOUNT
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> TDS
+		          	<?php if ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'D') {?> 
+		          		DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
+ DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+ CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
+ DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
+
+                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'C') {?> 
+                    	CREDIT NOTE
+                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'B') {?> 
+                    	BALANCE AMOUNT
+                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> 
+                    	TDS
                     <?php }?></td>	
 		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
 </td>

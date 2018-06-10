@@ -63,7 +63,8 @@ class PaymentBook extends CI_Controller
 
 	public function searchPaymentBookAction()
 	{
-		$finalResponse['supplier_id']  = $this->data['supplier_name'];
+		$finalResponse['supplier_id']     = $this->data['supplier_name'];
+		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 		if(count($data) == 0)
@@ -76,13 +77,31 @@ class PaymentBook extends CI_Controller
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
 			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
-		
+		$payable_month_array = array();
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']]['origin']   = $value['origin'];
-			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+			
+			$payable_month_array[] = $value['payable_month'];
+			if($value['payable_month'] == '0000-00-00')
+			{
+				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
+					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']][] = $value;
+				}
+				else
+				{
+					$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+					$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+					$result[$value['payable_month']]['origin']        = $value['origin'];
+				}
+			}
+			else
+			{
+				$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']]['origin']        = $value['origin'];
+			}
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
@@ -141,7 +160,7 @@ class PaymentBook extends CI_Controller
 		}
 
 		$finalResponse['result']          = $result;
-		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
+		
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}

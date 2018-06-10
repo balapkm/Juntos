@@ -128,6 +128,39 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         });
     }
 
+    $scope.cancelMaterialOutStanding = function(x){
+        $scope.editMaterialPOData  = {};
+        $scope.editMaterialPOData.qty   = (x.qty - x.received);
+        $scope.editMaterialPOData.material_name   = "test";
+        $scope.editMaterialPOData.id   = x.po_generated_request_id;
+        console.log(x,"cancelMaterialOutStanding");
+        $("#cancel_modal").modal('show');
+    }
+
+    $scope.cancel_material_action = function()
+    {
+        if(validateService.blank($scope.editMaterialPOData['qty'],"Please Enter Remaining Qty","remaining_qty")) return false;   
+        var service_details = {
+            method_name : "cancelMaterialOutstandingAction",
+            controller_name : "MaterialOutstanding",
+            data : JSON.stringify($scope.editMaterialPOData)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Updated Successfully','');
+                $scope.searchAction();
+                $('#cancel_modal').modal('hide');
+                $scope.checkEditBoxBillOutStandingModel = {};
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
+
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
         $scope.totalAmount = (x.price * x.qty);

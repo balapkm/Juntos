@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-25 19:47:32
+/* Smarty version 3.1.30, created on 2018-06-10 19:15:19
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b081afc317b84_72081365',
+  'unifunc' => 'content_5b1d2b6f861e51_78940139',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1527257841,
+      1 => 1528638304,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b081afc317b84_72081365 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d2b6f861e51_78940139 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -219,6 +219,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
+									        <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
+									          <span class="glyphicon glyphicon-ban-circle"></span>
+									        </a>
 									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
 									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x)">
 									        </div>
@@ -322,6 +325,37 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="edit_material_action()">Update</button>
+	        </div>
+	    </div>
+	    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="cancel_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		      	</button>
+		      	<h4 class="modal-title">Cancel Remaining Qty</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+		    		<div class="col-lg-4"></div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Remaining Qty</label>
+		                  <input type="text" ng-model="editMaterialPOData.qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
+		                </div>
+		            </div>
+		            <div class="col-lg-4"></div>
+		        </div>
+		    </div>
+	        <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="cancel_material_action()">Cancel</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->

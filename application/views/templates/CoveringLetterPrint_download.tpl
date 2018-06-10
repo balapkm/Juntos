@@ -90,10 +90,14 @@ table td
 		        [[foreach from=$extraData key=k1 item=v1]]
 		    	<tr>
 		          <td>
-		          	[[if $v1.type==='D' ]] DEBIT NOTE 
-                    [[elseif $v1.type==='C']] CREDIT NOTE
-                    [[elseif $v1.type==='B']] BALANCE AMOUNT
-                    [[elseif $v1.type==='T']] TDS
+		          	[[if $v1.type==='D' ]] 
+		          		DEBIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    [[elseif $v1.type==='C']] 
+                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    [[elseif $v1.type==='B']] 
+                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    [[elseif $v1.type==='T']] 
+                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
                     [[/if]]</td>	
 		          <td>[[$v1.debit_note_date]]</td>
 		          <td><b>[[$v1.amount]]</b></td>

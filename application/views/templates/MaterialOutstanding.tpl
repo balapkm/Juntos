@@ -159,6 +159,9 @@
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
+									        <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
+									          <span class="glyphicon glyphicon-ban-circle"></span>
+									        </a>
 									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
 									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x)">
 									        </div>
@@ -262,6 +265,37 @@
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" ng-click="edit_material_action()">Update</button>
+	        </div>
+	    </div>
+	    <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="cancel_modal">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		      	</button>
+		      	<h4 class="modal-title">Cancel Remaining Qty</h4>
+		    </div>
+		    <div class="modal-body">
+		    	<div class="row">
+		    		<div class="col-lg-4"></div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Remaining Qty</label>
+		                  <input type="text" ng-model="editMaterialPOData.qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
+		                </div>
+		            </div>
+		            <div class="col-lg-4"></div>
+		        </div>
+		    </div>
+	        <div class="modal-footer">
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" ng-click="cancel_material_action()">Cancel</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->
