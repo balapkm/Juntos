@@ -12,9 +12,9 @@
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
-	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
-	              <li><a href="#tab_5" data-toggle="tab">Other Master</a></li>
+	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -150,7 +150,7 @@
 				        	</div>
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
-					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="uom_table">
 					                    <thead>
 					                        <tr>
 					                          <th>Uof Id</th>
@@ -183,7 +183,7 @@
 				        	</div>
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
-					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="mm_table">
 					                    <thead>
 					                        <tr>
 					                          <th>Master Id</th>
@@ -213,13 +213,13 @@
 	              	</div>
 	              	<div class="tab-pane" id="tab_5">
 				        <div class="row">
-				        	<div class="col-lg-4"></div>
+				        	<!-- <div class="col-lg-4"></div>
 				        	<div class="col-lg-4 text-center" >
 				        		<select class="form-control" id="other_type" ng-model="otherTypeValue" ng-change="otherTypeValueChange()">
 				        			<option value="">Choose Other Type</option>
 				        			<option value="GROUP">GROUP</option>
 				        		</select>
-				        	</div>
+				        	</div> -->
 				        	<div class="col-lg-12" ng-if="otherTypeValueShow">
 				        		<div class="form-group pull-right" style="margin-top: 10px;">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addOtherMasterClick()">

@@ -26,7 +26,7 @@ app.controller('login',function($scope,validateService,httpService,commonService
 	        }
 	        else
 	        {
-	            commonService.setStorage('login_details',JSON.stringify(data),3600000);
+	            commonService.setStorage('login_details',JSON.stringify(data),18000000);
 	            window.location.href = 'dashboard';
 	        }
     	})

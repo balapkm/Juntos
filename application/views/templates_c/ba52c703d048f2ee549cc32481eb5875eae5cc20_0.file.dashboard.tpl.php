@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 18:51:03
+/* Smarty version 3.1.30, created on 2018-06-10 20:13:35
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d25bf0fca06_70413685',
+  'unifunc' => 'content_5b1d3917ba8f36_06811999',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1528636859,
+      1 => 1528641810,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d25bf0fca06_70413685 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d3917ba8f36_06811999 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -55,7 +55,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
-  <link rel="stylesheet" href="assets/css/custom-style.css">
+  <link rel="stylesheet" href="assets/css/custom-style.css?version=48">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -272,6 +272,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
       </div>
       <!-- /.modal-dialog -->
     </div>
+    <a href="#" class="scrollToTop">Scroll To Top</a>
 
   <!-- Control Sidebar -->
   <!-- /.control-sidebar -->
@@ -369,7 +370,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
-?version=46"><?php echo '</script'; ?>
+?version=48"><?php echo '</script'; ?>
 >
 <?php
 }
@@ -382,6 +383,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('body').addClass('loaded');
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $('.scrollToTop').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
   });
 <?php echo '</script'; ?>
 >

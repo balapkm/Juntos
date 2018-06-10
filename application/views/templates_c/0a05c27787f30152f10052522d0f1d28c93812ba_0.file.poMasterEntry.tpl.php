@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-24 22:07:17
+/* Smarty version 3.1.30, created on 2018-06-10 19:47:29
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b06ea3d8d7637_48826848',
+  'unifunc' => 'content_5b1d32f9d9e700_52113900',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1527179814,
+      1 => 1528640241,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b06ea3d8d7637_48826848 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d32f9d9e700_52113900 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -36,9 +36,9 @@ function content_5b06ea3d8d7637_48826848 (Smarty_Internal_Template $_smarty_tpl)
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
-	              <li><a href="#tab_3" data-toggle="tab">UOF Entry</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
-	              <li><a href="#tab_5" data-toggle="tab">Other Master</a></li>
+	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
@@ -225,7 +225,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        	</div>
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
-					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="uom_table">
 					                    <thead>
 					                        <tr>
 					                          <th>Uof Id</th>
@@ -271,7 +271,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        	</div>
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
-					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
+					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="mm_table">
 					                    <thead>
 					                        <tr>
 					                          <th>Master Id</th>
@@ -314,13 +314,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	              	</div>
 	              	<div class="tab-pane" id="tab_5">
 				        <div class="row">
-				        	<div class="col-lg-4"></div>
+				        	<!-- <div class="col-lg-4"></div>
 				        	<div class="col-lg-4 text-center" >
 				        		<select class="form-control" id="other_type" ng-model="otherTypeValue" ng-change="otherTypeValueChange()">
 				        			<option value="">Choose Other Type</option>
 				        			<option value="GROUP">GROUP</option>
 				        		</select>
-				        	</div>
+				        	</div> -->
 				        	<div class="col-lg-12" ng-if="otherTypeValueShow">
 				        		<div class="form-group pull-right" style="margin-top: 10px;">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addOtherMasterClick()">

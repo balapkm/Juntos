@@ -1,7 +1,8 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
-	$('#supplier_table').DataTable({
+	$('#supplier_table,#mm_table,#uom_table').DataTable({
+					iDisplayLength: 100,
 			        dom: 'Brfrtip',
 			        buttons: [
 			            'copy', 
@@ -13,6 +14,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 					        }
 					    }]});
 	$('#material_table').DataTable({
+					iDisplayLength: 100,
 			        dom: 'Brfrtip',
 			        buttons: [
 			            'copy', 
@@ -66,6 +68,11 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			}
 		},100);
 	}
+
+	setTimeout(function(){
+		$scope.otherTypeValue = "GROUP";
+		$scope.otherTypeValueChange();
+	},500);
 
 	$scope.changeMaterialNameDetails = function(id)
 	{
@@ -146,7 +153,9 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		if(data)
     		{
     			setTimeout(function(){
-    				$('#other_master_id').DataTable();
+    				$('#other_master_id').DataTable({
+    					iDisplayLength: 100
+    				});
     			},100);
     			
     			$scope.otherTypeValueShow = true;

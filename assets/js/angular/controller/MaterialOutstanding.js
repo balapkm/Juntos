@@ -60,6 +60,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $scope.exampleDataTable = function()
     {
         dataTableVariable = $('#example').DataTable({
+            iDisplayLength: 100,
             dom: 'Brfrtip',
             buttons: [
                 'copy', 

@@ -30,7 +30,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
-  <link rel="stylesheet" href="assets/css/custom-style.css">
+  <link rel="stylesheet" href="assets/css/custom-style.css?version=48">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -221,6 +221,7 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
+    <a href="#" class="scrollToTop">Scroll To Top</a>
 
   <!-- Control Sidebar -->
   <!-- /.control-sidebar -->
@@ -267,12 +268,26 @@
 <script src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]?version=46"></script>
+<script src="[[$v]]?version=48"></script>
 [[/foreach]]
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('body').addClass('loaded');
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $('.scrollToTop').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
   });
 </script>
 <!-- Insert this line after script imports -->

@@ -8,6 +8,24 @@
     height: 100%;
     z-index: 100000;
 }
+.scrollToTop{
+    width:130px; 
+    height:130px;
+    padding:10px; 
+    text-align:center; 
+    background: whiteSmoke;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    position:fixed;
+    bottom:75px;
+    right:40px;
+    display:none;
+    background: url('../../assets/img/arrow_up.png') no-repeat 0px 20px;
+}
+.scrollToTop:hover{
+    text-decoration:none;
+}
 #loader {
     display: block;
     position: relative;
