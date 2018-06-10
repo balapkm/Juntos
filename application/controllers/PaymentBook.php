@@ -114,7 +114,7 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['advancePaymentDetails'][] = $value;
+			$advancePaymentDetails[] = $value;
 		}
 
 
@@ -142,23 +142,20 @@ class PaymentBook extends CI_Controller
 						}
 					} 
 				}
-				if($key2 == 'advancePaymentDetails')
+				
+				foreach ($advancePaymentDetails as $Akey => $Avalue)
 				{
-					foreach ($value2 as $key3 => $value3)
+					if(in_array($Avalue['full_po_number'],$po_number_array))
 					{
-						if(in_array($value3['full_po_number'],$po_number_array))
-						{
-							$result[$key1][$key2][$key3]['isAvailable'] = 'Y';
-						}
-						else
-						{
-							unset($result[$key1][$key2][$key3]);
-						}
+						$result[$key1]['advancePaymentDetails'][] = $Avalue;
 					}
 				}
 			}
-		}
+			if(!empty($result[$key1]['advancePaymentDetails']))
+				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
 
+		}
+		// print_r($result);exit;
 		$finalResponse['result']          = $result;
 		
 		$template_name = 'paymentBookList.tpl';
@@ -320,10 +317,28 @@ class PaymentBook extends CI_Controller
 
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']]['origin']   = $value['origin'];
-			$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+			
+			$payable_month_array[] = $value['payable_month'];
+			if($value['payable_month'] == '0000-00-00')
+			{
+				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
+					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']][] = $value;
+				}
+				else
+				{
+					$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+					$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+					$result[$value['payable_month']]['origin']        = $value['origin'];
+				}
+			}
+			else
+			{
+				$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']]['origin']        = $value['origin'];
+			}
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
@@ -336,7 +351,7 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['advancePaymentDetails'][] = $value;
+			$advancePaymentDetails[] = $value;
 		}
 
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
@@ -362,21 +377,16 @@ class PaymentBook extends CI_Controller
 						}
 					} 
 				}
-				if($key2 == 'advancePaymentDetails')
+				foreach ($advancePaymentDetails as $Akey => $Avalue)
 				{
-					foreach ($value2 as $key3 => $value3)
+					if(in_array($Avalue['full_po_number'],$po_number_array))
 					{
-						if(in_array($value3['full_po_number'],$po_number_array))
-						{
-							$result[$key1][$key2][$key3]['isAvailable'] = 'Y';
-						}
-						else
-						{
-							unset($result[$key1][$key2][$key3]);
-						}
+						$result[$key1]['advancePaymentDetails'][] = $Avalue;
 					}
 				}
 			}
+			if(!empty($result[$key1]['advancePaymentDetails']))
+				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
 		}
 
 		$finalResponse['result']          = $result;

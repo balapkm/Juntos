@@ -210,7 +210,6 @@
 		            </thead>
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
-		            	[[if $v3.isAvailable eq 'Y']]
 		            	<tr>
 		            	<td style="text-align: center;">
 	                      	<a href="#" onclick='deleteAdvancePaymentDetails([[$v3|@json_encode]])''>
@@ -238,7 +237,6 @@
 		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
-		            	[[/if]]
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]

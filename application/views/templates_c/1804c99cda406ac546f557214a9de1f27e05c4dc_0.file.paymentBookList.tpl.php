@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 12:51:40
+/* Smarty version 3.1.30, created on 2018-06-10 21:59:48
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1cd184ba82e3_62513202',
+  'unifunc' => 'content_5b1d51fc772d10_18363712',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1528615253,
+      1 => 1528647796,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1cd184ba82e3_62513202 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b1d51fc772d10_18363712 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -342,7 +342,6 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars['v3']->value) {
 ?>
-		            	<?php if ($_smarty_tpl->tpl_vars['v3']->value['isAvailable'] == 'Y') {?>
 		            	<tr>
 		            	<td style="text-align: center;">
 	                      	<a href="#" onclick='deleteAdvancePaymentDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v3']->value);?>
@@ -380,7 +379,6 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
-		            	<?php }?>
 		            	<?php
 }
 }

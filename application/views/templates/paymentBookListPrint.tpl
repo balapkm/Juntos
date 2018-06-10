@@ -185,7 +185,6 @@
 		            </thead>
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
-		            	[[if $v3.isAvailable eq 'Y']]
 		            	<tr>
 
                       	[[assign var=totalAmount value=$totalAmount - $v3.amount]]
@@ -208,7 +207,6 @@
 		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
-		            	[[/if]]
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
