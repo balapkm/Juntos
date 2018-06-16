@@ -10,6 +10,10 @@ table td
 	border-right:1px solid #000;
 	padding:4px 3px;
 	font-size: 12px;
+
+}
+table tr td, table tr th {
+    page-break-inside: avoid;
 }
 </style>
 <body>
@@ -32,10 +36,11 @@ table td
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
 					</td>
-					<td width="40%" style="border:0px;"><h3 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h3>
-					<h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td>
-					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
-        			Tel : 91-4172-272470,272480</br>
+					<td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
+					<h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
+					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,Ranipet - 632-401</br>
+        			Tel : 91-4172-272470,271835</br>
         			Email : purchasedept@tmargroup.in </br>
         			Email : soles@tmargroup.in</font><br/><br/>
 
@@ -44,7 +49,7 @@ table td
         			Periamet,CHENNAI-600 003.INDIA</br>
         			Tel : 91-44-25612164,25610078</br>
         			Email : headoffice@tmargroup.in</br>
-        			<b>GSTIN : 33AABFT2029F1ZO1</b></font></td>
+        			<b>GSTIN : 33AABFT2029F1ZO</b></font></td>
 				</tr>
 			</table>
 		</td>
@@ -276,7 +281,7 @@ table td
      	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>
 	</tr>
 	<tr>
-		<td colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;">
+		<td colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;border-top: 1px solid #000">
 			<h4><b>Terms & Condition :</b></h4>
 			<ul>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
@@ -288,7 +293,7 @@ table td
 			<li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
 			</ul>
 		</td>
-		<td  colspan="[[($TCcolspanCalc*0.4)|round:0]]">
+		<td  colspan="[[($TCcolspanCalc*0.4)|round:0]]" style="border-top: 1px solid #000">
 			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
 			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
 			</br>

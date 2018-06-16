@@ -196,7 +196,7 @@
 		            	<td>[[$v3.supplier_pi_number]]</td>
 		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
 		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
-		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
+		            	<td class="datetd" style="background-color: yellow;">[[$k1|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.amount|number_format:2]]</td>
 		            	<td></td>
 		            	<td></td>

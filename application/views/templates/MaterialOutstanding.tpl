@@ -11,12 +11,11 @@
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
-	              <!-- <li><a href="#tab_2" data-toggle="tab">View</a></li> -->
+	              <li><a href="#tab_2" data-toggle="tab">Trash</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 	              		<div class="row">
-
 	              			<div class="col-lg-3"></div>
 	              			<div class="col-lg-3">
 				                <div class="form-group">
@@ -35,7 +34,7 @@
 				                  	  <option value="">Choose Filter Type</option>
 				                  	  <option value="PO">Po Wise</option>
 				                  	  <option value="Material">Material Wise</option>
-				                  	  <option value="Unit">Unit Wise</option>
+				                  	  <option value="Unit">Division Wise</option>
 				                  	  <option value="Supplier">Supplier Wise</option>
 				                  </select>
 				                </div>
@@ -196,6 +195,44 @@
 			                </table>
 			            </div>
 				    </div>
+				    <div class="tab-pane" id="tab_2">
+				    	<div class="table-responsive" style="margin-top: 50px;">
+			                <table id="trashTable" class="table table-bordered table-striped" >
+			                    <thead>
+			                        <tr>
+			                          <th>Action</th>
+			                          <th>Unit</th>
+			                          <th>Supplier</th>
+			                          <th>Order Ref</th>
+			                          <th>PO Number</th>
+			                          <th style="width: 100px">PO Date</th>
+			                          <th>Material</th>
+			                          <th>Quantity</th>
+			                          <th>UMO</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    	[[foreach from=$trash_details key=k item=v]]
+			                    	<tr>
+			                          <td align="center">
+			                          	<a href="#" onclick='addBackTrashIntoMaterial([[$v|@json_encode]])'>
+									        <span class="glyphicon glyphicon-plus-sign"></span>
+									    </a>
+			                          </td>
+			                          <td>[[$v.unit]]</td>
+			                          <td>[[$v.supplier_name]]</td>
+			                          <td>[[$v.order_reference]]</td>
+			                          <td>[[$v.full_po_number]]</td>
+			                          <td style="widtd: 100px">[[$v.po_date]]</td>
+			                          <td>[[$v.material_master_name]]</td>
+			                          <td>[[$v.qty]]</td>
+			                          <td>[[$v.material_uom]]</td>
+			                        </tr>
+			                        [[/foreach]]
+			                    </tbody>
+			                </table>
+			            </div>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -283,11 +320,20 @@
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
+		    		<div class="col-lg-4">
+		    			<h6><b>Total Qty : {{editMaterialPOData.qty|number:2}}</b></h6>
+		    		</div>
+		    		<div class="col-lg-4">
+		    			<h6><b>Received : {{editMaterialPOData.received|number:2}}</b></h6>
+		    		</div>
+		    		<div class="col-lg-4">
+		    			<h6><b>Balance : {{(editMaterialPOData.qty - editMaterialPOData.received)|number:2}}</b></h6>
+		    		</div>
 		    		<div class="col-lg-4"></div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Remaining Qty</label>
-		                  <input type="text" ng-model="editMaterialPOData.qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
+		                  <label for="exampleInputEmail1">Total Qty</label>
+		                  <input type="text" ng-model="editMaterialPOData.new_qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
 		                </div>
 		            </div>
 		            <div class="col-lg-4"></div>

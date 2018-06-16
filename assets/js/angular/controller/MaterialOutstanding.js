@@ -11,6 +11,13 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
       // startDate : new Date()
     });
 
+    if(tab_switch_name === 'tab_2')
+    {
+        setTimeout(function(){
+            $('a[href="#'+tab_switch_name+'"]').trigger('click');
+        },100);
+    }
+
     $scope.showMaterialOutStandingTable = false;
 
     $scope.materialOutStanding = "";
@@ -59,7 +66,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.exampleDataTable = function()
     {
-        dataTableVariable = $('#example').DataTable({
+        dataTableVariable = $('#example,#trashTable').DataTable({
             iDisplayLength: 100,
             dom: 'Brfrtip',
             buttons: [
@@ -129,17 +136,56 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         });
     }
 
+    $scope.addBackTrashIntoMaterial = function(data){
+        var service_details = {
+            method_name : "addBackTrashIntoMaterial",
+            controller_name : "MaterialOutstanding",
+            data : JSON.stringify(data)
+        };
+
+        swal({
+          title: "Do you want add back into Po?",
+          text: "",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+           if(willDelete)
+           {
+                httpService.callWebService(service_details).then(function(data){
+                    if(data)
+                    { 
+                        validateService.displayMessage('success','added Successfully','');
+                        $state.reload();
+                        tab_switch_name = 'tab_2';
+                    }
+                    else
+                    {
+                        validateService.displayMessage('error','Update Error',"");
+                    }
+                });
+            }
+        });
+    }
+
     $scope.cancelMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
-        $scope.editMaterialPOData.qty   = (x.qty - x.received);
-        $scope.editMaterialPOData.material_name   = "test";
-        $scope.editMaterialPOData.id   = x.po_generated_request_id;
-        console.log(x,"cancelMaterialOutStanding");
+        for (var i in x) {
+            $scope.editMaterialPOData[i] = x[i];
+        }
         $("#cancel_modal").modal('show');
     }
 
     $scope.cancel_material_action = function()
     {
+        $scope.editMaterialPOData['trashQty'] = $scope.editMaterialPOData['qty'] - $scope.editMaterialPOData['new_qty'];
+        if($scope.editMaterialPOData['trashQty'] < 0)
+        {
+            validateService.displayMessage('error',"Wrong Qty..","Validation Error");
+            return false;
+        }
+        commonService.showLoader();
         if(validateService.blank($scope.editMaterialPOData['qty'],"Please Enter Remaining Qty","remaining_qty")) return false;   
         var service_details = {
             method_name : "cancelMaterialOutstandingAction",
@@ -147,13 +193,15 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             data : JSON.stringify($scope.editMaterialPOData)
         };
         httpService.callWebService(service_details).then(function(data){
+            commonService.hideLoader();
             if(data)
             { 
                 $('#modal-backdrop').css('display','none');
                 validateService.displayMessage('success','Updated Successfully','');
-                $scope.searchAction();
+                //$scope.searchAction();
                 $('#cancel_modal').modal('hide');
                 $scope.checkEditBoxBillOutStandingModel = {};
+                $state.reload();
             }
             else
             {
@@ -335,3 +383,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     }
 
 });
+
+function addBackTrashIntoMaterial(data)
+{
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.addBackTrashIntoMaterial(data);
+    scope.$apply();
+}

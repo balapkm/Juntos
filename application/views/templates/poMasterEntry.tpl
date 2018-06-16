@@ -426,7 +426,7 @@
 		                </div>
 		            </div>
 		            <div class="col-lg-6">
-		                <div class="form-group">
+		                <div class="form-group" id="material_name_add">
 		                  <label for="exampleInputEmail1">Material Name</label>
 		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
 		                  	   <!-- <option value="">Choose Material Name</option> -->
@@ -435,14 +435,6 @@
 			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
 			                  	[[/foreach]]
 		                  </select>
-
-		                  <!-- <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
-		                  	   <option value="">Choose Material Name</option>
-		                  	   <option value="ADD_NEW">ADD NEW</option>
-		                  	   [[foreach from=$material_master_details key=k item=v]]
-			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
-			                  	[[/foreach]]
-		                  </select> -->
 		                </div>
 		            </div>
 		            <!-- <div class="col-lg-3" ng-if="addNewMaterialNameInput">

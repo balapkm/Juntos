@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 20:02:27
+/* Smarty version 3.1.30, created on 2018-06-16 20:44:32
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1be4fbc28c21_84511152',
+  'unifunc' => 'content_5b252958514d80_25029205',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1528554745,
+      1 => 1529162041,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1be4fbc28c21_84511152 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b252958514d80_25029205 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -124,7 +124,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        </div>
 				    </div>
 				    <div class="tab-pane" id="tab_2">
-	              		<table id="example" class="table table-bordered table-striped" style="margin-top: 10px;">
+	              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
 		                    <thead>
 		                        <tr>
 		                          <th>Supplier Name</th>
@@ -261,7 +261,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Add Advance Payment</h4>
+		        <h4 class="modal-title">{{advancePaymentModal.title}}</h4>
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
@@ -321,12 +321,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="advancePaymentData.query" class="form-control" id="ap_query" placeholder="Enter Query" ng-change="advancePaymentData.query = advancePaymentData.query.toUpperCase()">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Payable Month</label>
 		                  <input type="text" ng-model="advancePaymentData.payable_month" class="form-control" id="ap_payable_month" placeholder="Choose Payable Month">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Amount</label>
@@ -337,7 +337,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment_action()">Add</button>
+        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment_action()" ng-if="advancePaymentModal.button === 'Add'">Add</button>
+        		<button type="button" class="btn btn-primary" ng-click="edit_advance_payment_action()" ng-if="advancePaymentModal.button === 'Edit'">Edit</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->

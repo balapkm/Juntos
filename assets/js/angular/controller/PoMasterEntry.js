@@ -688,7 +688,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	      data : JSON.stringify($scope.material_form_data)
 	    };
     	httpService.callWebService(service_details).then(function(data){
-    		if(data)
+    		if(data.insert_condition)
     		{
     			swal({
 				  title: "Do you want add more?",
@@ -707,11 +707,14 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 				  }
 				  else
 				  {
-				  	console.log($scope.material_form_data);
+				  	if(data.newMaterial)
+				  	{
+				  		$('#material_name_select2').val("");
+				  		$('#material_name_add ul').append('<li value="'+data.material_name+'|'+data.material_id+'" class="es-visible">'+data.material_name+'</li>');
+				  	}
 				  	$scope.material_form_data['material_name'] = "";
 				  	$scope.material_form_data['price'] = "";
 				  	$scope.$apply();
-				  	$('#material_name_select2').val("");
 				  }
 				});
     			

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-29 23:24:06
+/* Smarty version 3.1.30, created on 2018-06-15 13:05:45
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b0d93be726352_90348163',
+  'unifunc' => 'content_5b236c51dcbb24_71978459',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1527616444,
+      1 => 1529048143,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b0d93be726352_90348163 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b236c51dcbb24_71978459 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
@@ -35,6 +35,10 @@ table td
 	border-right:1px solid #000;
 	padding:4px 3px;
 	font-size: 12px;
+
+}
+table tr td, table tr th {
+    page-break-inside: avoid;
 }
 </style>
 <body>
@@ -59,8 +63,9 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
 					</td>
-					<td width="40%" style="border:0px;"><h3 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h3>
-					<h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td>
+					<td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
+					<h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
 					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
@@ -457,7 +462,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	</tr>
 	<tr>
 		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.6),0);?>
-" style="border-left:1px solid #000;">
+" style="border-left:1px solid #000;border-top: 1px solid #000">
 			<h4><b>Terms & Condition :</b></h4>
 			<ul>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
@@ -470,7 +475,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			</ul>
 		</td>
 		<td  colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
-">
+" style="border-top: 1px solid #000">
 			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
 			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
 			</br>

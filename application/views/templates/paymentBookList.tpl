@@ -188,7 +188,7 @@
 		            </thead>
 		            <thead>
 		            <tr>
-		            	<th>Delete</th>
+		            	<th>Action</th>
 		            	<th>S.NO</th>
 		            	<th colspan="3" style="text-align: center;">TYPE</th>
 		            	<th>PO NUMBER</th>
@@ -212,6 +212,9 @@
 		            	[[foreach from=$v2 key=k3 item=v3]]
 		            	<tr>
 		            	<td style="text-align: center;">
+		            		<a href="#" onclick='editAdvancePaymentDetails([[$v3|@json_encode]])''>
+					          <span class="glyphicon glyphicon-edit"></span>
+					        </a>
 	                      	<a href="#" onclick='deleteAdvancePaymentDetails([[$v3|@json_encode]])''>
 					          <span class="glyphicon glyphicon-trash"></span>
 					        </a>
@@ -226,7 +229,7 @@
 		            	<td>[[$v3.supplier_pi_number]]</td>
 		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
 		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
-		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
+		            	<td class="datetd" style="background-color: yellow;">[[$k1|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.amount|number_format:2]]</td>
 		            	<td></td>
 		            	<td></td>

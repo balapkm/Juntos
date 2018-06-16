@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 19:15:19
+/* Smarty version 3.1.30, created on 2018-06-15 21:58:00
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d2b6f861e51_78940139',
+  'unifunc' => 'content_5b23e91091c973_69692610',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1528638304,
+      1 => 1529080078,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d2b6f861e51_78940139 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b23e91091c973_69692610 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -35,12 +35,11 @@ function content_5b1d2b6f861e51_78940139 (Smarty_Internal_Template $_smarty_tpl)
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
-	              <!-- <li><a href="#tab_2" data-toggle="tab">View</a></li> -->
+	              <li><a href="#tab_2" data-toggle="tab">Trash</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 	              		<div class="row">
-
 	              			<div class="col-lg-3"></div>
 	              			<div class="col-lg-3">
 				                <div class="form-group">
@@ -59,7 +58,7 @@ function content_5b1d2b6f861e51_78940139 (Smarty_Internal_Template $_smarty_tpl)
 				                  	  <option value="">Choose Filter Type</option>
 				                  	  <option value="PO">Po Wise</option>
 				                  	  <option value="Material">Material Wise</option>
-				                  	  <option value="Unit">Unit Wise</option>
+				                  	  <option value="Unit">Division Wise</option>
 				                  	  <option value="Supplier">Supplier Wise</option>
 				                  </select>
 				                </div>
@@ -256,6 +255,62 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                </table>
 			            </div>
 				    </div>
+				    <div class="tab-pane" id="tab_2">
+				    	<div class="table-responsive" style="margin-top: 50px;">
+			                <table id="trashTable" class="table table-bordered table-striped" >
+			                    <thead>
+			                        <tr>
+			                          <th>Action</th>
+			                          <th>Unit</th>
+			                          <th>Supplier</th>
+			                          <th>Order Ref</th>
+			                          <th>PO Number</th>
+			                          <th style="width: 100px">PO Date</th>
+			                          <th>Material</th>
+			                          <th>Quantity</th>
+			                          <th>UMO</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['trash_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+			                    	<tr>
+			                          <td align="center">
+			                          	<a href="#" onclick='addBackTrashIntoMaterial(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>
+									        <span class="glyphicon glyphicon-plus-sign"></span>
+									    </a>
+			                          </td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['unit'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['order_reference'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+</td>
+			                          <td style="widtd: 100px"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_date'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
+</td>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
+</td>
+			                        </tr>
+			                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+			                    </tbody>
+			                </table>
+			            </div>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -343,11 +398,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
+		    		<div class="col-lg-4">
+		    			<h6><b>Total Qty : {{editMaterialPOData.qty|number:2}}</b></h6>
+		    		</div>
+		    		<div class="col-lg-4">
+		    			<h6><b>Received : {{editMaterialPOData.received|number:2}}</b></h6>
+		    		</div>
+		    		<div class="col-lg-4">
+		    			<h6><b>Balance : {{(editMaterialPOData.qty - editMaterialPOData.received)|number:2}}</b></h6>
+		    		</div>
 		    		<div class="col-lg-4"></div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Remaining Qty</label>
-		                  <input type="text" ng-model="editMaterialPOData.qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
+		                  <label for="exampleInputEmail1">Total Qty</label>
+		                  <input type="text" ng-model="editMaterialPOData.new_qty" class="form-control" id="remaining_qty" placeholder="Enter Remaining Qty">
 		                </div>
 		            </div>
 		            <div class="col-lg-4"></div>

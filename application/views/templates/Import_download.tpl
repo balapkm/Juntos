@@ -32,10 +32,11 @@ table td
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
 					</td>
-					<td width="40%" style="border:0px;"><h3>T.M.ABDUL RAHMAN & SONS</h3>
-					<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5></td>
-					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
-        			Tel : 91-4172-272470,272480</br>
+					<td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
+					<h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
+					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,Ranipet - 632-401</br>
+        			Tel : 91-4172-272470,271835</br>
         			Email : purchasedept@tmargroup.in </br>
         			Email : soles@tmargroup.in</font><br/><br/>
 
@@ -44,7 +45,7 @@ table td
         			Periamet,CHENNAI-600 003.INDIA</br>
         			Tel : 91-44-25612164,25610078</br>
         			Email : headoffice@tmargroup.in</br>
-        			<b>GSTIN : 33AABFT2029F1ZO1</b></font></td>
+        			<b>GSTIN : 33AABFT2029F1ZO</b></font></td>
 				</tr>
 			</table>
 		</td>
@@ -209,7 +210,7 @@ table td
      	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;">
+		<td align="center" colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;border-top: 1px solid #000">
 			<div style="float: left;text-align: left;margin-left: 10px;width: 100%">
 				<!-- <p>Delivery Date        :    [[$importAdditionalCharges[0].delivery_date]]</p> -->
 				<p>Incoterms            :    [[$importAdditionalCharges[0].incoterms]]</p>
@@ -218,7 +219,7 @@ table td
 				<p>Query                :    [[$importAdditionalCharges[0].query]]</p>
 			</div>
 		</td>
-     	<td align="center" colspan="[[($TCcolspanCalc*0.4)|round:0]]">
+     	<td align="center" colspan="[[($TCcolspanCalc*0.4)|round:0]]" style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
 				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 100px;">Incharge</p>
 				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>

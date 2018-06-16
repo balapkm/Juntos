@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-10 19:47:29
+/* Smarty version 3.1.30, created on 2018-06-15 12:00:32
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1d32f9d9e700_52113900',
+  'unifunc' => 'content_5b235d086c6d16_86403157',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1528640241,
+      1 => 1529044207,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1d32f9d9e700_52113900 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b235d086c6d16_86403157 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -552,7 +552,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                </div>
 		            </div>
 		            <div class="col-lg-6">
-		                <div class="form-group">
+		                <div class="form-group" id="material_name_add">
 		                  <label for="exampleInputEmail1">Material Name</label>
 		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
 		                  	   <!-- <option value="">Choose Material Name</option> -->
@@ -573,26 +573,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
 		                  </select>
-
-		                  <!-- <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control select2" style="width: 100%;" ng-change="changeMaterialNameDetails('material_name_select2')">
-		                  	   <option value="">Choose Material Name</option>
-		                  	   <option value="ADD_NEW">ADD NEW</option>
-		                  	   <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</option>
-			                  	<?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
-		                  </select> -->
 		                </div>
 		            </div>
 		            <!-- <div class="col-lg-3" ng-if="addNewMaterialNameInput">

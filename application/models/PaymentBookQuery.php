@@ -51,6 +51,14 @@ class PaymentBookQuery extends CI_Model
         return $this->db->insert('advance_payment_details',$data);
     }
 
+    public function editAdvancePayment($data)
+    {
+        $id = $data['advance_payment_id'];
+        unset($data['advance_payment_id']);
+        $result = $this->db->update('advance_payment_details',$data, array('advance_payment_id' => $id));
+        return $result;
+    }
+
     public function updatePaymentListData($data)
     {
         $id = $data['bill_number'];

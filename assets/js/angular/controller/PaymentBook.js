@@ -71,7 +71,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.exampleDataTable = function()
     {
-        dataTableVariable = $('#example').DataTable({
+        dataTableVariable = $('#paymentBookExample').DataTable({
             dom: 'Brfrtip',
             buttons: [
                 'copy', 
@@ -89,7 +89,6 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     
     $scope.searchAction = function()
     {
-        dataTableVariable.destroy();
         $scope.generatePoData['date'] = $('#dateRangePicker').val();
         if(validateService.blank($scope.generatePoData['division'],"Please Enter division","division")) return false;
         if(validateService.blank($scope.generatePoData['type'],"Please Enter type","type")) return false;
@@ -127,7 +126,11 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $('#debit_credit_note_modal').modal();
     }
 
-    $scope.advancePaymentData = {};
+    $scope.advancePaymentData  = {};
+    $scope.advancePaymentModal = {
+        title  : "Add Advance Payment",
+        button : "Add"
+    };
     $scope.add_advance_payment = function(){
         $scope.advancePaymentData = {};
         $('#advance_payment_modal').modal();
@@ -144,7 +147,6 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             httpService.callWebService(service_details).then(function(data){
                 if(data)
                 { 
-                    console.log(data);
                     $scope.getPoNumberAsPerSupplierData = data;
                     commonService.hideLoader();
                 }
@@ -153,8 +155,37 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                     commonService.hideLoader();
                 }
             });
-            console.log(data);
         });
+    }
+
+    $scope.editAdvancePaymentDetails = function(data){
+        $scope.advancePaymentModal = {
+            title  : "Edit Advance Payment",
+            button : "Edit"
+        };
+        $('#ap_supplier_name').select2().val(data.supplier_id).trigger("change");
+        $scope.advancePaymentData = data;
+        var service_details = {
+            method_name : "getPoNumberAsPerSupplier",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.advancePaymentData)
+        };
+        commonService.showLoader();
+        httpService.callWebService(service_details).then(function(serviceData){
+            if(serviceData)
+            { 
+                $scope.getPoNumberAsPerSupplierData = serviceData;
+                commonService.hideLoader();
+                setTimeout(function(){
+                    $('#ap_full_po_number').select2().val(data.full_po_number).trigger("change");
+                },100);
+            }
+            else
+            {
+                commonService.hideLoader();
+            }
+        });
+        $('#advance_payment_modal').modal();
     }
 
     $scope.add_advance_payment_action = function()
@@ -170,6 +201,28 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 $('#modal-backdrop').css('display','none');
                 $scope.searchAction();
                 validateService.displayMessage('success','Added Successfully','');
+                $('#advance_payment_modal').modal('hide');
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
+
+    $scope.edit_advance_payment_action = function()
+    {
+        var service_details = {
+            method_name : "editAdvancePaymentAction",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.advancePaymentData)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                $scope.searchAction();
+                validateService.displayMessage('success','Updated Successfully','');
                 $('#advance_payment_modal').modal('hide');
             }
             else
@@ -300,6 +353,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 }
             });
     }
+
+   
 
     $scope.deleteAdvancePaymentDetails = function(data){
         var service_details = {
@@ -444,6 +499,12 @@ function deleteDepositDetails(data){
 function deleteAdvancePaymentDetails(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.deleteAdvancePaymentDetails(data);
+    scope.$apply();
+}
+
+function editAdvancePaymentDetails(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editAdvancePaymentDetails(data);
     scope.$apply();
 }
 

@@ -30,7 +30,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
-  <link rel="stylesheet" href="assets/css/custom-style.css?version=48">
+  <link rel="stylesheet" href="assets/css/custom-style.css?version=49">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -268,7 +268,7 @@
 <script src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]?version=48"></script>
+<script src="[[$v]]?version=58"></script>
 [[/foreach]]
 <script>
   $(document).ready(function () {

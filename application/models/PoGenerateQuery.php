@@ -134,6 +134,25 @@ class PoGenerateQuery extends CI_Model
         return $data;
     }
 
+    public function selectTrashData()
+    {
+        $sql = "SELECT 
+                    prd.*,
+                    sd.*,
+                    mm.material_name as material_master_name 
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd,
+                    material_master mm
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND
+                    outstanding_type = 'T' AND
+                    mm.material_id   = prd.material_master_id";
+
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function getOtherChargeUsingPoNumber($data){
 
         $sql = "SELECT 
@@ -224,6 +243,25 @@ class PoGenerateQuery extends CI_Model
         unset($data['material_name']);
         // print_r($data);exit;
         $result = $this->db->update('po_generated_request_details',$data, array('po_generated_request_id' => $id));
+        return $result;
+    }
+
+    public function moveTotrash($data){
+        $result = $this->db->update('po_generated_request_details',array('qty'=>$data['new_qty']), array('po_generated_request_id' => $data['po_generated_request_id']));
+
+        $sql = "INSERT INTO `po_generated_request_details` 
+                    (`parent_po_generated_request_id`, `unit`, `type`, `order_reference`, `po_number`, `po_date`, `delivery_date`, `supplier_id`, `material_id`, `material_master_id`, `material_name`, `po_description`, `material_hsn_code`, `qty`, `material_uom`, `currency`, `price`, `price_status`, `CGST`, `IGST`, `SGST`, `discount`, `discount_price_status`, `received`, `received_date`, `dc_date`, `bill_date`, `bill_number`, `bill_amount`, `payable_month`, `dc_number`, `outstanding_type`, `s_no`, `query`, `created_date`)
+                SELECT '".$data['po_generated_request_id']."', `unit`, `type`, `order_reference`, `po_number`, `po_date`, `delivery_date`, `supplier_id`, `material_id`, `material_master_id`, `material_name`, `po_description`, `material_hsn_code`, ".$data['trashQty'].", `material_uom`, `currency`, `price`, `price_status`, `CGST`, `IGST`, `SGST`, `discount`, `discount_price_status`, `received`, `received_date`, `dc_date`, `bill_date`, `bill_number`, `bill_amount`, `payable_month`, `dc_number`,'".$data['outstanding_type']."', `s_no`, `query`, `created_date`
+                FROM `po_generated_request_details`
+                WHERE ((`po_generated_request_id` = '".$data['po_generated_request_id']."'))";
+
+        return $this->db->query(trim($sql));
+    }
+
+    public function addBackTrashIntoMaterial($data){
+        $sql    = "UPDATE po_generated_request_details SET qty=qty+".$data['qty']." WHERE po_generated_request_id=".$data['parent_po_generated_request_id'];
+        $result = $this->db->query(trim($sql));
+        $result = $this->db->delete('po_generated_request_details',array('po_generated_request_id' => $data['po_generated_request_id']));
         return $result;
     }
 

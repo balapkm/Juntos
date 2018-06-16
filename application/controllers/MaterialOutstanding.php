@@ -17,9 +17,19 @@ class MaterialOutstanding extends CI_Controller
 	public function index()
 	{
 		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
+		$this->data['trash_details']         = $this->getTrashData();
 		$this->data['material_name_details'] = $this->PoMasterEntryQuery->select_material_master();
 		$this->data['po_unique_number']      = $this->getUniquePoNumber();
 		return $this->mysmarty->view('MaterialOutstanding.tpl',$this->data,TRUE);
+	}
+
+	public function getTrashData(){
+		$data =  $this->PoGenerateQuery->selectTrashData();
+		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+		foreach ($data as $key => $value) {
+			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
 	}
 
 	public function getUniquePoNumber(){
@@ -77,8 +87,17 @@ class MaterialOutstanding extends CI_Controller
 
 	public function cancelMaterialOutstandingAction()
 	{
-		// print_r($this->data);exit;
-		return $this->PoGenerateQuery->update_po_generated_request_details($this->data);
+		$this->data['outstanding_type'] = 'T';
+		return $this->PoGenerateQuery->moveTotrash($this->data);
+	}
+
+	public function addBackTrashIntoMaterial()
+	{
+		if($this->data['outstanding_type'] != 'T')
+		{
+			return false;
+		}
+		return $this->PoGenerateQuery->addBackTrashIntoMaterial($this->data);
 	}
 
 	public function updateMaterialOutstandingAction()

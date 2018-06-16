@@ -51,6 +51,10 @@ class PaymentBook extends CI_Controller
 		return $this->PaymentBookQuery->addAdvancePayment($this->data);
 	}
 
+	public function editAdvancePaymentAction(){
+		return $this->PaymentBookQuery->editAdvancePayment($this->data);
+	}
+
 	public function deleteAdvancePaymentDetails()
 	{
 		return $this->PaymentBookQuery->deleteAdvancePaymentDetails($this->data);	

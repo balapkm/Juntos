@@ -79,22 +79,27 @@ class PoMasterEntry extends CI_Controller
 			// $this->data['material_name'] = $this->data['add_material_name'];
 			$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
 			$count      = count($selectData);
+			$newMaterial= false;
 			if($count == 0)
 			{
 				$data['material_name'] = $this->data['material_name'];
 				$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
 				$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
 				$this->data['material_master_id'] = $selectData[0]['material_id'];
+				$newMaterial= true;
 			}
 			else
 			{
+				$newMaterial= false;
 				$this->data['material_master_id'] = $selectData[0]['material_id'];
 			}
 			unset($this->data['add_material_name']);
 		// }
 		$count = count($this->PoMasterEntryQuery->select_material_entry_as_per_supplier_name($this->data));
 		if($count != 0)return false;
-		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details');
+
+		return array("material_id"=>$this->data['material_master_id'],"newMaterial"=>$newMaterial,"insert_condition"=>$this->PoMasterEntryQuery->insert_supplier_entry($this->data,'material_details'),"material_name"=>$this->data['material_name']);
+		
 	}
 
 	public function addUOfAction()

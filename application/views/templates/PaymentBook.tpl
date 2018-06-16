@@ -89,7 +89,7 @@
 				        </div>
 				    </div>
 				    <div class="tab-pane" id="tab_2">
-	              		<table id="example" class="table table-bordered table-striped" style="margin-top: 10px;">
+	              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
 		                    <thead>
 		                        <tr>
 		                          <th>Supplier Name</th>
@@ -209,7 +209,7 @@
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Add Advance Payment</h4>
+		        <h4 class="modal-title">{{advancePaymentModal.title}}</h4>
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
@@ -258,12 +258,12 @@
 		                  <input type="text" ng-model="advancePaymentData.query" class="form-control" id="ap_query" placeholder="Enter Query" ng-change="advancePaymentData.query = advancePaymentData.query.toUpperCase()">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Payable Month</label>
 		                  <input type="text" ng-model="advancePaymentData.payable_month" class="form-control" id="ap_payable_month" placeholder="Choose Payable Month">
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Amount</label>
@@ -274,7 +274,8 @@
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment_action()">Add</button>
+        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment_action()" ng-if="advancePaymentModal.button === 'Add'">Add</button>
+        		<button type="button" class="btn btn-primary" ng-click="edit_advance_payment_action()" ng-if="advancePaymentModal.button === 'Edit'">Edit</button>
 	        </div>
 	    </div>
 	    <!-- /.modal-content -->
