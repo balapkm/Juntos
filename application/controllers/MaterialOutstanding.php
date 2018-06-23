@@ -132,15 +132,23 @@ class MaterialOutstanding extends CI_Controller
 			unset($this->data['material_master_name']);
 			unset($this->data['state_code']);
 
-			$this->data['outstanding_type'] = 'B';
+			if ($this->data['editType'] == 'EDIT') {
+				$this->data['outstanding_type'] = 'B';
+			}else{
+				$this->data['outstanding_type'] = 'T';
+			}
+			unset($this->data['editType']);
+			
 			$data    = array();
 			$data[0] = $this->data;
-
 			$this->PoGenerateQuery->update_po_generated_request_details($editData);
 			return $this->PoGenerateQuery->insert_po_generated_request_details($data);
 		}
 		else
 		{
+			$lastDateOfMonth = date('Y-m-d',strtotime('last day of this month', time()));
+			unset($this->data['editType']);
+			$this->data['payable_month'] = $lastDateOfMonth;
 			foreach ($this->data['checkEditBoxBillOutStandingArray'] as $key => $value) 
 			{
 				$this->data['id'] = $value;

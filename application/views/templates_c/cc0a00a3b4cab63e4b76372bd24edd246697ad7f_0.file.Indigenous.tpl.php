@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-15 21:40:23
+/* Smarty version 3.1.30, created on 2018-06-17 19:33:10
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5afb066f392575_87295726',
+  'unifunc' => 'content_5b266a1eb63b27_50383392',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1526400537,
+      1 => 1529244167,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5afb066f392575_87295726 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b266a1eb63b27_50383392 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -40,8 +40,8 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         				<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"/>
         			</td>
 		         	<td width="45%" style="border: 0px;">
-		         		<h4><b>T.M.ABDUL RAHMAN & SONS</b></h4>
-						<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5>
+		         		<h3><b>T.M.ABDUL RAHMAN & SONS</b></h3>
+						<h5 style="font-weight: normal;">FINISHED LEATHER & SHOES</h5>
 		         	</td>
 		         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
 		         		<h5 style="text-align: justify;margin-left:50px;"><b>45J / 46C Ammoor Road,RANIPET - 632-401</br>

@@ -16,8 +16,18 @@
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 	              		<div class="row">
-	              			<div class="col-lg-3"></div>
-	              			<div class="col-lg-3">
+	              			<div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Division</label>
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
+				                  	  <option value="">Choose Unit</option>
+				                  	  <option value="Upper">Upper</option>
+				                  	  <option value="Full Shoe">Full Shoe</option>
+				                  	  <option value="Sole">Sole</option>
+				                  </select>
+				                </div>
+				            </div>
+	              			<div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Outstanding Type</label>
 				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
@@ -27,19 +37,18 @@
 				                  </select>
 				                </div>
 				            </div>
-				            <div class="col-lg-3">
+				            <div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Filter Type</label>
 				                  <select class="form-control" id="filter_type" ng-model="generatePoData.filter_type_wise" ng-change="filterChange($event)">
 				                  	  <option value="">Choose Filter Type</option>
 				                  	  <option value="PO">Po Wise</option>
 				                  	  <option value="Material">Material Wise</option>
-				                  	  <option value="Unit">Division Wise</option>
+				                  	  <!-- <option value="Unit">Division Wise</option> -->
 				                  	  <option value="Supplier">Supplier Wise</option>
 				                  </select>
 				                </div>
 				            </div>
-				            <div class="col-lg-3"></div>
 
 				            <!-- unit wise -->
 				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Unit">
@@ -158,9 +167,9 @@
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
-									        <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
+									        <!-- <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-ban-circle"></span>
-									        </a>
+									        </a> -->
 									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
 									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x)">
 									        </div>
@@ -250,10 +259,17 @@
 		        <h4 class="modal-title">{{title}}<span ng-if="editMaterialPOData.outstanding_type === 'B'" class="pull-right" style="margin-right: 20px;">Total Amount : {{totalAmount}}</span></h4>
 		    </div>
 		    <div class="modal-body">
-		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
-		    		<h5 class="pull-right">Total Amount : <b>{{totalAmount}}</b></h5>
-		    	</div> -->
+		    	
 		        <div class="row">
+		        	<div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
+		                <div class="form-group">
+		                  	<label for="exampleInputEmail1">Type</label>
+		                 	<select class="form-control" id="editType" ng-model="editMaterialPOData.editType" ng-change="typeChangeFunction()">
+		                 		<option value="edit">Edit</option>
+		                 		<option value="trash">Trash</option>
+		                 	</select>
+		                </div>
+		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received</label>
@@ -261,6 +277,7 @@
 
 		                </div>
 		            </div>
+		            <div ng-if="editMaterialPOData.editType === 'edit'">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received Date</label>
@@ -297,6 +314,7 @@
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
+		        	</div>
 		        </div>
 		    </div>
 	        <div class="modal-footer">

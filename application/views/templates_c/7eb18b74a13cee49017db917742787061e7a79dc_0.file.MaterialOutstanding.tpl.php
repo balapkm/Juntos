@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-15 21:58:00
+/* Smarty version 3.1.30, created on 2018-06-23 20:08:05
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b23e91091c973_69692610',
+  'unifunc' => 'content_5b2e5b4d251579_97804235',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1529080078,
+      1 => 1529764428,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b23e91091c973_69692610 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2e5b4d251579_97804235 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -40,8 +40,18 @@ function content_5b23e91091c973_69692610 (Smarty_Internal_Template $_smarty_tpl)
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 	              		<div class="row">
-	              			<div class="col-lg-3"></div>
-	              			<div class="col-lg-3">
+	              			<div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Division</label>
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
+				                  	  <option value="">Choose Unit</option>
+				                  	  <option value="Upper">Upper</option>
+				                  	  <option value="Full Shoe">Full Shoe</option>
+				                  	  <option value="Sole">Sole</option>
+				                  </select>
+				                </div>
+				            </div>
+	              			<div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Outstanding Type</label>
 				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
@@ -51,19 +61,18 @@ function content_5b23e91091c973_69692610 (Smarty_Internal_Template $_smarty_tpl)
 				                  </select>
 				                </div>
 				            </div>
-				            <div class="col-lg-3">
+				            <div class="col-lg-4">
 				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Filter Type</label>
 				                  <select class="form-control" id="filter_type" ng-model="generatePoData.filter_type_wise" ng-change="filterChange($event)">
 				                  	  <option value="">Choose Filter Type</option>
 				                  	  <option value="PO">Po Wise</option>
 				                  	  <option value="Material">Material Wise</option>
-				                  	  <option value="Unit">Division Wise</option>
+				                  	  <!-- <option value="Unit">Division Wise</option> -->
 				                  	  <option value="Supplier">Supplier Wise</option>
 				                  </select>
 				                </div>
 				            </div>
-				            <div class="col-lg-3"></div>
 
 				            <!-- unit wise -->
 				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Unit">
@@ -218,9 +227,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        		<a href="#" ng-click="editMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-edit"></span>
 									        </a>
-									        <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
+									        <!-- <a href="#" ng-click="cancelMaterialOutStanding(x)" ng-if="x.outstanding_type === 'M'">
 									          <span class="glyphicon glyphicon-ban-circle"></span>
-									        </a>
+									        </a> -->
 									        <div class="checkbox checkbox-success" ng-if="x.outstanding_type === 'B'">
 									        	<input type="checkbox" ng-model="checkEditBoxBillOutStandingModel[x.po_generated_request_id]" ng-click="checkEditBoxBillOutStanding(x)">
 									        </div>
@@ -328,10 +337,17 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		        <h4 class="modal-title">{{title}}<span ng-if="editMaterialPOData.outstanding_type === 'B'" class="pull-right" style="margin-right: 20px;">Total Amount : {{totalAmount}}</span></h4>
 		    </div>
 		    <div class="modal-body">
-		    	<!-- <div style="margin-bottom: 35px;" ng-if="editMaterialPOData.outstanding_type === 'B'">
-		    		<h5 class="pull-right">Total Amount : <b>{{totalAmount}}</b></h5>
-		    	</div> -->
+		    	
 		        <div class="row">
+		        	<div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
+		                <div class="form-group">
+		                  	<label for="exampleInputEmail1">Type</label>
+		                 	<select class="form-control" id="editType" ng-model="editMaterialPOData.editType" ng-change="typeChangeFunction()">
+		                 		<option value="edit">Edit</option>
+		                 		<option value="trash">Trash</option>
+		                 	</select>
+		                </div>
+		            </div>
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received</label>
@@ -339,6 +355,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		                </div>
 		            </div>
+		            <div ng-if="editMaterialPOData.editType === 'edit'">
 		            <div class="col-lg-4" ng-if="editMaterialPOData.outstanding_type === 'M'">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Received Date</label>
@@ -375,6 +392,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="editMaterialPOData.bill_amount" class="form-control" id="bill_amount" placeholder="Enter Bill Amount">
 		                </div>
 		            </div>
+		        	</div>
 		        </div>
 		    </div>
 	        <div class="modal-footer">

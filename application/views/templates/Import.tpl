@@ -12,8 +12,8 @@
         				<img src="assets/img/TMAR LOGO.jpg" width="100" height="100"/>
         			</td>
 		         	<td width="45%" style="border: 0px;">
-		         		<h4><b>T.M.ABDUL RAHMAN & SONS</b></h4>
-						<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5>
+		         		<h3><b>T.M.ABDUL RAHMAN & SONS</b></h3>
+						<h5 style="font-weight: normal;">FINISHED LEATHER & SHOES</h5>
 		         	</td>
 		         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
 		         		<h5 style="text-align: justify;margin-left:50px;"><b>45J / 46C Ammoor Road,RANIPET - 632-401</br>

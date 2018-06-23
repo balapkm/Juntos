@@ -390,7 +390,14 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.downloadAsPdfPaymentBookDetails = function(){
         console.log($scope.generatePoData);
-        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&division='+$scope.generatePoData['division'];
+        if($scope.generatePoData['type'] === 'date')
+        {
+            var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?date='+$scope.generatePoData['date']+'&division='+$scope.generatePoData['division']+'&type='+$scope.generatePoData['type'];
+        }
+        else
+        {
+            var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&division='+$scope.generatePoData['division']+'&type='+$scope.generatePoData['type'];
+        }
         window.open(url);
     }
 

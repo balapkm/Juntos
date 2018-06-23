@@ -76,10 +76,10 @@
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
-			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;" ng-if="generatePoData.type !== 'date'">
+			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
 			        		<p align="right">
-				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
-				        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>
+				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()"  ng-if="generatePoData.type === 'specfic'">Add Advanced Payment</button>
+				        		<button type="button" class="btn btn-primary" ng-click="add_note()" ng-if="generatePoData.type === 'specfic'">Add Credit Note/Debit Note</button>
 				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails()">Download as PDF</button> 
 			        		</p>
 			       		</div>

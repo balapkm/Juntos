@@ -259,7 +259,7 @@ class PoGenerateQuery extends CI_Model
     }
 
     public function addBackTrashIntoMaterial($data){
-        $sql    = "UPDATE po_generated_request_details SET qty=qty+".$data['qty']." WHERE po_generated_request_id=".$data['parent_po_generated_request_id'];
+        $sql    = "UPDATE po_generated_request_details SET received=(received-".$data['qty'].") WHERE po_generated_request_id=".$data['parent_po_generated_request_id'];
         $result = $this->db->query(trim($sql));
         $result = $this->db->delete('po_generated_request_details',array('po_generated_request_id' => $data['po_generated_request_id']));
         return $result;
@@ -303,6 +303,7 @@ class PoGenerateQuery extends CI_Model
         if($data['outstanding_type'] == 'M')
         {
             $sql .= " AND (prd.qty - prd.received) > 0";
+            $sql .= " AND prd.unit = '".$data['unit']."'";
         }
 
         if($data['outstanding_type'] == 'B')
@@ -310,12 +311,9 @@ class PoGenerateQuery extends CI_Model
             $sql .= " AND (prd.bill_amount) = 0";
             $sql .= " AND (prd.bill_number) = ''";
             $sql .= " AND (prd.bill_date) = '0000-00-00'";
+            $sql .= " AND prd.unit = '".strtoupper($data['unit'])."'";
+
             // $sql .= " AND (prd.invoice_number) = ''";
-        }
-                    
-        if($data['filter_type_wise'] == 'Unit')
-        {
-            $sql .= " AND prd.unit = '".$data['unit']."'";
         }
 
         if($data['filter_type_wise'] == 'PO')
@@ -339,30 +337,27 @@ class PoGenerateQuery extends CI_Model
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
 
-        
         $result1  = $this->db->query(trim($sql))->result_array();
 
         if($data['outstanding_type'] == 'B')
         {
-            $sql     .= " GROUP BY prd.unit,prd.type,prd.po_number,prd.po_date";
+            $sql     .= " GROUP BY prd.unit,prd.type,prd.po_number,prd.po_date,prd.material_name";
             $explode  = explode("FROM",$sql);
 
             $explode[0] .= ",sum(prd.received) as total_received ";
             $sql      = implode("FROM",$explode);
             $result2  = $this->db->query(trim($sql))->result_array();
-            
             foreach ($result1 as $key1 => $value1) 
             {
                 foreach ($result2 as $key2 => $value2) 
                 {
-                    if($value1['unit'] == $value2['unit'] && $value1['type'] == $value2['type'] && $value1['po_number'] == $value2['po_number'] && $value1['po_date'] == $value2['po_date'])
+                    if($value1['unit'] == $value2['unit'] && $value1['type'] == $value2['type'] && $value1['po_number'] == $value2['po_number'] && $value1['po_date'] == $value2['po_date'] && $value1['material_name'] == $value2['material_name'])
                     {
                         $result1[$key1]['total_received'] = $value2['total_received'];
                     }
                 }
             }
         }
-
         return $result1;
     }
 

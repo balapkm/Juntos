@@ -128,7 +128,7 @@ class PaymentBook extends CI_Controller
 			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
 		}
 
-
+		// print_r($result);exit;
 		foreach ($result as $key1 => $value1) 
 		{
 			$po_number_array = array();
@@ -303,8 +303,8 @@ class PaymentBook extends CI_Controller
 	public function downloadAsPdfPaymentBookDetails()
 	{
 		$this->data = $_GET;
-		$this->data['type'] = "";
-		$finalResponse['suplier_id']  = $this->data['supplier_name'];
+		if($this->data['type'] === 'specfic')
+			$finalResponse['suplier_id']  = $this->data['supplier_name'];
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 

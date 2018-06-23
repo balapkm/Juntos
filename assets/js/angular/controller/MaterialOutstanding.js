@@ -111,6 +111,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $scope.totalAmountData = {};
     $scope.searchAction = function()
     {
+        if(validateService.blank($scope.generatePoData['unit'],"Please Choose unit","unit")) return false;
         if(validateService.blank($scope.generatePoData['outstanding_type'],"Please Choose outstanding type","outstanding_type")) return false;
 
         dataTableVariable.destroy();
@@ -210,6 +211,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         });
     }
 
+
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
         $scope.totalAmount = (x.price * x.qty);
@@ -218,7 +220,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         {
             $scope.editMaterialPOData[i] = x[i];
         }
-        
+        $scope.editMaterialPOData['editType'] = "edit";
         var date = new Date();
         if($scope.generatePoData['outstanding_type'] === 'M')
         {
@@ -266,8 +268,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                 return false;
             }
 
-            if(validateService.blank($scope.editMaterialPOData['dc_number'],"Please Enter DC Number","dc_number")) return false;
-            if(validateService.blank($scope.editMaterialPOData['dc_date'],"Please Choose DC Date","dc_date")) return false;
+            if($scope.generatePoData['editType'] === 'edit'){
+                if(validateService.blank($scope.editMaterialPOData['dc_number'],"Please Enter DC Number","dc_number")) return false;
+                if(validateService.blank($scope.editMaterialPOData['dc_date'],"Please Choose DC Date","dc_date")) return false;
+            }
         }
         else
         {
@@ -304,7 +308,16 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             { 
                 $('#modal-backdrop').css('display','none');
                 validateService.displayMessage('success','Updated Successfully','');
-                $scope.searchAction();
+                
+                if($scope.editMaterialPOData['editType'] === 'TRASH')
+                {
+                    $state.reload();
+                    tab_switch_name = 'tab_2';
+                }
+                else
+                {
+                    $scope.searchAction();
+                }
                 $('#material_modal').modal('hide');
                 $scope.checkEditBoxBillOutStandingModel = {};
             }
@@ -378,7 +391,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             }
             $scope.$apply();
             $('#totalAmountMOS').val(totalAmount);
-            console.log(totalAmount);
         },100);
     }
 

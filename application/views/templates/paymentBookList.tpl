@@ -243,8 +243,8 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
-	        [[/foreach]]
-	        		<tbody>
+	        		[[if $k2 eq 'chequeNumberDetails']]
+		    		<tbody>
 		                <tr style="font-weight: bold;">
 				        	<td colspan="16"></td>
 				        	<td><b>Total</b></td>
@@ -259,6 +259,8 @@
 				        	<td>[[($totalAmount - $v2[0].cheque_amount)|number_format:2]]</td>
 				        </tr>
 		            </tbody>
+		            [[/if]]
+            [[/foreach]]
 		</table>
 	</div>
 [[/foreach]]

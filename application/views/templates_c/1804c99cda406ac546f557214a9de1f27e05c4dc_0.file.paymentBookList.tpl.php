@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-16 19:50:05
+/* Smarty version 3.1.30, created on 2018-06-23 22:15:34
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b251c95c4ba41_15869330',
+  'unifunc' => 'content_5b2e792eb81529_98456012',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1529158768,
+      1 => 1529772310,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b251c95c4ba41_15869330 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2e792eb81529_98456012 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
@@ -391,13 +391,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
-	        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
-	        		<tbody>
+	        		<?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
+		    		<tbody>
 		                <tr style="font-weight: bold;">
 				        	<td colspan="16"></td>
 				        	<td><b>Total</b></td>
@@ -421,6 +416,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 				        </tr>
 		            </tbody>
+		            <?php }?>
+            <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
 		</table>
 	</div>
 <?php
