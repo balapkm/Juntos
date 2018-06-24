@@ -236,7 +236,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
              $scope.title = "Edit Bill Out Standing";
             $scope.editMaterialPOData['bill_amount'] = 0;
             $scope.editMaterialPOData['bill_number'] = "";
-            $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+            $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
         }
 
         setTimeout(function(){

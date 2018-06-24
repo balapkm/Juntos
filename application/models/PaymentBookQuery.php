@@ -190,7 +190,7 @@ class PaymentBookQuery extends CI_Model
 
     public function select_cheque_number_details($data)
     {
-        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_id']."' AND payable_month = '".$data['payable_month']."'";
+        $sql = "SELECT * FROM cheque_number_details WHERE supplier_id='".$data['supplier_id']."' AND payable_month = '".$data['payable_month']."' AND unit='".$data['unit']."'";
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
@@ -204,6 +204,7 @@ class PaymentBookQuery extends CI_Model
         if(!empty($data['date'])) {
             $date = explode("/",$data['date']);
         }
+        $sql.=  " unit= '".$data['division']."' AND";
         if($data['type'] == 'specfic')
         {
             $sql.=  " supplier_id = ".$data['supplier_name'];

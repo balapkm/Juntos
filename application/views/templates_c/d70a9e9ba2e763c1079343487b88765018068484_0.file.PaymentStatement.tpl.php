@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-09 21:32:59
+/* Smarty version 3.1.30, created on 2018-06-24 20:14:45
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b1bfa33112441_68247739',
+  'unifunc' => 'content_5b2fae5d28d3d6_61507314',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd70a9e9ba2e763c1079343487b88765018068484' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl',
-      1 => 1528560160,
+      1 => 1529851359,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b1bfa33112441_68247739 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2fae5d28d3d6_61507314 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -42,8 +42,8 @@ function content_5b1bfa33112441_68247739 (Smarty_Internal_Template $_smarty_tpl)
 	              			<div class="col-lg-3"></div>
 				            <!-- Supplier Wise -->
 				            <div class="col-lg-12" style="margin-top: 10px;">
-				            	<div class="col-lg-4"></div>
-					            <!-- <div class="col-lg-3">
+				            	<div class="col-lg-3"></div>
+					            <div class="col-lg-3">
 				                	<div class="form-group">
 					                  <label for="exampleInputEmail1">Division</label>
 					                  <select class="form-control" id="division" ng-model="paymentStatementObject.division">
@@ -53,14 +53,14 @@ function content_5b1bfa33112441_68247739 (Smarty_Internal_Template $_smarty_tpl)
 					                  	  <option value="SOLE">SOLE</option>
 					                  </select>
 					                </div>
-				                </div> -->
-					            <div class="col-lg-4">
+				                </div>
+					            <div class="col-lg-3">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Month</label>
 					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Month">
 					                </div>
 					            </div>
-					            <div class="col-lg-4"></div>
+					            <div class="col-lg-3"></div>
 				                <!-- <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>

@@ -441,7 +441,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     {
         $scope.chequeNumberDetails = {};
         $scope.chequeNumberDetails = data;
-
+        $scope.chequeNumberDetails['unit'] = $scope.generatePoData['division'];
         var service_details = {
             method_name : "getChequeNumberDetailsAction",
             controller_name : "PaymentBook",
@@ -467,6 +467,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.editChequeNumberDetailsAction = function()
     {
+        $scope.chequeNumberDetails['unit'] = $scope.generatePoData['division'];
         var service_details = {
             method_name : "editChequeNumberDetailsAction",
             controller_name : "PaymentBook",

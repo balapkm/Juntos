@@ -128,13 +128,6 @@ class PaymentBook extends CI_Controller
 			$advancePaymentDetails[] = $value;
 		}
 
-
-		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
-		foreach ($data as $key => $value) 
-		{
-			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
-		}
-
 		// print_r($result);exit;
 		foreach ($result as $key1 => $value1) 
 		{
@@ -166,9 +159,14 @@ class PaymentBook extends CI_Controller
 				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
 
 		}
-		// print_r($result);exit;
+
+		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
+		}
+
 		$finalResponse['result']          = $result;
-		
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -279,6 +277,7 @@ class PaymentBook extends CI_Controller
 
 	public function editChequeNumberDetailsAction()
 	{
+		// print_r($this->data);exit;
 		$selectData = $this->PaymentBookQuery->select_cheque_number_details($this->data);
 		if(count($selectData) == 0)
 		{
@@ -375,12 +374,6 @@ class PaymentBook extends CI_Controller
 			$advancePaymentDetails[] = $value;
 		}
 
-		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
-		foreach ($data as $key => $value) 
-		{
-			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
-		}
-
 		foreach ($result as $key1 => $value1) 
 		{
 			$po_number_array = array();
@@ -408,6 +401,12 @@ class PaymentBook extends CI_Controller
 			}
 			if(!empty($result[$key1]['advancePaymentDetails']))
 				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
+		}
+
+		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
+		foreach ($data as $key => $value) 
+		{
+			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
 		}
 
 		$finalResponse['result']          = $result;
