@@ -51,6 +51,20 @@ class PoMasterEntryQuery extends CI_Model
         return $result;
     }
 
+    public function import_update_material_entry($data){
+        $id = $data[0];
+        $update = array(
+            'material_hsn_code' => $data[3],
+            'price' => $data[7],
+            'CGST'  => $data[9],
+            'SGST'  => $data[10],
+            'IGST'  => $data[11],
+            'discount'  => $data[13]
+        );
+
+        return $this->db->update('material_details',$update, array('material_id' => $id));
+    }
+
     public function update_material_master($data)
     {
         $id = $data['material_id'];

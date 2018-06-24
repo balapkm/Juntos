@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-15 12:00:32
+/* Smarty version 3.1.30, created on 2018-06-24 22:20:13
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b235d086c6d16_86403157',
+  'unifunc' => 'content_5b2fcbc51f3cf8_72373762',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1529044207,
+      1 => 1529858903,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b235d086c6d16_86403157 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2fcbc51f3cf8_72373762 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -132,6 +132,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	              	</div>
 	              	<div class="tab-pane" id="tab_2">
 				        <div class="row">
+				        	<form action="PoMasterEntry/importData" method="post" enctype="multipart/form-data" target="_blank">
+					        	<div class="col-lg-4">
+								    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" >
+					        	</div>
+					        	<div class="col-lg-4">
+								    <input type="submit" class="form-control btn btn-success" value="Upload CSV" name="submit">
+					        	</div>
+				        	</form>
 				        	<div class="col-lg-12">
 				        		<div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
@@ -142,6 +150,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
 					                    <thead>
 					                        <tr>
+					                          <th>Material Id</th>
 					                          <th>Supplier Name</th>
 					                          <th>Material Name</th>
 					                          <th>HSN Code</th>
@@ -166,6 +175,8 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
 						                        <tr>
+						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
+</td>
 						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
 </td>
 						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>

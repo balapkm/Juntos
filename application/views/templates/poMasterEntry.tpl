@@ -81,6 +81,14 @@
 	              	</div>
 	              	<div class="tab-pane" id="tab_2">
 				        <div class="row">
+				        	<form action="PoMasterEntry/importData" method="post" enctype="multipart/form-data" target="_blank">
+					        	<div class="col-lg-4">
+								    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" >
+					        	</div>
+					        	<div class="col-lg-4">
+								    <input type="submit" class="form-control btn btn-success" value="Upload CSV" name="submit">
+					        	</div>
+				        	</form>
 				        	<div class="col-lg-12">
 				        		<div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
@@ -91,6 +99,7 @@
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
 					                    <thead>
 					                        <tr>
+					                          <th>Material Id</th>
 					                          <th>Supplier Name</th>
 					                          <th>Material Name</th>
 					                          <th>HSN Code</th>
@@ -111,6 +120,7 @@
 					                    <tbody>
 					                        [[foreach from=$material_entry key=k item=v]]
 						                        <tr>
+						                          <td>[[$v.material_id]]</td>
 						                          <td>[[$v.supplier_name]]</td>
 						                          <td>[[$v.material_master_name]]</td>
 						                          <td>[[$v.material_hsn_code]]</td>

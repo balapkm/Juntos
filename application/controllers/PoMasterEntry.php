@@ -24,6 +24,49 @@ class PoMasterEntry extends CI_Controller
 		return $this->mysmarty->view('poMasterEntry.tpl',$this->data,TRUE);
 	}
 
+	public function importData(){
+		if(count($_FILES) != 0)
+		{
+			$target_dir = "assets/po_html/";
+			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			$target_file = $target_dir."upload.csv";
+
+			if($imageFileType != 'csv')
+			{
+				echo "<script>alert('Please upload csv');window.close();</script>";exit;
+			}
+
+			if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		        echo "<script>alert('Some Error Occur.Please check your csv');window.close();</script>";exit;
+		    }
+		    $file = fopen($target_dir."upload.csv","r");
+		    $data = array();
+		    while(! feof($file))
+		    {
+		  		$data[] = fgetcsv($file);
+		  	}
+			fclose($file);
+
+			foreach ($data as $key => $value) 
+			{
+				if($key != 0)
+				{
+					if(!$this->PoMasterEntryQuery->import_update_material_entry($value))
+					{
+						echo "<script>alert('Some Error Occur.Please check your csv');window.close();</script>";exit;
+					}
+				}
+			}
+
+			echo "<script>alert('Updated Done');window.close();</script>";exit;
+		}
+		else
+		{
+			echo "<script>alert('Some Error Occur.Please check your csv');window.close();</script>";exit;
+		}
+	}
+
 	public function getOtherMasterData()
 	{
 		return $this->PoMasterEntryQuery->select_other_master($this->data);
