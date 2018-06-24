@@ -394,6 +394,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         },100);
     }
 
+   
+
 });
 
 function addBackTrashIntoMaterial(data)

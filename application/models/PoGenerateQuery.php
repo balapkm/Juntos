@@ -49,7 +49,7 @@ class PoGenerateQuery extends CI_Model
     public function getUniquePoNumber($year="")
     {
         $sql = "SELECT 
-                    unit,type,po_number
+                    unit,type,po_number,po_date
                 FROM
                     po_generated_request_details
                 WHERE 

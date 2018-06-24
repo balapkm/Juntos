@@ -132,7 +132,9 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         button : "Add"
     };
     $scope.add_advance_payment = function(){
+        console.log($scope.generatePoData);
         $scope.advancePaymentData = {};
+        $scope.advancePaymentData.supplier_id = $scope.generatePoData.supplier_name;
         $('#advance_payment_modal').modal();
         $scope.getPoNumberAsPerSupplierData = [];
         $('#ap_supplier_name').on('select2:select', function (e) {
@@ -190,6 +192,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.add_advance_payment_action = function()
     {
+        console.log($scope.advancePaymentData);
         var service_details = {
             method_name : "addAdvancePaymentAction",
             controller_name : "PaymentBook",
@@ -482,6 +485,35 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 validateService.displayMessage('error','Update Error',"");
             }
         });
+    }
+
+    $('#search_year_po').datepicker({
+        autoclose: true,
+        format: " yyyy", // Notice the Extra space at the beginning
+        viewMode: "years", 
+        minViewMode: "years"
+    });
+
+    $scope.searchPoBasedOnYear = function()
+    {
+        if($scope.advancePaymentData.po_year !== "")
+        {
+            $scope.searchPoBasedOnYearData = [];
+            commonService.showLoader();
+            var service_details = {
+                method_name : "searchPoBasedOnYear",
+                controller_name : "GeneratePo",
+                data : JSON.stringify($scope.advancePaymentData)
+            };
+            httpService.callWebService(service_details).then(function(data){
+                commonService.hideLoader();
+                if(data)
+                { 
+                    console.log(data);
+                    $scope.searchPoBasedOnYearData = data;
+                }
+            });
+        }
     }
 });
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-23 22:21:54
+/* Smarty version 3.1.30, created on 2018-06-24 12:42:34
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2e7aaa886cf9_67978322',
+  'unifunc' => 'content_5b2f44627c74f7_20538842',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1529772707,
+      1 => 1529824306,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2e7aaa886cf9_67978322 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2f44627c74f7_20538842 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -265,7 +265,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">Supplier Name</label>
 		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="advancePaymentData.supplier_id">
@@ -286,13 +286,20 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 			                </select>
 			            </div>
+		            </div> -->
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Po Year</label>
+		                  <input type="text" class="form-control" id="search_year_po" ng-model="advancePaymentData.po_year" placeholder="Choose Po Date" ng-change="searchPoBasedOnYear()">
+		                </div>
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">PO Number</label>
 		                    <select class="form-control select2" style="width: 100%;" id="ap_full_po_number" ng-model="advancePaymentData.full_po_number">
 		                  	  	<option value="">Choose PO Number</option>
-		                  		<option ng-repeat="x in getPoNumberAsPerSupplierData" value="{{x.po_number}}">{{x.po_number}}</option>
+		                  		<option ng-repeat="x in searchPoBasedOnYearData" value="{{x.full_po_number+'|'+x.po_date+'|'+x.unit+'|'+x.type
+		                  		+'|'+x.po_number}}">{{x.full_po_number}}</option>
 			                </select>
 			            </div>
 		            </div>

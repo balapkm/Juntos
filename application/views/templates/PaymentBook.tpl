@@ -213,7 +213,7 @@
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
-		            <div class="col-lg-4">
+		            <!-- <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">Supplier Name</label>
 		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="advancePaymentData.supplier_id">
@@ -223,13 +223,20 @@
 		                  	    [[/foreach]]
 			                </select>
 			            </div>
+		            </div> -->
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Po Year</label>
+		                  <input type="text" class="form-control" id="search_year_po" ng-model="advancePaymentData.po_year" placeholder="Choose Po Date" ng-change="searchPoBasedOnYear()">
+		                </div>
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">PO Number</label>
 		                    <select class="form-control select2" style="width: 100%;" id="ap_full_po_number" ng-model="advancePaymentData.full_po_number">
 		                  	  	<option value="">Choose PO Number</option>
-		                  		<option ng-repeat="x in getPoNumberAsPerSupplierData" value="{{x.po_number}}">{{x.po_number}}</option>
+		                  		<option ng-repeat="x in searchPoBasedOnYearData" value="{{x.full_po_number+'|'+x.po_date+'|'+x.unit+'|'+x.type
+		                  		+'|'+x.po_number}}">{{x.full_po_number}}</option>
 			                </select>
 			            </div>
 		            </div>

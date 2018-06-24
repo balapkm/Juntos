@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-23 22:30:48
+/* Smarty version 3.1.30, created on 2018-06-24 12:28:16
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2e7cc03d9681_82735985',
+  'unifunc' => 'content_5b2f41085c4708_17075585',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1529773245,
+      1 => 1529823494,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2e7cc03d9681_82735985 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2f41085c4708_17075585 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -370,7 +370,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
-?version=64"><?php echo '</script'; ?>
+?version=67"><?php echo '</script'; ?>
 >
 <?php
 }

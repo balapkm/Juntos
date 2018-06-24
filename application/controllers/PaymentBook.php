@@ -48,6 +48,13 @@ class PaymentBook extends CI_Controller
 
 	public function addAdvancePaymentAction()
 	{
+		$full_po_number = explode("|",$this->data['full_po_number']);
+		$this->data['full_po_number']  = $full_po_number[0];
+		$this->data['po_date']         = $full_po_number[1];
+		$this->data['unit']            = $full_po_number[2];
+		$this->data['type']            = $full_po_number[3];
+		$this->data['po_number']       = $full_po_number[4];
+		unset($this->data['po_year']);
 		return $this->PaymentBookQuery->addAdvancePayment($this->data);
 	}
 
@@ -164,6 +171,16 @@ class PaymentBook extends CI_Controller
 		
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
+	}
+
+	public function searchPoBasedOnYear()
+	{
+		$data =  $this->PoGenerateQuery->getUniquePoNumber($this->data['po_year']);
+		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+		foreach ($data as $key => $value) {
+			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
 	}
 
 	public function avgCostCalc($data,$full_qty,$full_bill_data)
