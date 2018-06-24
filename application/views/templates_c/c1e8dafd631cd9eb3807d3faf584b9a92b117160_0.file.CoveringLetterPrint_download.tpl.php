@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-16 20:54:52
+/* Smarty version 3.1.30, created on 2018-06-24 22:53:37
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b252bc48eb155_65077221',
+  'unifunc' => 'content_5b2fd399bca0b3_70120900',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1528616210,
+      1 => 1529861014,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b252bc48eb155_65077221 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b2fd399bca0b3_70120900 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <style>
@@ -67,6 +67,23 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
+
+<?php if (count($_smarty_tpl->tpl_vars['advancePaymentData']->value) != 0) {?>
+	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['advancePaymentData']->value, 'v1', false, 'k1');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
+?>
+		<?php $_smarty_tpl->_assignInScope('grandAmount', $_smarty_tpl->tpl_vars['grandAmount']->value-$_smarty_tpl->tpl_vars['v1']->value['amount']);
+?>
+	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+<?php }?>
+
 <span style="display: none;" id="GrandTotal"><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
 </span>
 <span style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
@@ -108,11 +125,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	<div style="margin-top: 50px;margin-left: 20px;">
 		<p><b>DEAR SIR,</b></p>
 		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
-		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 . <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
-		<?php } else { ?>
-		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+			<?php } else { ?>
+			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 . <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 		<?php }?>
@@ -152,82 +169,80 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </b></td>
 		        </tr>
 		        <?php if (count($_smarty_tpl->tpl_vars['extraData']->value) != 0) {?>
-		        <?php
+			        <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['extraData']->value, 'v1', false, 'k1');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
 ?>
-		    	<tr>
-		          <td>
-		          	<?php if ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'D') {?> 
-		          		DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
+			    	<tr>
+			          <td>
+			          	<?php if ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'D') {?> 
+			          		DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
 
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'C') {?> 
-                    	CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
+	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'C') {?> 
+	                    	CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
  DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
 
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'B') {?> 
-                    	BALANCE AMOUNT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
+	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'B') {?> 
+	                    	BALANCE AMOUNT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
 
-                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> 
-                    	TDS <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
+	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> 
+	                    	TDS <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
 
-                    <?php }?></td>	
-		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+	                    <?php }?></td>	
+			          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
 </td>
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+			          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
 </b></td>
-		        </tr>
-		        <?php
+			        </tr>
+			        <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-		        <tr>
-		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+			        <tr>
+			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+			          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
 </b></td>
-		        </tr>
+			        </tr>
 		        <?php }?>
 		        <?php if (count($_smarty_tpl->tpl_vars['advancePaymentData']->value) != 0) {?>
-		        <?php
+			        <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['advancePaymentData']->value, 'v1', false, 'k1');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
 ?>
-		    	<tr>
-		    	  <?php $_smarty_tpl->_assignInScope('grandAmount', $_smarty_tpl->tpl_vars['grandAmount']->value-$_smarty_tpl->tpl_vars['v1']->value['amount']);
-?>
-		          <td>Advance Payment - <?php echo $_smarty_tpl->tpl_vars['v1']->value['full_po_number'];?>
+			    	<tr>
+			          <td>Advance Payment - <?php echo $_smarty_tpl->tpl_vars['v1']->value['full_po_number'];?>
 </td>	
-		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['date'];?>
+			          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['date'];?>
 </td>
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+			          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
 </b></td>
-		        </tr>
-		        <?php
+			        </tr>
+			        <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-		        <tr>
-		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+			        <tr>
+			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+			          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
 </b></td>
-		        </tr>
+			        </tr>
 		        <?php }?>
 		    </tbody>
 		</table>

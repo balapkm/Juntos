@@ -34,6 +34,7 @@ table td
 [[foreach from=$advancePaymentData key=k1 item=v1]]
 [[assign var=grandAmount value=$grandAmount - $v1.amount]]
 [[/foreach]]
+[[/if]]
 
 <span style="display: none;" id="GrandTotal">[[$grandAmount]]</span>
 <span style="display: none;" id="currencyCode">[[$data[0].currency]]</span>

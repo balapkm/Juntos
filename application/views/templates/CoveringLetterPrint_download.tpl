@@ -26,9 +26,10 @@ table td
 [[/foreach]]
 
 [[if $advancePaymentData|@count neq 0]]
-[[foreach from=$advancePaymentData key=k1 item=v1]]
-	[[assign var=grandAmount value=$grandAmount - $v1.amount]]
-[[/foreach]]
+	[[foreach from=$advancePaymentData key=k1 item=v1]]
+		[[assign var=grandAmount value=$grandAmount - $v1.amount]]
+	[[/foreach]]
+[[/if]]
 
 <span style="display: none;" id="GrandTotal">[[$grandAmount]]</span>
 <span style="display: none;" id="currencyCode">[[$data[0].currency]]</span>
@@ -66,9 +67,9 @@ table td
 	<div style="margin-top: 50px;margin-left: 20px;">
 		<p><b>DEAR SIR,</b></p>
 		[[if $chequeData[0].dd_number neq '']]
-		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
-		[[else]]
-		<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+			[[else]]
+			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 		[[/if]]
 	</div>
 	<div style="width: 80%;margin:auto;margin-top: 20px;">
@@ -93,40 +94,39 @@ table td
 		          <td><b>[[$totalAmount]]</b></td>
 		        </tr>
 		        [[if $extraData|@count neq 0]]
-		        [[foreach from=$extraData key=k1 item=v1]]
-		    	<tr>
-		          <td>
-		          	[[if $v1.type==='D' ]] 
-		          		DEBIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
-                    [[elseif $v1.type==='C']] 
-                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
-                    [[elseif $v1.type==='B']] 
-                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
-                    [[elseif $v1.type==='T']] 
-                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
-                    [[/if]]</td>	
-		          <td>[[$v1.debit_note_date]]</td>
-		          <td><b>[[$v1.amount]]</b></td>
-		        </tr>
-		        [[/foreach]]
-		        <tr>
-		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b>[[$grandAmount]]</b></td>
-		        </tr>
+			        [[foreach from=$extraData key=k1 item=v1]]
+			    	<tr>
+			          <td>
+			          	[[if $v1.type==='D' ]] 
+			          		DEBIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+	                    [[elseif $v1.type==='C']] 
+	                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+	                    [[elseif $v1.type==='B']] 
+	                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+	                    [[elseif $v1.type==='T']] 
+	                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+	                    [[/if]]</td>	
+			          <td>[[$v1.debit_note_date]]</td>
+			          <td><b>[[$v1.amount]]</b></td>
+			        </tr>
+			        [[/foreach]]
+			        <tr>
+			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+			          <td><b>[[$grandAmount]]</b></td>
+			        </tr>
 		        [[/if]]
 		        [[if $advancePaymentData|@count neq 0]]
-		        [[foreach from=$advancePaymentData key=k1 item=v1]]
-		    	<tr>
-		    	  [[assign var=grandAmount value=$grandAmount - $v1.amount]]
-		          <td>Advance Payment - [[$v1.full_po_number]]</td>	
-		          <td>[[$v1.date]]</td>
-		          <td><b>[[$v1.amount]]</b></td>
-		        </tr>
-		        [[/foreach]]
-		        <tr>
-		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b>[[$grandAmount]]</b></td>
-		        </tr>
+			        [[foreach from=$advancePaymentData key=k1 item=v1]]
+			    	<tr>
+			          <td>Advance Payment - [[$v1.full_po_number]]</td>	
+			          <td>[[$v1.date]]</td>
+			          <td><b>[[$v1.amount]]</b></td>
+			        </tr>
+			        [[/foreach]]
+			        <tr>
+			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
+			          <td><b>[[$grandAmount]]</b></td>
+			        </tr>
 		        [[/if]]
 		    </tbody>
 		</table>
