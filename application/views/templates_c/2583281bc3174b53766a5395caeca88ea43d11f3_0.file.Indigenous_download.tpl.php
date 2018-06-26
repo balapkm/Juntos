@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-26 23:35:44
+/* Smarty version 3.1.30, created on 2018-06-26 23:49:15
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b328078e18449_43488238',
+  'unifunc' => 'content_5b3283a3734dc7_43718771',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1530036310,
+      1 => 1530037125,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b328078e18449_43488238 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3283a3734dc7_43718771 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
@@ -194,7 +194,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
      	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-     	<td width="8%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
 <br/>
      			<?php if ($_smarty_tpl->tpl_vars['v']->value['price_status'] != 'FINAL') {?>
@@ -337,7 +337,7 @@ $_prefixVariable5=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 ?>
      	<?php }?>
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
      		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>

@@ -127,7 +127,7 @@ table tr td, table tr th {
      	[[/if]]
      	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.qty]]</td>
      	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.material_uom]]</td>
-     	<td width="8%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      			[[$v.price|number_format:2]]<br/>
      			[[if $v.price_status neq 'FINAL']]
      			[ [[$v.price_status]] ]
@@ -212,7 +212,7 @@ table tr td, table tr th {
      	[[else]]
      		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
      	[[/if]]
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
      		[[$other_total_AMOUNT|number_format:2]]
      	</td>
