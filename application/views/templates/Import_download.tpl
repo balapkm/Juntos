@@ -51,11 +51,11 @@ table td
 		</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">Purchase Order</td>
+		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">PURCHASE ORDER</td>
 	</tr>
 	<tr>
 		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
-		<td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">LH.Po.No</td>
+		<td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
 		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].full_po_number]]</td>
 	</tr>
 	<tr>
@@ -74,16 +74,16 @@ table td
 		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
 	</tr>
 	<tr>
-		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">S.No</td>
-     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;">DESCRIPTION</td>
+		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
+     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">HSN CODE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
      	[[/if]]
-     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;">QTY</td>
-     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;">UOM</td>
-     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;">PRICE</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">DISCOUNT</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">TOTAL <br/>AMOUNT</td>
+     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
+     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
+     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
     </tr>
     [[assign var=GrandTotal value= 0]]
     [[assign var=TcolspanCalc value=3]]
@@ -137,7 +137,7 @@ table td
 
      	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
-     	<td width="10%" align="center" style="font:bold arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue|number_format:2]]</b></td>
+     	<td width="10%" align="right" style="font:bold arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue|number_format:2]]</b></td>
 
      	
      	[[$GrandTotal = $GrandTotal + $totalPriceValue]]
@@ -173,7 +173,7 @@ table td
      	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]
 		[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]
 
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue1|number_format:2]]</b></td>
+     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue1|number_format:2]]</b></td>
     </tr>
     [[/foreach]]
     [[/if]]
@@ -189,7 +189,7 @@ table td
 
 		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
 		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="[[$DcolspanCalc]]">DISCOUNT</td>
-		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		<td align="right" style="font:normal arial,helvetica,verdana; color:#000;">
 			<b>[[$ODiscountValue|number_format:2]]</b>
 		</td>
     </tr>
@@ -204,7 +204,7 @@ table td
      	[[/if]]
 
      	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="2">TOTAL AMOUNT [[$searchPoData[0].currency]]</td>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
+     	<td align="right" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 
      	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
      	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>

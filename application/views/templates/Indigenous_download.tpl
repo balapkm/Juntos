@@ -55,11 +55,11 @@ table tr td, table tr th {
 		</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">Purchase Order</td>
+		<td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">PURCHASE ORDER</td>
 	</tr>
 	<tr>
 		<td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
-		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">LH.Po.No</td>
+		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
 		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].full_po_number]]</td>
 	</tr>
 	<tr>
@@ -78,25 +78,25 @@ table tr td, table tr th {
 		<td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
 	</tr>
 	<tr>
-		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">S.No</td>
-     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;">DESCRIPTION</td>
+		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
+     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">HSN CODE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
      	[[/if]]
-     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;">QTY</td>
-     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;">UOM</td>
-     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;">PRICE</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">DISCOUNT</td>
+     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
+     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
+     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
      	[[if $searchPoData[0]['state_code'] eq 33]]
-         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">CGST</td>
-         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">SGST</td>
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">CGST</td>
+         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">SGST</td>
      	[[/if]]
      	[[if $searchPoData[0]['state_code'] neq 33]]
-     		<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">IGST</td>
+     		<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">IGST</td>
      	[[/if]]
      	[[/if]]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;">TOTAL <br/>AMOUNT</td>
+     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
      	</div>
     </tr>
     [[assign var=GrandTotal value= 0]]
@@ -185,7 +185,7 @@ table tr td, table tr th {
      	[[/if]]
      	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
-     	<td width="10%" align="center" style="font:bold arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue|number_format:2]]</b></td>
+     	<td width="10%" align="right" style="font:bold arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue|number_format:2]]</b></td>
 
      	
      	[[$GrandTotal = $GrandTotal + $totalPriceValue]]
@@ -233,7 +233,7 @@ table tr td, table tr th {
      	[[assign var=totalPriceValue1 value=[[$SGSTTotalValue + $CGSTTotalValue + $other_total_AMOUNT + $IGSTTotalValue]]]]
 		[[$GrandTotal1 = $GrandTotal1 + $totalPriceValue1]]
 
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue1|number_format:2]]</b></td>
+     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[$totalPriceValue1|number_format:2]]</b></td>
     </tr>
     [[/foreach]]
     [[/if]]
@@ -249,7 +249,7 @@ table tr td, table tr th {
 
 		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
 		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="[[$DcolspanCalc]]">DISCOUNT</td>
-		<td align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		<td align="right" style="font:normal arial,helvetica,verdana; color:#000;">
 			<b>[[$ODiscountValue|number_format:2]]</b>
 		</td>
     </tr>
@@ -275,7 +275,7 @@ table tr td, table tr th {
      	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.4)|round:0]]"></td>
      	[[/if]]
      	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="[[($TCcolspanCalc*0.3)|round:0]]">TOTAL AMOUNT [[$searchPoData[0].currency]]</td> 
-     	<td colspan="1" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
+     	<td colspan="1" align="right" style="font:normal arial,helvetica,verdana; color:#000;"><b>[[(($GrandTotal + $GrandTotal1) - $ODiscountValue)|number_format:2]]</b></td>
 
      	<td id="GrandTotal" style="display: none;">[[($GrandTotal + $GrandTotal1) - $ODiscountValue]]</td>
      	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>
@@ -290,7 +290,8 @@ table tr td, table tr th {
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Freight to be paid as agreed between the parties.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Failing to file a tax return on time.We reserved the right to deduct the tax AMOUNT from your payment.</li>
-			<li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+            <li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">SUPPLY OF MATERIAL SHOULD PASS ALL TEST AS PER REACH/RCS/RSC/GB PHTHALATES STANDARD</li>
 			</ul>
 		</td>
 		<td  colspan="[[($TCcolspanCalc*0.4)|round:0]]" style="border-top: 1px solid #000">

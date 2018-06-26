@@ -45,8 +45,8 @@ table td
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="assets/img/TMAR LOGO.jpg" width="100" height="100"/>
 					</td>
-					<td width="40%" style="border:0px;"><h3>T.M.ABDUL RAHMAN & SONS</h3>
-					<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5></td>
+					<td width="45%" style="border:0px;"><h2 style="margin:2px;">T.M.ABDUL RAHMAN & SONS</h2>
+					<h4 style="font-weight: normal;margin-top:2px">FINISHED LEATHER & SHOES</h4></td>
 					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
@@ -91,34 +91,34 @@ table td
 		    	[[foreach from=$data key=k1 item=v1]]
 		    	<tr>
 		          <td>[[$v1.bill_number]]</td>	
-		          <td>[[$v1.bill_date]]</td>
-		          <td><b>[[$v1.bill_amount]]</b></td>
+		          <td>[[$v1.bill_date|date_format:"%d-%m-%Y"]]</td>
+		          <td><b>[[$v1.bill_amount|number_format:2]]</b></td>
 		        </tr>
 		        [[/foreach]]
 		        <tr>
 		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b>[[$totalAmount]]</b></td>
+		          <td><b>[[$totalAmount|number_format:2]]</b></td>
 		        </tr>
 		        [[if $extraData|@count neq 0]]
 		        [[foreach from=$extraData key=k1 item=v1]]
 		    	<tr>
 		          <td>
 		          	[[if $v1.type==='D' ]] 
-		          		DEBIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+		          		DEBIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
                     [[elseif $v1.type==='C']] 
-                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
                     [[elseif $v1.type==='B']] 
-                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
                     [[elseif $v1.type==='T']] 
-                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
                     [[/if]]</td>	
-		          <td>[[$v1.debit_note_date]]</td>
-		          <td><b>[[$v1.amount]]</b></td>
+		          <td>[[$v1.debit_note_date|date_format:"%d-%m-%Y"]]</td>
+		          <td><b>[[$v1.amount|number_format:2]]</b></td>
 		        </tr>
 		        [[/foreach]]
 		        <tr>
 		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b>[[$grandAmount]]</b></td>
+		          <td><b>[[$grandAmount|number_format:2]]</b></td>
 		        </tr>
 		        [[/if]]
 		        [[if $advancePaymentData|@count neq 0]]
@@ -126,13 +126,13 @@ table td
 		    	<tr>
 		    	  [[assign var=grandAmount value=$grandAmount - $v1.amount]]
 		          <td>Advance Payment - [[$v1.full_po_number]]</td>	
-		          <td>[[$v1.date]]</td>
-		          <td><b>[[$v1.amount]]</b></td>
+		          <td>[[$v1.date|date_format:"%d-%m-%Y"]]</td>
+		          <td><b>[[$v1.amount|number_format:2]]</b></td>
 		        </tr>
 		        [[/foreach]]
 		        <tr>
 		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b>[[$grandAmount]]</b></td>
+		          <td><b>[[$grandAmount|number_format:2]]</b></td>
 		        </tr>
 		        [[/if]]
 		    </tbody>

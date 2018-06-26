@@ -43,7 +43,10 @@ app.service('validateService',function(){
   		for(var i in data)
   		{
   			if(typeof data[i] === "string")
-  				final[i] = data[i].toUpperCase();
+  			{
+	  			final[i] = data[i].toUpperCase();
+	  			final[i] = data[i].replace("'", "");
+  			}
   		}
   		return final;
   	}

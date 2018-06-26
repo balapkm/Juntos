@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-24 22:53:37
+/* Smarty version 3.1.30, created on 2018-06-26 23:42:30
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2fd399bca0b3_70120900',
+  'unifunc' => 'content_5b32820e8e4712_45112683',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1529861014,
+      1 => 1530036746,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2fd399bca0b3_70120900 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b32820e8e4712_45112683 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <style>
@@ -95,8 +95,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
 					</td>
-					<td width="45%" style="border:0px;"><h3 style="margin:2px;">T.M.ABDUL RAHMAN & SONS</h3>
-					<h5 style="font-weight: normal;margin-top:2px">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5></td>
+					<td width="45%" style="border:0px;"><h2 style="margin:2px;">T.M.ABDUL RAHMAN & SONS</h2>
+					<h4 style="font-weight: normal;margin-top:2px">FINISHED LEATHER & SHOES</h4></td>
 					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
@@ -134,13 +134,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 		<?php }?>
 	</div>
-	<div style="width: 80%;margin:auto;margin-top: 20px;">
+	<div style="width: 90%;margin:auto;margin-top: 20px;">
 		<table class="coveringLetterTable">
 			<thead>
 		        <tr>
-		          <th><b>INVOICE.NO</b></th>	
-		          <th><b>DATE</b></th>
-		          <th><b>AMOUNT</b></th>
+		          <th width="60%"><b>INVOICE.NO</b></th>	
+		          <th width="20%"><b>DATE</b></th>
+		          <th width="20%" align="right"><b>AMOUNT</b></th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -152,9 +152,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 		    	<tr>
 		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['bill_number'];?>
 </td>	
-		          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['bill_date'];?>
+		          <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['bill_date'],"%d-%m-%Y");?>
 </td>
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['bill_amount'];?>
+		          <td align="right" ><b style="float: right;"><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['bill_amount'],2);?>
 </b></td>
 		        </tr>
 		        <?php
@@ -165,7 +165,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		        <tr>
 		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-		          <td><b><?php echo $_smarty_tpl->tpl_vars['totalAmount']->value;?>
+		          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalAmount']->value,2);?>
 </b></td>
 		        </tr>
 		        <?php if (count($_smarty_tpl->tpl_vars['extraData']->value) != 0) {?>
@@ -178,32 +178,32 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 			          <td>
 			          	<?php if ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'D') {?> 
 			          		DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['debit_note_date'],"%d-%m-%Y");?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'],"%d-%m-%Y");?>
 
 	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'C') {?> 
 	                    	CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['debit_note_date'],"%d-%m-%Y");?>
  DEBIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'],"%d-%m-%Y");?>
 
 	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'B') {?> 
 	                    	BALANCE AMOUNT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['debit_note_date'],"%d-%m-%Y");?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
  DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
 
 	                    <?php } elseif ($_smarty_tpl->tpl_vars['v1']->value['type'] === 'T') {?> 
 	                    	TDS <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_no'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['debit_note_date'],"%d-%m-%Y");?>
  CREDIT NOTE <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote'];?>
- DT <?php echo $_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'];?>
+ DT <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['supplier_creditnote_date'],"%d-%m-%Y");?>
 
 	                    <?php }?></td>	
-			          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['debit_note_date'];?>
+			          <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['debit_note_date'],"%d-%m-%Y");?>
 </td>
-			          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+			          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['amount'],2);?>
 </b></td>
 			        </tr>
 			        <?php
@@ -214,7 +214,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 			        <tr>
 			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-			          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+			          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
 </b></td>
 			        </tr>
 		        <?php }?>
@@ -227,9 +227,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 			    	<tr>
 			          <td>Advance Payment - <?php echo $_smarty_tpl->tpl_vars['v1']->value['full_po_number'];?>
 </td>	
-			          <td><?php echo $_smarty_tpl->tpl_vars['v1']->value['date'];?>
+			          <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['date'],"%d-%m-%Y");?>
 </td>
-			          <td><b><?php echo $_smarty_tpl->tpl_vars['v1']->value['amount'];?>
+			          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['amount'],2);?>
 </b></td>
 			        </tr>
 			        <?php
@@ -240,7 +240,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 			        <tr>
 			          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
-			          <td><b><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
+			          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
 </b></td>
 			        </tr>
 		        <?php }?>
