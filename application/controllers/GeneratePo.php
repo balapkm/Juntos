@@ -262,7 +262,6 @@ class GeneratePo extends CI_Controller
 			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html --header-html '.$folder_name.'/'.$headername.'.html --footer-right "Page no :"[page]/[topage] --footer-left "'.$this->data['searchPoData'][0]['full_po_number'].'-'.date('Y',strtotime($this->data['searchPoData'][0]['po_date'])).'-'.$this->data['searchPoData'][0]['order_reference'].'" --footer-font-size 8 '.$folder_name.'/'.$filename.'.pdf  2>&1';
 		}
 
-		// echo $cmd;exit;
 		$response = exec($cmd);
 
 		// print_r($response);exit;

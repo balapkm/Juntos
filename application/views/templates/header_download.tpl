@@ -17,6 +17,33 @@ table tr td, table tr th {
 }
 </style>
 <body>
+[[if $type neq 'Indigenous']]
+[[assign var=OTCcolspanCalc value=7]]
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+[[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+[[/if]]
+
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+    [[if $searchPoData[0]['state_code'] eq 33]]
+        [[assign var=OTCcolspanCalc value=$OTCcolspanCalc+2]]
+    [[else]]
+        [[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+    [[/if]]
+[[/if]]
+[[else]]
+[[assign var=OTCcolspanCalc value=7]]
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+[[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+[[/if]]
+
+[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+    [[if $searchPoData[0]['state_code'] eq 33]]
+        [[assign var=OTCcolspanCalc value=$OTCcolspanCalc+2]]
+    [[else]]
+        [[assign var=OTCcolspanCalc value=$OTCcolspanCalc+1]]
+    [[/if]]
+[[/if]]
+[[/if]]
 <table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
     <tr> 
         <td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
@@ -65,6 +92,42 @@ table tr td, table tr th {
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
+    [[if $type neq 'Indigenous']]
+    <tr>
+        <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
+        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
+        [[/if]]
+        <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
+        <td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
+        <td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
+    </tr>
+    [[else]]
+    <tr>
+        <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
+        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
+        [[/if]]
+        <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
+        <td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
+        <td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
+        [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+        [[if $searchPoData[0]['state_code'] eq 33]]
+            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">CGST</td>
+            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">SGST</td>
+        [[/if]]
+        [[if $searchPoData[0]['state_code'] neq 33]]
+            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">IGST</td>
+        [[/if]]
+        [[/if]]
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
+    </tr>
+    [[/if]]
 </table>
 </body>
 </html>

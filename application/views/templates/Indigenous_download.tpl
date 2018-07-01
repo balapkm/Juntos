@@ -30,28 +30,6 @@ table tr td, table tr th {
 	[[/if]]
 [[/if]]
 <table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
-	<tr>
-		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
-     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
-     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
-     	[[/if]]
-     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
-     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
-     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
-     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	[[if $searchPoData[0]['state_code'] eq 33]]
-         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">CGST</td>
-         	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">SGST</td>
-     	[[/if]]
-     	[[if $searchPoData[0]['state_code'] neq 33]]
-     		<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">IGST</td>
-     	[[/if]]
-     	[[/if]]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
-     	</div>
-    </tr>
     [[assign var=GrandTotal value= 0]]
     [[assign var=TcolspanCalc value=3]]
     [[assign var=DcolspanCalc value=5]]

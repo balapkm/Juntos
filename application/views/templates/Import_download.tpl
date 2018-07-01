@@ -26,18 +26,6 @@ table td
 	[[/if]]
 [[/if]]
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
-	<tr>
-		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
-     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
-     	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
-     	[[/if]]
-     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
-     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
-     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
-    </tr>
     [[assign var=GrandTotal value= 0]]
     [[assign var=TcolspanCalc value=3]]
     [[assign var=DcolspanCalc value=5]]

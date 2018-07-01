@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-01 11:27:54
+/* Smarty version 3.1.30, created on 2018-07-01 19:38:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b386d62d0b6d6_26886623',
+  'unifunc' => 'content_5b38e06b567b22_41560886',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1530424579,
+      1 => 1530452253,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b386d62d0b6d6_26886623 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b38e06b567b22_41560886 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,18 +52,6 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
 	<?php }
 }?>
 <table cellspacing="0" cellpadding="0" border="0" width="100%">
-	<tr>
-		<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
-     	<td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
-     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
-     	<?php }?>
-     	<td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
-     	<td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
-     	<td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
-     	<td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
-    </tr>
     <?php $_smarty_tpl->_assignInScope('GrandTotal', 0);
 ?>
     <?php $_smarty_tpl->_assignInScope('TcolspanCalc', 3);
