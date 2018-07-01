@@ -1,113 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+    <title>Juntos Download</title>
 </head>
 <style>
-.own-table{
-    width: 100%;
-    font-size: 12px;
-}
-td
+table td
 {
-	word-wrap: break-word;
-}
-.own-table th,.own-table td,.own-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+    border-bottom:1px solid #000;
+    border-right:1px solid #000;
+    padding:4px 3px;
+    font-size: 12px;
 
-.own-td-1{
-    padding : 3px 3px 3px 40px;
-    font-size: 10px;
 }
-
-.own-td-2{
-    padding: 5px;
-}
-
-.own-td-3{
-    padding-bottom: 200px;
-}
-
-.own-td-4{
-    padding-bottom: 10px;
-}
-
-.own-td-5{
-    padding-bottom: 100px;
+table tr td, table tr th {
+    page-break-inside: avoid;
 }
 </style>
 <body>
-<table class="own-table">
-	<tr>
-    	<table class="own-table">
-    		<tr>
-    			<td width="15%" style="padding: 20px 15px 28px 40px;border: 0px;">
-    				<img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
-    			</td>
-	         	<td width="45%" style="border: 0px;">
-	         		<h3>T.M.ABDUL RAHMAN & SONS</h3>
-					<h5 style="font-weight: normal;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h5>
-	         	</td>
-	         	<td width="40%" style="border: 0px;padding-right: 20px;" align="right">
-	         		<p style="text-align: justify;margin-left:30px;font-weight: normal;font-size: 10px">45J / 46C Ammoor Road,RANIPET - 632-401</br>
-        			Tel : 91-4172-272470,272480</br>
-        			Email : purchasedept@tmargroup.in </br>
-        			Email : soles@tmargroup.in</p>
+<table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
+    <tr> 
+        <td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+            <table cellspacing="0" cellpadding="0" width="100%" id="x">
+                <tr>
+                    <td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
+                    </td>
+                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
+                    <h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
+                    <td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,Ranipet - 632-401</br>
+                    Tel : 91-4172-272470,271835</br>
+                    Email : purchasedept@tmargroup.in </br>
+                    Email : soles@tmargroup.in</font><br/><br/>
 
-        			<p style="text-align: justify;margin-left:30px;font-weight: normal;font-size: 10px">
-        			H.O : 48(Old No.49) Wuthucattan Street,</br>
-        			Periamet,CHENNAI-600 003.INDIA</br>
-        			Tel : 91-44-25612164,25610078</br>
-        			Email : headoffice@tmargroup.in</br>
-        			<b>GSTIN : 33AABFT2029F1ZO</b>1</p>
-	         	</td>
-    		</tr>
-    	</table>
+                    <font style="font:bold arial,helvetica,verdana; color:#000;">
+                    H.O : 48(Old No.49) Wuthucattan Street,</br>
+                    Periamet,CHENNAI-600 003.INDIA</br>
+                    Tel : 91-44-25612164,25610078</br>
+                    Email : headoffice@tmargroup.in</br>
+                    <b>GSTIN : 33AABFT2029F1ZO</b></font></td>
+                </tr>
+            </table>
+        </td>
     </tr>
     <tr>
-    	<table class="own-table">
-    		<tr>
-    			<td align="center" class="own-td-1" width="100%">PURCHASE ORDER</td>
-    		</tr>
-    	</table>
+        <td align="center" colspan="10" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;">PURCHASE ORDER</td>
     </tr>
     <tr>
-    	<table class="own-table">
-    		<tr>
-    			<td class="own-td-1" width="40%">To</td>
-	         	<td class="own-td-1" width="30%">LH.Po.No</td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].full_po_number]]</td>
-    		</tr>
-    	</table>
+        <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].full_po_number]]</td>
     </tr>
     <tr>
-    	<table class="own-table">
-    		<tr>
-    			<td class="own-td-1" width="40%">M/s.[[$searchPoData[0].supplier_name]]</td>
-	         	<td class="own-td-1" width="30%">Date</td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
-    		</tr>
-    	</table>
+        <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">M/s.[[$searchPoData[0].supplier_name]]</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
     <tr>
-    	<table class="own-table">
-    		<tr>
-    			<td class="own-td-1" width="40%">[[$searchPoData[0].origin]]</td>
-	         	<td class="own-td-1" width="30%">Ord Ref</td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].order_reference]]</td>
-    		</tr>
-    	</table>
+        <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$searchPoData[0].origin]]</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].order_reference]]</td>
     </tr>
     <tr>
-    	<table class="own-table">
-    		<tr>
-    			<td class="own-td-1" width="40%">GSTIN : [[$searchPoData[0].gst_no]]</td>
-	         	<td class="own-td-1" width="30%">Delivery Date</td>
-	         	<td class="own-td-1" width="30%">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
-    		</tr>
-    	</table>
+        <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal; arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><b>GSTIN : [[$searchPoData[0].gst_no]]</b></td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
+        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
 </table>
 </body>
