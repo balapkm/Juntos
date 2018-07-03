@@ -235,13 +235,13 @@ class GeneratePo extends CI_Controller
 		if($this->data['type'] == 'Indigenous' || $this->data['type'] == 'Sample_Indigenous')
 		{
 			$template_name = 'Indigenous_download.tpl';
-			$footer_name   = 'Indigenous_download_footer.tpl';
+			$footer_name   = 'footer_download.tpl';
 			$header_name   = 'header_download.tpl';
 		}
 		else
 		{
 			$template_name = 'Import_download.tpl';
-			$footer_name   = 'Import_download_footer.tpl';
+			$footer_name   = 'footer_download.tpl';
 			$header_name   = 'header_download.tpl';
 		}
 
@@ -255,13 +255,13 @@ class GeneratePo extends CI_Controller
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
 		{
 			// $cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --header-html '.$folder_name.'/'.$headername.'.html --header-spacing 0 --header-line --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
-			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html --header-html '.$folder_name.'/'.$headername.'.html --footer-right "Page no :"[page]/[topage] --footer-left "'.$this->data['searchPoData'][0]['full_po_number'].'-'.date('Y',strtotime($this->data['searchPoData'][0]['po_date'])).'-'.$this->data['searchPoData'][0]['order_reference'].'" --footer-font-size 8 '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe '.$folder_name.'/'.$filename.'.html --header-html '.$folder_name.'/'.$headername.'.html --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
 		}
 		else
 		{
-			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html --header-html '.$folder_name.'/'.$headername.'.html --footer-right "Page no :"[page]/[topage] --footer-left "'.$this->data['searchPoData'][0]['full_po_number'].'-'.date('Y',strtotime($this->data['searchPoData'][0]['po_date'])).'-'.$this->data['searchPoData'][0]['order_reference'].'" --footer-font-size 8 '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf '.$folder_name.'/'.$filename.'.html --header-html '.$folder_name.'/'.$headername.'.html --footer-html '.$folder_name.'/'.$footername.'.html '.$folder_name.'/'.$filename.'.pdf 2>&1';
 		}
-
+		// echo $cmd;exit;
 		$response = exec($cmd);
 
 		// print_r($response);exit;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-03 10:55:07
+/* Smarty version 3.1.30, created on 2018-07-03 22:44:30
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b3b08b3c7ddc0_38671468',
+  'unifunc' => 'content_5b3baef69112f4_59832130',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1530595503,
+      1 => 1530597478,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b3b08b3c7ddc0_38671468 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3baef69112f4_59832130 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -395,12 +395,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
 			<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>-->
 			<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
 		</td>
