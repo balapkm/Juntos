@@ -162,12 +162,12 @@ table td
 		</td>
      	<td align="center" colspan="[[($TCcolspanCalc*0.4)|round:0]]" style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 100px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 100px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>

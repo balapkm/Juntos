@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-01 19:13:00
+/* Smarty version 3.1.30, created on 2018-07-03 10:55:07
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b38da64dce019_27129609',
+  'unifunc' => 'content_5b3b08b3c7ddc0_38671468',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1530452578,
+      1 => 1530595503,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b38da64dce019_27129609 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3b08b3c7ddc0_38671468 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>

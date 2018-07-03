@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-01 19:38:43
+/* Smarty version 3.1.30, created on 2018-07-03 11:27:31
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b38e06b567b22_41560886',
+  'unifunc' => 'content_5b3b104bb83ff1_81169210',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1530452253,
+      1 => 1530597449,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b38e06b567b22_41560886 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b3b104bb83ff1_81169210 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -292,12 +292,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
      	<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
 " style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 100px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 100px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>

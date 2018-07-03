@@ -233,12 +233,12 @@ table tr td, table tr th {
 			<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
 			<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>-->
 			<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 150px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
 		</td>
