@@ -167,8 +167,8 @@ class PoMasterEntry extends CI_Controller
 
 	public function updateMaterialMasterAction()
 	{
-		$count = count($this->PoMasterEntryQuery->select_material_master($this->data));
-		if($count != 0)return false;
+		// $count = count($this->PoMasterEntryQuery->select_material_master($this->data));
+		// if($count != 0)return false;
 		return $this->PoMasterEntryQuery->update_material_master($this->data);
 	}
 
