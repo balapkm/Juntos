@@ -122,16 +122,17 @@ class PaymentBook extends CI_Controller
 		}
 
 		$advancePaymentDetails = array();
-		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
 			$advancePaymentDetails[] = $value;
 		}
 
-		// print_r($result);exit;
+		// print_r($advancePaymentDetails);exit;
 		foreach ($result as $key1 => $value1) 
 		{
 			$po_number_array = array();
+			$advance_payment_array = array();
 			foreach ($value1 as $key2 => $value2) 
 			{
 				if($key2 == 'paymentBookList')
@@ -143,13 +144,14 @@ class PaymentBook extends CI_Controller
 						{
 							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
 							$po_number_array[] = $value4['po_number'];
+							$advance_payment_array[] = $value4['advance_payment_id'];
 						}
 					} 
 				}
 				
 				foreach ($advancePaymentDetails as $Akey => $Avalue)
 				{
-					if(in_array($Avalue['full_po_number'],$po_number_array))
+					if(in_array($Avalue['advance_payment_id'],$advance_payment_array))
 					{
 						$result[$key1]['advancePaymentDetails'][] = $Avalue;
 					}
@@ -166,7 +168,7 @@ class PaymentBook extends CI_Controller
 			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
 		}
 
-		$finalResponse['result']          = $result;
+		$finalResponse['result'] = $result;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -368,7 +370,7 @@ class PaymentBook extends CI_Controller
 		}
 
 		$advancePaymentDetails = array();
-		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
 			$advancePaymentDetails[] = $value;

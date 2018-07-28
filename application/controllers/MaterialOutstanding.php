@@ -11,6 +11,7 @@ class MaterialOutstanding extends CI_Controller
 		$this->load->library('Mysmarty');
 		$this->load->model('PoGenerateQuery');
 		$this->load->model('PoMasterEntryQuery');
+		$this->load->model('PaymentBookQuery');
 		$this->load->config('application');
 	}
 
@@ -52,7 +53,8 @@ class MaterialOutstanding extends CI_Controller
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
 			$data[$key]['po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
-
+			/*$data[$key]['unit'] = strtoupper($value['unit']);
+			$data[$key]['type'] = strtoupper($value['type']);*/
 
 			$totalAmount = 0;
 			$discountTotalAmt = 0;
@@ -120,6 +122,9 @@ class MaterialOutstanding extends CI_Controller
 
 			$this->data['parent_po_generated_request_id'] = $this->data['po_generated_request_id'];
 			$this->data['po_number'] = $po_raw_number;
+			$this->data['unit'] = strtoupper($this->data['unit']);
+			$this->data['type'] = strtoupper($this->data['type']);
+			$this->data['editType'] = strtoupper($this->data['editType']);
 			// $this->data['balance'] = $balance;
 			$this->data['created_date'] = date('Y-m-d');
 
@@ -149,9 +154,39 @@ class MaterialOutstanding extends CI_Controller
 			$lastDateOfMonth = date('Y-m-d',strtotime('last day of this month', time()));
 			unset($this->data['editType']);
 			$this->data['payable_month'] = $lastDateOfMonth;
+
+			$advancePaymentDetails = array();
+			$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"N");
+			foreach ($data as $key => $value) 
+			{
+				$advancePaymentDetails[] = $value;
+			}
+			// print_r($advancePaymentDetails);exit;
+			$data = $this->PoGenerateQuery->getPoDataAsPerId($this->data['checkEditBoxBillOutStandingArray']);
+			$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+			foreach ($data as $key => $value) {
+				$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			foreach ($advancePaymentDetails as $k2 => $v2) {
+				foreach ($data as $k1 => $v1) {
+					if($v1['full_po_number'] == $v2['full_po_number']){
+
+						$Udata['advance_payment_id'] = $v2['advance_payment_id'];
+						$Udata['used_status']        = 'Y';
+
+						$this->PaymentBookQuery->editAdvancePayment($Udata);
+						$data[$k1]['advance_payment_id'] = $v2['advance_payment_id'];
+						continue 2;
+					}
+				}
+			}
+			// print_r($advancePaymentDetails);//exit;
+			// print_r($data);exit;
+			$this->data['checkEditBoxBillOutStandingArray'] = $data;
 			foreach ($this->data['checkEditBoxBillOutStandingArray'] as $key => $value) 
 			{
-				$this->data['id'] = $value;
+				$this->data['id']                 = $value['po_generated_request_id'];
+				$this->data['advance_payment_id'] = empty($value['advance_payment_id'])?0:$value['advance_payment_id'];
 				unset($this->data['checkEditBoxBillOutStandingArray']);
 				$this->PoGenerateQuery->update_po_generated_request_details($this->data);
 			}

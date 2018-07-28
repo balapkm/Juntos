@@ -151,27 +151,31 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
-    public function getAdvancePaymentDetails($data)
+    public function getAdvancePaymentDetails($data,$status)
     {
-        if(empty($data['type'])) {
+        /*if(empty($data['type'])) {
             $data['type'] = 'specfic';
         }
         if(!empty($data['payment_statement_supplier_id']))
         {
             $data['supplier_name'] = $data['payment_statement_supplier_id'];
+        }*/
+        $sql = "SELECT * FROM advance_payment_details";
+        if(!empty($status))
+        {
+            $sql.=  " WHERE used_status = '".$status."'";
         }
-        $sql = "SELECT * FROM advance_payment_details WHERE";
-        if(!empty($data['date'])) {
+        /*if(!empty($data['date'])) {
             $date = explode("/",$data['date']);
-        }
-        if($data['type'] == 'specfic')
+        }*/
+        /*if($data['type'] == 'specfic')
         {
             $sql.=  " supplier_id = ".$data['supplier_name'];
         }
         if($data['type'] == 'date')
         {
             $sql.=  " payable_month BETWEEN '".$date[0]."' AND '".$date[1]."'";
-        }
+        }*/
 
         $data  = $this->db->query($sql)->result_array();
         return $data;

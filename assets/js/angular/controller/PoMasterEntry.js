@@ -430,6 +430,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		if(validateService.blank($scope.supplier_form_data['state_code'],"Please enter state code","state_code")) return false;
     		if(validateService.blank($scope.supplier_form_data['supplier_tax_status'],"Please enter supplier tax status","supplier_tax_status")) return false;
     	}
+    	
     	$scope.supplier_form_data = validateService.changeAllUpperCase($scope.supplier_form_data);
 		var service_details = {
 	      method_name : "updateSupplierAction",

@@ -6,3 +6,6 @@ ADD `material_master_id` int(11) NOT NULL AFTER `supplier_id`;
 
 ALTER TABLE `po_generated_request_details`
 ADD `material_master_id` int(11) NOT NULL AFTER `material_id`;
+
+ALTER TABLE `po_generated_request_details`
+ADD `advance_payment_id` int NOT NULL AFTER `parent_po_generated_request_id`;

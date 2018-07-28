@@ -1,0 +1,5 @@
+ALTER TABLE `po_generated_request_details`
+ADD `advance_payment_id` int NOT NULL AFTER `parent_po_generated_request_id`;
+
+ALTER TABLE `advance_payment_details`
+ADD `used_status` enum('Y','N') NOT NULL DEFAULT 'N';

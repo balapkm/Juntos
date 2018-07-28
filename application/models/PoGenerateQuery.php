@@ -31,6 +31,21 @@ class PoGenerateQuery extends CI_Model
         }
     }
 
+    public function getPoDataAsPerId($ids){
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date ,
+                    po_generated_request_id 
+                FROM 
+                    po_generated_request_details 
+                WHERE 
+                    po_generated_request_id IN (".implode(",",$ids).")";
+        return $this->db->query($sql)->result_array();
+
+    }
+
     public function getPONumberHighestBasedPODate($unit,$type,$startDate,$endDate)
     {
         $sql = "SELECT 
@@ -241,7 +256,7 @@ class PoGenerateQuery extends CI_Model
         $id = $data['id'];
         unset($data['id']);
         unset($data['material_name']);
-        // print_r($data);exit;
+       
         $result = $this->db->update('po_generated_request_details',$data, array('po_generated_request_id' => $id));
         return $result;
     }
@@ -336,7 +351,6 @@ class PoGenerateQuery extends CI_Model
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
-
         $result1  = $this->db->query(trim($sql))->result_array();
 
         if($data['outstanding_type'] == 'B')
