@@ -17,7 +17,8 @@ class PaymentStatementQuery extends CI_Model
                     sd.payment_type,
                     cnd.cheque_amount,
                     cnd.page_no,
-                    cnd.cheque_number_id
+                    cnd.cheque_number_id,
+                    cnd.payable_month
                 FROM
                     cheque_number_details cnd,
                     supplier_details sd
@@ -25,8 +26,24 @@ class PaymentStatementQuery extends CI_Model
                     sd.supplier_id  = cnd.supplier_id AND
                     cnd.unit = '".$data['division']."' AND
                     cnd.payable_month BETWEEN '".$data['payment_statement_month']."-01' AND '".$data['payment_statement_month']."-31'";
-        $data  = $this->db->query($sql)->result_array();
-        return $data;
+        $result  = $this->db->query($sql)->result_array();
+        foreach ($result as $key => $value) {
+            $sql  = "SELECT (bill_amount-ad.amount) as bill_amount FROM po_generated_request_details prd,advance_payment_details ad WHERE prd.advance_payment_id=ad.advance_payment_id AND prd.payable_month='".$value['payable_month']."' GROUP BY bill_number";
+            $data  = $this->db->query($sql)->result_array();
+            if(!empty($data))
+            $result[$key]['total_amount']= $data[0]['bill_amount'];
+
+            $sql  = "SELECT amount,type FROM debit_note_details WHERE payable_month='".$value['payable_month']."'";
+            $data  = $this->db->query($sql)->result_array();
+            foreach ($data as $key => $value) {
+                if($value['type']=='D' || $value['type']=='T')
+                    $result[$key]['total_amount'] -= $value['amount'];
+                else
+                    $result[$key]['total_amount'] += $value['amount'];
+            }
+        }
+
+        return $result;
     }
 
     public function getCoverLetterData($data)

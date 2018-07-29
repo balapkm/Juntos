@@ -266,9 +266,9 @@ class PaymentBook extends CI_Controller
 		$totalAmount = 0;
 		foreach ($data as $key => $value) {
 			if($value['type']=='D' || $value['type']=='T')
-				$totalAmount += $value['amount'];
-			else
 				$totalAmount -= $value['amount'];
+			else
+				$totalAmount += $value['amount'];
 
 		}
 		$template_name = 'debitNoteList.tpl';

@@ -101,7 +101,7 @@
                     	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
-                    	<td style="font-weight: bold;">{{x.cheque_amount}}</td>
+                    	<td style="font-weight: bold;">{{x.total_amount}}</td>
                     </tr>
                 </tbody>
             </table>

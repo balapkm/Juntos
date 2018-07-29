@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-24 20:14:45
+/* Smarty version 3.1.30, created on 2018-07-29 18:59:23
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2fae5d28d3d6_61507314',
+  'unifunc' => 'content_5b5dc1336881a3_82987896',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd70a9e9ba2e763c1079343487b88765018068484' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl',
-      1 => 1529851359,
+      1 => 1532870959,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2fae5d28d3d6_61507314 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b5dc1336881a3_82987896 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -136,7 +136,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                     	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
-                    	<td style="font-weight: bold;">{{x.cheque_amount}}</td>
+                    	<td style="font-weight: bold;">{{x.total_amount}}</td>
                     </tr>
                 </tbody>
             </table>
