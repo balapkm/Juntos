@@ -92,7 +92,7 @@ class PoMasterEntryQuery extends CI_Model
     public function update_material_entry($data)
     {
         $id = $data['material_id'];
-        $unsetArray = array('material_id','supplier_id','state_code','supplier_name');
+        $unsetArray = array('material_id','supplier_id','state_code','supplier_name','show_delete');
         foreach ($unsetArray as $key => $value) {
             unset($data[$value]);
         }
