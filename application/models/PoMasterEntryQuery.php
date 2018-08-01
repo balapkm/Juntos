@@ -188,6 +188,11 @@ class PoMasterEntryQuery extends CI_Model
                 $data[$key]['show_delete'] = 'Y';
             }
         }
+
+        foreach ($data as $key => $value) {
+            $data[$key]['material_name'] = str_replace('"',"",$data[$key]['material_name']);
+            $data[$key]['material_name'] = str_replace("'","",$data[$key]['material_name']);
+        }
         return $data;
     }
 
