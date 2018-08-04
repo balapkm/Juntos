@@ -319,12 +319,14 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $scope.editOtherDetailsFn = function(data){
         $scope.editOtherDetails = {};
         $scope.editOtherDetails.po_date = data[0].po_date;
+        $scope.editOtherDetails.supplier_id = data[0].supplier_id;
         $scope.editOtherDetails.delivery_date = data[0].delivery_date;
         $scope.editOtherDetails.order_reference = data[0].order_reference;
         $scope.editOtherDetails.po_ids = [];
         for (var i = 0;i < data.length;i++) {
             $scope.editOtherDetails.po_ids.push(data[i].po_generated_request_id);
         }
+        $('#edit_supplier_id').select2().select2("val", data[0].supplier_id);
         $('#edit_other_details').modal('show');
     }
 

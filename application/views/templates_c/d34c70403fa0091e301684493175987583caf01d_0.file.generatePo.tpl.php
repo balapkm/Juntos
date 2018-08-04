@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-23 22:50:09
+/* Smarty version 3.1.30, created on 2018-08-04 19:16:36
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b05a2c9223cc9_27036317',
+  'unifunc' => 'content_5b65ae3c7746d4_26119673',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1527095929,
+      1 => 1533390347,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b05a2c9223cc9_27036317 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b65ae3c7746d4_26119673 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -505,22 +505,44 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 		    <div class="modal-body">
 		    	<div class="row">
-			    	<div class="col-lg-4">
+			    	<div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">PO Date</label>
 		                  <input type="text" class="form-control" id="edit_po_date" ng-model="editOtherDetails.po_date" placeholder="Choose Po Date">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Delivery Date</label>
 		                  <input type="text" class="form-control" id="edit_delivery_date" ng-model="editOtherDetails.delivery_date" placeholder="Choose Delivery Date">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Order Reference</label>
 		                  <input type="text" class="form-control" id="edit_order_reference" ng-model="editOtherDetails.order_reference" placeholder="Enter Order Reference" ng-change="editOtherDetails.order_reference = editOtherDetails.order_reference.toUpperCase()">
+		                </div>
+		            </div>
+		            <div class="col-lg-6">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Supplier Name</label>
+		                  <select class="form-control select2" style="width: 100%;" id="edit_supplier_id" ng-model="editOtherDetails.supplier_id">
+		                  	<option value="">Choose Supplier Name</option>
+	                  	  	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+		                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+		                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                  </select>
 		                </div>
 		            </div>
 	            </div>
