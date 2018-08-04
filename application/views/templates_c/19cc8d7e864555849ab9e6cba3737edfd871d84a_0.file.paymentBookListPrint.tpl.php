@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-17 18:15:37
+/* Smarty version 3.1.30, created on 2018-08-04 20:53:11
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2657f1616565_56130961',
+  'unifunc' => 'content_5b65c4dfb1eaf8_78997355',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19cc8d7e864555849ab9e6cba3737edfd871d84a' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl',
-      1 => 1529126174,
+      1 => 1533396184,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2657f1616565_56130961 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b65c4dfb1eaf8_78997355 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <h2 class="text-center">Payment Book</h2>
@@ -30,6 +30,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
 ?>
 	<div style="margin-top: 50px;">
+		<?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 		<?php if ($_smarty_tpl->tpl_vars['k1']->value != '0000-00-00') {?>
 		<h5><b>Payable Date : <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['k1']->value,"%d-%m-%Y");?>
  | Supplier Name : <?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_name"];?>
@@ -40,6 +41,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
  | Supplier Name : <?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_name"];?>
  | Origin : <?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["origin"];?>
 </b></h5>
+		<?php }?>
 		<?php }?>
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			<?php $_smarty_tpl->_assignInScope('totalAmount', 0);
@@ -346,6 +348,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
 		            <tbody>
 		            	<?php
@@ -382,6 +385,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
 		            </tbody>
+		            <?php }?>
 		            <?php }?>
 	        <?php
 }

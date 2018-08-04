@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-23 22:15:34
+/* Smarty version 3.1.30, created on 2018-08-04 20:51:20
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2e792eb81529_98456012',
+  'unifunc' => 'content_5b65c4707d7313_09617769',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1529772310,
+      1 => 1533396062,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2e792eb81529_98456012 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b65c4707d7313_09617769 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars['v1']->value) {
 ?>
 	<div style="overflow-x:auto;margin-top: 50px;">
+		<?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 		<?php if ($_smarty_tpl->tpl_vars['k1']->value != '0000-00-00') {?>
 		<h5>
 			<b>Payable Date : <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['k1']->value,"%d-%m-%Y");?>
@@ -55,6 +56,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 ","supplier_id":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_id"];?>
 "})'>Covering Letter</a>
 		</h5>
+		<?php }?>
 		<?php }?>
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			<?php $_smarty_tpl->_assignInScope('totalAmount', 0);
@@ -391,6 +393,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 	        		<?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
 		    		<tbody>
 		                <tr style="font-weight: bold;">
@@ -416,6 +419,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 				        </tr>
 		            </tbody>
+		            <?php }?>
 		            <?php }?>
             <?php
 }

@@ -1,5 +1,6 @@
 [[foreach from=$result key=k1 item=v1]]
 	<div style="overflow-x:auto;margin-top: 50px;">
+		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>
 			<b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
@@ -14,6 +15,7 @@
 			</b>
 			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 		</h5>
+		[[/if]]
 		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
@@ -243,6 +245,7 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
+		            [[if !empty($v1['paymentBookList'])]]
 	        		[[if $k2 eq 'chequeNumberDetails']]
 		    		<tbody>
 		                <tr style="font-weight: bold;">
@@ -259,6 +262,7 @@
 				        	<td>[[($totalAmount - $v2[0].cheque_amount)|number_format:2]]</td>
 				        </tr>
 		            </tbody>
+		            [[/if]]
 		            [[/if]]
             [[/foreach]]
 		</table>

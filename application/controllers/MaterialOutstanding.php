@@ -161,7 +161,9 @@ class MaterialOutstanding extends CI_Controller
 			{
 				$advancePaymentDetails[] = $value;
 			}
-			// print_r($advancePaymentDetails);exit;
+
+			$po_data = $this->PaymentBookQuery->getPODetails($this->data['checkEditBoxBillOutStandingArray'][0]);
+
 			$data = $this->PoGenerateQuery->getPoDataAsPerId($this->data['checkEditBoxBillOutStandingArray']);
 			$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
 			foreach ($data as $key => $value) {
@@ -190,6 +192,11 @@ class MaterialOutstanding extends CI_Controller
 				unset($this->data['checkEditBoxBillOutStandingArray']);
 				$this->PoGenerateQuery->update_po_generated_request_details($this->data);
 			}
+			$data = array();
+			$data['payable_month'] = $lastDateOfMonth;
+			$data['unit'] = $po_data[0]['unit'];
+			$data['supplier_id'] = $po_data[0]['supplier_id'];
+			$this->PaymentBookQuery->insert_cheque_number_details($data);
 			return true;
 		}
 	}

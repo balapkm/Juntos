@@ -1,10 +1,12 @@
 <h2 class="text-center">Payment Book</h2>
 [[foreach from=$result key=k1 item=v1]]
 	<div style="margin-top: 50px;">
+		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5><b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[else]]
 		<h5><b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
+		[[/if]]
 		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
@@ -210,6 +212,7 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
+		            [[if !empty($v1['paymentBookList'])]]
 		            [[if $k2 eq 'chequeNumberDetails']]
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
@@ -228,6 +231,7 @@
 				        </tr>
 				        [[/foreach]]
 		            </tbody>
+		            [[/if]]
 		            [[/if]]
 	        [[/foreach]]
 		</table>

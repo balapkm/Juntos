@@ -41,6 +41,18 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function getPODetails($id)
+    {
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    `po_generated_request_details` 
+                WHERE
+                    po_generated_request_id =".$id;
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function insert_debit_note_details($data){
         $data['created_date'] = date('Y-m-d');
         return $this->db->insert('debit_note_details',$data);
