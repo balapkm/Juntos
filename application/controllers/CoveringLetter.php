@@ -67,7 +67,7 @@ class CoveringLetter extends CI_Controller
 		$data       = $this->PaymentStatementQuery->getCoverLetterData($this->data);
 		$extraData  = $this->PaymentStatementQuery->getExtraBillAmountData($this->data);
 		$chequeData = $this->PaymentStatementQuery->getChequeBillAmountData($this->data);
-		$advancePaymentDetails = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data);
+		$advancePaymentDetails = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		
 		$po_number_array = array();
 		foreach ($data as $key => $value) 
@@ -77,10 +77,9 @@ class CoveringLetter extends CI_Controller
 			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			$po_number_array[]         = $data[$key]['po_number'];
 		}
-
 		if(count($data) == 0)
 		{
-			return false;
+			echo "<script>alert('No Data found');window.close();</script>";exit;
 		}
 
 		foreach ($advancePaymentDetails as $key => $value) 
@@ -96,7 +95,6 @@ class CoveringLetter extends CI_Controller
 		$finalResponse['extraData']  = $extraData;
 		$finalResponse['chequeData'] = $chequeData;
 		$finalResponse['advancePaymentData'] = $advancePaymentDetails;
-
 		$template_name = 'CoveringLetterPrint_download.tpl';
 
 		$folder_name = realpath(APPPATH."../assets/po_html");

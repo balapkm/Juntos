@@ -100,25 +100,25 @@ class PaymentBook extends CI_Controller
 				}
 				else
 				{
-					$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
-					$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-					$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-					$result[$value['payable_month']]['origin']        = $value['origin'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']]."_".$value['supplier_id']['supplier_name'] = $value['supplier_name'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 				}
 			}
 			else
 			{
-				$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
-				$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-				$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-				$result[$value['payable_month']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 			}
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['debitNoteList'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
 		}
 
 		$advancePaymentDetails = array();
@@ -165,10 +165,11 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
 
 		$finalResponse['result'] = $result;
+		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -348,18 +349,18 @@ class PaymentBook extends CI_Controller
 				}
 				else
 				{
-					$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
-					$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-					$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-					$result[$value['payable_month']]['origin']        = $value['origin'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']]."_".$value['supplier_id']['supplier_name'] = $value['supplier_name'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+					$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 				}
 			}
 			else
 			{
-				$result[$value['payable_month']]['paymentBookList'][$value['bill_number']][] = $value;
-				$result[$value['payable_month']]['supplier_name'] = $value['supplier_name'];
-				$result[$value['payable_month']]['supplier_id']   = $value['supplier_id'];
-				$result[$value['payable_month']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 			}
 		}
 

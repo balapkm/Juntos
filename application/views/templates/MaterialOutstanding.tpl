@@ -234,7 +234,7 @@
 			                          <td>[[$v.full_po_number]]</td>
 			                          <td style="widtd: 100px">[[$v.po_date]]</td>
 			                          <td>[[$v.material_master_name]]</td>
-			                          <td>[[$v.qty]]</td>
+			                          <td>[[$v.received]]</td>
 			                          <td>[[$v.material_uom]]</td>
 			                        </tr>
 			                        [[/foreach]]

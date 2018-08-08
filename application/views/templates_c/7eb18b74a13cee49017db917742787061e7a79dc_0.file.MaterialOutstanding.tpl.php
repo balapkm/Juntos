@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-18 21:28:12
+/* Smarty version 3.1.30, created on 2018-08-08 10:11:33
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b4f6394ed16c2_05987881',
+  'unifunc' => 'content_5b6a747d869217_71501037',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1531929466,
+      1 => 1533703275,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b4f6394ed16c2_05987881 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b6a747d869217_71501037 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -305,7 +305,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 </td>
 			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
 </td>
-			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
+			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['received'];?>
 </td>
 			                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>

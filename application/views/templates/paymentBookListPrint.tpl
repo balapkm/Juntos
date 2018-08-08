@@ -3,7 +3,8 @@
 	<div style="margin-top: 50px;">
 		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
-		<h5><b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
+		<h5>[[assign var="dateValue" value="_"|explode:$k1]]
+			<b>Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[else]]
 		<h5><b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[/if]]

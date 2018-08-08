@@ -3,9 +3,10 @@
 		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>
-			<b>Payable Date : [[$k1|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
+			[[assign var="dateValue" value="_"|explode:$k1]]
+			<b>Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
+			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[ $dateValue[0] ]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
+			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[ $dateValue[0] ]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 			</b>
 		</h5>
 		[[else]]
