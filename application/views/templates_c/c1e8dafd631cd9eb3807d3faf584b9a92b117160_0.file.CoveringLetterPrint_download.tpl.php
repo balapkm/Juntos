@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-26 23:42:30
+/* Smarty version 3.1.30, created on 2018-08-09 09:04:33
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b32820e8e4712_45112683',
+  'unifunc' => 'content_5b6bb649b3c2c7_74218428',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1530036746,
+      1 => 1530036768,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b32820e8e4712_45112683 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b6bb649b3c2c7_74218428 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <style>
@@ -154,7 +154,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 </td>	
 		          <td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v1']->value['bill_date'],"%d-%m-%Y");?>
 </td>
-		          <td align="right" ><b style="float: right;"><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['bill_amount'],2);?>
+		          <td align="right"><b><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['bill_amount'],2);?>
 </b></td>
 		        </tr>
 		        <?php

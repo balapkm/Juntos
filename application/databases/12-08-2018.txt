@@ -1,0 +1,6 @@
+INSERT INTO `sub_menu_details` (`sub_menu_name`, `sub_menu_link`, `sub_menu_icon`, `sub_menu_status`)
+VALUES ('Report', 'po_report', '', 'Y');
+
+INSERT INTO `menu_sub_menu_mapping_details` VALUES ('',2,1,10);
+
+INSERT INTO `component_details` VALUES ('',1,'PoReport','div1','','po_report', 'Y');
