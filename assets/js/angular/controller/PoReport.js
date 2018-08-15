@@ -6,6 +6,13 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		          cancelLabel: 'Clear'
 		      }
 		});
+		$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
+	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
+		});
+
+		$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
+		      $(this).val('');
+		});
 	},500)  
 
 	
@@ -27,14 +34,7 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		supplier_id : false
 	}
 
-	$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
-	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
-	});
-
-	$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
-	      $(this).val('');
-	});
-
+	
 	$scope.chageReportType = function(){
 		if($scope.po_report.report_type === "report_1"){
 			$scope.po_report_show = {
@@ -46,16 +46,16 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		}
 		if($scope.po_report.report_type === "report_2"){
 			$scope.po_report_show = {
-				division : false,
-				type : false,
+				division : true,
+				type : true,
 				date_range : true,
 				material_id : true
 			}
 		}
 		if($scope.po_report.report_type === "report_3"){
 			$scope.po_report_show = {
-				division : false,
-				type : false,
+				division : true,
+				type : true,
 				date_range : true,
 				material_id : false,
 				supplier_id : true
