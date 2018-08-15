@@ -22,6 +22,8 @@
 			              				<option value="report_1">Po Wise</option>
 			              				<option value="report_2">Material Wise</option>
 			              				<option value="report_3">Supplier Wise</option>
+			              				<option value="report_4">Order Ref Wise</option>
+			              				<option value="report_5">Tax Wise</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -74,6 +76,29 @@
 					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
 					                  	  [[/foreach]]
 					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4" ng-if="po_report_show.order_ref">
+					                <div class="form-group">
+					                  <label for="exampleInputPassword1">Order Reference</label>
+					                  <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref">
+					                </div>
+					            </div>
+					            <div class="col-lg-4"  ng-if="po_report_show.tax_type">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Tax Type</label>
+					                  <select class="form-control select2" style="width: 100%;" id="tax_type" ng-model="po_report.tax_type">
+					                  	  <option value="">Choose Tax Type</option>
+					                  	  <option value="CGST">CGST</option>
+					                  	  <option value="SGST">SGST</option>
+					                  	  <option value="IGST">IGST</option>
+					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4" ng-if="po_report_show.tax_type">
+					                <div class="form-group">
+					                  <label for="exampleInputPassword1">Tax Percentage</label>
+					                  <input type="text" class="form-control" placeholder="Enter Tax Percentage" id="tax_perc" ng-model="po_report.tax_perc">
 					                </div>
 					            </div>
 					        </div>

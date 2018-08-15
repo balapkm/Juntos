@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-12 22:57:53
+/* Smarty version 3.1.30, created on 2018-08-15 22:10:02
   from "/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b706e193616c0_21333722',
+  'unifunc' => 'content_5b74576215ab63_37363433',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '09483ff734008b9e9d6657423ef2cf75d0d63ce9' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl',
-      1 => 1534094871,
+      1 => 1534351072,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b706e193616c0_21333722 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b74576215ab63_37363433 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -46,6 +46,8 @@ function content_5b706e193616c0_21333722 (Smarty_Internal_Template $_smarty_tpl)
 			              				<option value="report_1">Po Wise</option>
 			              				<option value="report_2">Material Wise</option>
 			              				<option value="report_3">Supplier Wise</option>
+			              				<option value="report_4">Order Ref Wise</option>
+			              				<option value="report_5">Tax Wise</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -120,6 +122,29 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
 					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4" ng-if="po_report_show.order_ref">
+					                <div class="form-group">
+					                  <label for="exampleInputPassword1">Order Reference</label>
+					                  <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref">
+					                </div>
+					            </div>
+					            <div class="col-lg-4"  ng-if="po_report_show.tax_type">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Tax Type</label>
+					                  <select class="form-control select2" style="width: 100%;" id="tax_type" ng-model="po_report.tax_type">
+					                  	  <option value="">Choose Tax Type</option>
+					                  	  <option value="CGST">CGST</option>
+					                  	  <option value="SGST">SGST</option>
+					                  	  <option value="IGST">IGST</option>
+					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4" ng-if="po_report_show.tax_type">
+					                <div class="form-group">
+					                  <label for="exampleInputPassword1">Tax Percentage</label>
+					                  <input type="text" class="form-control" placeholder="Enter Tax Percentage" id="tax_perc" ng-model="po_report.tax_perc">
 					                </div>
 					            </div>
 					        </div>

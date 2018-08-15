@@ -68,6 +68,8 @@ class PoReportQuery extends CI_Model
                     supplier_details sd
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
+                    unit = '".$data['division']."' AND
+                    type = '".$data['type']."' AND
                     po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND
                     material_master_id = ".$data['material_id']." AND
                     outstanding_type = 'M'";
@@ -101,8 +103,80 @@ class PoReportQuery extends CI_Model
                     supplier_details sd
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
+                    unit = '".$data['division']."' AND
+                    type = '".$data['type']."' AND
                     po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND
                     prd.supplier_id = ".$data['supplier_id']." AND
+                    outstanding_type = 'M'";
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function fetch_po_report_4($data)
+    {
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date,
+                    sd.supplier_name,
+                    origin,
+                    order_reference,
+                    po_description,
+                    query,
+                    material_hsn_code,
+                    qty,
+                    material_uom,
+                    price,
+                    discount,
+                    CGST,
+                    SGST,
+                    IGST,
+                    delivery_date
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND
+                    unit = '".$data['division']."' AND
+                    type = '".$data['type']."' AND
+                    po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND
+                    prd.order_reference = '".$data['order_ref']."' AND
+                    outstanding_type = 'M'";
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function fetch_po_report_5($data)
+    {
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date,
+                    sd.supplier_name,
+                    origin,
+                    order_reference,
+                    po_description,
+                    query,
+                    material_hsn_code,
+                    qty,
+                    material_uom,
+                    price,
+                    discount,
+                    CGST,
+                    SGST,
+                    IGST,
+                    delivery_date
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND
+                    unit = '".$data['division']."' AND
+                    type = '".$data['type']."' AND
+                    po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND
+                    ".$data["tax_type"]." = ".$data["tax_perc"]." AND
                     outstanding_type = 'M'";
         $result  = $this->db->query($sql)->result_array();
         return $result;

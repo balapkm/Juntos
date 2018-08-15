@@ -70,6 +70,32 @@ class PoReport extends CI_Controller
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
+		if($this->data['report_type'] == "report_4"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_4($this->data);
+			if(count($data) == 0){
+				echo "<script>alert('No Data found');window.close();</script>";exit;
+			}
+			foreach ($data as $key => $value) {
+				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+		}
+
+		if($this->data['report_type'] == "report_5"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_5($this->data);
+			if(count($data) == 0){
+				echo "<script>alert('No Data found');window.close();</script>";exit;
+			}
+			foreach ($data as $key => $value) {
+				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+		}
+
 		array_unshift($data , $columArray);
 		header("Content-Disposition: attachment; filename=\"Report.xls\"");
 		header("Content-Type: application/vnd.ms-excel;");
