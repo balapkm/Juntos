@@ -1,11 +1,14 @@
 app.controller('PoReport',function($scope,validateService,commonService,httpService){
+	setTimeout(function(){
+		$('#datePicker').daterangepicker({
+		      autoUpdateInput: false,
+		      locale: {
+		          cancelLabel: 'Clear'
+		      }
+		});
+	},500)  
+
 	
-	$('#datePicker').daterangepicker({
-	      autoUpdateInput: false,
-	      locale: {
-	          cancelLabel: 'Clear'
-	      }
-	});
 
 	$scope.po_report = {
 		report_type : "report_1",
