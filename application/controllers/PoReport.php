@@ -41,7 +41,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_2"){
@@ -54,7 +54,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_3"){
@@ -67,7 +67,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_4"){
@@ -80,7 +80,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_5"){
@@ -93,7 +93,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		array_unshift($data , $columArray);
@@ -114,13 +114,13 @@ class PoReport extends CI_Controller
 		        ->setCellValue('C1', 'T.M. ABDUL RAHMAN & SONS ')
 		        ->setCellValue('D2', 'RANIPET');
 
-		$columns = array("A","B","C","D","E","F","G","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+		$columns = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
 
 		$spreadsheet->getDefaultStyle()->getFont()->setSize(9.9);
 		$spreadsheet->getDefaultStyle()->getFont()->setName('MS Sans Serif');
 
 		$getActiveSheet = $spreadsheet->getActiveSheet();
-		
+		// echo "<pre>";print_r($data);exit;
 		$rowCount       = 4;
 		foreach ($data as $key => $value) {
 			$count = 0;
