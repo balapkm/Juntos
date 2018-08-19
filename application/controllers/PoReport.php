@@ -97,16 +97,68 @@ class PoReport extends CI_Controller
 		}
 
 		array_unshift($data , $columArray);
-		header("Content-Disposition: attachment; filename=\"Report.xls\"");
-		header("Content-Type: application/vnd.ms-excel;");
-		header("Pragma: no-cache");
-		header("Expires: 0");
-		$out = fopen("php://output", 'w');
-		foreach ($data as $value)
-		{
-		    fputcsv($out, $value,"\t");
+
+		$spreadsheet = new Spreadsheet();
+
+		// Set document properties
+		$spreadsheet->getProperties()->setCreator('T.M. ABDUL RAHMAN & SONS')
+		        ->setLastModifiedBy('T.M. ABDUL RAHMAN & SONS')
+		        ->setTitle('Office 2007 XLSX Test Document')
+		        ->setSubject('Office 2007 XLSX Test Document')
+		        ->setDescription('T.M. ABDUL RAHMAN & SONS')
+		        ->setKeywords('T.M. ABDUL RAHMAN & SONS')
+		        ->setCategory('T.M. ABDUL RAHMAN & SONS');
+
+		// Add some data
+		$spreadsheet->setActiveSheetIndex(0)
+		        ->setCellValue('C1', 'T.M. ABDUL RAHMAN & SONS ')
+		        ->setCellValue('D2', 'RANIPET');
+
+		$columns = array("A","B","C","D","E","F","G","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+
+		$spreadsheet->getDefaultStyle()->getFont()->setSize(9.9);
+		$spreadsheet->getDefaultStyle()->getFont()->setName('MS Sans Serif');
+
+		$getActiveSheet = $spreadsheet->getActiveSheet();
+		
+		$rowCount       = 4;
+		foreach ($data as $key => $value) {
+			$count = 0;
+			foreach ($value as $k1 => $v1) {
+				if($key == 0)
+				$getActiveSheet->getStyle((string)($columns[$count].$rowCount))->getFont()->setBold(true);
+				$getActiveSheet->setCellValue((string)($columns[$count].$rowCount),$v1);
+				$count++;
+			}
+			$rowCount++;
 		}
-		fclose($out);
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="REPORT.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+		header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header('Pragma: public'); // HTTP/1.0
+
+		$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+		$writer->save('php://output');
+		exit;
+
+		// header("Content-Disposition: attachment; filename=\"Report.xls\"");
+		// header("Content-Type: application/vnd.ms-excel;");
+		// header("Pragma: no-cache");
+		// header("Expires: 0");
+		// $out = fopen("php://output", 'w');
+		// foreach ($data as $value)
+		// {
+		//     fputcsv($out, $value,"\t");
+		// }
+		// fclose($out);
 		// echo "<script>window.close();</script>";exit;
 	}
 }
