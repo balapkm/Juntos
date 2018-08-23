@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-03 22:44:30
+/* Smarty version 3.1.30, created on 2018-08-23 23:34:01
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b3baef69112f4_59832130',
+  'unifunc' => 'content_5b7ef7117b2c73_85751172',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1530597478,
+      1 => 1535047438,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b3baef69112f4_59832130 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b7ef7117b2c73_85751172 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -352,10 +352,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     	<td></td>
 	</tr> -->
     <tr>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['TCcolspanCalc']->value;?>
+</td>
      	<?php if ($_smarty_tpl->tpl_vars['TCcolspanCalc']->value > 7) {?>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
+	     	<?php if ($_smarty_tpl->tpl_vars['TCcolspanCalc']->value == 9) {?>
+	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
 "></td>
+	     	<?php } else { ?>
+	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
+"></td>
+	     	<?php }?>
      	<?php } else { ?>
      	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
 "></td>

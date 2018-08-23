@@ -199,9 +199,13 @@ table tr td, table tr th {
     	<td></td>
 	</tr> -->
     <tr>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$TCcolspanCalc]]</td>
      	[[if $TCcolspanCalc > 7]]
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.5)|round:0]]"></td>
+	     	[[if $TCcolspanCalc eq 9]]
+	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.4)|round:0]]"></td>
+	     	[[else]]
+	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.5)|round:0]]"></td>
+	     	[[/if]]
      	[[else]]
      	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.4)|round:0]]"></td>
      	[[/if]]
