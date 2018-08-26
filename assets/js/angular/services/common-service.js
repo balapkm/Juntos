@@ -23,7 +23,8 @@ app.service('commonService',function($http,$q){
 	this.number2text = function (value,currency) {
 		var currencyCode = {
 			"INR"  : "PAISE",
-			"EURO" : "CENTS"
+			"EURO" : "CENTS",
+			"USD"  : "CENTS"
 		};
 		
 		if(typeof currencyCode[currency] === 'undefined')

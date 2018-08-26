@@ -479,7 +479,7 @@
 		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <select class="form-control select2" style="width: 100%;" id="edit_supplier_id" ng-model="editOtherDetails.supplier_id">
+		                  <select class="form-control" style="width: 100%;" id="edit_supplier_id" ng-model="editOtherDetails.supplier_id">
 		                  	<option value="">Choose Supplier Name</option>
 	                  	  	[[foreach from=$supplier_entry key=k item=v]]
 		                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>

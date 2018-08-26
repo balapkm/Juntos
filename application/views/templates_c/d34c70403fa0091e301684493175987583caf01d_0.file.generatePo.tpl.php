@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-04 19:16:36
+/* Smarty version 3.1.30, created on 2018-08-26 19:48:18
   from "/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b65ae3c7746d4_26119673',
+  'unifunc' => 'content_5b82b6aa117933_70229007',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd34c70403fa0091e301684493175987583caf01d' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/generatePo.tpl',
-      1 => 1533390347,
+      1 => 1535293027,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b65ae3c7746d4_26119673 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b82b6aa117933_70229007 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -526,7 +526,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-6">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
-		                  <select class="form-control select2" style="width: 100%;" id="edit_supplier_id" ng-model="editOtherDetails.supplier_id">
+		                  <select class="form-control" style="width: 100%;" id="edit_supplier_id" ng-model="editOtherDetails.supplier_id">
 		                  	<option value="">Choose Supplier Name</option>
 	                  	  	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-26 23:22:25
+/* Smarty version 3.1.30, created on 2018-08-26 19:53:14
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b327d59342086_64283537',
+  'unifunc' => 'content_5b82b7d21f5d36_20128613',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1529244182,
+      1 => 1535293385,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b327d59342086_64283537 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b82b7d21f5d36_20128613 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -118,7 +118,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         			<td align="center" width="5%">S.No</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
                     <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-		         	<td align="center" width="10%">HSN CODE</td>
+		         	<td align="center" width="10%">HSN/SAC CODE</td>
                     <?php }?>
 		         	<td align="center" width="5%">QTY</td>
 		         	<td align="center" width="7%">UOM</td>
@@ -406,7 +406,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </b></h5>
                             <h5><b>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
 </b></h5>
-        					<h5><b>Query                :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['query'];?>
+        					<h5><b><?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['query'];?>
 </b></h5>
         				</div>
         			</td>

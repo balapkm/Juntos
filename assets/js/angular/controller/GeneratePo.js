@@ -315,7 +315,6 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         $scope.poEditFormData.IGST           = data.IGST;
         $('#po_modal').modal('show');
     }
-
     $scope.editOtherDetailsFn = function(data){
         $scope.editOtherDetails = {};
         $scope.editOtherDetails.po_date = data[0].po_date;
@@ -326,7 +325,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         for (var i = 0;i < data.length;i++) {
             $scope.editOtherDetails.po_ids.push(data[i].po_generated_request_id);
         }
-        $('#edit_supplier_id').select2().select2("val", data[0].supplier_id);
+        setTimeout(function(){$('#edit_supplier_id').select2().val(data[0].supplier_id).trigger('change.select2')},100);
         $('#edit_other_details').modal('show');
     }
 
@@ -551,7 +550,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     {
         // if(validateService.blank($scope.importOtherCharge['delivery_date'],"Please Choose delivery date","import_delivery_date")) return false;
         if(validateService.blank($scope.importOtherCharge['incoterms'],"Please Choose incoterms","import_incoterms")) return false;
-        if(validateService.blank($scope.importOtherCharge['query'],"Please Enter Query","import_query")) return false;
+        // if(validateService.blank($scope.importOtherCharge['query'],"Please Enter Query","import_query")) return false;
         if(validateService.blank($scope.importOtherCharge['payment_status'],"Please Choose payment Status","import_payment_status")) return false;
         if(validateService.blank($scope.importOtherCharge['Shipment'],"Please Choose Shipment","import_shipment")) return false;
 

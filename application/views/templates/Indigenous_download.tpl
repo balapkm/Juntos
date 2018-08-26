@@ -199,7 +199,7 @@ table tr td, table tr th {
     	<td></td>
 	</tr> -->
     <tr>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$TCcolspanCalc]]</td>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
      	[[if $TCcolspanCalc > 7]]
 	     	[[if $TCcolspanCalc eq 9]]
 	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="[[($TCcolspanCalc*0.4)|round:0]]"></td>
@@ -250,32 +250,6 @@ table tr td, table tr th {
 </table>
 <script>
 	[[literal]]
-	// (function () {
-
-	//     var getPositionAtCenter = function (element) {
-	//         var data = element.getBoundingClientRect();
-	//         return {
-	//             x: data.left + data.width / 2,
-	//             y: data.top + data.height / 2
-	//         };
-	//     };
-
-	//     var getDistanceBetweenElements = function (a, b) {
-	//         var aPosition = getPositionAtCenter(a);
-	//         var bPosition = getPositionAtCenter(b);
-	//         return Math.sqrt(
-	//         Math.pow(aPosition.x - bPosition.x, 2) + Math.pow(aPosition.y - bPosition.y, 2));
-	//     };
-
-	//     document.getElementById("result").style.height = (842 - getDistanceBetweenElements(document.getElementById("x"),
-	//     document.getElementById("y")))+"px";
-
-	//    //   document.getElementById("result").textContent = getDistanceBetweenElements(document.getElementById("x"),
- //    // document.getElementById("y"));
-	    
-	//     // document.getElementById("result").innerHTML = ;
-
-	// })();
 
 	var number = document.getElementById('GrandTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
@@ -284,7 +258,8 @@ table tr td, table tr th {
 	function number2text(value) {
 	    var currencyCode = {
 			"INR"  : "PAISE",
-			"EURO" : "CENTS"
+			"EURO" : "CENTS",
+			"USD"  : "CENTS"
 		};
 		
 		if(typeof currencyCode[currency] === 'undefined')

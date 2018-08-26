@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-07-03 22:44:53
+/* Smarty version 3.1.30, created on 2018-08-26 20:10:52
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b3baf0d9afec6_73730793',
+  'unifunc' => 'content_5b82bbf4333de0_30093397',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1530597460,
+      1 => 1535294449,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b3baf0d9afec6_73730793 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b82bbf4333de0_30093397 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,7 +58,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
 ?>
     <?php $_smarty_tpl->_assignInScope('DcolspanCalc', 5);
 ?>
-    <?php $_smarty_tpl->_assignInScope('TCcolspanCalc', 7);
+    <?php $_smarty_tpl->_assignInScope('TCcolspanCalc', 6);
 ?>
     <?php $_smarty_tpl->_assignInScope('OTHERPercGrandTotal', 0);
 ?>
@@ -98,9 +98,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
      	<?php }?>
      	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['qty'];?>
 </td>
-     	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
+     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
-     	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
+     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
 <br/>
      			<?php if ($_smarty_tpl->tpl_vars['v']->value['price_status'] != 'FINAL') {?>
@@ -139,7 +139,7 @@ $_prefixVariable2=ob_get_clean();
 $_smarty_tpl->_assignInScope('totalPriceValue', $_prefixVariable2);
 ?>
 
-     	<td width="10%" align="right" style="font:bold arial,helvetica,verdana; color:#000;"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue']->value,2);?>
+     	<td width="20%" align="right" style="font:bold arial,helvetica,verdana; color:#000;"><b><?php echo number_format($_smarty_tpl->tpl_vars['totalPriceValue']->value,2);?>
 </b></td>
 
      	
@@ -263,7 +263,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 "></td>
      	<?php }?>
 
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="2">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" colspan="3">TOTAL AMOUNT <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['currency'];?>
 </td>
      	<td align="right" style="font:normal arial,helvetica,verdana; color:#000;"><b><?php echo number_format((($_smarty_tpl->tpl_vars['GrandTotal']->value+$_smarty_tpl->tpl_vars['GrandTotal1']->value)-$_smarty_tpl->tpl_vars['ODiscountValue']->value),2);?>
 </b></td>
@@ -274,7 +274,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 	</tr>
 	<tr>
-		<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.6),0);?>
+		<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
 " style="border-left:1px solid #000;border-top: 1px solid #000">
 			<div style="float: left;text-align: left;margin-left: 10px;width: 100%">
 				<!-- <p>Delivery Date        :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['delivery_date'];?>
@@ -289,7 +289,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </p>
 			</div>
 		</td>
-     	<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
+     	<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
 " style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
 				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>

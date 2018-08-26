@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-23 23:34:01
+/* Smarty version 3.1.30, created on 2018-08-26 20:13:54
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b7ef7117b2c73_85751172',
+  'unifunc' => 'content_5b82bcaac64814_77647850',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1535047438,
+      1 => 1535294631,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b7ef7117b2c73_85751172 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b82bcaac64814_77647850 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -352,8 +352,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     	<td></td>
 	</tr> -->
     <tr>
-     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['TCcolspanCalc']->value;?>
-</td>
+     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
      	<?php if ($_smarty_tpl->tpl_vars['TCcolspanCalc']->value > 7) {?>
 	     	<?php if ($_smarty_tpl->tpl_vars['TCcolspanCalc']->value == 9) {?>
 	     	<td align="center" style="font:normal arial,helvetica,verdana; color:#000;" id="numberToWord" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
@@ -415,32 +414,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 <?php echo '<script'; ?>
 >
 	
-	// (function () {
-
-	//     var getPositionAtCenter = function (element) {
-	//         var data = element.getBoundingClientRect();
-	//         return {
-	//             x: data.left + data.width / 2,
-	//             y: data.top + data.height / 2
-	//         };
-	//     };
-
-	//     var getDistanceBetweenElements = function (a, b) {
-	//         var aPosition = getPositionAtCenter(a);
-	//         var bPosition = getPositionAtCenter(b);
-	//         return Math.sqrt(
-	//         Math.pow(aPosition.x - bPosition.x, 2) + Math.pow(aPosition.y - bPosition.y, 2));
-	//     };
-
-	//     document.getElementById("result").style.height = (842 - getDistanceBetweenElements(document.getElementById("x"),
-	//     document.getElementById("y")))+"px";
-
-	//    //   document.getElementById("result").textContent = getDistanceBetweenElements(document.getElementById("x"),
- //    // document.getElementById("y"));
-	    
-	//     // document.getElementById("result").innerHTML = ;
-
-	// })();
 
 	var number = document.getElementById('GrandTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
@@ -449,7 +422,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	function number2text(value) {
 	    var currencyCode = {
 			"INR"  : "PAISE",
-			"EURO" : "CENTS"
+			"EURO" : "CENTS",
+			"USD"  : "CENTS"
 		};
 		
 		if(typeof currencyCode[currency] === 'undefined')
