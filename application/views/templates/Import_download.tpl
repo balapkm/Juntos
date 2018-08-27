@@ -9,7 +9,7 @@ table td
 	border-bottom:1px solid #000;
 	border-right:1px solid #000;
 	padding:4px 6px;
-	font-size: 12px;
+	font-size: 14px;
 }
 </style>
 <body>
@@ -157,17 +157,17 @@ table td
 				<p>Incoterms            :    [[$importAdditionalCharges[0].incoterms]]</p>
 				<p>Payment Terms        :    [[$importAdditionalCharges[0].payment_terms]]</p>
 				<p>Shipment             :    [[$importAdditionalCharges[0].Shipment]]</p>
-				<p>Query                :    [[$importAdditionalCharges[0].query]]</p>
+				<p>[[$importAdditionalCharges[0].query]]</p>
 			</div>
 		</td>
      	<td align="center" colspan="[[($TCcolspanCalc*0.5)|round:0]]" style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>
@@ -182,7 +182,8 @@ table td
 	function number2text(value) {
 	    var currencyCode = {
 			"INR"  : "PAISE",
-			"EURO" : "CENTS"
+			"EURO" : "CENTS",
+			"USD"  : "CENTS"
 		};
 		
 		if(typeof currencyCode[currency] === 'undefined')

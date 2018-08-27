@@ -9,7 +9,7 @@ table td
     border-bottom:1px solid #000;
     border-right:1px solid #000;
     padding:4px 3px;
-    font-size: 12px;
+    font-size: 14px;
 
 }
 table tr td, table tr th {
@@ -51,10 +51,10 @@ table tr td, table tr th {
                 <tr>
                     <td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
                     </td>
-                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <td width="40%" style="border:0px;"><h1 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h1>
                     <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
-                    <h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
-                    <td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,Ranipet - 632-401</br>
+                    <h3 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h3></td>
+                    <td width="25%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
                     Tel : 91-4172-272470,271835</br>
                     Email : purchasedept@tmargroup.in </br>
                     Email : soles@tmargroup.in</font><br/><br/>

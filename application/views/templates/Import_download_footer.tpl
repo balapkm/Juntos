@@ -6,7 +6,7 @@
 <style>
 .own-table{
     width: 100%;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 td
@@ -60,7 +60,7 @@ td
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:80px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
+		         		<h5 style="float: right;margin:80px 20px 0px 20px;"><b>Authorised & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

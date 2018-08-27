@@ -44,7 +44,7 @@
         	<table class="own-table">
         		<tr>
         			<td class="own-td-1" width="40%"><b>To</b></td>
-		         	<td class="own-td-1" width="30%"><b>LH.Po.No</b></td>
+		         	<td class="own-td-1" width="30%"><b>Po.No</b></td>
 		         	<td class="own-td-1" width="30%">[[$searchPoData[0].full_po_number]]</td>
         		</tr>
         	</table>
@@ -79,7 +79,7 @@
         <tr>
         	<table class="own-table">
         		<tr style="font-weight: bold;">
-        			<td align="center" width="5%">S.No</td>
+        			<td align="center" width="5%">S.NO</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
                     [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 		         	<td align="center" width="10%">HSN/SAC CODE</td>
@@ -283,7 +283,7 @@
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorised & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>
