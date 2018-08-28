@@ -361,15 +361,15 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			title : "Edit Material Details",
 			button : "Update"
 		}
+
 		$scope.material_form_data = data;
-
-		if(data.state_code === "22")
-			$scope.showGst = false;
-		else
+		if(data.state_code === "33")
 			$scope.showGst = true;
-
+		else
+			$scope.showGst = false;
 		setTimeout(function(){
             $('#material_uom').select2().val(data.material_uom).trigger("change");
+            $('#group').select2().val(data.group).trigger("change");
             $('#material_name_select2').val(data.material_master_name);
             $('#supplier_name_select2').select2().val(data.supplier_id+"|"+data.state_code+"|"+data.supplier_status).trigger("change");
 	    },100);

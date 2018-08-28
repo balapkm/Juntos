@@ -74,22 +74,22 @@ table tr td, table tr th {
     </tr>
     <tr>
         <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
-        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
+        <td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].full_po_number]]</td>
     </tr>
     <tr>
         <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">M/s.[[$searchPoData[0].supplier_name]]</td>
-        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
+        <td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].po_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
     <tr>
         <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$searchPoData[0].origin]]</td>
-        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
+        <td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].order_reference]]</td>
     </tr>
     <tr>
         <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal; arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><b>GSTIN : [[$searchPoData[0].gst_no]]</b></td>
-        <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
+        <td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
         <td colspan="[[($OTCcolspanCalc*0.3)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
     [[if $type neq 'Indigenous']]
@@ -108,9 +108,17 @@ table tr td, table tr th {
     [[else]]
     <tr>
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
-        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+
         [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
+        [[if $searchPoData[0]['state_code'] eq 33]]
+        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        [[/if]]
+        [[if $searchPoData[0]['state_code'] neq 33]]
+        <td align="center" width="30%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        [[/if]]
+        [[/if]]
+        [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN/SAC CODE</td>
         [[/if]]
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
         <td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-26 20:13:54
+/* Smarty version 3.1.30, created on 2018-08-28 22:46:23
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b82bcaac64814_77647850',
+  'unifunc' => 'content_5b8583674ba408_36665185',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1535294631,
+      1 => 1535476563,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b82bcaac64814_77647850 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b8583674ba408_36665185 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@ table td
 	border-bottom:1px solid #000;
 	border-right:1px solid #000;
 	padding:4px 3px;
-	font-size: 12px;
+	font-size: 14px;
 
 }
 table tr td, table tr th {
@@ -81,14 +81,32 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
     <tr >
 		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-     		<div style="text-align: left;">
-                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 
-            </div>
-            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+	     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	     		<div style="text-align: left;">
+	                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+	            </div>
+
+	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
 </div>
-     	</td>
+	     	</td>
+	    <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	     		<div style="text-align: left;">
+	                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+
+	            </div>
+
+	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+</div>
+	     	</td>
+	    <?php }?>
+	    <?php }?>
+
      	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
          	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
          	<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+1);
@@ -227,14 +245,22 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 ?>
     <tr>
 		<td width="5%" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
-     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+	 		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+	     		<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
 </td>
+	     	<?php }?>
+	     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+	     		<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+</td>
+	     	<?php }?>
+     	<?php }?>
      	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
      	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['v']->value['hsn_code'];?>
 </td>
      	<?php }?>
      	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
      	<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] == 'AMOUNT') {?>
      		<?php ob_start();
 echo $_smarty_tpl->tpl_vars['v']->value['amount'];
@@ -248,7 +274,7 @@ $_prefixVariable5=ob_get_clean();
 $_smarty_tpl->_assignInScope('other_total_AMOUNT', $_prefixVariable5);
 ?>
      	<?php }?>
-     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
+     	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      		<?php if ($_smarty_tpl->tpl_vars['v']->value['amount_type'] != 'AMOUNT') {?> <?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
  % <br/><?php }?>
      		<?php echo number_format($_smarty_tpl->tpl_vars['other_total_AMOUNT']->value,2);?>
@@ -377,21 +403,21 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </td>
 	</tr>
 	<tr>
-		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.6),0);?>
+		<td colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
 " style="border-left:1px solid #000;border-top: 1px solid #000">
 			<h4><b>Terms & Condition :</b></h4>
 			<ul>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Please quote our purchase order number on the invoice.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
-			<li style="font:bold arial,helvetica,verdana; color:#000;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+			<li style="font:bold arial,helvetica,verdana; color:#000;">Replacement for damages and defects required.We reserved the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Freight to be paid as agreed between the parties.</li>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Failing to file a tax return on time.We reserved the right to deduct the tax AMOUNT from your payment.</li>
             <li style="font:bold arial,helvetica,verdana; color:#000;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
-			<li style="font:bold arial,helvetica,verdana; color:#000;">SUPPLY OF MATERIAL SHOULD PASS ALL TEST AS PER REACH/RCS/RSC/GB PHTHALATES STANDARD</li>
+			<li style="margin-top: 3px;font-weight: bold;">SUPPLY OF MATERIAL SHOULD PASS ALL TEST AS PER REACH/RCS/RSC/GB PHTHALATES STANDARD.</li>
 			</ul>
 		</td>
-		<td  colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.4),0);?>
+		<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
 " style="border-top: 1px solid #000">
 			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
 			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
@@ -400,12 +426,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
 			<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>-->
 			<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
 		</td>

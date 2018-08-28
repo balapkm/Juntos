@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-26 20:11:43
+/* Smarty version 3.1.30, created on 2018-08-28 21:33:18
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b82bc278fdbf8_79019153',
+  'unifunc' => 'content_5b857246a96fa6_48899716',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1535293375,
+      1 => 1535379406,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b82bc278fdbf8_79019153 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b857246a96fa6_48899716 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -72,8 +72,8 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         <tr>
         	<table class="own-table">
         		<tr>
-        			<td class="own-td-1" width="40%">To</td>
-		         	<td class="own-td-1" width="30%">LH.Po.No</td>
+        			<td class="own-td-1" width="40%">TO</td>
+		         	<td class="own-td-1" width="30%">PO.NO</td>
 		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['full_po_number'];?>
 </td>
         		</tr>
@@ -115,7 +115,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         <tr>
         	<table class="own-table">
         		<tr style="font-weight: bold;">
-        			<td align="center" width="5%">S.No</td>
+        			<td align="center" width="5%">S.NO</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
 		         	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%">HSN/SAC CODE</td>
@@ -485,10 +485,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	        					<li style="font-weight: bold;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
 	        					<li style="margin-top: 3px;font-weight: bold;">Please quote our purchase order number on the invoice.</li>
 	        					<li style="margin-top: 3px;font-weight: bold;">The material will not be allowed inside our premises on non-working hours and holidays.</li>
-	        					<li style="margin-top: 3px;font-weight: bold;">Replacement of damages and defects required.We reserve the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">Replacement for damages and defects required.We reserved the right to cancel the orders which are delayed / defective.Any further claims from our buyer in respect to quality of the materials supplied by you and incidental expenses therefore will be entirely at your cost.</li>
 	        					<li style="margin-top: 3px;font-weight: bold;">Freight to be paid as agreed between the parties.</li>
 	        					<li style="margin-top: 3px;font-weight: bold;">Failing to file a tax return on time.We reserved the right to deduct the tax AMOUNT from your payment.</li>
 	        					<li style="margin-top: 3px;font-weight: bold;">The product supplied should meet reach (European) Standards.Non-compliance will result in penalties.</li>
+	        					<li style="margin-top: 3px;font-weight: bold;">SUPPLY OF MATERIAL SHOULD PASS ALL TEST AS PER REACH/RCS/RSC/GB PHTHALATES STANDARD.</li>
 	        				</ul>
         			</td>
         			
@@ -498,7 +499,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorised & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-26 19:53:14
+/* Smarty version 3.1.30, created on 2018-08-28 21:32:18
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b82b7d21f5d36_20128613',
+  'unifunc' => 'content_5b85720a1cdae1_93829717',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1535293385,
+      1 => 1535379406,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b82b7d21f5d36_20128613 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b85720a1cdae1_93829717 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -73,7 +73,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         	<table class="own-table">
         		<tr>
         			<td class="own-td-1" width="40%"><b>To</b></td>
-		         	<td class="own-td-1" width="30%"><b>LH.Po.No</b></td>
+		         	<td class="own-td-1" width="30%"><b>Po.No</b></td>
 		         	<td class="own-td-1" width="30%"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['full_po_number'];?>
 </td>
         		</tr>
@@ -115,7 +115,7 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
         <tr>
         	<table class="own-table">
         		<tr style="font-weight: bold;">
-        			<td align="center" width="5%">S.No</td>
+        			<td align="center" width="5%">S.NO</td>
 		         	<td align="center" width="20%">DESCRIPTION</td>
                     <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
 		         	<td align="center" width="10%">HSN/SAC CODE</td>
@@ -417,7 +417,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorized & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorised & Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

@@ -42,12 +42,28 @@ table tr td, table tr th {
 
     <tr >
 		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$k+1]]</td>
-     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-     		<div style="text-align: left;">
-                [[$v.material_master_name]]
-            </div>
-            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
-     	</td>
+		[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+
+        [[if $searchPoData[0]['state_code'] eq 33]]
+	     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	     		<div style="text-align: left;">
+	                [[$v.material_master_name]]
+	            </div>
+
+	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
+	     	</td>
+	    [[/if]]
+        [[if $searchPoData[0]['state_code'] neq 33]]
+        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	     		<div style="text-align: left;">
+	                [[$v.material_master_name]]
+	            </div>
+
+	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
+	     	</td>
+	    [[/if]]
+	    [[/if]]
+
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
          	[[if $k eq 0]]
          	[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
@@ -132,18 +148,25 @@ table tr td, table tr th {
     [[foreach from=$otherAdditionalCharges key=k item=v]]
     <tr>
 		<td width="5%" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"></td>
-     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.name]]</td>
+		[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+	 		[[if $searchPoData[0]['state_code'] eq 33]]
+	     		<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.name]]</td>
+	     	[[/if]]
+	     	[[if $searchPoData[0]['state_code'] neq 33]]
+	     		<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.name]]</td>
+	     	[[/if]]
+     	[[/if]]
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
      	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.hsn_code]]</td>
      	[[/if]]
      	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
-     	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
+     	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;"></td>
      	[[if $v.amount_type eq 'AMOUNT']]
      		[[assign var=other_total_AMOUNT value=[[$v.amount]]]]
      	[[else]]
      		[[assign var=other_total_AMOUNT value=[[(($v.amount/100) * $OTHERPercGrandTotal )]]]]
      	[[/if]]
-     	<td width="10%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
+     	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
      		[[if $v.amount_type neq 'AMOUNT']] [[$v.amount]] % <br/>[[/if]]
      		[[$other_total_AMOUNT|number_format:2]]
      	</td>
@@ -216,7 +239,7 @@ table tr td, table tr th {
      	<td align="center" style="display: none;" id="currencyCode" >[[$searchPoData[0].currency]]</td>
 	</tr>
 	<tr>
-		<td colspan="[[($TCcolspanCalc*0.6)|round:0]]" style="border-left:1px solid #000;border-top: 1px solid #000">
+		<td colspan="[[($TCcolspanCalc*0.5)|round:0]]" style="border-left:1px solid #000;border-top: 1px solid #000">
 			<h4><b>Terms & Condition :</b></h4>
 			<ul>
 			<li style="font:bold arial,helvetica,verdana; color:#000;">Original invoice with 2 duplicate copies should be submitted at the time of delivering the goods.Products HSN code should be mentioned on the invoice.</li>
@@ -229,7 +252,7 @@ table tr td, table tr th {
 			<li style="margin-top: 3px;font-weight: bold;">SUPPLY OF MATERIAL SHOULD PASS ALL TEST AS PER REACH/RCS/RSC/GB PHTHALATES STANDARD.</li>
 			</ul>
 		</td>
-		<td align="center" colspan="[[($TCcolspanCalc*0.4)|round:0]]" style="border-top: 1px solid #000">
+		<td align="center" colspan="[[($TCcolspanCalc*0.5)|round:0]]" style="border-top: 1px solid #000">
 			<!--<h5 style="float: left;margin:80px 0px 0px 20px;"><b>Incharge</b></h5>
 			<h5 style="float: right;margin:80px 20px 0px 20px;"><b>For T.M.Abdul Rahman & Sons</b></h5>
 			</br>

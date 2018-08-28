@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-26 20:10:52
+/* Smarty version 3.1.30, created on 2018-08-28 21:32:25
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b82bbf4333de0_30093397',
+  'unifunc' => 'content_5b8572114a5e54_41384673',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1535294449,
+      1 => 1535379465,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b82bbf4333de0_30093397 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b8572114a5e54_41384673 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@ table td
 	border-bottom:1px solid #000;
 	border-right:1px solid #000;
 	padding:4px 6px;
-	font-size: 12px;
+	font-size: 14px;
 }
 </style>
 <body>
@@ -285,19 +285,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </p>
 				<p>Shipment             :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['Shipment'];?>
 </p>
-				<p>Query                :    <?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['query'];?>
+				<p><?php echo $_smarty_tpl->tpl_vars['importAdditionalCharges']->value[0]['query'];?>
 </p>
 			</div>
 		</td>
      	<td align="center" colspan="<?php echo round(($_smarty_tpl->tpl_vars['TCcolspanCalc']->value*0.5),0);?>
 " style="border-top: 1px solid #000">
      		<div style="width:40%;float:left;">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">Incharge</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;">Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">Incharge</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;">Signature</p>
 			</div>
 			<div style="width:60%;float:left">
-				<p style="font-weight:bold;color:#000;font-size:10px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:10px;margin-top: 20px;"> Authorized & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>
@@ -313,7 +313,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	function number2text(value) {
 	    var currencyCode = {
 			"INR"  : "PAISE",
-			"EURO" : "CENTS"
+			"EURO" : "CENTS",
+			"USD"  : "CENTS"
 		};
 		
 		if(typeof currencyCode[currency] === 'undefined')

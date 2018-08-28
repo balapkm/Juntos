@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-26 20:07:44
+/* Smarty version 3.1.30, created on 2018-08-28 22:45:02
   from "/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b82bb3869d788_33214842',
+  'unifunc' => 'content_5b8583167ee855_30807441',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cac4af7b50381dde7dce2f4011951eff193008b' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl',
-      1 => 1535294262,
+      1 => 1535476500,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b82bb3869d788_33214842 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b8583167ee855_30807441 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ table td
     border-bottom:1px solid #000;
     border-right:1px solid #000;
     padding:4px 3px;
-    font-size: 12px;
+    font-size: 14px;
 
 }
 table tr td, table tr th {
@@ -80,10 +80,10 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
                 <tr>
                     <td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
                     </td>
-                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
+                    <td width="40%" style="border:0px;"><h1 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h1>
                     <!-- <h6 style="font-weight: normal;margin: 0px;">MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</h6></td> -->
-                    <h6 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h6></td>
-                    <td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,Ranipet - 632-401</br>
+                    <h3 style="font-weight: normal;margin: 0px;">FINISHED LEATHER & SHOES</h3></td>
+                    <td width="25%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
                     Tel : 91-4172-272470,271835</br>
                     Email : purchasedept@tmargroup.in </br>
                     Email : soles@tmargroup.in</font><br/><br/>
@@ -104,7 +104,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
     <tr>
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">To</td>
-        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.2),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;">Po.No</td>
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['full_po_number'];?>
@@ -114,7 +114,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">M/s.<?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_name'];?>
 </td>
-        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.2),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;">Date</td>
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['po_date'],"%d-%m-%Y");?>
@@ -124,7 +124,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['origin'];?>
 </td>
-        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.2),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;">OrderRef</td>
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;"><?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['order_reference'];?>
@@ -134,7 +134,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.4),0);?>
 " style="font:normal; arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><b>GSTIN : <?php echo $_smarty_tpl->tpl_vars['searchPoData']->value[0]['gst_no'];?>
 </b></td>
-        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
+        <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.2),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
         <td colspan="<?php echo round(($_smarty_tpl->tpl_vars['OTCcolspanCalc']->value*0.3),0);?>
 " style="font:normal arial,helvetica,verdana; color:#000;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['searchPoData']->value[0]['delivery_date'],"%d-%m-%Y");?>
@@ -156,9 +156,17 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
     <?php } else { ?>
     <tr>
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
-        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+
         <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN CODE</td>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+        <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+        <td align="center" width="30%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        <?php }?>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+        <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN/SAC CODE</td>
         <?php }?>
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">QTY</td>
         <td align="center" width="7%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">UOM</td>
