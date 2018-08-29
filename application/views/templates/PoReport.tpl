@@ -19,11 +19,9 @@
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Report type</label>
 					                  <select class="form-control" ng-change="chageReportType()" ng-model="po_report.report_type">
-			              				<option value="report_1">Po Wise</option>
+			              				<option value="report_1">Po Search</option>
 			              				<option value="report_2">Material Wise</option>
 			              				<option value="report_3">Supplier Wise</option>
-			              				<option value="report_4">Order Ref Wise</option>
-			              				<option value="report_5">Tax Wise</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -45,8 +43,8 @@
 			              				<option value="">Choose Type</option>
 			              				<option value="IMPORT">IMPORT</option>
 			              				<option value="INDIGENOUS">INDIGENOUS</option>
-			              				<option value="SAMPLE IMPORT">SAMPLE IMPORT</option>
-			              				<option value="SAMPLE INDIGENOUS">SAMPLE INDIGENOUS</option>
+			              				<option value="SAMPLE_IMPORT">SAMPLE IMPORT</option>
+			              				<option value="SAMPLE_INDIGENOUS">SAMPLE INDIGENOUS</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -105,6 +103,7 @@
 					        <div class="row">
 					        	<div class="col-lg-12 text-center">
 					                <div class="form-group">
+					                	<input type="button" ng-click="poViewAction()" class="btn btn-success" value="View">
 					                  <input type="button" ng-click="poDownloadAction()" class="btn btn-primary" value="Download">
 					                </div>
 					            </div>
@@ -115,6 +114,25 @@
 	      	</div>
 	    </div>
       <!-- /.box -->
+    </div>
+
+    <div class="row" ng-if="viewTable">
+    	<div class="col-lg-12">
+    		<div class="table-responsive">
+	    		<table id="example" class="table table-bordered table-striped">
+	                <thead>
+	                    <tr>
+	                      <th ng-repeat="x in viewTableData.columns">{{x}}</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr ng-repeat="x in viewTableData.data">
+	                      <td ng-repeat="(k,v) in x">{{v}}</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+    	</div>
     </div>
 </section>
 

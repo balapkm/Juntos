@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-15 22:10:02
+/* Smarty version 3.1.30, created on 2018-08-29 22:02:48
   from "/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b74576215ab63_37363433',
+  'unifunc' => 'content_5b86cab0048126_36008530',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '09483ff734008b9e9d6657423ef2cf75d0d63ce9' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl',
-      1 => 1534351072,
+      1 => 1535560362,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b74576215ab63_37363433 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b86cab0048126_36008530 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -43,11 +43,9 @@ function content_5b74576215ab63_37363433 (Smarty_Internal_Template $_smarty_tpl)
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Report type</label>
 					                  <select class="form-control" ng-change="chageReportType()" ng-model="po_report.report_type">
-			              				<option value="report_1">Po Wise</option>
+			              				<option value="report_1">Po Search</option>
 			              				<option value="report_2">Material Wise</option>
 			              				<option value="report_3">Supplier Wise</option>
-			              				<option value="report_4">Order Ref Wise</option>
-			              				<option value="report_5">Tax Wise</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -69,8 +67,8 @@ function content_5b74576215ab63_37363433 (Smarty_Internal_Template $_smarty_tpl)
 			              				<option value="">Choose Type</option>
 			              				<option value="IMPORT">IMPORT</option>
 			              				<option value="INDIGENOUS">INDIGENOUS</option>
-			              				<option value="SAMPLE IMPORT">SAMPLE IMPORT</option>
-			              				<option value="SAMPLE INDIGENOUS">SAMPLE INDIGENOUS</option>
+			              				<option value="SAMPLE_IMPORT">SAMPLE IMPORT</option>
+			              				<option value="SAMPLE_INDIGENOUS">SAMPLE INDIGENOUS</option>
 			              			  </select>
 					                </div>
 					            </div>
@@ -151,6 +149,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					        <div class="row">
 					        	<div class="col-lg-12 text-center">
 					                <div class="form-group">
+					                	<input type="button" ng-click="poViewAction()" class="btn btn-success" value="View">
 					                  <input type="button" ng-click="poDownloadAction()" class="btn btn-primary" value="Download">
 					                </div>
 					            </div>
@@ -161,6 +160,25 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	      	</div>
 	    </div>
       <!-- /.box -->
+    </div>
+
+    <div class="row" ng-if="viewTable">
+    	<div class="col-lg-12">
+    		<div class="table-responsive">
+	    		<table id="example" class="table table-bordered table-striped">
+	                <thead>
+	                    <tr>
+	                      <th ng-repeat="x in viewTableData.columns">{{x}}</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr ng-repeat="x in viewTableData.data">
+	                      <td ng-repeat="(k,v) in x">{{v}}</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+    	</div>
     </div>
 </section>
 

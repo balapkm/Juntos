@@ -1,5 +1,6 @@
 app.controller('PoReport',function($scope,validateService,commonService,httpService){
 	setTimeout(function(){
+		$('.select2').select2();
 		$('#datePicker').daterangepicker({
 		      autoUpdateInput: false,
 		      locale: {
@@ -7,15 +8,13 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		      }
 		});
 		$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
-	      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
+		      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 		});
 
 		$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		});
 	},500)  
-
-	
 
 	$scope.po_report = {
 		report_type : "report_1",
@@ -33,10 +32,10 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		division : true,
 		type : true,
 		date_range : true,
-		material_id : false,
-		supplier_id : false,
-		order_ref   : false,
-		tax_type : false
+		material_id : true,
+		supplier_id : true,
+		order_ref   : true,
+		tax_type : true
 	}
 
 	
@@ -46,17 +45,17 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 				division : true,
 				type : true,
 				date_range : true,
-				material_id : false,
-				supplier_id : false,
-				order_ref : false,
-				tax_type : false
+				material_id : true,
+				supplier_id : true,
+				order_ref : true,
+				tax_type : true
 			}
 		}
 		if($scope.po_report.report_type === "report_2"){
 			$scope.po_report_show = {
-				division : true,
-				type : true,
-				date_range : true,
+				division : false,
+				type : false,
+				date_range : false,
 				material_id : true,
 				supplier_id : false,
 				order_ref : false,
@@ -65,37 +64,16 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		}
 		if($scope.po_report.report_type === "report_3"){
 			$scope.po_report_show = {
-				division : true,
-				type : true,
-				date_range : true,
+				division : false,
+				type : false,
+				date_range : false,
 				material_id : false,
 				supplier_id : true,
 				order_ref : false,
 				tax_type : false
 			}
 		}
-		if($scope.po_report.report_type === "report_4"){
-			$scope.po_report_show = {
-				division : true,
-				type : true,
-				date_range : true,
-				material_id : false,
-				supplier_id : false,
-				order_ref : true,
-				tax_type : false
-			}
-		}
-		if($scope.po_report.report_type === "report_5"){
-			$scope.po_report_show = {
-				division : true,
-				type : true,
-				date_range : true,
-				material_id : false,
-				supplier_id : false,
-				order_ref : false,
-				tax_type : true
-			}
-		}
+		
 		setTimeout(function(){
 			$('.select2').select2();
 			$('#datePicker').daterangepicker({
@@ -116,27 +94,101 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 
 	$scope.poDownloadAction = function(){
 		$scope.po_report.date_range = $("#datePicker").val();
-		if(validateService.blank($scope.po_report['division'],"Please Choose division","division")) return false;
-		if(validateService.blank($scope.po_report['type'],"Please Choose type","type")) return false;
-		if(validateService.blank($scope.po_report['date_range'],"Please Choose date","datePicker1")) return false;
-		
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
 		}
 		if($scope.po_report.report_type === "report_3"){
 			if(validateService.blank($scope.po_report['supplier_id'],"Please Choose supplier","supplier_id")) return false;
 		}
-		if($scope.po_report.report_type === "report_4"){
-			if(validateService.blank($scope.po_report['order_ref'],"Please Enter Order Reference","order_ref")) return false;
-		}
-		if($scope.po_report.report_type === "report_5"){
-			if(validateService.blank($scope.po_report['tax_type'],"Please Choose tax type","tax_type")) return false;
-			if(validateService.blank($scope.po_report['tax_perc'],"Please enter tax percentage","tax_perc")) return false;
-		}
+		
+		$scope.po_report['action'] = "download";
 		var url = "PoReport/poDownloadAction?";
 		for(var i in $scope.po_report){
 			url += i+"="+$scope.po_report[i]+"&";
 		}
 		window.open(url);
+	}
+
+	var dataTableVariable;
+	$scope.loadTable = function(){
+		dataTableVariable = $('#example').DataTable({
+            iDisplayLength: 100,
+            dom: 'Brfrtip',
+            buttons: [
+                'copy', 
+                'csv',
+                'excel',
+                {
+		            extend: "print",
+		            customize: function(win)
+		            {
+		 
+		                var last = null;
+		                var current = null;
+		                var bod = [];
+		 
+		                var css = '@page { size: landscape; }',
+		                    head = win.document.head || win.document.getElementsByTagName('head')[0],
+		                    style = win.document.createElement('style');
+		 
+		                style.type = 'text/css';
+		                style.media = 'print';
+		 
+		                if (style.styleSheet)
+		                {
+		                  style.styleSheet.cssText = css;
+		                }
+		                else
+		                {
+		                  style.appendChild(win.document.createTextNode(css));
+		                }
+		                head.appendChild(style);
+		         	}
+		      	},
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                }
+            ]
+        });
+	}
+
+	$scope.viewTable = false;
+	setTimeout(function(){
+        $scope.loadTable();
+    },250);
+	$scope.poViewAction = function(){
+		$scope.po_report.date_range = $("#datePicker").val();
+		if($scope.po_report.report_type === "report_2"){
+			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
+		}
+		if($scope.po_report.report_type === "report_3"){
+			if(validateService.blank($scope.po_report['supplier_id'],"Please Choose supplier","supplier_id")) return false;
+		}
+		dataTableVariable.destroy();
+		$scope.po_report['action']  = "view";
+		commonService.showLoader();
+		$scope.viewTable = false;
+        var service_details = {
+            method_name : "poDownloadAction",
+            controller_name : "PoReport",
+            data : JSON.stringify($scope.po_report)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            commonService.hideLoader();
+            setTimeout(function(){
+		        $scope.loadTable();
+            },250);
+            if(!data)
+            {
+	           validateService.displayMessage('error','No data found',""); 
+	        }
+	        else
+	        {
+	        	$scope.viewTable = true;
+	            $scope.viewTableData = data;
+	        }
+        });
 	}
 })

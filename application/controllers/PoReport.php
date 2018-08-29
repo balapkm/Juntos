@@ -30,13 +30,21 @@ class PoReport extends CI_Controller
 	}
 
 	public function poDownloadAction(){
-		$this->data = $_GET;
+		if(empty($this->data))
+			$this->data = $_GET;
+
 		if($this->data['report_type'] == "report_1"){
 			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_1($this->data);
 			if(count($data) == 0){
-				echo "<script>alert('No Data found');window.close();</script>";exit;
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
 			}
+			
 			foreach ($data as $key => $value) {
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
@@ -45,56 +53,33 @@ class PoReport extends CI_Controller
 		}
 
 		if($this->data['report_type'] == "report_2"){
-			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_2($this->data);
 			if(count($data) == 0){
-				echo "<script>alert('No Data found');window.close();</script>";exit;
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
 			}
-			foreach ($data as $key => $value) {
-				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
-				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
-			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("SUPPLIER_NAME","SUPPLIER_ADDRESS","CONTACT_NO","ORIGIN","GST NO","STATE_CODE","SUPPLIER_TAX_STATUS","SUPPLIER_STATUS","PAYMENT_TO","PAYMENT_TYPE");
 		}
 
 		if($this->data['report_type'] == "report_3"){
-			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_3($this->data);
 			if(count($data) == 0){
-				echo "<script>alert('No Data found');window.close();</script>";exit;
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
 			}
-			foreach ($data as $key => $value) {
-				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
-				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
-			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("MATERIAL_NAME","MATERIAL_HSN_CODE","GROUP","MATERIAL_UOM","PRICE","DISCOUNT","SGST","CGST","IGST","CURRENCY","PRICE_STATUS","DISCOUNT_PRICE_STATUS");
 		}
 
-		if($this->data['report_type'] == "report_4"){
-			$this->data['date_range'] = explode("/",$this->data['date_range']);
-			$data = $this->PoReportQuery->fetch_po_report_4($this->data);
-			if(count($data) == 0){
-				echo "<script>alert('No Data found');window.close();</script>";exit;
-			}
-			foreach ($data as $key => $value) {
-				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
-				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
-			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
-		}
-
-		if($this->data['report_type'] == "report_5"){
-			$this->data['date_range'] = explode("/",$this->data['date_range']);
-			$data = $this->PoReportQuery->fetch_po_report_5($this->data);
-			if(count($data) == 0){
-				echo "<script>alert('No Data found');window.close();</script>";exit;
-			}
-			foreach ($data as $key => $value) {
-				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
-				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
-			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","QUERY","HSN CODE","QTY","UOM","PRICE","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
-		}
+		if($this->data['action'] == 'view')
+		return array("data"=>$data,"columns"=>$columArray);
 
 		array_unshift($data , $columArray);
 
