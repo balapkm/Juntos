@@ -20,7 +20,6 @@ class PoReportQuery extends CI_Model
                     order_reference,
                     material_name,
                     po_description,
-                    query,
                     material_hsn_code,
                     qty,
                     material_uom,
