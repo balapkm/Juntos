@@ -79,7 +79,13 @@
 					            <div class="col-lg-4" ng-if="po_report_show.order_ref">
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Order Reference</label>
-					                  <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref">
+					                  <!-- <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref"> -->
+					                  <select class="form-control select2" style="width: 100%;" id="order_ref" ng-model="po_report.order_ref">
+					                  	  <option value="">Choose Order Reference</option>
+					                  	  [[foreach from=$order_reference_details key=k item=v]]
+					                  		<option value="[[$v.order_reference]]">[[$v.order_reference]]</option>
+					                  	  [[/foreach]]
+					                  </select>
 					                </div>
 					            </div>
 					            <div class="col-lg-4"  ng-if="po_report_show.tax_type">

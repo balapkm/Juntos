@@ -81,6 +81,17 @@ class PoGenerateQuery extends CI_Model
         return $data;
     }
 
+    public function getOrderReferenceDetails(){
+         $sql = "SELECT 
+                    prd.order_reference
+                FROM
+                    po_generated_request_details prd
+                group by prd.order_reference";
+
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function getSupplierNameDetails(){
          $sql = "SELECT 
                     sd.supplier_name,

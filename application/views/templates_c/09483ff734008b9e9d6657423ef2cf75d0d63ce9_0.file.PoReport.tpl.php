@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-29 22:02:48
+/* Smarty version 3.1.30, created on 2018-08-31 22:56:51
   from "/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b86cab0048126_36008530',
+  'unifunc' => 'content_5b897a5b7f3365_38536617',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '09483ff734008b9e9d6657423ef2cf75d0d63ce9' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl',
-      1 => 1535560362,
+      1 => 1535736409,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b86cab0048126_36008530 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b897a5b7f3365_38536617 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -125,7 +125,24 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					            <div class="col-lg-4" ng-if="po_report_show.order_ref">
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Order Reference</label>
-					                  <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref">
+					                  <!-- <input type="text" class="form-control" placeholder="Enter Order Reference" id="order_ref" ng-model="po_report.order_ref"> -->
+					                  <select class="form-control select2" style="width: 100%;" id="order_ref" ng-model="po_report.order_ref">
+					                  	  <option value="">Choose Order Reference</option>
+					                  	  <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['order_reference_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['order_reference'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['order_reference'];?>
+</option>
+					                  	  <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+					                  </select>
 					                </div>
 					            </div>
 					            <div class="col-lg-4"  ng-if="po_report_show.tax_type">

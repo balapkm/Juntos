@@ -26,6 +26,7 @@ class PoReport extends CI_Controller
 	{
 		$this->data['material_name_details'] = $this->PoMasterEntryQuery->select_material_master();
 		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
+		$this->data['order_reference_details'] = $this->PoGenerateQuery->getOrderReferenceDetails();
 		return $this->mysmarty->view('PoReport.tpl',$this->data,TRUE);
 	}
 
