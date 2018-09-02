@@ -244,7 +244,7 @@ class GeneratePo extends CI_Controller
 			$footer_name   = 'footer_download.tpl';
 			$header_name   = 'header_download.tpl';
 		}
-
+		// print_r($this->data);exit;
 		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$this->data,TRUE));
 		file_put_contents($folder_name."/".$footername.".html",$this->mysmarty->view($footer_name,$this->data,TRUE));
 		file_put_contents($folder_name."/".$headername.".html",$this->mysmarty->view($header_name,$this->data,TRUE));

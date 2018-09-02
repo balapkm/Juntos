@@ -24,6 +24,7 @@ class PoReportQuery extends CI_Model
                     qty,
                     material_uom,
                     price,
+                    currency,
                     discount,
                     CGST,
                     SGST,

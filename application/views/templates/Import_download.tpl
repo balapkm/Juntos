@@ -167,7 +167,7 @@ table td
 			</div>
 			<div style="width:60%;float:left">
 				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>

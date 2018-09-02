@@ -98,37 +98,37 @@ table tr td, table tr th {
      	[[assign var=OTHERPercGrandTotal value=($OTHERPercGrandTotal + (($v.price* $v.qty) - $DISCOUNTTotalValue))]]
 
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-     	[[if $searchPoData[0]['state_code'] eq 33]]
-         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		[[$v.CGST]]% 
-         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
-         	</td>
-         	[[if $k eq 0]]
-         	[[assign var=TcolspanCalc value=$TcolspanCalc+2]]
-         	[[assign var=DcolspanCalc value=$DcolspanCalc+2]]
-         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+2]]
-         	[[/if]]
-         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		[[$v.SGST]]% 
-         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
-         	</td>
-     	[[/if]]
+	     	[[if $searchPoData[0]['state_code'] eq 33]]
+	         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		[[$v.CGST]]% 
+	         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
+	         	</td>
+	         	[[if $k eq 0]]
+	         	[[assign var=TcolspanCalc value=$TcolspanCalc+2]]
+	         	[[assign var=DcolspanCalc value=$DcolspanCalc+2]]
+	         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+2]]
+	         	[[/if]]
+	         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		[[$v.SGST]]% 
+	         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
+	         	</td>
+	     	[[/if]]
 
 
-     	[[if $searchPoData[0]['state_code'] neq 33]]
-     		[[if $k eq 0]]
-     		[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
-     		[[assign var=DcolspanCalc value=$DcolspanCalc+1]]
-     		[[assign var=TCcolspanCalc value=$TCcolspanCalc+1]]
-     		[[/if]]
-         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		[[$v.IGST]]% 
-         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
-         	</td>
-     	[[/if]]
+	     	[[if $searchPoData[0]['state_code'] neq 33]]
+	     		[[if $k eq 0]]
+	     		[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
+	     		[[assign var=DcolspanCalc value=$DcolspanCalc+1]]
+	     		[[assign var=TCcolspanCalc value=$TCcolspanCalc+1]]
+	     		[[/if]]
+	         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * $v.price ) * $v.qty]]]]
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		[[$v.IGST]]% 
+	         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
+	         	</td>
+	     	[[/if]]
      	[[/if]]
      	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
@@ -265,7 +265,7 @@ table tr td, table tr th {
 			</div>
 			<div style="width:60%;float:left">
 				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised Signature</p>
 			</div>
 			<div style="clear: both;"></div>
 		</td>

@@ -92,7 +92,7 @@ table tr td, table tr th {
         <td colspan="[[($OTCcolspanCalc*0.2)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">Delivery Date</td>
         <td colspan="[[($OTCcolspanCalc*0.4)|round:0]]" style="font:normal arial,helvetica,verdana; color:#000;">[[$searchPoData[0].delivery_date|date_format:"%d-%m-%Y"]]</td>
     </tr>
-    [[if $type neq 'Indigenous']]
+    [[if ($type neq 'Indigenous' AND $type neq 'Sample_Indigenous') ]]
     <tr>
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
         <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
@@ -125,13 +125,13 @@ table tr td, table tr th {
         <td align="center" width="8%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">PRICE</td>
         <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DISCOUNT</td>
         [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-        [[if $searchPoData[0]['state_code'] eq 33]]
-            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">CGST</td>
-            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">SGST</td>
-        [[/if]]
-        [[if $searchPoData[0]['state_code'] neq 33]]
-            <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">IGST</td>
-        [[/if]]
+            [[if $searchPoData[0]['state_code'] eq 33]]
+                <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">CGST</td>
+                <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">SGST</td>
+            [[/if]]
+            [[if $searchPoData[0]['state_code'] neq 33]]
+                <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">IGST</td>
+            [[/if]]
         [[/if]]
         <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">TOTAL <br/>AMOUNT</td>
     </tr>

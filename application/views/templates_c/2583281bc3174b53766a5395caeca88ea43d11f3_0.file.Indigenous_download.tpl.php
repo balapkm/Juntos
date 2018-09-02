@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-29 09:52:55
+/* Smarty version 3.1.30, created on 2018-09-02 12:58:29
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b861f9f62be43_79113418',
+  'unifunc' => 'content_5b8b911d6a51b3_65389709',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1535476622,
+      1 => 1535873282,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b861f9f62be43_79113418 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b8b911d6a51b3_65389709 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -157,55 +157,55 @@ if ($_smarty_tpl->tpl_vars['v']->value['discount_price_status'] != 'AMOUNT') {?>
 ?>
 
      	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+	     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+	         	<?php $_smarty_tpl->_assignInScope('CGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['CGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		<?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		<?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
 % 
-         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
+	         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['CGSTTotalValue']->value,2);?>
  ]
-         	</td>
-         	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
-         	<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+2);
+	         	</td>
+	         	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
+	         	<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+2);
 ?>
-         	<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+2);
+	         	<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+2);
 ?>
-         	<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+2);
+	         	<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+2);
 ?>
-         	<?php }?>
-         	<?php $_smarty_tpl->_assignInScope('SGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['SGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
+	         	<?php }?>
+	         	<?php $_smarty_tpl->_assignInScope('SGSTTotalValue', (($_smarty_tpl->tpl_vars['v']->value['SGST']/100)*(($_smarty_tpl->tpl_vars['v']->value['price']*$_smarty_tpl->tpl_vars['v']->value['qty'])-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value)));
 ?>
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		<?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		<?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
 % 
-         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
+	         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['SGSTTotalValue']->value,2);?>
  ]
-         	</td>
-     	<?php }?>
+	         	</td>
+	     	<?php }?>
 
 
-     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-     		<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
-     		<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+1);
+	     	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+	     		<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
+	     		<?php $_smarty_tpl->_assignInScope('TcolspanCalc', $_smarty_tpl->tpl_vars['TcolspanCalc']->value+1);
 ?>
-     		<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+1);
+	     		<?php $_smarty_tpl->_assignInScope('DcolspanCalc', $_smarty_tpl->tpl_vars['DcolspanCalc']->value+1);
 ?>
-     		<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+1);
+	     		<?php $_smarty_tpl->_assignInScope('TCcolspanCalc', $_smarty_tpl->tpl_vars['TCcolspanCalc']->value+1);
 ?>
-     		<?php }?>
-         	<?php ob_start();
+	     		<?php }?>
+	         	<?php ob_start();
 echo (($_smarty_tpl->tpl_vars['v']->value['IGST']/100)*$_smarty_tpl->tpl_vars['v']->value['price'])*$_smarty_tpl->tpl_vars['v']->value['qty'];
 $_prefixVariable2=ob_get_clean();
 $_smarty_tpl->_assignInScope('IGSTTotalValue', $_prefixVariable2);
 ?>
-         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-         		<?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
+	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+	         		<?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
 % 
-         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
+	         		</br>[ <?php echo number_format($_smarty_tpl->tpl_vars['IGSTTotalValue']->value,2);?>
  ]
-         	</td>
-     	<?php }?>
+	         	</td>
+	     	<?php }?>
      	<?php }?>
      	<?php ob_start();
 echo ($_smarty_tpl->tpl_vars['v']->value['qty']*$_smarty_tpl->tpl_vars['v']->value['price'])+$_smarty_tpl->tpl_vars['IGSTTotalValue']->value+$_smarty_tpl->tpl_vars['SGSTTotalValue']->value+$_smarty_tpl->tpl_vars['CGSTTotalValue']->value-$_smarty_tpl->tpl_vars['DISCOUNTTotalValue']->value;
