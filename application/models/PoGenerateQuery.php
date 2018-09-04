@@ -195,7 +195,7 @@ class PoGenerateQuery extends CI_Model
         return $data;
     }
 
-    public function getImportChargeUsingPoNumber($data)
+    public function getImportChargeUsingPoNumber($data,$status = 'Y')
     {
         $sql = "SELECT 
                     *
@@ -204,8 +204,9 @@ class PoGenerateQuery extends CI_Model
                 WHERE
                     unit = '".$data['unit']."' AND
                     type = '".$data['type']."' AND
-                    po_number = '".$data['po_number']."' AND
-                    YEAR(po_date) = '".$data['po_year']."'";
+                    po_number = '".$data['po_number']."'";
+        if($status == 'Y')
+        $sql .= "AND YEAR(po_date) = '".$data['po_year']."'";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;

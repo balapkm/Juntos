@@ -45,14 +45,26 @@ class PoReport extends CI_Controller
 					return false;
 				}
 			}
-			
 			foreach ($data as $key => $value) {
+
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
-				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+				
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+
+				$data[$key]['incoterms'] = "NIL";
+				$data[$key]['payment_terms'] = "NIL";
+				$data[$key]['Shipment'] = "NIL";
+				if($value['type'] == 'Import' || $value['type'] == 'Sample_Import'){
+					$importData = $this->PoGenerateQuery->getImportChargeUsingPoNumber($value,'N');
+					$data[$key]['incoterms'] = $importData[0]['incoterms'];
+					$data[$key]['payment_terms'] = $importData[0]['payment_terms'];
+					$data[$key]['Shipment'] = $importData[0]['Shipment'];
+				}
+
+				$data[$key]['po_number']    = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE","INCOTERMS","PAYMENT_TERMS","SHIPMENT");
 		}
 
 		if($this->data['report_type'] == "report_2"){
