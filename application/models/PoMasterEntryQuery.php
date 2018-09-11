@@ -141,6 +141,20 @@ class PoMasterEntryQuery extends CI_Model
         return $this->objectToArray($data);
     }
 
+    public function select_uof_master_as_per_name($data)
+    {
+        $query = $this->db->get_where('uof_master', 
+                                        array(
+                                            'uof_name'     => $data['uof_name']
+                                        ));
+        $data  = array();
+        foreach ($query->result() as $row)
+        {
+             $data[] = $row;
+        }
+        return $this->objectToArray($data);
+    }
+
     public function select_material_master($where_condition = array())
     {
         if(empty($where_condition))

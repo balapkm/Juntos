@@ -148,7 +148,7 @@ class PoMasterEntry extends CI_Controller
 
 	public function addUOfAction()
 	{
-		$count = count($this->PoMasterEntryQuery->select_uof_master($this->data));
+		$count = count($this->PoMasterEntryQuery->select_uof_master_as_per_name($this->data));
 		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->insert_supplier_entry($this->data,'uof_master');
 	}
