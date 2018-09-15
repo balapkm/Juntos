@@ -456,7 +456,7 @@
 		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Material HSN Code</label>
-		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code" ng-model="material_form_data.material_hsn_code" >
+		                  <input type="text" class="form-control" id="material_hsn_code" placeholder="Enter Material HSN Code" ng-model="material_form_data.material_hsn_code" ng-change="material_form_data.material_hsn_code = material_form_data.material_hsn_code.toUpperCase()">
 		                </div>
 		            </div>
 		            <div class="col-lg-3">
