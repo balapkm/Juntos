@@ -345,7 +345,7 @@ class PoGenerateQuery extends CI_Model
 
         if($data['filter_type_wise'] == 'PO')
         {
-            $sql .= " AND prd.unit = '".$data['po_number'][0]."'";
+            // $sql .= " AND prd.unit = '".$data['po_number'][0]."'";
             $sql .= " AND prd.type = '".$data['po_number'][1]."'";
             $sql .= " AND prd.po_number = '".$data['po_number'][2]."'";
             $sql .= " AND YEAR(prd.po_date) = '".$data['po_year']."'";
@@ -363,6 +363,7 @@ class PoGenerateQuery extends CI_Model
             // $sql .= " AND material_id IN(".implode(',',$data['material_name']).")";
             $sql .= " AND prd.supplier_id = ".$data['supplier_name'];
         }
+        
         $result1  = $this->db->query(trim($sql))->result_array();
 
         if($data['outstanding_type'] == 'B')

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-28 21:33:18
+/* Smarty version 3.1.30, created on 2018-09-30 18:35:08
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b857246a96fa6_48899716',
+  'unifunc' => 'content_5bb0ca04613327_41146882',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1535379406,
+      1 => 1535874599,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b857246a96fa6_48899716 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bb0ca04613327_41146882 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -499,7 +499,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		         		</br>
 		         		</br>
 		         		<h5 style="float: left;margin:100px 0px 0px 20px;"><b>Signature</b></h5>
-		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorised & Signature</b></h5>
+		         		<h5 style="float: right;margin:100px 20px 0px 20px;"><b>Authorised Signature</b></h5>
 		         	</td>
         		</tr>
         	</table>

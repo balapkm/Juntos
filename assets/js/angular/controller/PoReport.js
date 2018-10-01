@@ -17,7 +17,7 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 	},500)  
 
 	$scope.po_report = {
-		report_type : "report_1",
+		report_type : "report_4",
 		division : "",
 		type : "",
 		date_range : "",
@@ -26,6 +26,10 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		order_ref   : "",
 		tax_type : "",
 		tax_perc : ""
+	}
+
+	$scope.tabChange = function(report_type){
+		$scope.po_report.report_type = report_type;
 	}
 
 	$scope.po_report_show = {

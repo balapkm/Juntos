@@ -118,6 +118,178 @@ class PoReportQuery extends CI_Model
         $result  = $this->db->query($sql)->result_array();
         return $result;
     }
+
+    public function fetch_po_report_4($data)
+    {
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date,
+                    sd.supplier_name,
+                    origin,
+                    order_reference,
+                    material_name,
+                    po_description,
+                    material_hsn_code,
+                    qty,
+                    material_uom,
+                    received,
+                    received_date,
+                    (prd.qty - prd.received) as balance,
+                    price,
+                    currency,
+                    discount,
+                    CGST,
+                    SGST,
+                    IGST,
+                    delivery_date
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND ";
+
+        if(!empty($data['division'])){
+            $sql .= "unit = '".$data['division']."' AND ";
+        }
+
+        if(!empty($data['type'])){
+            $sql .= "type = '".$data['type']."' AND ";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
+            $sql .= "po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND ";
+        }
+
+        if(!empty($data['material_id'])){
+            $sql .= "material_master_id = ".$data['material_id']." AND ";
+        }
+
+        if(!empty($data['supplier_id'])){
+            $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
+        }
+        $sql .= "prd.outstanding_type = 'M'";
+
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function fetch_po_report_5($data)
+    {
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date,
+                    sd.supplier_name,
+                    origin,
+                    order_reference,
+                    material_name,
+                    po_description,
+                    material_hsn_code,
+                    qty,
+                    material_uom,
+                    received,
+                    received_date,
+                    (prd.received - prd.qty) as excess,
+                    price,
+                    currency,
+                    discount,
+                    CGST,
+                    SGST,
+                    IGST,
+                    delivery_date
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND ";
+
+        if(!empty($data['division'])){
+            $sql .= "unit = '".$data['division']."' AND ";
+        }
+
+        if(!empty($data['type'])){
+            $sql .= "type = '".$data['type']."' AND ";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
+            $sql .= "po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND ";
+        }
+
+        if(!empty($data['material_id'])){
+            $sql .= "material_master_id = ".$data['material_id']." AND ";
+        }
+
+        if(!empty($data['supplier_id'])){
+            $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
+        }
+        $sql .= "prd.outstanding_type = 'B'";
+
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function fetch_po_report_6($data)
+    {
+        $sql = "SELECT 
+                    unit,
+                    type,
+                    po_number,
+                    po_date,
+                    sd.supplier_name,
+                    origin,
+                    order_reference,
+                    material_name,
+                    po_description,
+                    material_hsn_code,
+                    qty,
+                    material_uom,
+                    received,
+                    received_date,
+                    (prd.qty - prd.received) as balance,
+                    (prd.received - prd.qty) as excess,
+                    dc_number,
+                    dc_date,
+                    price,
+                    currency,
+                    discount,
+                    CGST,
+                    SGST,
+                    IGST,
+                    delivery_date
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND ";
+
+        if(!empty($data['division'])){
+            $sql .= "unit = '".$data['division']."' AND ";
+        }
+
+        if(!empty($data['type'])){
+            $sql .= "type = '".$data['type']."' AND ";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
+            $sql .= "po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND ";
+        }
+
+        if(!empty($data['material_id'])){
+            $sql .= "material_master_id = ".$data['material_id']." AND ";
+        }
+
+        if(!empty($data['supplier_id'])){
+            $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
+        }
+        $sql .= "prd.outstanding_type = 'B'";
+
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
 }
 
 ?>

@@ -93,6 +93,70 @@ class PoReport extends CI_Controller
 			$columArray = array("MATERIAL_NAME","MATERIAL_HSN_CODE","GROUP","MATERIAL_UOM","PRICE","DISCOUNT","SGST","CGST","IGST","CURRENCY","PRICE_STATUS","DISCOUNT_PRICE_STATUS");
 		}
 
+		if($this->data['report_type'] == "report_4"){
+			$data = $this->PoReportQuery->fetch_po_report_4($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
+				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
+				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+		}
+
+		if($this->data['report_type'] == "report_5"){
+			$data = $this->PoReportQuery->fetch_po_report_5($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+			foreach ($data as $key => $value) {
+				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
+				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
+				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
+				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+		}
+
+		if($this->data['report_type'] == "report_6"){
+			$data = $this->PoReportQuery->fetch_po_report_6($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+			foreach ($data as $key => $value) {
+				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
+				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
+				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
+				$data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
+				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
+				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+			}
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","EXCESS","DC NO","DC DATE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+		}
+
 		if($this->data['action'] == 'view')
 		return array("data"=>$data,"columns"=>$columArray);
 
@@ -148,18 +212,6 @@ class PoReport extends CI_Controller
 		$writer = IOFactory::createWriter($spreadsheet, 'Xls');
 		$writer->save('php://output');
 		exit;
-
-		// header("Content-Disposition: attachment; filename=\"Report.xls\"");
-		// header("Content-Type: application/vnd.ms-excel;");
-		// header("Pragma: no-cache");
-		// header("Expires: 0");
-		// $out = fopen("php://output", 'w');
-		// foreach ($data as $value)
-		// {
-		//     fputcsv($out, $value,"\t");
-		// }
-		// fclose($out);
-		// echo "<script>window.close();</script>";exit;
 	}
 }
 
