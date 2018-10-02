@@ -109,6 +109,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
@@ -130,6 +131,7 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
@@ -152,6 +154,7 @@ class PoReport extends CI_Controller
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
