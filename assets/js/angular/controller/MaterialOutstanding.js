@@ -121,6 +121,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             data : JSON.stringify($scope.generatePoData)
         };
         $scope.materialOutStanding = [];
+        $scope.checkEditBoxBillOutStandingModel = {};
         $scope.showMaterialOutStandingTable = false;
         commonService.showLoader();
         httpService.callWebService(service_details).then(function(data){
@@ -215,7 +216,6 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $scope.editMaterialOutStanding = function(x){
         $scope.editMaterialPOData  = {};
         $scope.totalAmount = (x.price * x.qty);
-        // alert($scope.totalAmount);
         for(var i in x)
         {
             $scope.editMaterialPOData[i] = x[i];
@@ -246,7 +246,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
               todayHighlight : true,
               // startDate:new Date()
             });
-
+            if($scope.generatePoData['outstanding_type'] === 'M'){
+                $scope.totalAmount = (x.price * x.qty);
+                $scope.$apply();
+            }
         },100);
         $scope.totalAmount = $('#totalAmountMOS').val();
 
