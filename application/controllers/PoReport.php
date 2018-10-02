@@ -94,6 +94,7 @@ class PoReport extends CI_Controller
 		}
 
 		if($this->data['report_type'] == "report_4"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_4($this->data);
 			if(count($data) == 0){
 				if($this->data['action'] != 'view'){
@@ -108,13 +109,13 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
-				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_5"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_5($this->data);
 			if(count($data) == 0){
 				if($this->data['action'] != 'view'){
@@ -129,13 +130,13 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
-				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_6"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_6($this->data);
 			if(count($data) == 0){
 				if($this->data['action'] != 'view'){

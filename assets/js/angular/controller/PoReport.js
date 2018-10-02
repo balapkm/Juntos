@@ -1,17 +1,17 @@
 app.controller('PoReport',function($scope,validateService,commonService,httpService){
 	setTimeout(function(){
 		$('.select2').select2();
-		$('#datePicker').daterangepicker({
+		$('#datePicker,#datePicker1').daterangepicker({
 		      autoUpdateInput: false,
 		      locale: {
 		          cancelLabel: 'Clear'
 		      }
 		});
-		$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
 		      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 		});
 
-		$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		});
 	},500)  
@@ -98,6 +98,9 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 
 	$scope.poDownloadAction = function(){
 		$scope.po_report.date_range = $("#datePicker").val();
+		if($scope.po_report.report_type === "report_4" || $scope.po_report.report_type === "report_5" || $scope.po_report.report_type === "report_6"){
+			$scope.po_report.date_range = $("#datePicker1").val();
+		}			
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
 		}
@@ -164,6 +167,9 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
     },250);
 	$scope.poViewAction = function(){
 		$scope.po_report.date_range = $("#datePicker").val();
+		if($scope.po_report.report_type === "report_4" || $scope.po_report.report_type === "report_5" || $scope.po_report.report_type === "report_6"){
+			$scope.po_report.date_range = $("#datePicker1").val();
+		}
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
 		}

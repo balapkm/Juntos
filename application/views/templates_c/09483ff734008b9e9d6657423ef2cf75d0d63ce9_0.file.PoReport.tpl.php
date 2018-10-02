@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-01 20:30:13
+/* Smarty version 3.1.30, created on 2018-10-02 13:00:48
   from "/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bb2367d928f92_73111812',
+  'unifunc' => 'content_5bb31ea8754d95_24103966',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '09483ff734008b9e9d6657423ef2cf75d0d63ce9' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl',
-      1 => 1538406000,
+      1 => 1538465443,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bb2367d928f92_73111812 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bb31ea8754d95_24103966 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -213,7 +213,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					            <div class="col-lg-4" ng-if="po_report_show.date_range">
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Date</label>
-					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker">
+					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker1">
 					                </div>
 					            </div>
 					            <div class="col-lg-4" ng-if="po_report_show.material_id">

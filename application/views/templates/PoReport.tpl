@@ -156,7 +156,7 @@
 					            <div class="col-lg-4" ng-if="po_report_show.date_range">
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Date</label>
-					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker">
+					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker1">
 					                </div>
 					            </div>
 					            <div class="col-lg-4" ng-if="po_report_show.material_id">
