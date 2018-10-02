@@ -224,7 +224,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         var date = new Date();
         if($scope.generatePoData['outstanding_type'] === 'M')
         {
-            $scope.title = "Edit Material Out Standing";
+            $scope.title = "Edit Material Out Standing ("+x.material_name+")";
             $scope.editMaterialPOData['received_data'] = x.received;
             $scope.editMaterialPOData['received'] = 0;
             $scope.editMaterialPOData['received_date'] = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
@@ -233,7 +233,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         }
         else
         {
-             $scope.title = "Edit Bill Out Standing";
+            $scope.title = "Edit Bill Out Standing";
             $scope.editMaterialPOData['bill_amount'] = 0;
             $scope.editMaterialPOData['bill_number'] = "";
             $scope.editMaterialPOData['bill_date'] = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
