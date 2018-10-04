@@ -109,13 +109,11 @@ table tr td, table tr th {
     <tr>
         <td align="center" width="5%" style="font:bold arial,helvetica,verdana; color:#000;border-left:1px solid #000;font-weight: bold;">S.NO</td>
 
-        [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
         [[if $searchPoData[0]['state_code'] eq 33]]
         <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
         [[/if]]
         [[if $searchPoData[0]['state_code'] neq 33]]
         <td align="center" width="30%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
-        [[/if]]
         [[/if]]
         [[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
         <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN/SAC CODE</td>

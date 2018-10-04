@@ -42,27 +42,24 @@ table tr td, table tr th {
 
     <tr >
 		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;">[[$k+1]]</td>
-		[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
+	        [[if $searchPoData[0]['state_code'] eq 33]]
+		     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		     		<div style="text-align: left;">
+		                [[$v.material_master_name]]
+		            </div>
 
-        [[if $searchPoData[0]['state_code'] eq 33]]
-	     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-	     		<div style="text-align: left;">
-	                [[$v.material_master_name]]
-	            </div>
+		            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
+		     	</td>
+		    [[/if]]
+	        [[if $searchPoData[0]['state_code'] neq 33]]
+	        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		     		<div style="text-align: left;">
+		                [[$v.material_master_name]]
+		            </div>
 
-	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
-	     	</td>
-	    [[/if]]
-        [[if $searchPoData[0]['state_code'] neq 33]]
-        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-	     		<div style="text-align: left;">
-	                [[$v.material_master_name]]
-	            </div>
-
-	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
-	     	</td>
-	    [[/if]]
-	    [[/if]]
+		            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;">[[$v.po_description]]</div>
+		     	</td>
+		    [[/if]]
 
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
          	[[if $k eq 0]]

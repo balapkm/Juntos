@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-09-02 12:58:29
+/* Smarty version 3.1.30, created on 2018-10-04 22:35:57
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b8b911d6a51b3_65389709',
+  'unifunc' => 'content_5bb648759d8e53_07108354',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2583281bc3174b53766a5395caeca88ea43d11f3' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous_download.tpl',
-      1 => 1535873282,
+      1 => 1538672751,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b8b911d6a51b3_65389709 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bb648759d8e53_07108354 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -81,31 +81,28 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
     <tr >
 		<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;border-left:1px solid #000;"><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
 </td>
-		<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+	        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+		     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		     		<div style="text-align: left;">
+		                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
 
-        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-	     	<td width="20%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-	     		<div style="text-align: left;">
-	                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+		            </div>
 
-	            </div>
-
-	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+		            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
 </div>
-	     	</td>
-	    <?php }?>
-        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-	     		<div style="text-align: left;">
-	                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
+		     	</td>
+		    <?php }?>
+	        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
+	        	<td width="30%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+		     		<div style="text-align: left;">
+		                <?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
 
-	            </div>
+		            </div>
 
-	            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
+		            <div style="margin-top: 5px;text-align:left;word-wrap: break-word;white-space: pre;"><?php echo $_smarty_tpl->tpl_vars['v']->value['po_description'];?>
 </div>
-	     	</td>
-	    <?php }?>
-	    <?php }?>
+		     	</td>
+		    <?php }?>
 
      	<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
          	<?php if ($_smarty_tpl->tpl_vars['k']->value == 0) {?>
@@ -431,7 +428,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			</div>
 			<div style="width:60%;float:left">
 				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised Signature</p>
 			</div>
 			<div style="clear: both;"></div>
 		</td>
