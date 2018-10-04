@@ -1,0 +1,2 @@
+ALTER TABLE `po_generated_request_details`
+CHANGE `order_reference` `order_reference` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `type`;
