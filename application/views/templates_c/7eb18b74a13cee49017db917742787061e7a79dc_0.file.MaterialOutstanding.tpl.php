@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-02 18:28:34
+/* Smarty version 3.1.30, created on 2018-10-07 21:29:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bb36b7a8fbf53_02172791',
+  'unifunc' => 'content_5bba2d6f424af8_24570094',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1538485056,
+      1 => 1538927974,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bb36b7a8fbf53_02172791 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bba2d6f424af8_24570094 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -42,17 +42,6 @@ function content_5bb36b7a8fbf53_02172791 (Smarty_Internal_Template $_smarty_tpl)
 	              		<div class="row">
 	              			<div class="col-lg-4">
 				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Division</label>
-				                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
-				                  	  <option value="">Choose Unit</option>
-				                  	  <option value="Upper">Upper</option>
-				                  	  <option value="Full Shoe">Full Shoe</option>
-				                  	  <option value="Sole">Sole</option>
-				                  </select>
-				                </div>
-				            </div>
-	              			<div class="col-lg-4">
-				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Outstanding Type</label>
 				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
 				                  	  <option value="">Choose Outstanding Type</option>
@@ -62,134 +51,82 @@ function content_5bb36b7a8fbf53_02172791 (Smarty_Internal_Template $_smarty_tpl)
 				                </div>
 				            </div>
 				            <div class="col-lg-4">
-				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Filter Type</label>
-				                  <select class="form-control" id="filter_type" ng-model="generatePoData.filter_type_wise" ng-change="filterChange($event)">
-				                  	  <option value="">Choose Filter Type</option>
-				                  	  <option value="PO">Po Wise</option>
-				                  	  <option value="Material">Material Wise</option>
-				                  	  <!-- <option value="Unit">Division Wise</option> -->
-				                  	  <option value="Supplier">Supplier Wise</option>
-				                  </select>
+				                <div class="form-group" >
+				                  <label for="exampleInputPassword1">Division</label>
+				                  <select class="form-control" ng-model="generatePoData.division" id="division">
+		              				<option value="">Choose Division</option>
+		              				<option value="UPPER">UPPER</option>
+		              				<option value="FULL SHOE">FULL SHOE</option>
+		              				<option value="SOLE">SOLE</option>
+		              			  </select>
 				                </div>
 				            </div>
-
-				            <!-- unit wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Unit">
-					            <div class="col-lg-4"></div>
-		              			<div class="col-lg-4">
-					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Unit</label>
-					                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
-					                  	  <option value="">Choose Unit</option>
-					                  	  <option value="Upper">Upper</option>
-					                  	  <option value="Full Shoe">Full Shoe</option>
-					                  	  <option value="Sole">Sole</option>
-					                  </select>
-					                </div>
-					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
-				            <!-- unit wise -->
-
-				            <!-- PO wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.PO">
-					            <div class="col-lg-3"></div>
-					            <div class="col-lg-3">
-					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Po Number</label>
-					                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="generatePoData.po_number" ng-change="clearRedMark('po_number')">
-					                  	<option value="">Choose Po Number</option>
-				                  	  	<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['po_unique_number']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['unit'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['po_number'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
-</option>
-					                  	<?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
-					                  </select>
-					                </div>
-					            </div>
-					            <div class="col-lg-3">
-					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Po Year</label>
-					                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
-					                </div>
-					            </div>
-					            <div class="col-lg-3"></div>
-					        </div>
-				            <!-- PO wise -->
-
-				            <!-- Material Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Material">
-					            <div class="col-lg-4"></div>
-					            <div class="col-lg-4">
-					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Material Name</label>
-					                  <select class="form-control select2" style="width: 100%;" id="material_name" ng-model="generatePoData.material_name">
-					                  	  <option value="">Choose Material Name</option>
-					                  	  <?php
+		              		<div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputPassword1">type</label>
+				                  <select class="form-control" ng-model="generatePoData.type" id="type">
+		              				<option value="">Choose Type</option>
+		              				<option value="IMPORT">IMPORT</option>
+		              				<option value="INDIGENOUS">INDIGENOUS</option>
+		              				<option value="SAMPLE_IMPORT">SAMPLE IMPORT</option>
+		              				<option value="SAMPLE_INDIGENOUS">SAMPLE INDIGENOUS</option>
+		              			  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputPassword1">Date</label>
+				                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                	<label for="exampleInputPassword1">Material Name</label>
+				                  	<select class="form-control select2" style="width: 100%;" ng-model="generatePoData.material_id" id="material_id">
+				                  		<option value="">Choose Material Name</option>
+			                  	    	<?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_name_details']->value, 'v', false, 'k');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+				                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
 </option>
-					                  	  <?php
+				                  	  	<?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-					                  </select>
-					                </div>
-				            	</div>
-					            <div class="col-lg-4"></div>
-					        </div>
-				            <!-- Material Wise -->
-
-				            <!-- Supplier Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Supplier">
-					            <div class="col-lg-4"></div>
-				                <div class="col-lg-4">
-					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Supplier Name</label>
-					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')">
-					                  	  <option value="">Choose Supplier Name</option>
-					                  	  <?php
+				                	</select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Supplier Name</label>
+				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id">
+				                  	  <option value="">Choose Supplier Name</option>
+				                  	  <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_name_details']->value, 'v', false, 'k');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 ?>
-					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+				                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
 </option>
-					                  	  <?php
+				                  	  <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
-					                  </select>
-					                </div>
-					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
+				                  </select>
+				                </div>
+				            </div>
 				            
 				            <!-- Supplier Wise -->
 
-				            <div class="col-lg-12 text-center" ng-if="generatePoData.show_button">
+				            <div class="col-lg-12 text-center">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
@@ -200,6 +137,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        <tr>
 			                          <th>Edit</th>
 			                          <th>Unit</th>
+			                          <th>Type</th>
 			                          <th>Supplier</th>
 			                          <th>Order Ref</th>
 			                          <th>PO Number</th>
@@ -238,6 +176,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									        </a>
 			                        	</td>
 			                        	<td>{{x.unit}}</td>
+			                        	<td>{{x.type}}</td>
 			                        	<td>{{x.supplier_name}}</td>
 			                        	<td>{{x.order_reference}}</td>
 			                        	<td>{{x.po_number}}</td>

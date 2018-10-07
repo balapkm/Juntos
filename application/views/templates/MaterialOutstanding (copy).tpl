@@ -18,6 +18,17 @@
 	              		<div class="row">
 	              			<div class="col-lg-4">
 				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Division</label>
+				                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
+				                  	  <option value="">Choose Unit</option>
+				                  	  <option value="Upper">Upper</option>
+				                  	  <option value="Full Shoe">Full Shoe</option>
+				                  	  <option value="Sole">Sole</option>
+				                  </select>
+				                </div>
+				            </div>
+	              			<div class="col-lg-4">
+				                <div class="form-group">
 				                  <label for="exampleInputEmail1">Outstanding Type</label>
 				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
 				                  	  <option value="">Choose Outstanding Type</option>
@@ -27,60 +38,98 @@
 				                </div>
 				            </div>
 				            <div class="col-lg-4">
-				                <div class="form-group" >
-				                  <label for="exampleInputPassword1">Division</label>
-				                  <select class="form-control" ng-model="generatePoData.division" id="division">
-		              				<option value="">Choose Division</option>
-		              				<option value="UPPER">UPPER</option>
-		              				<option value="FULL SHOE">FULL SHOE</option>
-		              				<option value="SOLE">SOLE</option>
-		              			  </select>
-				                </div>
-				            </div>
-		              		<div class="col-lg-4">
 				                <div class="form-group">
-				                  <label for="exampleInputPassword1">type</label>
-				                  <select class="form-control" ng-model="generatePoData.type" id="type">
-		              				<option value="">Choose Type</option>
-		              				<option value="IMPORT">IMPORT</option>
-		              				<option value="INDIGENOUS">INDIGENOUS</option>
-		              				<option value="SAMPLE_IMPORT">SAMPLE IMPORT</option>
-		              				<option value="SAMPLE_INDIGENOUS">SAMPLE INDIGENOUS</option>
-		              			  </select>
-				                </div>
-				            </div>
-				            <div class="col-lg-4">
-				                <div class="form-group">
-				                  <label for="exampleInputPassword1">Date</label>
-				                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker">
-				                </div>
-				            </div>
-				            <div class="col-lg-4">
-				                <div class="form-group">
-				                	<label for="exampleInputPassword1">Material Name</label>
-				                  	<select class="form-control select2" style="width: 100%;" ng-model="generatePoData.material_id" id="material_id">
-				                  		<option value="">Choose Material Name</option>
-			                  	    	[[foreach from=$material_name_details key=k item=v]]
-				                  		<option value="[[$v.material_id]]">[[$v.material_name]]</option>
-				                  	  	[[/foreach]]
-				                	</select>
-				                </div>
-				            </div>
-				            <div class="col-lg-4">
-				                <div class="form-group">
-				                  <label for="exampleInputEmail1">Supplier Name</label>
-				                  <select class="form-control select2" style="width: 100%;" id="supplier_id" ng-model="generatePoData.supplier_id">
-				                  	  <option value="">Choose Supplier Name</option>
-				                  	  [[foreach from=$supplier_name_details key=k item=v]]
-				                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
-				                  	  [[/foreach]]
+				                  <label for="exampleInputEmail1">Filter Type</label>
+				                  <select class="form-control" id="filter_type" ng-model="generatePoData.filter_type_wise" ng-change="filterChange($event)">
+				                  	  <option value="">Choose Filter Type</option>
+				                  	  <option value="PO">Po Wise</option>
+				                  	  <option value="Material">Material Wise</option>
+				                  	  <!-- <option value="Unit">Division Wise</option> -->
+				                  	  <option value="Supplier">Supplier Wise</option>
 				                  </select>
 				                </div>
 				            </div>
+
+				            <!-- unit wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Unit">
+					            <div class="col-lg-4"></div>
+		              			<div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Unit</label>
+					                  <select class="form-control" id="unit" ng-model="generatePoData.unit">
+					                  	  <option value="">Choose Unit</option>
+					                  	  <option value="Upper">Upper</option>
+					                  	  <option value="Full Shoe">Full Shoe</option>
+					                  	  <option value="Sole">Sole</option>
+					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4"></div>
+					        </div>
+				            <!-- unit wise -->
+
+				            <!-- PO wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.PO">
+					            <div class="col-lg-3"></div>
+					            <div class="col-lg-3">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Po Number</label>
+					                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="generatePoData.po_number" ng-change="clearRedMark('po_number')">
+					                  	<option value="">Choose Po Number</option>
+				                  	  	[[foreach from=$po_unique_number key=k item=v]]
+					                  		<option value="[[$v.unit]]|[[$v.type]]|[[$v.po_number]]|[[$v.full_po_number]]">[[$v.full_po_number]]</option>
+					                  	[[/foreach]]
+					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-3">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Po Year</label>
+					                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
+					                </div>
+					            </div>
+					            <div class="col-lg-3"></div>
+					        </div>
+				            <!-- PO wise -->
+
+				            <!-- Material Wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Material">
+					            <div class="col-lg-4"></div>
+					            <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Material Name</label>
+					                  <select class="form-control select2" style="width: 100%;" id="material_name" ng-model="generatePoData.material_name">
+					                  	  <option value="">Choose Material Name</option>
+					                  	  [[foreach from=$material_name_details key=k item=v]]
+					                  		<option value="[[$v.material_name]]">[[$v.material_name]]</option>
+					                  	  [[/foreach]]
+					                  </select>
+					                </div>
+				            	</div>
+					            <div class="col-lg-4"></div>
+					        </div>
+				            <!-- Material Wise -->
+
+				            <!-- Supplier Wise -->
+				            <div class="col-lg-12" style="margin-top: 10px;" ng-if="generatePoData.filter_type.Supplier">
+					            <div class="col-lg-4"></div>
+				                <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Supplier Name</label>
+					                  <select class="form-control select2" style="width: 100%;" id="supplier_name" ng-model="generatePoData.supplier_name" ng-change="clearRedMark('supplier_name')">
+					                  	  <option value="">Choose Supplier Name</option>
+					                  	  [[foreach from=$supplier_name_details key=k item=v]]
+					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
+					                  	  [[/foreach]]
+					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4"></div>
+					        </div>
 				            
 				            <!-- Supplier Wise -->
 
-				            <div class="col-lg-12 text-center">
+				            <div class="col-lg-12 text-center" ng-if="generatePoData.show_button">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
@@ -91,7 +140,6 @@
 			                        <tr>
 			                          <th>Edit</th>
 			                          <th>Unit</th>
-			                          <th>Type</th>
 			                          <th>Supplier</th>
 			                          <th>Order Ref</th>
 			                          <th>PO Number</th>
@@ -130,7 +178,6 @@
 									        </a>
 			                        	</td>
 			                        	<td>{{x.unit}}</td>
-			                        	<td>{{x.type}}</td>
 			                        	<td>{{x.supplier_name}}</td>
 			                        	<td>{{x.order_reference}}</td>
 			                        	<td>{{x.po_number}}</td>

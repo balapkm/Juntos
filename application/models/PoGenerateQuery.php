@@ -304,6 +304,71 @@ class PoGenerateQuery extends CI_Model
         return $result;
     }
 
+    public function getMaterialOutStandingDataNew($data){
+        $sql = "SELECT 
+                    sd.supplier_name,
+                    sd.state_code,
+                    prd.*,
+                    DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day,
+                    prd.material_name as material_master_name
+                FROM
+                    po_generated_request_details prd,
+                    supplier_details sd
+                WHERE
+                    prd.supplier_id = sd.supplier_id AND ";
+
+        if(!empty($data['division'])){
+            $sql .= "unit = '".$data['division']."' AND ";
+        }
+
+        if(!empty($data['type'])){
+            $sql .= "type = '".$data['type']."' AND ";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
+            $sql .= "po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND ";
+        }
+
+        if(!empty($data['material_id'])){
+            $sql .= "material_master_id = ".$data['material_id']." AND ";
+        }
+
+        if(!empty($data['supplier_id'])){
+            $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
+        }
+
+        if($data['outstanding_type'] == 'B')
+        {
+            $sql .= "(prd.bill_amount) = 0  AND ";
+            $sql .= "(prd.bill_number) = '' AND ";
+            $sql .= "(prd.bill_date) = '0000-00-00' AND ";
+        }
+        $sql .= "prd.outstanding_type = '".$data['outstanding_type']."'";
+        $result1  = $this->db->query(trim($sql))->result_array();
+
+        if($data['outstanding_type'] == 'B')
+        {
+            $sql     .= " GROUP BY prd.unit,prd.type,prd.po_number,prd.po_date,prd.material_name";
+            $explode  = explode("FROM",$sql);
+
+            $explode[0] .= ",sum(prd.received) as total_received ";
+            $sql      = implode("FROM",$explode);
+            $result2  = $this->db->query(trim($sql))->result_array();
+            foreach ($result1 as $key1 => $value1) 
+            {
+                foreach ($result2 as $key2 => $value2) 
+                {
+                    if($value1['unit'] == $value2['unit'] && $value1['type'] == $value2['type'] && $value1['po_number'] == $value2['po_number'] && $value1['po_date'] == $value2['po_date'] && $value1['material_name'] == $value2['material_name'])
+                    {
+                        $result1[$key1]['total_received'] = $value2['total_received'];
+                    }
+                }
+            }
+        }
+
+        return $result1;
+    }
+
     public function getMaterialOutStandingData($data)
     {
         $sql = "SELECT 

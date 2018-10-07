@@ -11,6 +11,24 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
       // startDate : new Date()
     });
 
+    setTimeout(function(){
+        $('.select2').select2();
+        $('#datePicker').daterangepicker({
+              autoUpdateInput: false,
+              locale: {
+                  cancelLabel: 'Clear'
+              }
+        });
+        $('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
+              $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
+        });
+
+        $('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
+              $(this).val('');
+        });
+    },1000)  
+
+
     if(tab_switch_name === 'tab_2')
     {
         setTimeout(function(){
@@ -46,21 +64,12 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     }
 
     $scope.generatePoData = {
-        po_number : "",
-        po_year : new Date().getFullYear(),
-        unit : "",
-        material_name : "",
-        supplier_name : "",
         outstanding_type : "M",
-        filter_type_wise : "",
-        filter_type : {
-            PO : false,
-            Material : false,
-            Unit : false,
-            Supplier : false
-        },
-        show_button : false,
-        outputData : []
+        division : "",
+        type : "",
+        date_range : "",
+        material_id : "",
+        supplier_id : "",
     }
 
 
@@ -111,8 +120,10 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
     $scope.totalAmountData = {};
     $scope.searchAction = function()
     {
-        if(validateService.blank($scope.generatePoData['unit'],"Please Choose unit","unit")) return false;
+        $scope.generatePoData.date_range = $("#datePicker").val();
+        // if(validateService.blank($scope.generatePoData['unit'],"Please Choose unit","unit")) return false;
         if(validateService.blank($scope.generatePoData['outstanding_type'],"Please Choose outstanding type","outstanding_type")) return false;
+        console.log($scope.generatePoData);
 
         dataTableVariable.destroy();
         var service_details = {

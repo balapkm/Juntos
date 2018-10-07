@@ -44,11 +44,13 @@ class MaterialOutstanding extends CI_Controller
 
 	public function searchMaterialOutstandingAction()
 	{
-		if(!empty($this->data['po_number']))
+		/*if(!empty($this->data['po_number']))
 		{
 			$this->data['po_number'] = explode("|",$this->data['po_number']);
-		}
-		$data = $this->PoGenerateQuery->getMaterialOutStandingData($this->data);
+		}*/
+		// print_r($this->data);exit;
+		$this->data['date_range'] = explode("/",$this->data['date_range']);
+		$data = $this->PoGenerateQuery->getMaterialOutStandingDataNew($this->data);
 		foreach ($data as $key => $value) {
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
