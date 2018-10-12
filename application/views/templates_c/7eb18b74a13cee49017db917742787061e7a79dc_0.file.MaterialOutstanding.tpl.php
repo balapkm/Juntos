@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-07 21:29:43
+/* Smarty version 3.1.30, created on 2018-10-12 22:06:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bba2d6f424af8_24570094',
+  'unifunc' => 'content_5bc0cd9b21c992_12225541',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1538927974,
+      1 => 1539362194,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bba2d6f424af8_24570094 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bc0cd9b21c992_12225541 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -123,6 +123,38 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				                  </select>
 				                </div>
 				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Number</label>
+				                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="generatePoData.po_number" ng-change="clearRedMark('po_number')">
+				                  	<option value="">Choose Po Number</option>
+			                  	  	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['po_unique_number']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+				                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['unit'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['po_number'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+</option>
+				                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+				                  </select>
+				                </div>
+				            </div>
+
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Year</label>
+				                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
+				                </div>
+				            </div>
 				            
 				            <!-- Supplier Wise -->
 
@@ -142,6 +174,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                          <th>Order Ref</th>
 			                          <th>PO Number</th>
 			                          <th style="width: 100px">PO Date</th>
+			                          <th>PO Description</th>
 			                          <th>Material</th>
 			                          <th>Quantity</th>
 			                          <th>UMO</th>
@@ -181,6 +214,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<td>{{x.order_reference}}</td>
 			                        	<td>{{x.po_number}}</td>
 			                        	<td>{{x.po_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td>{{x.po_description|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>

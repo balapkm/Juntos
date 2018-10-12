@@ -19,6 +19,12 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                   cancelLabel: 'Clear'
               }
         });
+        $('#search_year_po').datepicker({
+            autoclose: true,
+            format: " yyyy",
+            viewMode: "years", 
+            minViewMode: "years"
+        });
         $('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
               $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
         });
@@ -26,7 +32,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         $('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
               $(this).val('');
         });
-    },1000)  
+    },1500)  
 
 
     if(tab_switch_name === 'tab_2')
@@ -70,6 +76,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
         date_range : "",
         material_id : "",
         supplier_id : "",
+        po_number : "",
+        po_year : new Date().getFullYear()
     }
 
 

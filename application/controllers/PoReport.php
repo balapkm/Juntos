@@ -130,6 +130,7 @@ class PoReport extends CI_Controller
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
+				$data[$key]['excess']        = round($value['excess'],2);
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
 				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];

@@ -286,7 +286,7 @@ class PoGenerateQuery extends CI_Model
     }
 
     public function addBackTrashIntoMaterial($data){
-        $sql    = "UPDATE po_generated_request_details SET received=(received-".$data['qty'].") WHERE po_generated_request_id=".$data['parent_po_generated_request_id'];
+        $sql    = "UPDATE po_generated_request_details SET received=(received-".$data['received'].")  WHERE po_generated_request_id=".$data['parent_po_generated_request_id'];
         $result = $this->db->query(trim($sql));
         $result = $this->db->delete('po_generated_request_details',array('po_generated_request_id' => $data['po_generated_request_id']));
         return $result;
@@ -337,12 +337,25 @@ class PoGenerateQuery extends CI_Model
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
         }
 
+        if(!empty($data['po_number'])){
+            $sql .= "prd.unit = '".$data['po_number'][0]."' AND ";
+            $sql .= "prd.type = '".$data['po_number'][1]."' AND ";
+            $sql .= "prd.po_number = '".$data['po_number'][2]."' AND ";
+            $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
+        }
+
         if($data['outstanding_type'] == 'B')
         {
             $sql .= "(prd.bill_amount) = 0  AND ";
             $sql .= "(prd.bill_number) = '' AND ";
             $sql .= "(prd.bill_date) = '0000-00-00' AND ";
         }
+
+        if($data['outstanding_type'] == 'M')
+        {
+            $sql .= "(prd.qty - prd.received) > 0 AND ";
+        }
+
         $sql .= "prd.outstanding_type = '".$data['outstanding_type']."'";
         $result1  = $this->db->query(trim($sql))->result_array();
 

@@ -77,6 +77,24 @@
 				                  </select>
 				                </div>
 				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Number</label>
+				                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="generatePoData.po_number" ng-change="clearRedMark('po_number')">
+				                  	<option value="">Choose Po Number</option>
+			                  	  	[[foreach from=$po_unique_number key=k item=v]]
+				                  		<option value="[[$v.unit]]|[[$v.type]]|[[$v.po_number]]|[[$v.full_po_number]]">[[$v.full_po_number]]</option>
+				                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Po Year</label>
+				                  <input type="text" class="form-control" id="search_year_po" ng-model="generatePoData.po_year" placeholder="Choose Po Date">
+				                </div>
+				            </div>
 				            
 				            <!-- Supplier Wise -->
 
@@ -96,6 +114,7 @@
 			                          <th>Order Ref</th>
 			                          <th>PO Number</th>
 			                          <th style="width: 100px">PO Date</th>
+			                          <th>PO Description</th>
 			                          <th>Material</th>
 			                          <th>Quantity</th>
 			                          <th>UMO</th>
@@ -135,6 +154,7 @@
 			                        	<td>{{x.order_reference}}</td>
 			                        	<td>{{x.po_number}}</td>
 			                        	<td>{{x.po_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td>{{x.po_description|date:'dd-MM-yyyy'}}</td>
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>

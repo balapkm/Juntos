@@ -225,7 +225,8 @@ class PoReportQuery extends CI_Model
         if(!empty($data['supplier_id'])){
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
         }
-        $sql .= "prd.outstanding_type = 'B'";
+        $sql .= "prd.outstanding_type = 'B' AND";
+        $sql .= "(prd.received - prd.qty) > 0";
 
         $result  = $this->db->query($sql)->result_array();
         return $result;
