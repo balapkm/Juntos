@@ -234,7 +234,8 @@ class PoReportQuery extends CI_Model
 
     public function fetch_po_report_6($data)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
+                    po_generated_request_id, 
                     unit,
                     type,
                     po_number,
@@ -286,6 +287,32 @@ class PoReportQuery extends CI_Model
         $sql .= "prd.outstanding_type != 'T'";
 
         $result  = $this->db->query($sql)->result_array();
+
+        $sql = "SELECT 
+                    parent_po_generated_request_id
+                FROM
+                    po_generated_request_details prd
+                WHERE
+                    prd.outstanding_type = 'T'";
+        $trashData  = $this->db->query($sql)->result_array();
+
+        // print_r($trashData);
+        // print_r($result);
+        foreach ($trashData as $k1 => $v1) {
+            $key = array_search($v1['parent_po_generated_request_id'], array_column($result,'po_generated_request_id'));
+            if($key !== FALSE)
+            {
+                $qty = $result[$key]['qty'];
+                $received = $result[$key]['received'];
+
+                if(($qty - $received) <= 0){
+                    unset($result[$key]);
+                }
+            }
+        }
+        foreach ($result as $k2=> $v2) {
+            unset($result[$k2]['po_generated_request_id']);
+        }
         return $result;
     }
 

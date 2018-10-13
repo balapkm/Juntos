@@ -123,8 +123,16 @@ class PoReport extends CI_Controller
 			foreach ($data as $key => $value) {
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
-				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
-				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
+				if($value['delivery_date'] != '0000-00-00'){
+					$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				}else{
+					$data[$key]['delivery_date'] = "";
+				}
+				if($value['received_date'] != '0000-00-00'){
+					$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
+				}else{
+					$data[$key]['received_date'] = "";
+				}
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","DELIVERY DATE");
@@ -146,8 +154,13 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['excess']        = round($value['excess'],2);
-				// $data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
-				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
+				// $data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));\
+				
+				if($value['received_date'] != '0000-00-00'){
+					$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
+				}else{
+					$data[$key]['received_date'] = "";
+				}
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS");
@@ -169,9 +182,22 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				// $data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				// $data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
-				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
-				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
-				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
+				if($value['delivery_date'] != '0000-00-00'){
+					$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				}else{
+					$data[$key]['delivery_date'] = "";
+				}
+				if($value['received_date'] != '0000-00-00'){
+					$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
+				}else{
+					$data[$key]['received_date'] = "";
+				}
+				if($value['dc_date'] != '0000-00-00'){
+					$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
+				}else{
+					$data[$key]['dc_date'] = "";
+				}
+
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","DC NO","DC DATE","DELIVERY DATE");
