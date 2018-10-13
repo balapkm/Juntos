@@ -27,12 +27,27 @@ class PoReport extends CI_Controller
 		$this->data['material_name_details'] = $this->PoMasterEntryQuery->select_material_master();
 		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
 		$this->data['order_reference_details'] = $this->PoGenerateQuery->getOrderReferenceDetails();
+		$this->data['po_unique_number']      = $this->getUniquePoNumber();
 		return $this->mysmarty->view('PoReport.tpl',$this->data,TRUE);
+	}
+
+	public function getUniquePoNumber(){
+		$data =  $this->PoGenerateQuery->getUniquePoNumber();
+		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
+		foreach ($data as $key => $value) {
+			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
+		}
+		return $data;
 	}
 
 	public function poDownloadAction(){
 		if(empty($this->data))
 			$this->data = $_GET;
+
+		if(!empty($this->data['po_number']))
+		{
+			$this->data['po_number'] = explode("|",$this->data['po_number']);
+		}
 
 		if($this->data['report_type'] == "report_1"){
 			$this->data['date_range'] = explode("/",$this->data['date_range']);
@@ -112,7 +127,7 @@ class PoReport extends CI_Controller
 				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","DELIVERY DATE");
 		}
 
 		if($this->data['report_type'] == "report_5"){
@@ -131,11 +146,11 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['excess']        = round($value['excess'],2);
-				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
+				// $data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
 				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","EXCESS");
 		}
 
 		if($this->data['report_type'] == "report_6"){
@@ -152,14 +167,14 @@ class PoReport extends CI_Controller
 			foreach ($data as $key => $value) {
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
-				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
-				$data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
+				// $data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
+				// $data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
 				$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
 				$data[$key]['received_date'] = date('d-m-Y',strtotime($value['received_date']));
 				$data[$key]['dc_date'] = date('d-m-Y',strtotime($value['dc_date']));
 				$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","ORD REF","MATERIAL NAME","DESCRIPTION","HSN CODE","QTY","UOM","RECEIVED","RECEIVED DATE","BALANCE","EXCESS","DC NO","DC DATE","PRICE","CURRENCY","DISCOUNT %","CGST %","SGST %","IGST %","DELIVERY DATE");
+			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","DC NO","DC DATE","DELIVERY DATE");
 		}
 
 		if($this->data['action'] == 'view')

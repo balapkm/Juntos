@@ -128,21 +128,13 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    order_reference,
                     material_name,
                     po_description,
-                    material_hsn_code,
                     qty,
                     material_uom,
                     received,
                     received_date,
                     (prd.qty - prd.received) as balance,
-                    price,
-                    currency,
-                    discount,
-                    CGST,
-                    SGST,
-                    IGST,
                     delivery_date
                 FROM
                     po_generated_request_details prd,
@@ -169,7 +161,16 @@ class PoReportQuery extends CI_Model
         if(!empty($data['supplier_id'])){
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
         }
-        $sql .= "prd.outstanding_type = 'M'";
+
+        if(!empty($data['po_number'])){
+            $sql .= "prd.unit = '".$data['po_number'][0]."' AND ";
+            $sql .= "prd.type = '".$data['po_number'][1]."' AND ";
+            $sql .= "prd.po_number = '".$data['po_number'][2]."' AND ";
+            $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
+        }
+
+        $sql .= "prd.outstanding_type = 'M' AND ";
+        $sql .= "(prd.qty - prd.received) > 0";
 
         $result  = $this->db->query($sql)->result_array();
         return $result;
@@ -184,22 +185,13 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    order_reference,
                     material_name,
                     po_description,
-                    material_hsn_code,
                     qty,
                     material_uom,
                     received,
                     received_date,
-                    (prd.received - prd.qty) as excess,
-                    price,
-                    currency,
-                    discount,
-                    CGST,
-                    SGST,
-                    IGST,
-                    delivery_date
+                    (prd.received - prd.qty) as excess
                 FROM
                     po_generated_request_details prd,
                     supplier_details sd
@@ -225,6 +217,14 @@ class PoReportQuery extends CI_Model
         if(!empty($data['supplier_id'])){
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
         }
+
+        if(!empty($data['po_number'])){
+            $sql .= "prd.unit = '".$data['po_number'][0]."' AND ";
+            $sql .= "prd.type = '".$data['po_number'][1]."' AND ";
+            $sql .= "prd.po_number = '".$data['po_number'][2]."' AND ";
+            $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
+        }
+
         $sql .= "prd.outstanding_type = 'B' AND";
         $sql .= "(prd.received - prd.qty) > 0";
 
@@ -241,24 +241,14 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    order_reference,
                     material_name,
                     po_description,
-                    material_hsn_code,
                     qty,
                     material_uom,
                     received,
                     received_date,
-                    (prd.qty - prd.received) as balance,
-                    (prd.received - prd.qty) as excess,
                     dc_number,
                     dc_date,
-                    price,
-                    currency,
-                    discount,
-                    CGST,
-                    SGST,
-                    IGST,
                     delivery_date
                 FROM
                     po_generated_request_details prd,
@@ -285,7 +275,15 @@ class PoReportQuery extends CI_Model
         if(!empty($data['supplier_id'])){
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
         }
-        $sql .= "prd.outstanding_type = 'B'";
+
+        if(!empty($data['po_number'])){
+            $sql .= "prd.unit = '".$data['po_number'][0]."' AND ";
+            $sql .= "prd.type = '".$data['po_number'][1]."' AND ";
+            $sql .= "prd.po_number = '".$data['po_number'][2]."' AND ";
+            $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
+        }
+
+        $sql .= "prd.outstanding_type != 'T'";
 
         $result  = $this->db->query($sql)->result_array();
         return $result;

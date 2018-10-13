@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-02 13:00:48
+/* Smarty version 3.1.30, created on 2018-10-13 21:58:28
   from "/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bb31ea8754d95_24103966',
+  'unifunc' => 'content_5bc21d2c9b0ed8_85699466',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '09483ff734008b9e9d6657423ef2cf75d0d63ce9' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PoReport.tpl',
-      1 => 1538465443,
+      1 => 1539447917,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bb31ea8754d95_24103966 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bc21d2c9b0ed8_85699466 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h1>
@@ -258,6 +258,38 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
 					                  </select>
+					                </div>
+					            </div>
+					            <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Po Number</label>
+					                  <select class="form-control select2" style="width: 100%;" id="po_number_search" ng-model="po_report.po_number" ng-change="clearRedMark('po_number')">
+					                  	<option value="">Choose Po Number</option>
+				                  	  	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['po_unique_number']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['unit'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['po_number'];?>
+|<?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['full_po_number'];?>
+</option>
+					                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+					                  </select>
+					                </div>
+					            </div>
+
+					            <div class="col-lg-4">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Po Year</label>
+					                  <input type="text" class="form-control" id="search_year_po" ng-model="po_report.po_year" placeholder="Choose Po Date">
 					                </div>
 					            </div>
 					        </div>

@@ -14,7 +14,14 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		$('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		});
-	},500)  
+
+		$('#search_year_po').datepicker({
+            autoclose: true,
+            format: " yyyy",
+            viewMode: "years", 
+            minViewMode: "years"
+        });
+	},1500)  
 
 	$scope.po_report = {
 		report_type : "report_4",
@@ -25,7 +32,9 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		supplier_id : "",
 		order_ref   : "",
 		tax_type : "",
-		tax_perc : ""
+		tax_perc : "",
+		po_number : "",
+		po_year : new Date().getFullYear()
 	}
 
 	$scope.tabChange = function(report_type){
