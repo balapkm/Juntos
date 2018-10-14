@@ -295,21 +295,24 @@ class PoReportQuery extends CI_Model
                 WHERE
                     prd.outstanding_type = 'T'";
         $trashData  = $this->db->query($sql)->result_array();
-
-        // print_r($trashData);
-        // print_r($result);
+        
+        $keys = array();
         foreach ($trashData as $k1 => $v1) {
             $key = array_search($v1['parent_po_generated_request_id'], array_column($result,'po_generated_request_id'));
             if($key !== FALSE)
             {
                 $qty = $result[$key]['qty'];
                 $received = $result[$key]['received'];
-
                 if(($qty - $received) <= 0){
-                    unset($result[$key]);
+                    $keys[] = $key;
                 }
             }
         }
+
+        foreach ($keys as $k3 => $v3) {
+            unset($result[$v3]);
+        }
+
         foreach ($result as $k2=> $v2) {
             unset($result[$k2]['po_generated_request_id']);
         }
