@@ -284,7 +284,7 @@ class PoReportQuery extends CI_Model
             $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
         }
 
-        $sql .= "prd.outstanding_type != 'T'";
+        $sql .= "prd.outstanding_type = 'B'";
 
         $result  = $this->db->query($sql)->result_array();
 
