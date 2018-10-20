@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-12 22:06:43
+/* Smarty version 3.1.30, created on 2018-10-19 14:25:15
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bc0cd9b21c992_12225541',
+  'unifunc' => 'content_5bc99bf3d07211_87954110',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1539362194,
+      1 => 1539939285,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bc0cd9b21c992_12225541 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bc99bf3d07211_87954110 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -179,7 +179,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                          <th>Quantity</th>
 			                          <th>UMO</th>
 			                          <th>Received</th>
-			                          <th>Received Date</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Received Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Excess Qty</th>
 			                          <th>Delivery Date</th>
@@ -219,8 +219,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
 			                        	<td>{{x.received}}</td>
-			                        	<td ng-if="x.received_date !== '0000-00-00'">{{x.received_date|date:'dd-MM-yyyy'}}</td>
-			                        	<td ng-if="x.received_date === '0000-00-00'"></td>
+			                        	<td ng-if="(x.received_date !== '0000-00-00' && x.outstanding_type === 'B')">{{x.received_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td ng-if="(x.received_date === '0000-00-00' && x.outstanding_type === 'B')"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
 			                        	<td ng-if="x.outstanding_type === 'B'">{{(x.total_received - x.qty)|number:2}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->

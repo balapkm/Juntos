@@ -288,8 +288,11 @@ class PaymentBook extends CI_Controller
 		}
 		else
 		{
-			$this->data['cheque_number_id'] = $selectData[0]['cheque_number_id'];
-			return $this->PaymentBookQuery->update_cheque_number_details($this->data);
+			foreach ($selectData as $key => $value) {
+				$this->data['cheque_number_id'] = $value['cheque_number_id'];
+				$this->PaymentBookQuery->update_cheque_number_details($this->data);
+			}
+			return true;
 		}
 	}
 
