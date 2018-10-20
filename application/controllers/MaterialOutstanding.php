@@ -110,7 +110,7 @@ class MaterialOutstanding extends CI_Controller
 		{
 			$received      = $this->data['received'];
 			$received_data = $this->data['received_data'];
-			$cal_rec_data  = (int)$received_data + (int)$received;
+			$cal_rec_data  = $received_data + $received;
 			$balance       = $this->data['qty'] - $cal_rec_data;
 
 			$editData = array(
