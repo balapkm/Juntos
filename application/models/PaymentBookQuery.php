@@ -81,12 +81,6 @@ class PaymentBookQuery extends CI_Model
     }
     public function getPaymentBookData($data)
     {
-        if(empty($data['type'])) {
-            $data['type'] = 'specfic';
-        }
-        if(!empty($data['date'])) {
-            $date = explode("/",$data['date']);
-        }
         $sql = "SELECT 
                     sd.supplier_name,
                     sd.state_code,
@@ -101,19 +95,20 @@ class PaymentBookQuery extends CI_Model
                     outstanding_type = 'B' AND 
                     prd.bill_amount!=0 AND 
                     prd.bill_number!='' AND 
-                    prd.unit = '".$data['division']."' AND";
+                    prd.unit = '".$data['division']."'";
 
-        if($data['type'] == 'specfic')
+        if(!empty($data['supplier_name']))
         {
-            $sql.=  " prd.supplier_id = ".$data['supplier_name'];
+            $sql.=  " AND prd.supplier_id = ".$data['supplier_name'];
         }
-        if($data['type'] == 'date')
+
+        if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
-            $sql.=  " prd.payable_month BETWEEN '".$date[0]."' AND '".$date[1]."'";
+            $sql.=  " AND prd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
                                         
         $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc";
-       
+
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }
@@ -143,22 +138,26 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function getCreditDebitNoteDetails(){
+        $sql   = "SELECT * FROM debit_note_details dnd,supplier_details sd WHERE dnd.supplier_id=sd.supplier_id";                    
+        $data  = $this->db->query(trim($sql))->result_array();
+        return $data;
+    }
+
     public function getDebitNoteListData($data){
-        if(empty($data['type'])) {
-            $data['type'] = 'specfic';
-        }
-        $sql = "SELECT * FROM debit_note_details WHERE";
-        if(!empty($data['date'])) {
-            $date = explode("/",$data['date']);
-        }
-        if($data['type'] == 'specfic')
+        
+        $sql = "SELECT * FROM debit_note_details WHERE division = '".$data['division']."'";
+        
+        if(!empty($data['supplier_name']))
         {
-            $sql.=  " supplier_id = ".$data['supplier_name'];
+            $sql.=  " AND supplier_id = ".$data['supplier_name']."";
         }
-        if($data['type'] == 'date')
+
+        if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
-            $sql.=  " payable_month BETWEEN '".$date[0]."' AND '".$date[1]."'";
+            $sql.=  " AND payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
+
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
@@ -213,22 +212,20 @@ class PaymentBookQuery extends CI_Model
 
     public function select_all_cheque_number_details($data)
     {
-        if(empty($data['type'])) {
-            $data['type'] = 'specfic';
-        }
         $sql = "SELECT * FROM cheque_number_details WHERE";
-        if(!empty($data['date'])) {
-            $date = explode("/",$data['date']);
-        }
-        $sql.=  " unit= '".$data['division']."' AND";
-        if($data['type'] == 'specfic')
+        
+        $sql.=  " unit= '".$data['division']."'";
+
+        if(!empty($data['supplier_name']))
         {
-            $sql.=  " supplier_id = ".$data['supplier_name'];
+            $sql.=  " AND supplier_id = ".$data['supplier_name'];
         }
-        if($data['type'] == 'date')
+
+        if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
-            $sql.=  " payable_month BETWEEN '".$date[0]."' AND '".$date[1]."'";
+            $sql.=  " AND payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
+
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

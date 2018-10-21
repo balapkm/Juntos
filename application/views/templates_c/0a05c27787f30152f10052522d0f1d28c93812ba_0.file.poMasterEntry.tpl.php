@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-09-15 17:55:36
+/* Smarty version 3.1.30, created on 2018-10-21 20:54:09
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b9cfa4074f669_19642561',
+  'unifunc' => 'content_5bcc9a194bd633_80449333',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1537014325,
+      1 => 1540135445,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b9cfa4074f669_19642561 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bcc9a194bd633_80449333 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -37,19 +37,53 @@ function content_5b9cfa4074f669_19642561 (Smarty_Internal_Template $_smarty_tpl)
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
-	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
+	              <li><a href="#tab_4" data-toggle="tab"  ng-click="search_material_master_name()">Material Master</a></li>
 	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 				        <div class="row">
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
+				        	<div class="col-lg-4"></div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Supplier Name</label>
+				                  <select id="supplier_name_select3" ng-model="supplierNameSearchDetails.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
+				                  	   <option value="">Choose Supplier Name</option>
+				                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+					                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4"></div>
+				        </div>
+				        <div class="row">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_supplier_name()">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_supplier()">
 				                </div>
 				        	</div>
+				       	</div>
+				       	<div class="row">
 				        	<div class="col-lg-12">
-				        		<div class="table-responsive">
+				        		<div class="table-responsive" ng-if="supplierNameDetailsShow">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
 					                    <thead>
 					                        <tr>
@@ -74,56 +108,28 @@ function content_5b9cfa4074f669_19642561 (Smarty_Internal_Template $_smarty_tpl)
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                    	<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-					                        <tr>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['alt_supplier_name'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_address'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['alt_supplier_address'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_code'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['origin'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['alternative_origin'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['contact_no'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['email_id'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['gst_no'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['state_code'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_tax_status'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_status'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['bank_details'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payment_to'];?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payment_type'];?>
-</td>
-					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Edit</button>
+					                        <tr ng-repeat="v in supplierNameDetails track by $index">
+					                          <td>{{v.supplier_name}}</td>
+					                          <td>{{v.alt_supplier_name}}</td>
+					                          <td>{{v.supplier_address}}</td>
+					                          <td>{{v.alt_supplier_address}}</td>
+					                          <td>{{v.supplier_code}}</td>
+					                          <td>{{v.origin}}</td>
+					                          <td>{{v.alternative_origin}}</td>
+					                          <td>{{v.contact_no}}</td>
+					                          <td>{{v.email_id}}</td>
+					                          <td>{{v.gst_no}}</td>
+					                          <td>{{v.state_code}}</td>
+					                          <td>{{v.supplier_tax_status}}</td>
+					                          <td>{{v.supplier_status}}</td>
+					                          <td>{{v.bank_details}}</td>
+					                          <td>{{v.payment_to}}</td>
+					                          <td>{{v.payment_type}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='supplierEditClick(v)'>Edit</button>
 					                          </td>
 			                          		  <!-- <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
 )'>Delete</button></td> -->
 					                        </tr>
-					                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
 					                    </tbody>
 					                </table>
 					            </div>
@@ -131,6 +137,67 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        </div>
 	              	</div>
 	              	<div class="tab-pane" id="tab_2">
+	              		<div class="row">
+				        	<div class="col-lg-3"></div>
+				        	<div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Supplier Name</label>
+				                  <select id="supplier_name_select4" ng-model="materialNameSearchDetails.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
+				                  	   <option value="">Choose Supplier Name</option>
+				                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+					                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select id="material_name_select3" ng-model="materialNameSearchDetails.material_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select3')">
+				                  	   <option value="">Choose Material Name</option>
+				                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</option>
+					                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3"></div>
+				        </div>
+				        <div class="row">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_material_name()">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
+				                </div>
+				        	</div>
+				       	</div>
 				        <div class="row">
 				        	<form action="PoMasterEntry/importData" method="post" enctype="multipart/form-data" target="_blank">
 					        	<div class="col-lg-4">
@@ -140,13 +207,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 								    <input type="submit" class="form-control btn btn-success" value="Upload CSV" name="submit">
 					        	</div>
 				        	</form>
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
-				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
-				                </div>
-				        	</div>
-				        	<div class="col-lg-12">
-				        		<div class="table-responsive">
+				        	
+				        	<div class="col-lg-12" style="margin-top: 10px">
+				        		<div class="table-responsive" ng-if="materialNameDetailsShow">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
 					                    <thead>
 					                        <tr>
@@ -169,58 +232,29 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_entry']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-						                        <tr>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_master_name'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_hsn_code'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['group'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['currency'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['price'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['CGST'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['SGST'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['IGST'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['discount_price_status'];?>
-</td>
-						                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['discount'];?>
-</td>
-						                          <td><button class="btn btn-primary btn-sm" onclick='materialEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Edit</button>
-						                          </td>
-						                          
-				                          		  <td>
-				                          		  	<?php if ($_smarty_tpl->tpl_vars['v']->value['show_delete'] == 'Y') {?>
-				                          		  	<button class="btn btn-primary btn-sm" onclick='materialDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Delete</button>
-				                          		  	<?php }?>
-				                          		  </td>
-				                          		  
-						                        </tr>
-						                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
+					                        <tr ng-repeat="v in materialNameDetails">
+					                          <td>{{v.material_id}}</td>
+					                          <td>{{v.supplier_name}}</td>
+					                          <td>{{v.material_master_name}}</td>
+					                          <td>{{v.material_hsn_code}}</td>
+					                          <td>{{v.material_uom}}</td>
+					                          <td>{{v.group}}</td>
+					                          <td>{{v.currency}}</td>
+					                          <td>{{v.price}}</td>
+					                          <td>{{v.price_status}}</td>
+					                          <td>{{v.CGST}}</td>
+					                          <td>{{v.SGST}}</td>
+					                          <td>{{v.IGST}}</td>
+					                          <td>{{v.discount_price_status}}</td>
+					                          <td>{{v.discount}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='materialEditClick(v)'>Edit</button>
+					                          </td>
+					                          
+			                          		  <td>
+			                          		  	<button ng-if="v.show_delete === 'Y'" class="btn btn-primary btn-sm" ng-click='materialDeleteClick(v)'>Delete</button>
+			                          		  </td>
+			                          		  
+					                        </tr>
 					                    </tbody>
 					                </table>
 					            </div>
@@ -274,12 +308,47 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        </div>
 	              	</div>
 	              	<div class="tab-pane" id="tab_4">
+	              		<!-- <div class="row">
+				        	<div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select id="material_name_select4" ng-model="materialMasterNameSearchDetails.material_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select3')">
+				                  	   <option value="">Choose Material Name</option>
+				                  	   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_entry']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+					                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
+</option>
+					                  	<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4"></div>
+				        </div> -->
 				        <div class="row">
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<!-- <div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_material_master_name()">
+				                </div> -->
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addMaterialMaster()">
 				                </div>
 				        	</div>
+				       	</div>
+
+				        <div class="row">
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="mm_table">
@@ -292,31 +361,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                    	<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-					                        <tr>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['k']->value+1;?>
-</td>
-					                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</td>
-					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Edit</button></td>
+					                        <tr ng-repeat="x in materialMasterNameDetails">
+					                          <td>{{$index+1}}</td>
+					                          <td>{{x.material_name}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='materialMasterEditClick(x)'>Edit</button></td>
 			                          		  <td>
-			                          		  	<?php if ($_smarty_tpl->tpl_vars['v']->value['show_delete'] == 'Y') {?>
-			                          		  	<button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)'>Delete</button>
-			                          		  	<?php }?>
+			                          		  	<button ng-if="x.show_delete === 'Y'" class="btn btn-primary btn-sm" ng-click='materialMasterDeleteClick(x)'>Delete</button>
 			                          		  </td>
 					                        </tr>
-					                        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
 					                    </tbody>
 					                </table>
 					            </div>

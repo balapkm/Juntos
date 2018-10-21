@@ -1,18 +1,20 @@
+[[assign var=serialCount value= 0]]
 [[foreach from=$result key=k1 item=v1]]
+	[[assign var=serialCount value=($serialCount + 1)]]
 	<div style="overflow-x:auto;margin-top: 50px;">
 		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>
 			[[assign var="dateValue" value="_"|explode:$k1]]
 			[[assign var="PMDate" value=$dateValue[0] ]]
-			<b>Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
+			<b><span class="badge">[[$serialCount]]</span> Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
 			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
 			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 			</b>
 		</h5>
 		[[else]]
 		<h5>
-			<b>Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
+			<b><span class="badge">[[$serialCount]]</span> Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
 			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[$lastDateOfMonth]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
 			</b>
 			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
@@ -43,7 +45,7 @@
 				          <th>BILL DATE</th>
 				          <th style="background-color: yellow;">PAYABLE MONTH</th>
 				          <th>Bill Amount</th>
-				          <th>DEDC.</th>
+				          <!-- <th>DEDC.</th> -->
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
 				          <th>CHEQUE AMOUNT</th>
@@ -69,31 +71,31 @@
 									</td>
 						          	<td rowspan="[[$v3|@count]]">[[$v4.s_no]]</td>
 					          	  [[/if]]
-						          <td>[[$v4.material_hsn_code]]</td>
-						          <td>[[$v4.CGST|number_format:2]]</td>
-						          <td>[[$v4.SGST|number_format:2]]</td>
-						          <td>[[$v4.IGST|number_format:2]]</td>
-						          <td>[[$v4.received]]</td>
-						          <td width="20%">[[$v4.material_name]]</td>
-						          <td>[[$v4.material_uom]]</td>
-						          <td>[[$v4.price|number_format:2]]</td>
-						          <td>[[$v4.po_number]]</td>
-						          <td>[[$v4.dc_number]]</td>
-						          <td>[[$v4.avg_cost|number_format:2]]</td>
+						          <td style="text-align: center;">[[$v4.material_hsn_code]]</td>
+						          <td style="text-align: center;">[[$v4.CGST|number_format:2]]</td>
+						          <td style="text-align: center;">[[$v4.SGST|number_format:2]]</td>
+						          <td style="text-align: center;">[[$v4.IGST|number_format:2]]</td>
+						          <td style="text-align: center;">[[$v4.received|number_format:2]]</td>
+						          <td width="20%" style="text-align: left;">[[$v4.material_name]]</td>
+						          <td style="text-align: center;">[[$v4.material_uom]]</td>
+						          <td style="text-align: right;">[[$v4.price|number_format:2]]</td>
+						          <td style="text-align: center;">[[$v4.po_number]]</td>
+						          <td style="text-align: center;">[[$v4.dc_number]]</td>
+						          <td style="text-align: right;">[[$v4.avg_cost|number_format:2]]</td>
 						          [[if $k4 eq 0]]
-						          	  <td rowspan="[[$v3|@count]]">[[$v4.query]]</td>
-							          <td rowspan="[[$v3|@count]]">[[$v4.bill_number]]</td>
-							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.bill_date|date_format:"%d-%m-%Y"]]</td>
+						          	  <td rowspan="[[$v3|@count]]" style="text-align: center;">[[$v4.query]]</td>
+							          <td rowspan="[[$v3|@count]]" style="text-align: center;">[[$v4.bill_number]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="text-align: center;">[[$v4.bill_date|date_format:"%d-%m-%Y"]]</td>
 							          [[if $v4.payable_month neq '0000-00-00']]
-							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$v4.payable_month|date_format:"%d-%m-%Y"]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;text-align: center;">[[$v4.payable_month|date_format:"%d-%m-%Y"]]</td>
 							          [[else]]
-							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;">[[$lastDateOfMonth|date_format:"%d-%m-%Y"]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="background-color: yellow;text-align: center;">[[$lastDateOfMonth|date_format:"%d-%m-%Y"]]</td>
 							          [[/if]]
-							          <td rowspan="[[$v3|@count]]">[[$v4.bill_amount|number_format:2]]</td>
-							          <td rowspan="[[$v3|@count]]">[[$v4.deduction]]</td>
-							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_no]]</td>
-							          <td rowspan="[[$v3|@count]]" class="datetd">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
-							          <td rowspan="[[$v3|@count]]">[[$v4.cheque_amount|number_format:2]]</td>
+							          <td rowspan="[[$v3|@count]]" style="text-align: right;">[[$v4.bill_amount|number_format:2]]</td>
+							          <!-- <td rowspan="[[$v3|@count]]" >[[$v4.deduction]]</td> -->
+							          <td rowspan="[[$v3|@count]]" style="text-align: center;">[[$v4.cheque_no]]</td>
+							          <td rowspan="[[$v3|@count]]" class="datetd" style="text-align: center;">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
+							          <td rowspan="[[$v3|@count]]" style="text-align: right;">[[$v4.cheque_amount|number_format:2]]</td>
 							          <!-- <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td> -->
@@ -104,12 +106,12 @@
 				        [[/foreach]]
 				        <tr>
 				        	<td colspan="16"></td>
-				        	<td><b>Total</b></td>
-				        	<td><b>[[$totalAmount|number_format:2]]</b></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
-				        	<td></td>
+				        	<!-- <td></td> -->
 				        	<!-- <td></td>
 				        	<td></td>
 				        	<td></td> -->
@@ -120,7 +122,7 @@
 				    [[if $k2 eq 'debitNoteList']]
 				    <thead>
 		                <tr>
-		                  <th>Delete</th>
+		                  <th></th>
 		                  <th>S.No</th>
 		                  <th colspan="3" style="text-align: center;">TYPE</th>
 		                  <th>DEBIT NOTE NO.</th>
@@ -133,7 +135,7 @@
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
-		                  <th></th>
+		                  <!-- <th></th> -->
 		                  <!-- <th></th>
 		                  <th></th>
 		                  <th></th> -->
@@ -143,9 +145,9 @@
 		            	[[foreach from=$v2 key=k3 item=v3]]
 		                <tr>
 		                      <td style="text-align: center;">
-		                      	<a href="#" onclick='deleteDepositDetails([[$v3|@json_encode]])''>
+		                      	<!-- <a href="#" onclick='deleteDepositDetails([[$v3|@json_encode]])''>
 						          <span class="glyphicon glyphicon-trash"></span>
-						        </a>
+						        </a> -->
 		                      </td>
 
 		                      [[if $v3.type==='D']]
@@ -175,7 +177,7 @@
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
-		                      <td></td>
+		                      <!-- <td></td> -->
 		                      <!-- <td></td>
 		                      <td></td>
 		                      <td></td> -->
@@ -199,7 +201,7 @@
 		            	<th>DATE</th>
 		            	<th>SUPPLIER PI NUMBER</th>
 		            	<th>DATE</th>
-		            	<th colspan="7" style="text-align: center;">QUERY</th>
+		            	<th colspan="6" style="text-align: center;">QUERY</th>
 		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
 		            	<th>AMOUNT</th>
 		            	<th></th>
@@ -232,13 +234,13 @@
 		            	<td class="datetd">[[$v3.supplier_date|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.supplier_pi_number]]</td>
 		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
-		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
+		            	<td colspan="6" style="text-align: center;">[[$v3.query]]</td>
 		            	<td class="datetd" style="background-color: yellow;">[[$k1|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.amount|number_format:2]]</td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
-		            	<td></td>
+		            	<!-- <td></td> -->
 		            	<!-- <td></td>
 		            	<td></td>
 		            	<td></td> -->
@@ -252,16 +254,16 @@
 		    		<tbody>
 		                <tr style="font-weight: bold;">
 				        	<td colspan="16"></td>
-				        	<td><b>Total</b></td>
-				        	<td><b>[[$totalAmount|number_format:2]]</b></td>
-				        	<td>[[$v2[0].deduction]]</td>
-				        	<td>[[$v2[0].cheque_no]]</td>
-				        	<td class="datetd">[[$v2[0].cheque_date|date_format:"%d-%m-%Y"]]</td>
-				        	<td>[[$v2[0].cheque_amount|number_format:2]]</td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
+				        	<!-- <td>[[$v2[0].deduction]]</td> -->
+				        	<td style="text-align: center;">[[$v2[0].cheque_no]]</td>
+				        	<td class="datetd" style="text-align: center;">[[$v2[0].cheque_date|date_format:"%d-%m-%Y"]]</td>
+				        	<td style="text-align: right;">[[$v2[0].cheque_amount|number_format:2]]</td>
 				        	<!-- <td>[[$v2[0].dd_number]]</td>
 				        	<td class="datetd">[[$v2[0].dd_date]]</td>
 				        	<td>[[$v2[0].dd_amount|number_format:2]]</td> -->
-				        	<td>[[($totalAmount - $v2[0].cheque_amount)|number_format:2]]</td>
+				        	<td style="text-align: right;">[[($totalAmount - $v2[0].cheque_amount)|number_format:2]]</td>
 				        </tr>
 		            </tbody>
 		            [[/if]]
@@ -280,8 +282,8 @@
 }
 
 .paymentBookListTable th,.paymentBookListTable td{
-    text-align: left;
-    padding: 5px 40px 5px 10px;
+    text-align: center;
+    padding: 5px 15px 5px 15px;
     border: 1px solid #000;
     font-size: 14px;
 }

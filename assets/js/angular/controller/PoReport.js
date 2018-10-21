@@ -1,17 +1,17 @@
 app.controller('PoReport',function($scope,validateService,commonService,httpService){
 	setTimeout(function(){
 		$('.select2').select2();
-		$('#datePicker,#datePicker1').daterangepicker({
+		$('#datePicker,#datePicker1,#datePicker2').daterangepicker({
 		      autoUpdateInput: false,
 		      locale: {
 		          cancelLabel: 'Clear'
 		      }
 		});
-		$('#datePicker,#datePicker1').on('apply.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1,#datePicker2').on('apply.daterangepicker', function(ev, picker) {
 		      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 		});
 
-		$('#datePicker,#datePicker1').on('cancel.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1,#datePicker2').on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		});
 
@@ -24,7 +24,7 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 	},1500)  
 
 	$scope.po_report = {
-		report_type : "report_4",
+		report_type : "report_7",
 		division : "",
 		type : "",
 		date_range : "",
@@ -34,7 +34,9 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		tax_type : "",
 		tax_perc : "",
 		po_number : "",
-		po_year : new Date().getFullYear()
+		po_year : new Date().getFullYear(),
+		origin : "",
+		deduction_query : ""
 	}
 
 	$scope.tabChange = function(report_type){
@@ -48,7 +50,10 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		material_id : true,
 		supplier_id : true,
 		order_ref   : true,
-		tax_type : true
+		tax_type : true,
+		po_number_show : true,
+		origin : true,
+		deduction_query : true
 	}
 
 	
@@ -87,29 +92,18 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 			}
 		}
 		
-		setTimeout(function(){
-			$('.select2').select2();
-			$('#datePicker').daterangepicker({
-			      autoUpdateInput: false,
-			      locale: {
-			          cancelLabel: 'Clear'
-			      }
-			});
-			$('#datePicker').on('apply.daterangepicker', function(ev, picker) {
-			      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
-			});
-
-			$('#datePicker').on('cancel.daterangepicker', function(ev, picker) {
-			      $(this).val('');
-			});
-		},100);
 	}
 
 	$scope.poDownloadAction = function(){
 		$scope.po_report.date_range = $("#datePicker").val();
 		if($scope.po_report.report_type === "report_4" || $scope.po_report.report_type === "report_5" || $scope.po_report.report_type === "report_6"){
 			$scope.po_report.date_range = $("#datePicker1").val();
-		}			
+		}	
+
+		if($scope.po_report.report_type === "report_8"){
+			$scope.po_report.date_range = $("#datePicker2").val();
+		}	
+
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
 		}
@@ -179,6 +173,11 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		if($scope.po_report.report_type === "report_4" || $scope.po_report.report_type === "report_5" || $scope.po_report.report_type === "report_6"){
 			$scope.po_report.date_range = $("#datePicker1").val();
 		}
+
+		if($scope.po_report.report_type === "report_8"){
+			$scope.po_report.date_range = $("#datePicker2").val();
+		}	
+
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
 		}

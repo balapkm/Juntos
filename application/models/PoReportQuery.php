@@ -319,6 +319,45 @@ class PoReportQuery extends CI_Model
         return $result;
     }
 
+    public function fetch_po_report_8($data)
+    {
+        $sql = "SELECT
+                    sd.supplier_name,
+                    sd.origin,
+                    dnd.type,
+                    dnd.debit_note_no,
+                    dnd.debit_note_date,
+                    dnd.supplier_creditnote,
+                    dnd.supplier_creditnote_date,
+                    dnd.query,
+                    dnd.payable_month,
+                    dnd.amount
+                FROM
+                    debit_note_details dnd,
+                    supplier_details sd
+                WHERE
+                    sd.supplier_id = dnd.supplier_id ";
+
+        if(!empty($data['supplier_id'])){
+            $sql .= "AND sd.supplier_id = ".$data['supplier_id'];
+        }
+
+        if(!empty($data['origin'])){
+            $sql .= "AND sd.origin = '".$data['origin']."'";
+        }
+
+        if(!empty($data['deduction_query'])){
+            $sql .= "AND dnd.query LIKE '%".$data['deduction_query']."%'";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
+            $sql .= "AND payable_month BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."'";
+        }
+
+        $result  = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
 }
 
 ?>

@@ -16,8 +16,9 @@ class PaymentBook extends CI_Controller
 
 	public function index()
 	{
-		$this->data['supplier_name_details'] = $this->PoGenerateQuery->getSupplierNameDetails();
-		$this->data['advancePaymentDetails'] = $this->PaymentBookQuery->getAdvancePaymentFullDetails();
+		$this->data['supplier_name_details']  = $this->PoGenerateQuery->getSupplierNameDetails();
+		$this->data['advancePaymentDetails']  = $this->PaymentBookQuery->getAdvancePaymentFullDetails();
+		$this->data['creditDebitNoteDetails'] = $this->PaymentBookQuery->getCreditDebitNoteDetails();
 		return $this->mysmarty->view('PaymentBook.tpl',$this->data,TRUE);
 	}
 
@@ -74,8 +75,10 @@ class PaymentBook extends CI_Controller
 
 	public function searchPaymentBookAction()
 	{
-		$finalResponse['supplier_id']     = $this->data['supplier_name'];
+		$finalResponse['supplier_id']     = empty($this->data['supplier_name'])?"":$this->data['supplier_name'];
 		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
+		$this->data['date']               = empty($this->data['date']) ? "" : explode("/",$this->data['date']);
+
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 		if(count($data) == 0)
@@ -313,6 +316,7 @@ class PaymentBook extends CI_Controller
 				"debit_note_no" =>  $this->data['debitnote_no'],
 				"debit_note_date" => $this->data['debitnote_date'],
 				"type" => $this->data['type'],
+				"division" => $this->data['division'],
 				"supplier_creditnote"   => $this->data['supplier_creditnote_no'],
 				"supplier_creditnote_date"     => $this->data['creditnote_date'],
 				"query"     => $this->data['query'],
@@ -325,8 +329,12 @@ class PaymentBook extends CI_Controller
 	public function downloadAsPdfPaymentBookDetails()
 	{
 		$this->data = $_GET;
-		if($this->data['type'] === 'specfic')
-			$finalResponse['suplier_id']  = $this->data['supplier_name'];
+		$finalResponse['supplier_id']     = empty($this->data['supplier_name'])?"":$this->data['supplier_name'];
+		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
+		$this->data['date']               = empty($this->data['date']) ? "" : explode("/",$this->data['date']);
+		$this->data['supplier_name']      = empty($this->data['supplier_name']) ? "" : $this->data['supplier_name'];
+		$this->data['supplier_name']      = ($this->data['supplier_name'] == 'undefined') ? "" : $this->data['supplier_name'];
+
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 

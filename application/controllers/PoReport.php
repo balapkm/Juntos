@@ -203,6 +203,34 @@ class PoReport extends CI_Controller
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","DC NO","DC DATE","DELIVERY DATE");
 		}
 
+		if($this->data['report_type'] == "report_8"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_8($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				if($value['type'] == 'D')
+					$data[$key]['type'] = 'DEBIT NOTE';
+				if($value['type'] == 'C')
+					$data[$key]['type'] = 'CREDIT NOTE';
+				if($value['type'] == 'B')
+					$data[$key]['type'] = 'BALANCE AMOUNT';
+				if($value['type'] == 'T')
+					$data[$key]['type'] = 'TDS';
+
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+			}
+			
+			$columArray = array("SUPPLIER_NAME","ORIGIN","TYPE","DEBIT NOTE NO","DATE","SUPPLIER CREDIT NOTE","DATE","QUERY","PAYABLE MONTH","AMOUNT");
+		}
+
 		if($this->data['action'] == 'view')
 		return array("data"=>$data,"columns"=>$columArray);
 

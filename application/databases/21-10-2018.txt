@@ -1,0 +1,2 @@
+ALTER TABLE `debit_note_details`
+ADD `division` varchar(15) NOT NULL AFTER `supplier_id`;

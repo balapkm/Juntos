@@ -12,14 +12,13 @@
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Advance payment</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">Credit Note / Debit Note</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
-
 	              		<div class="row">
 	              			<div class="col-lg-12" style="margin-top: 10px;">
-					            <div class="col-lg-3"></div>
-				                <div class="col-lg-3">
+				                <div class="col-lg-4" ng-init="generatePoData.division = 'UPPER'">
 				                	<div class="form-group">
 					                  <label for="exampleInputEmail1">Division</label>
 					                  <select class="form-control" id="division" ng-model="generatePoData.division">
@@ -30,21 +29,6 @@
 					                  </select>
 					                </div>
 				                </div>
-				                <div class="col-lg-3">
-				                	<div class="form-group">
-					                  <label for="exampleInputEmail1">Type</label>
-					                  <select class="form-control" id="division" ng-model="generatePoData.type">
-					                  	  <option value="">Choose Type</option>
-					                  	  <option value="specfic">Specfic</option>
-					                  	  <option value="date">Date</option>
-					                  </select>
-					                </div>
-				                </div>
-				                <div class="col-lg-3"></div>
-				            </div>
-				            <!-- Supplier Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'specfic'">
-					            <div class="col-lg-4"></div>
 				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
@@ -56,30 +40,21 @@
 					                  </select>
 					                </div>
 					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
-					         <!-- Date Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'date'">
-					            <div class="col-lg-4"></div>
-				                <div class="col-lg-4">
+					            <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Date Range</label>
 					                  <input type="text" id="dateRangePicker" class="form-control">
 					                </div>
 					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
-
+				            </div>
 				            
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name !== '' || generatePoData.type === 'date'">
+				            <div class="col-lg-12 text-center">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
 			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
 			        		<p align="right">
-				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()"  ng-if="generatePoData.type === 'specfic'">Add Advanced Payment</button>
-				        		<button type="button" class="btn btn-primary" ng-click="add_note()" ng-if="generatePoData.type === 'specfic'">Add Credit Note/Debit Note</button>
 				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails()">Download as PDF</button> 
 			        		</p>
 			       		</div>
@@ -89,6 +64,9 @@
 				        </div>
 				    </div>
 				    <div class="tab-pane" id="tab_2">
+				    	<p align="right">
+			        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
+		        		</p>
 	              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
 		                    <thead>
 		                        <tr>
@@ -110,6 +88,49 @@
 		                          <td>[[$v.supplier_date]]</td>
 		                          <td>[[$v.supplier_pi_number]]</td>
 		                          <td>[[$v.date]]</td>
+		                          <td>[[$v.query]]</td>
+		                          <td>[[$v.payable_month]]</td>
+		                          <td>[[$v.amount]]</td>
+		                        </tr>
+		                        [[/foreach]]
+		                    </tbody>
+		                </table>
+				    </div>
+				    <div class="tab-pane" id="tab_3">
+				    	<p align="right">
+			        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>
+		        		</p>
+	              		<table id="paymentBookExample1" class="table table-bordered table-striped" style="margin-top: 10px;">
+		                    <thead>
+		                        <tr>
+		                          <th>Action</th>
+		                          <th>Supplier Name</th>
+		                          <th>Type</th>
+		                          <th>Division</th>
+		                          <th>Debit Note No</th>
+		                          <th>Debit Note Date</th>
+		                          <th>Supplier Credit Note</th>
+		                          <th>Supplier Credit Note Date</th>
+		                          <th>Query</th>
+		                          <th>Payable Month</th>
+		                          <th>Amount</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	[[foreach from=$creditDebitNoteDetails key=k item=v]]
+		                        <tr>
+		                          <td style="text-align: center;">
+			                      	<a href="#" onclick='deleteDepositDetails([[$v|@json_encode]])''>
+							          <span class="glyphicon glyphicon-trash"></span>
+							        </a>
+			                      </td>
+		                          <td>[[$v.supplier_name]]</td>
+		                          <td>[[$v.type]]</td>
+		                          <td>[[$v.division]]</td>
+		                          <td>[[$v.debit_note_no]]</td>
+		                          <td>[[$v.debit_note_date]]</td>
+		                          <td>[[$v.supplier_creditnote]]</td>
+		                          <td>[[$v.supplier_creditnote_date]]</td>
 		                          <td>[[$v.query]]</td>
 		                          <td>[[$v.payable_month]]</td>
 		                          <td>[[$v.amount]]</td>
@@ -147,6 +168,28 @@
 			                  </select>
 			                </div>
 		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">Supplier Name</label>
+		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="addNoteData.supplier_id">
+		                  	  	<option value="">Choose Supplier Name</option>
+		                  	    [[foreach from=$supplier_name_details key=k item=v]]
+		                  			<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
+		                  	    [[/foreach]]
+			                </select>
+			            </div>
+		            </div>
+		            <div class="col-lg-4" ng-init="addNoteData.division = 'UPPER'">
+	                	<div class="form-group">
+		                  <label for="exampleInputEmail1">Division</label>
+		                  <select class="form-control" id="division" ng-model="addNoteData.division">
+		                  	  <option value="">Choose Division</option>
+		                  	  <option value="UPPER">UPPER</option>
+		                  	  <option value="FULL SHOE">FULL SHOE</option>
+		                  	  <option value="SOLE">SOLE</option>
+		                  </select>
+		                </div>
+	                </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Debit/Credit Note No</label>

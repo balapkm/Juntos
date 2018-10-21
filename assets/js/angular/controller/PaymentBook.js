@@ -71,7 +71,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.exampleDataTable = function()
     {
-        dataTableVariable = $('#paymentBookExample').DataTable({
+        dataTableVariable = $('#paymentBookExample,#paymentBookExample1').DataTable({
             dom: 'Brfrtip',
             buttons: [
                 'copy', 
@@ -89,15 +89,9 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     
     $scope.searchAction = function()
     {
+        if(validateService.blank($scope.generatePoData['division'],"Please Choose division","division")) return false;
         $scope.generatePoData['date'] = $('#dateRangePicker').val();
-        if(validateService.blank($scope.generatePoData['division'],"Please Enter division","division")) return false;
-        if(validateService.blank($scope.generatePoData['type'],"Please Enter type","type")) return false;
         
-        if($scope.generatePoData['type'] == "date")
-        {
-            $scope.generatePoData['supplier_name'] = "";
-            if(validateService.blank($scope.generatePoData['date'],"Please Enter date","dateRangePicker")) return false;
-        }
         var service_details = {
             method_name : "searchPaymentBookAction",
             controller_name : "PaymentBook",
@@ -345,7 +339,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                     httpService.callWebService(service_details).then(function(data){
                         if(data)
                         { 
-                            $scope.searchAction();
+                            $state.reload();
                             validateService.displayMessage('success','Data Removed Successfully','');
                         }
                         else
@@ -392,20 +386,12 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     }
 
     $scope.downloadAsPdfPaymentBookDetails = function(){
-        console.log($scope.generatePoData);
-        if($scope.generatePoData['type'] === 'date')
-        {
-            var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?date='+$scope.generatePoData['date']+'&division='+$scope.generatePoData['division']+'&type='+$scope.generatePoData['type'];
-        }
-        else
-        {
-            var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&division='+$scope.generatePoData['division']+'&type='+$scope.generatePoData['type'];
-        }
+        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&date='+$scope.generatePoData['date']+'&division='+$scope.generatePoData['division'];
         window.open(url);
     }
 
     $scope.update_note_details = function(){
-        $scope.addNoteData['supplier_id'] = $scope.generatePoData['supplier_name'];
+        // $scope.addNoteData['supplier_id'] = $scope.generatePoData['supplier_name'];
         if(validateService.blank($scope.addNoteData['type'],"Please select note type","type")) return false;
         if($scope.addNoteData['type'] !== 'B')
         {
@@ -426,7 +412,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             { 
                 $('#modal-backdrop').css('display','none');
                 validateService.displayMessage('success','Note Added Successfully','');
-                $scope.searchAction();
+                $state.reload();
                 $('#debit_credit_note_modal').modal('hide');
             }
             else

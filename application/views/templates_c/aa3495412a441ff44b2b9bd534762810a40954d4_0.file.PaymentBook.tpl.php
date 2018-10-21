@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-06-24 12:42:34
+/* Smarty version 3.1.30, created on 2018-10-21 16:02:35
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b2f44627c74f7_20538842',
+  'unifunc' => 'content_5bcc55c37d9d84_30349968',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1529824306,
+      1 => 1540117949,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b2f44627c74f7_20538842 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bcc55c37d9d84_30349968 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -36,14 +36,13 @@ function content_5b2f44627c74f7_20538842 (Smarty_Internal_Template $_smarty_tpl)
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Report</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Advance payment</a></li>
+	              <li><a href="#tab_3" data-toggle="tab">Credit Note / Debit Note</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
-
 	              		<div class="row">
 	              			<div class="col-lg-12" style="margin-top: 10px;">
-					            <div class="col-lg-3"></div>
-				                <div class="col-lg-3">
+				                <div class="col-lg-4" ng-init="generatePoData.division = 'UPPER'">
 				                	<div class="form-group">
 					                  <label for="exampleInputEmail1">Division</label>
 					                  <select class="form-control" id="division" ng-model="generatePoData.division">
@@ -54,21 +53,6 @@ function content_5b2f44627c74f7_20538842 (Smarty_Internal_Template $_smarty_tpl)
 					                  </select>
 					                </div>
 				                </div>
-				                <div class="col-lg-3">
-				                	<div class="form-group">
-					                  <label for="exampleInputEmail1">Type</label>
-					                  <select class="form-control" id="division" ng-model="generatePoData.type">
-					                  	  <option value="">Choose Type</option>
-					                  	  <option value="specfic">Specfic</option>
-					                  	  <option value="date">Date</option>
-					                  </select>
-					                </div>
-				                </div>
-				                <div class="col-lg-3"></div>
-				            </div>
-				            <!-- Supplier Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'specfic'">
-					            <div class="col-lg-4"></div>
 				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
@@ -91,30 +75,21 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 					                  </select>
 					                </div>
 					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
-					         <!-- Date Wise -->
-				            <div class="col-lg-12" style="margin-top: 10px;" ng-show="generatePoData.type === 'date'">
-					            <div class="col-lg-4"></div>
-				                <div class="col-lg-4">
+					            <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Date Range</label>
 					                  <input type="text" id="dateRangePicker" class="form-control">
 					                </div>
 					            </div>
-					            <div class="col-lg-4"></div>
-					        </div>
-
+				            </div>
 				            
 				            <!-- Supplier Wise -->
-				            <div class="col-lg-12 text-center" ng-if="generatePoData.supplier_name !== '' || generatePoData.type === 'date'">
+				            <div class="col-lg-12 text-center">
 				            	<button type="submit" class="btn btn-primary" ng-click="searchAction()">Search</button>
 				            </div>
 				        </div>
 			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
 			        		<p align="right">
-				        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()"  ng-if="generatePoData.type === 'specfic'">Add Advanced Payment</button>
-				        		<button type="button" class="btn btn-primary" ng-click="add_note()" ng-if="generatePoData.type === 'specfic'">Add Credit Note/Debit Note</button>
 				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails()">Download as PDF</button> 
 			        		</p>
 			       		</div>
@@ -124,6 +99,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 				        </div>
 				    </div>
 				    <div class="tab-pane" id="tab_2">
+				    	<p align="right">
+			        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
+		        		</p>
 	              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
 		                    <thead>
 		                        <tr>
@@ -170,6 +148,69 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                    </tbody>
 		                </table>
 				    </div>
+				    <div class="tab-pane" id="tab_3">
+				    	<p align="right">
+			        		<button type="button" class="btn btn-primary" ng-click="add_note()">Add Credit Note/Debit Note</button>
+		        		</p>
+	              		<table id="paymentBookExample1" class="table table-bordered table-striped" style="margin-top: 10px;">
+		                    <thead>
+		                        <tr>
+		                          <th>Action</th>
+		                          <th>Supplier Name</th>
+		                          <th>Type</th>
+		                          <th>Division</th>
+		                          <th>Debit Note No</th>
+		                          <th>Debit Note Date</th>
+		                          <th>Supplier Credit Note</th>
+		                          <th>Supplier Credit Note Date</th>
+		                          <th>Query</th>
+		                          <th>Payable Month</th>
+		                          <th>Amount</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['creditDebitNoteDetails']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+		                        <tr>
+		                          <td style="text-align: center;">
+			                      	<a href="#" onclick='deleteDepositDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)''>
+							          <span class="glyphicon glyphicon-trash"></span>
+							        </a>
+			                      </td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['type'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['division'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['debit_note_no'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['debit_note_date'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_creditnote'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_creditnote_date'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['query'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['payable_month'];?>
+</td>
+		                          <td><?php echo $_smarty_tpl->tpl_vars['v']->value['amount'];?>
+</td>
+		                        </tr>
+		                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		                    </tbody>
+		                </table>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -199,6 +240,39 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                  </select>
 			                </div>
 		            </div>
+		            <div class="col-lg-4">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">Supplier Name</label>
+		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="addNoteData.supplier_id">
+		                  	  	<option value="">Choose Supplier Name</option>
+		                  	    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_name_details']->value, 'v', false, 'k');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
+?>
+		                  			<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['supplier_name'];?>
+</option>
+		                  	    <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+			                </select>
+			            </div>
+		            </div>
+		            <div class="col-lg-4" ng-init="addNoteData.division = 'UPPER'">
+	                	<div class="form-group">
+		                  <label for="exampleInputEmail1">Division</label>
+		                  <select class="form-control" id="division" ng-model="addNoteData.division">
+		                  	  <option value="">Choose Division</option>
+		                  	  <option value="UPPER">UPPER</option>
+		                  	  <option value="FULL SHOE">FULL SHOE</option>
+		                  	  <option value="SOLE">SOLE</option>
+		                  </select>
+		                </div>
+	                </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Debit/Credit Note No</label>

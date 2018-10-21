@@ -120,6 +120,16 @@ class PoMasterEntryQuery extends CI_Model
         return $this->objectToArray($data);
     }
 
+    public function search_supplier_name_details_new($data){
+        $sql = 'SELECT * FROM supplier_details WHERE status = "Y"';
+
+        if(!empty($data['supplier_id'])){
+            $sql .= ' AND supplier_id = "'.$data['supplier_id'].'"';
+        }
+        $data  = $this->db->query($sql)->result_array();
+        return $data;
+    }
+
     public function get_max_supplier_id()
     {
         $sql = 'SELECT MAX(supplier_id)+1 AS max_supplier_id FROM supplier_details';
@@ -207,6 +217,45 @@ class PoMasterEntryQuery extends CI_Model
             $data[$key]['material_name'] = str_replace('"',"",$data[$key]['material_name']);
             $data[$key]['material_name'] = str_replace("'","",$data[$key]['material_name']);
         }
+        return $data;
+    }
+
+    public function search_material_master_name_details_new($data){
+        $sql = 'SELECT * FROM material_master WHERE status = "Y"';
+
+        if(!empty($data['material_id'])){
+            $sql .= ' AND material_id = "'.$data['material_id'].'"';
+        }
+        $data  = $this->db->query($sql)->result_array();
+
+        $sql  ="SELECT
+                   material_master_id
+                FROM
+                    po_generated_request_details prd
+                WHERE 
+                    outstanding_type = 'M'
+                GROUP BY material_master_id";
+                    
+        $prdData  = $this->db->query($sql)->result_array();
+        $prdData  = array_column($prdData,"material_master_id");
+        
+        foreach ($data as $key => $value) 
+        {
+            if(in_array($value['material_id'],$prdData))
+            {
+                $data[$key]['show_delete'] = 'N';
+            }
+            else
+            {
+                $data[$key]['show_delete'] = 'Y';
+            }
+        }
+
+        foreach ($data as $key => $value) {
+            $data[$key]['material_name'] = str_replace('"',"",$data[$key]['material_name']);
+            $data[$key]['material_name'] = str_replace("'","",$data[$key]['material_name']);
+        }
+
         return $data;
     }
 
@@ -298,6 +347,58 @@ class PoMasterEntryQuery extends CI_Model
             }
         }
         return $this->objectToArray($data);
+    }
+
+    public function search_material_name_details_new($data){
+        $sql = "SELECT
+                   md.*,
+                   sd.state_code,
+                   sd.supplier_id,
+                   sd.supplier_name,
+                   sd.supplier_status,
+                   mm.material_name as material_master_name
+                FROM
+                   material_details md,
+                   material_master mm,
+                   supplier_details sd
+                WHERE
+                    md.material_master_id = mm.material_id AND
+                    sd.supplier_id = md.supplier_id";
+
+        if(!empty($data['supplier_id'])){
+            $sql .= ' AND md.supplier_id = "'.$data['supplier_id'].'"';
+        }
+
+        if(!empty($data['material_id'])){
+            $sql .= ' AND md.material_id = "'.$data['material_id'].'"';
+        }
+
+        $data  = $this->db->query($sql)->result_array();
+
+        $sql = "SELECT
+                   material_id
+                FROM
+                    po_generated_request_details prd
+                WHERE 
+                    outstanding_type = 'M'
+                GROUP BY material_id";
+                    
+        $prdData  = $this->db->query($sql)->result_array();
+        $prdData  = array_column($prdData,"material_id");
+
+        foreach ($data as $key => $value) 
+        {
+            if(in_array($value['material_id'],$prdData))
+            {
+                $data[$key]['show_delete'] = 'N';
+            }
+            else
+            {
+                $data[$key]['show_delete'] = 'Y';
+            }
+        }
+
+        return $data;
     }
 
     public function delete_supplier_entry($data)

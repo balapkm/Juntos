@@ -13,19 +13,42 @@
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
 	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
-	              <li><a href="#tab_4" data-toggle="tab">Material Master</a></li>
+	              <li><a href="#tab_4" data-toggle="tab"  ng-click="search_material_master_name()">Material Master</a></li>
 	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
 	            </ul>
 	            <div class="tab-content">
 	              	<div class="tab-pane active" id="tab_1">
 				        <div class="row">
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
+				        	<div class="col-lg-4"></div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Supplier Name</label>
+				                  <select id="supplier_name_select3" ng-model="supplierNameSearchDetails.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
+				                  	   <option value="">Choose Supplier Name</option>
+				                  	   [[foreach from=$supplier_entry key=k item=v]]
+					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
+					                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4"></div>
+				        </div>
+				        <div class="row">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_supplier_name()">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_supplier()">
 				                </div>
 				        	</div>
+				       	</div>
+				       	<div class="row">
 				        	<div class="col-lg-12">
-				        		<div class="table-responsive">
+				        		<div class="table-responsive" ng-if="supplierNameDetailsShow">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="supplier_table">
 					                    <thead>
 					                        <tr>
@@ -50,29 +73,27 @@
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                    	[[foreach from=$supplier_entry key=k item=v]]
-					                        <tr>
-					                          <td>[[$v.supplier_name]]</td>
-					                          <td>[[$v.alt_supplier_name]]</td>
-					                          <td>[[$v.supplier_address]]</td>
-					                          <td>[[$v.alt_supplier_address]]</td>
-					                          <td>[[$v.supplier_code]]</td>
-					                          <td>[[$v.origin]]</td>
-					                          <td>[[$v.alternative_origin]]</td>
-					                          <td>[[$v.contact_no]]</td>
-					                          <td>[[$v.email_id]]</td>
-					                          <td>[[$v.gst_no]]</td>
-					                          <td>[[$v.state_code]]</td>
-					                          <td>[[$v.supplier_tax_status]]</td>
-					                          <td>[[$v.supplier_status]]</td>
-					                          <td>[[$v.bank_details]]</td>
-					                          <td>[[$v.payment_to]]</td>
-					                          <td>[[$v.payment_type]]</td>
-					                          <td><button class="btn btn-primary btn-sm" onclick='supplierEditClick([[$v|@json_encode]])'>Edit</button>
+					                        <tr ng-repeat="v in supplierNameDetails track by $index">
+					                          <td>{{v.supplier_name}}</td>
+					                          <td>{{v.alt_supplier_name}}</td>
+					                          <td>{{v.supplier_address}}</td>
+					                          <td>{{v.alt_supplier_address}}</td>
+					                          <td>{{v.supplier_code}}</td>
+					                          <td>{{v.origin}}</td>
+					                          <td>{{v.alternative_origin}}</td>
+					                          <td>{{v.contact_no}}</td>
+					                          <td>{{v.email_id}}</td>
+					                          <td>{{v.gst_no}}</td>
+					                          <td>{{v.state_code}}</td>
+					                          <td>{{v.supplier_tax_status}}</td>
+					                          <td>{{v.supplier_status}}</td>
+					                          <td>{{v.bank_details}}</td>
+					                          <td>{{v.payment_to}}</td>
+					                          <td>{{v.payment_type}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='supplierEditClick(v)'>Edit</button>
 					                          </td>
 			                          		  <!-- <td><button class="btn btn-primary btn-sm" onclick='supplierDeleteClick([[$v|@json_encode]])'>Delete</button></td> -->
 					                        </tr>
-					                        [[/foreach]]
 					                    </tbody>
 					                </table>
 					            </div>
@@ -80,6 +101,45 @@
 				        </div>
 	              	</div>
 	              	<div class="tab-pane" id="tab_2">
+	              		<div class="row">
+				        	<div class="col-lg-3"></div>
+				        	<div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Supplier Name</label>
+				                  <select id="supplier_name_select4" ng-model="materialNameSearchDetails.supplier_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('supplier_name_select2')">
+				                  	   <option value="">Choose Supplier Name</option>
+				                  	   [[foreach from=$supplier_entry key=k item=v]]
+					                  		<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
+					                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select id="material_name_select3" ng-model="materialNameSearchDetails.material_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select3')">
+				                  	   <option value="">Choose Material Name</option>
+				                  	   [[foreach from=$material_entry key=k item=v]]
+					                  		<option value="[[$v.material_id]]">[[$v.material_name]]</option>
+					                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-3"></div>
+				        </div>
+				        <div class="row">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_material_name()">
+				                </div>
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
+				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
+				                </div>
+				        	</div>
+				       	</div>
 				        <div class="row">
 				        	<form action="PoMasterEntry/importData" method="post" enctype="multipart/form-data" target="_blank">
 					        	<div class="col-lg-4">
@@ -89,13 +149,9 @@
 								    <input type="submit" class="form-control btn btn-success" value="Upload CSV" name="submit">
 					        	</div>
 				        	</form>
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
-				                  <input type="button" class="btn btn-success" value="ADD" ng-click="add_material_click()">
-				                </div>
-				        	</div>
-				        	<div class="col-lg-12">
-				        		<div class="table-responsive">
+				        	
+				        	<div class="col-lg-12" style="margin-top: 10px">
+				        		<div class="table-responsive" ng-if="materialNameDetailsShow">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="material_table">
 					                    <thead>
 					                        <tr>
@@ -118,33 +174,29 @@
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                        [[foreach from=$material_entry key=k item=v]]
-						                        <tr>
-						                          <td>[[$v.material_id]]</td>
-						                          <td>[[$v.supplier_name]]</td>
-						                          <td>[[$v.material_master_name]]</td>
-						                          <td>[[$v.material_hsn_code]]</td>
-						                          <td>[[$v.material_uom]]</td>
-						                          <td>[[$v.group]]</td>
-						                          <td>[[$v.currency]]</td>
-						                          <td>[[$v.price]]</td>
-						                          <td>[[$v.price_status]]</td>
-						                          <td>[[$v.CGST]]</td>
-						                          <td>[[$v.SGST]]</td>
-						                          <td>[[$v.IGST]]</td>
-						                          <td>[[$v.discount_price_status]]</td>
-						                          <td>[[$v.discount]]</td>
-						                          <td><button class="btn btn-primary btn-sm" onclick='materialEditClick([[$v|@json_encode]])'>Edit</button>
-						                          </td>
-						                          
-				                          		  <td>
-				                          		  	[[if $v.show_delete eq 'Y']]
-				                          		  	<button class="btn btn-primary btn-sm" onclick='materialDeleteClick([[$v|@json_encode]])'>Delete</button>
-				                          		  	[[/if]]
-				                          		  </td>
-				                          		  
-						                        </tr>
-						                        [[/foreach]]
+					                        <tr ng-repeat="v in materialNameDetails">
+					                          <td>{{v.material_id}}</td>
+					                          <td>{{v.supplier_name}}</td>
+					                          <td>{{v.material_master_name}}</td>
+					                          <td>{{v.material_hsn_code}}</td>
+					                          <td>{{v.material_uom}}</td>
+					                          <td>{{v.group}}</td>
+					                          <td>{{v.currency}}</td>
+					                          <td>{{v.price}}</td>
+					                          <td>{{v.price_status}}</td>
+					                          <td>{{v.CGST}}</td>
+					                          <td>{{v.SGST}}</td>
+					                          <td>{{v.IGST}}</td>
+					                          <td>{{v.discount_price_status}}</td>
+					                          <td>{{v.discount}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='materialEditClick(v)'>Edit</button>
+					                          </td>
+					                          
+			                          		  <td>
+			                          		  	<button ng-if="v.show_delete === 'Y'" class="btn btn-primary btn-sm" ng-click='materialDeleteClick(v)'>Delete</button>
+			                          		  </td>
+			                          		  
+					                        </tr>
 					                    </tbody>
 					                </table>
 					            </div>
@@ -185,12 +237,36 @@
 				        </div>
 	              	</div>
 	              	<div class="tab-pane" id="tab_4">
+	              		<!-- <div class="row">
+				        	<div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				                <div class="form-group">
+				                  <label for="exampleInputEmail1">Material Name</label>
+				                  <select id="material_name_select4" ng-model="materialMasterNameSearchDetails.material_id" class="form-control select2" style="width: 100%;" ng-change="clearRedMark('material_name_select3')">
+				                  	   <option value="">Choose Material Name</option>
+				                  	   [[foreach from=$material_entry key=k item=v]]
+					                  		<option value="[[$v.material_id]]">[[$v.material_name]]</option>
+					                  	[[/foreach]]
+				                  </select>
+				                </div>
+				            </div>
+				            <div class="col-lg-4"></div>
+				        </div> -->
 				        <div class="row">
-				        	<div class="col-lg-12">
-				        		<div class="form-group pull-right">
+				            <div class="col-lg-4"></div>
+				            <div class="col-lg-4">
+				        		<!-- <div class="form-group text-center">
+				                  <input type="button" class="btn btn-success" value="Search" ng-click="search_material_master_name()">
+				                </div> -->
+				            </div>
+				            <div class="col-lg-4">
+				                <div class="form-group pull-right">
 				                  <input type="button" class="btn btn-success" value="ADD" ng-click="addMaterialMaster()">
 				                </div>
 				        	</div>
+				       	</div>
+
+				        <div class="row">
 				        	<div class="col-lg-12">
 				        		<div class="table-responsive">
 					                <table style="margin-top: 10px;" class="table table-bordered table-striped" id="mm_table">
@@ -203,18 +279,14 @@
 					                        </tr>
 					                    </thead>
 					                    <tbody>
-					                    	[[foreach from=$material_master_details key=k item=v]]
-					                        <tr>
-					                          <td>[[$k+1]]</td>
-					                          <td>[[$v.material_name]]</td>
-					                          <td><button class="btn btn-primary btn-sm" onclick='materialMasterEditClick([[$v|@json_encode]])'>Edit</button></td>
+					                        <tr ng-repeat="x in materialMasterNameDetails">
+					                          <td>{{$index+1}}</td>
+					                          <td>{{x.material_name}}</td>
+					                          <td><button class="btn btn-primary btn-sm" ng-click='materialMasterEditClick(x)'>Edit</button></td>
 			                          		  <td>
-			                          		  	[[if $v.show_delete eq 'Y']]
-			                          		  	<button class="btn btn-primary btn-sm" onclick='materialMasterDeleteClick([[$v|@json_encode]])'>Delete</button>
-			                          		  	[[/if]]
+			                          		  	<button ng-if="x.show_delete === 'Y'" class="btn btn-primary btn-sm" ng-click='materialMasterDeleteClick(x)'>Delete</button>
 			                          		  </td>
 					                        </tr>
-					                        [[/foreach]]
 					                    </tbody>
 					                </table>
 					            </div>

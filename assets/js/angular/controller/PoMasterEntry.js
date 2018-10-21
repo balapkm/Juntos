@@ -1,35 +1,8 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
-	$('#supplier_table,#mm_table,#uom_table').DataTable({
-					iDisplayLength: 100,
-			        dom: 'Brfrtip',
-			        buttons: [
-			            'copy', 
-			            'csv',
-			            {
-					        extend: 'excel',
-					        exportOptions: {
-					            columns: 'th:not(:last-child)'
-					        }
-					    }]});
-	$('#material_table').DataTable({
-					iDisplayLength: 100,
-			        dom: 'Brfrtip',
-			        buttons: [
-			            'copy', 
-			            {
-					        extend: 'csv',
-					        exportOptions: {
-					            columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
-					        }
-					    },
-			            {
-					        extend: 'excel',
-					        exportOptions: {
-					            columns: [1,2,3,4,5,6,7,8,9,10,11,12,13]
-					        }
-					    }]});
+	
+	
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');
 	setTimeout(function(){
@@ -139,6 +112,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		title : "Add Other Master Details",
 		button : "Add"
 	}
+	$scope.supplierNameSearchDetails = {};
 	$scope.otherTypeValueChange = function()
 	{
 		$scope.otherTypeValueShow = false;
@@ -253,6 +227,105 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
     		{
     			validateService.displayMessage('error','Duplicate Entry...',"");
     		}
+    	})
+	}
+	$scope.supplierNameDetailsShow  = false;
+	$scope.materialNameDetailsShow  = false;
+	$scope.materialMasterNameDetailsShow  = false;
+
+	var supplier_table_dataTable_id; 
+	var material_table_dataTable_id; 
+
+	$scope.load_supplier_table = function(){
+		supplier_table_dataTable_id = $('#supplier_table,#mm_table,#uom_table').DataTable({
+			iDisplayLength: 100,
+	        dom: 'Brfrtip',
+	        buttons: [
+	            'copy', 
+	            'csv',
+	            {
+			        extend: 'excel',
+			        exportOptions: {
+			            columns: 'th:not(:last-child)'
+			        }
+		}]});
+	}
+
+	$scope.load_material_table = function(){
+		material_table_dataTable_id = $('#material_table').DataTable({
+			iDisplayLength: 100,
+	        dom: 'Brfrtip',
+	        buttons: [
+	            'copy', 
+	            {
+			        extend: 'csv',
+			        exportOptions: {
+			            columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+			        }
+			    },
+	            {
+			        extend: 'excel',
+			        exportOptions: {
+			            columns: [1,2,3,4,5,6,7,8,9,10,11,12,13]
+			        }
+			    }]});
+	}
+
+	setTimeout(function(){
+		$scope.load_supplier_table();$scope.load_material_table();
+	},500)
+	
+	$scope.search_supplier_name = function(){
+		supplier_table_dataTable_id.destroy();
+		$scope.supplierNameDetailsShow = false;
+		$scope.supplierNameDetails = {};
+		var service_details = {
+	      method_name : "supplierNameSearchDetails",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.supplierNameSearchDetails)
+	    };
+	    
+    	httpService.callWebService(service_details).then(function(data){
+    		$scope.supplierNameDetailsShow = true;
+    		$scope.supplierNameDetails  = data;
+    		setTimeout(function(){$scope.load_supplier_table();},500)
+    	})
+
+	}
+	$scope.materialNameSearchDetails = {};
+	
+	$scope.search_material_name = function(){
+		material_table_dataTable_id.destroy();
+		$scope.materialNameDetailsShow = false;
+		$scope.materialNameDetails = {};
+		var service_details = {
+	      method_name : "materialNameSearchDetails",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.materialNameSearchDetails)
+	    };
+	    
+    	httpService.callWebService(service_details).then(function(data){
+    		$scope.materialNameDetailsShow = true;
+    		$scope.materialNameDetails  = data;
+    		setTimeout(function(){$scope.load_material_table();},500)
+    	})
+	}
+
+	$scope.materialMasterNameSearchDetails = {};
+	$scope.search_material_master_name = function(){
+		supplier_table_dataTable_id.destroy();
+		$scope.materialMasterNameDetailsShow = false;
+		$scope.materialMasterNameDetails = {};
+		var service_details = {
+	      method_name : "materialMasterNameSearchDetails",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify($scope.materialMasterNameSearchDetails)
+	    };
+	    
+    	httpService.callWebService(service_details).then(function(data){
+    		$scope.materialMasterNameDetailsShow = true;
+    		$scope.materialMasterNameDetails  = data;
+    		setTimeout(function(){$scope.load_supplier_table();},500)
     	})
 	}
 
