@@ -1,6 +1,7 @@
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;" onclick="downloadAsPdfPODetails()">Download as PDF</button>
+    <button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick="downloadAsHtmlPdfPODetailsAction()">Download as HTML PDF</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addPurchaseOrder([[$searchPoData[0]|@json_encode]])'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges([[$searchPoData[0]|@json_encode]])'>Add Additional Charges</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addOverAllDiscount([[$searchPoData[0]|@json_encode]])'>Add Overall Discount</button>

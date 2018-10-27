@@ -300,6 +300,11 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         window.open(url);
     }
 
+    $scope.downloadAsHtmlPdfPODetailsAction = function(){
+        var url = 'GeneratePo/downloadAsHtmlPdfPODetailsAction?po_number='+po_number+"&po_year="+po_year;
+        window.open(url);
+    }
+
     $scope.poEditClick = function(data){
         $scope.poEditFormData.po_description = data.po_description;
         $scope.poEditFormData.qty           = data.qty;
@@ -742,6 +747,13 @@ function deletePoDetails(data)
 function downloadAsPdfPODetails(){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.downloadAsPdfPODetails();
+    scope.$apply();
+}
+
+
+function downloadAsHtmlPdfPODetailsAction(){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.downloadAsHtmlPdfPODetailsAction();
     scope.$apply();
 }
 

@@ -283,6 +283,50 @@ class GeneratePo extends CI_Controller
 		fclose($fp); 
 	}
 
+	public function downloadAsHtmlPdfPODetailsAction()
+	{
+		$this->data = $_GET;
+		$po_number = explode("|",$this->data['po_number']);
+		$this->data['unit'] = $po_number[0];
+		$this->data['type'] = $po_number[1];
+		$this->data['po_number']       = $po_number[2];
+		$this->data['view_status']     = 'Download';
+		$this->data['searchPoData']    =  $this->PoGenerateQuery->getPoDataAsPerPONumber($this->data);
+
+		foreach ($this->data['searchPoData'] as $key => $value) {
+			if($value['qty'] == 0)
+			{
+				echo "<script>alert('Quantity should be  greater than zero');window.close();</script>";exit;
+			}
+		}
+		
+
+		$this->data['otherAdditionalCharges']    =  $this->PoGenerateQuery->getOtherChargeUsingPoNumber($this->data);
+		$this->data['importAdditionalCharges']   =  $this->PoGenerateQuery->getImportChargeUsingPoNumber($this->data);
+		$this->data['overAllDiscountDetails']    =  $this->PoGenerateQuery->getOverAllDiscountDetails($this->data);
+		$this->data['searchPoData'][0]['full_po_number'] = $po_number[3];
+		$filename    = date('YmdHis');
+		$footername  = "footer";
+		$headername  = "header";
+
+		$folder_name = realpath(APPPATH."../assets/po_html");
+		if($this->data['type'] == 'Indigenous' || $this->data['type'] == 'Sample_Indigenous')
+		{
+			$template_name = 'Indigenous_html_view.tpl';
+		}
+		else
+		{
+			$template_name = 'Import_html_view.tpl';
+		}
+
+		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$this->data,TRUE));
+		
+
+		chmod($folder_name."/".$filename.".html", 0777);
+
+		echo $this->mysmarty->view($template_name,$this->data,TRUE);exit;
+	}
+
 	public function getMaterialDetailsAsPerSupplier()
 	{
 		return $this->PoGenerateQuery->getMaterialDetailsAsPerSupplier($this->data['supplier_id']);

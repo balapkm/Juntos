@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-20 13:25:55
+/* Smarty version 3.1.30, created on 2018-10-27 19:28:42
   from "/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bcadf8b92e2a3_71856130',
+  'unifunc' => 'content_5bd46f1237fd71_23158623',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cac4af7b50381dde7dce2f4011951eff193008b' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/header_download.tpl',
-      1 => 1540022152,
+      1 => 1540646913,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bcadf8b92e2a3_71856130 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bd46f1237fd71_23158623 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <!DOCTYPE html>
@@ -42,36 +42,40 @@ table tr td, table tr th {
 }
 </style>
 <body>
-<?php if ($_smarty_tpl->tpl_vars['type']->value != 'Indigenous') {
-$_smarty_tpl->_assignInScope('OTCcolspanCalc', 7);
-if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {
-$_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
-}?>
+<?php if ($_smarty_tpl->tpl_vars['type']->value != 'Indigenous') {?>
+    <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', 7);
+?>
+    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+    <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
+?>
+    <?php }?>
 
-<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-        <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+2);
+    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+            <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+2);
 ?>
-    <?php } else { ?>
-        <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
+        <?php } else { ?>
+            <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
 ?>
+        <?php }?>
     <?php }
-}
-} else {
-$_smarty_tpl->_assignInScope('OTCcolspanCalc', 7);
-if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {
-$_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
-}?>
+} else { ?>
+    <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', 7);
+?>
+    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+    <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
+?>
+    <?php }?>
 
-<?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
-    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
-        <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+2);
+    <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
+        <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] == 33) {?>
+            <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+2);
 ?>
-    <?php } else { ?>
-        <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
+        <?php } else { ?>
+            <?php $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspanCalc']->value+1);
 ?>
+        <?php }?>
     <?php }
-}
 }?>
 <table cellspacing="0" cellpadding="0" border="0" style="height:100%;width:100%;">
     <tr> 
@@ -161,7 +165,7 @@ $_smarty_tpl->_assignInScope('OTCcolspanCalc', $_smarty_tpl->tpl_vars['OTCcolspa
         <td align="center" width="20%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
         <?php }?>
         <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['state_code'] != 33) {?>
-        <td align="center" width="33%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
+        <td align="center" width="30%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">DESCRIPTION</td>
         <?php }?>
         <?php if ($_smarty_tpl->tpl_vars['searchPoData']->value[0]['supplier_status'] != 'UNREGISTERED') {?>
         <td align="center" width="10%" style="font:bold arial,helvetica,verdana; color:#000;font-weight: bold;">HSN/SAC CODE</td>

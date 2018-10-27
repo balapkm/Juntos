@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-09-30 18:35:08
+/* Smarty version 3.1.30, created on 2018-10-27 18:43:50
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bb0ca04613327_41146882',
+  'unifunc' => 'content_5bd4648e804df4_62438105',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1535874599,
+      1 => 1540646007,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bb0ca04613327_41146882 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bd4648e804df4_62438105 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
 <div class="col-lg-12" style="margin-top: 50px;">
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;" onclick="downloadAsPdfPODetails()">Download as PDF</button>
+	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick="downloadAsHtmlPdfPODetailsAction()">Download as HTML PDF</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addPurchaseOrder(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>
 )'>Add Purchase Order</button>
 	<button class="btn btn-primary" style="float: right;margin-bottom: 10px;margin-right: 10px;" onclick='addAdditionalCharges(<?php echo json_encode($_smarty_tpl->tpl_vars['searchPoData']->value[0]);?>

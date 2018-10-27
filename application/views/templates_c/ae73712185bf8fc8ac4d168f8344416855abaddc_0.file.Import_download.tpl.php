@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-28 21:32:25
+/* Smarty version 3.1.30, created on 2018-10-27 19:28:42
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b8572114a5e54_41384673',
+  'unifunc' => 'content_5bd46f1225db23_86836713',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ae73712185bf8fc8ac4d168f8344416855abaddc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import_download.tpl',
-      1 => 1535379465,
+      1 => 1535874607,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b8572114a5e54_41384673 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bd46f1225db23_86836713 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -297,7 +297,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			</div>
 			<div style="width:60%;float:left">
 				<p style="font-weight:bold;color:#000;font-size:12px;line-height: 200px;">For T.M.Abdul Rahman & Sons</p>
-				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised & Signature</p>
+				<p style="font-weight:bold;color:#000;font-size:12px;margin-top: 20px;"> Authorised Signature</p>
 			</div>
 			<div style="clear: both;"></div>
      	</td>
