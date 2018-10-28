@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-08-09 09:04:33
+/* Smarty version 3.1.30, created on 2018-10-28 20:36:36
   from "/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5b6bb649b3c2c7_74218428',
+  'unifunc' => 'content_5bd5d07cb12cd1_90268274',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c1e8dafd631cd9eb3807d3faf584b9a92b117160' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/CoveringLetterPrint_download.tpl',
-      1 => 1530036768,
+      1 => 1540739179,
       2 => 'file',
     ),
   ),
@@ -20,16 +20,16 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b6bb649b3c2c7_74218428 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bd5d07cb12cd1_90268274 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <style>
 table td
 {
 	border-bottom:1px solid #000;
-	border-right:2px solid #000;
-	padding:4px 3px;
-	font-size: 12px;
+	border-right:4px solid #000;
+	padding:4px 2px;
+	font-size: 14px;
 }
 </style>
 <?php $_smarty_tpl->_assignInScope('totalAmount', 0);
@@ -86,17 +86,18 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 <span style="display: none;" id="GrandTotal"><?php echo $_smarty_tpl->tpl_vars['grandAmount']->value;?>
 </span>
+<span style="display: none;" id="ChequeTotal"><?php echo $_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_amount'];?>
+</span>
 <span style="display: none;" id="currencyCode"><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
 </span>
 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
 	<tr> 
-		<td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+		<td style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
-					</td>
-					<td width="45%" style="border:0px;"><h2 style="margin:2px;">T.M.ABDUL RAHMAN & SONS</h2>
-					<h4 style="font-weight: normal;margin-top:2px">FINISHED LEATHER & SHOES</h4></td>
+                    </td>
+                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
 					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
@@ -113,8 +114,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		</td>
 	</tr>
 </table>
-<div style="border: 1px solid black;width: 100%;margin:auto;font-size: 11px;">
-	<div style="margin-left: 20px;">
+<div style="border: 1px solid black;width: 100%;margin:auto;font-size: 14px;">
+	<div style="margin-left: 15px;">
 		<p><b>TO</b></p>
 		<p><b><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['supplier_name'];?>
 <br/><?php echo $_smarty_tpl->tpl_vars['data']->value[0]['origin'];?>
@@ -122,15 +123,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		<p style="text-align: right;margin-top: -45px;margin-right: 20px;"><b>Date : <?php echo smarty_modifier_date_format(time(),"%d-%m-%Y");?>
 </b></p>
 	</div>
-	<div style="margin-top: 50px;margin-left: 20px;">
+	<div style="margin-top: 50px;margin-left: 15px;">
 		<p><b>DEAR SIR,</b></p>
 		<?php if ($_smarty_tpl->tpl_vars['chequeData']->value[0]['dd_number'] != '') {?>
-			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
-. <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
+			<p style="text-indent: 50px;font-weight: normal;font-style: none;word-wrap: break-word;overflow-wrap: break-word;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+. <?php echo number_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_amount'],2);?>
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 			<?php } else { ?>
-			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
-. <?php echo number_format($_smarty_tpl->tpl_vars['grandAmount']->value,2);?>
+			<p style="text-indent: 50px;fon$chequeData[0].dd_numbert-weight: normal;font-style: none;word-wrap: break-word;overflow-wrap: break-word;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR <?php echo $_smarty_tpl->tpl_vars['data']->value[0]['currency'];?>
+. <?php echo number_format($_smarty_tpl->tpl_vars['chequeData']->value[0]['cheque_amount'],2);?>
  ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 		<?php }?>
 	</div>
@@ -277,14 +278,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
     font-weight: normal;
     padding: 5px 40px 5px 10px;
     border: 1px solid #000;
-    font-size: 14px;
+    font-size: 16px;
 }
 </style>
 
 <?php echo '<script'; ?>
 >
 	
-	var number = document.getElementById('GrandTotal').innerHTML;
+	var number = document.getElementById('ChequeTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
 	document.getElementById('numberToWord').innerHTML = number2text(number,currency);
     

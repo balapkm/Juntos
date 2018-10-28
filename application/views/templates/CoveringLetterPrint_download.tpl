@@ -2,9 +2,9 @@
 table td
 {
 	border-bottom:1px solid #000;
-	border-right:2px solid #000;
-	padding:4px 3px;
-	font-size: 12px;
+	border-right:4px solid #000;
+	padding:4px 2px;
+	font-size: 14px;
 }
 </style>
 [[assign var=totalAmount value=0]]
@@ -32,16 +32,16 @@ table td
 [[/if]]
 
 <span style="display: none;" id="GrandTotal">[[$grandAmount]]</span>
+<span style="display: none;" id="ChequeTotal">[[$chequeData[0].cheque_amount]]</span>
 <span style="display: none;" id="currencyCode">[[$data[0].currency]]</span>
 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
 	<tr> 
-		<td colspan="11" valign="top" style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
+		<td style="padding:0px;border-left:1px solid #000;border-top:1px solid #000;">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
-					</td>
-					<td width="45%" style="border:0px;"><h2 style="margin:2px;">T.M.ABDUL RAHMAN & SONS</h2>
-					<h4 style="font-weight: normal;margin-top:2px">FINISHED LEATHER & SHOES</h4></td>
+                    </td>
+                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
 					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
@@ -58,18 +58,18 @@ table td
 		</td>
 	</tr>
 </table>
-<div style="border: 1px solid black;width: 100%;margin:auto;font-size: 11px;">
-	<div style="margin-left: 20px;">
+<div style="border: 1px solid black;width: 100%;margin:auto;font-size: 14px;">
+	<div style="margin-left: 15px;">
 		<p><b>TO</b></p>
 		<p><b>[[$data[0].supplier_name]]<br/>[[$data[0].origin]]<b></p>
 		<p style="text-align: right;margin-top: -45px;margin-right: 20px;"><b>Date : [[$smarty.now|date_format:"%d-%m-%Y"]]</b></p>
 	</div>
-	<div style="margin-top: 50px;margin-left: 20px;">
+	<div style="margin-top: 50px;margin-left: 15px;">
 		<p><b>DEAR SIR,</b></p>
 		[[if $chequeData[0].dd_number neq '']]
-			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+			<p style="text-indent: 50px;font-weight: normal;font-style: none;word-wrap: break-word;overflow-wrap: break-word;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI DD FOR [[$data[0].currency]]. [[$chequeData[0].cheque_amount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 			[[else]]
-			<p style="text-indent: 50px;font-weight: normal;font-style: none">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR [[$data[0].currency]]. [[$grandAmount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
+			<p style="text-indent: 50px;fon$chequeData[0].dd_numbert-weight: normal;font-style: none;word-wrap: break-word;overflow-wrap: break-word;">WE ARE ENCLOSING HEREWITH WALAJAPET / SBI CHEQUE FOR [[$data[0].currency]]. [[$chequeData[0].cheque_amount|number_format:2]] ( <span id="numberToWord"></span> ) TOWARDS YOUR FOLLOWING INVOICES.</p>
 		[[/if]]
 	</div>
 	<div style="width: 90%;margin:auto;margin-top: 20px;">
@@ -157,13 +157,13 @@ table td
     font-weight: normal;
     padding: 5px 40px 5px 10px;
     border: 1px solid #000;
-    font-size: 14px;
+    font-size: 16px;
 }
 </style>
 
 <script>
 	[[literal]]
-	var number = document.getElementById('GrandTotal').innerHTML;
+	var number = document.getElementById('ChequeTotal').innerHTML;
 	var currency = document.getElementById('currencyCode').innerHTML;
 	document.getElementById('numberToWord').innerHTML = number2text(number,currency);
     
