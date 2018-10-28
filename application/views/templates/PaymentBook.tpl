@@ -120,7 +120,10 @@
 		                    	[[foreach from=$creditDebitNoteDetails key=k item=v]]
 		                        <tr>
 		                          <td style="text-align: center;">
-			                      	<a href="#" onclick='deleteDepositDetails([[$v|@json_encode]])''>
+		                          	<a href="#" onclick='editDepositDetails([[$v|@json_encode]])'>
+							          <span class="glyphicon glyphicon-edit"></span>
+							        </a>
+			                      	<a href="#" onclick='deleteDepositDetails([[$v|@json_encode]])'>
 							          <span class="glyphicon glyphicon-trash"></span>
 							        </a>
 			                      </td>
@@ -151,14 +154,13 @@
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Add Credit Note/Debit Note</h4>
+		        <h4 class="modal-title">{{depositDetailsModal.title}}</h4>
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Type</label>
-		                  <input type="hidden" ng-model="addNoteData.supplier_id" id="supplier_id">
 		                  <select class="form-control select2" style="width: 100%;" id="type" ng-model="addNoteData.type">
 		                  	  <option value="">Choose Type</option>
 		                  		<option value="D">DEBIT NOTE</option>
@@ -171,7 +173,7 @@
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">Supplier Name</label>
-		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="addNoteData.supplier_id">
+		                    <select class="form-control select2" style="width: 100%;" id="addNoteData_supplier_name" ng-model="addNoteData.supplier_id">
 		                  	  	<option value="">Choose Supplier Name</option>
 		                  	    [[foreach from=$supplier_name_details key=k item=v]]
 		                  			<option value="[[$v.supplier_id]]">[[$v.supplier_name]]</option>
@@ -202,7 +204,6 @@
 		                  <input type="text" ng-model="addNoteData.debitnote_date" class="form-control" id="debitnote_date" placeholder="Choose Debit note date">
 		                </div>
 		            </div>
-		           
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Debit/Credit Note</label>
@@ -237,7 +238,9 @@
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" ng-click="update_note_details()">Add Note</button>
+        		<button type="button" class="btn btn-primary" ng-click="update_note_details()" ng-if="depositDetailsModal.button === 'Add'">Add Note</button>
+
+        		<button type="button" class="btn btn-primary" ng-click="edit_update_note_details()" ng-if="depositDetailsModal.button === 'Edit'">Update</button>
         		
 	        </div>
 	    </div>

@@ -122,8 +122,8 @@
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Received Date</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Balance</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Excess Qty</th>
-			                          <th>Delivery Date</th>
-			                          <th>Delay Day</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Delivery Date</th>
+			                          <th ng-if="materialOutStanding[0].outstanding_type === 'M'">Delay Day</th>
 			                          <!-- <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Invoice Number</th> -->
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Number</th>
 			                          <th ng-if="materialOutStanding[0].outstanding_type === 'B'">Bill Date</th>
@@ -164,8 +164,8 @@
 			                        	<td ng-if="x.outstanding_type === 'M'">{{x.qty - x.received}}</td>
 			                        	<td ng-if="x.outstanding_type === 'B'">{{(x.total_received - x.qty)|number:2}}</td>
 			                        	<!-- <td ng-if="x.outstanding_type === 'B'">{{x.balance}}</td> -->
-			                        	<td>{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
-			                        	<td>{{x.delay_day}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'M'">{{x.delivery_date|date:'dd-MM-yyyy'}}</td>
+			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'M'">{{x.delay_day}}</td>
 			                        	<!-- <td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.invoice_number}}</td> -->
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_number}}</td>
 			                        	<td ng-if="materialOutStanding[0].outstanding_type === 'B'">{{x.bill_date}}</td>

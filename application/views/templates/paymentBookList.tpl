@@ -8,16 +8,16 @@
 			[[assign var="dateValue" value="_"|explode:$k1]]
 			[[assign var="PMDate" value=$dateValue[0] ]]
 			<b><span class="badge">[[$serialCount]]</span> Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
+			<a style="right: 25px;cursor: pointer;position: absolute;" onClick='editChequeNumberDetails({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
+			<a style="right: 60px;cursor: pointer;position: absolute;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$PMDate]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 			</b>
 		</h5>
 		[[else]]
 		<h5>
 			<b><span class="badge">[[$serialCount]]</span> Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='editChequeNumberDetails({"payable_month":"[[$lastDateOfMonth]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
+			<a style="right: 25px;cursor: pointer;position: absolute;" onClick='editChequeNumberDetails({"payable_month":"[[$lastDateOfMonth]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Edit</a>
 			</b>
-			<a style="margin-left: 20px;cursor: pointer;float: right;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
+			<a style="right: 60px;cursor: pointer;position: absolute;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 		</h5>
 		[[/if]]
 		[[/if]]

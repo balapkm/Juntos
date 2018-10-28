@@ -58,6 +58,13 @@ class PaymentBookQuery extends CI_Model
         return $this->db->insert('debit_note_details',$data);
     }
 
+    public function update_debit_note_details($data){
+        $id = $data['id'];
+        unset($data['id']);
+        $result = $this->db->update('debit_note_details',$data, array('s_no' => $id));
+        return $result;
+    }
+
     public function addAdvancePayment($data)
     {
         return $this->db->insert('advance_payment_details',$data);

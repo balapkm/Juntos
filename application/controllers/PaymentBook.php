@@ -326,6 +326,24 @@ class PaymentBook extends CI_Controller
 		return $this->PaymentBookQuery->insert_debit_note_details($addData);
 	}
 
+	public function updateNoteDetails()
+	{
+		$addData = array(
+				"id" => $this->data['s_no'],
+				"supplier_id" => $this->data['supplier_id'],
+				"debit_note_no" =>  $this->data['debitnote_no'],
+				"debit_note_date" => $this->data['debitnote_date'],
+				"type" => $this->data['type'],
+				"division" => $this->data['division'],
+				"supplier_creditnote"   => $this->data['supplier_creditnote_no'],
+				"supplier_creditnote_date"     => $this->data['creditnote_date'],
+				"query"     => $this->data['query'],
+				"payable_month"     => $this->data['payable_month'],
+				"amount"     => $this->data['amount']
+			);
+		return $this->PaymentBookQuery->update_debit_note_details($addData);
+	}
+
 	public function downloadAsPdfPaymentBookDetails()
 	{
 		$this->data = $_GET;

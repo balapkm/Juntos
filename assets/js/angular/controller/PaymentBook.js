@@ -126,7 +126,6 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         button : "Add"
     };
     $scope.add_advance_payment = function(){
-        console.log($scope.generatePoData);
         $scope.advancePaymentData = {};
         $scope.advancePaymentData.supplier_id = $scope.generatePoData.supplier_name;
         $('#advance_payment_modal').modal();
@@ -351,6 +350,58 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             });
     }
 
+    $scope.depositDetailsModal  = {};
+    $scope.depositDetailsModal = {
+        title  : "Add Credit Note/Debit Note",
+        button : "Add"
+    };
+    $scope.editDepositDetails = function(data){
+         $scope.depositDetailsModal = {
+            title  : "Edit Credit Note/Debit Note",
+            button : "Edit"
+        };
+        console.log(data);
+        $scope.addNoteData = data;
+        $scope.addNoteData['debitnote_no'] = data['debit_note_no'];
+        $scope.addNoteData['supplier_creditnote_no'] = data['supplier_creditnote'];
+        $scope.addNoteData['debitnote_date'] = data['debit_note_date'];
+        $scope.addNoteData['creditnote_date'] = data['supplier_creditnote_date'];
+        $('#type').select2().val(data.type).trigger("change");
+        $('#addNoteData_supplier_name').select2().val(data.supplier_id).trigger("change");
+        $scope.advancePaymentData = data;
+        $('#debit_credit_note_modal').modal();
+    }
+
+    $scope.edit_update_note_details = function(){
+        if(validateService.blank($scope.addNoteData['type'],"Please select note type","type")) return false;
+        if($scope.addNoteData['type'] !== 'B')
+        {
+            if(validateService.blank($scope.addNoteData['debitnote_no'],"Please Enter Debit note no","debitnote_no")) return false;
+            if(validateService.blank($scope.addNoteData['supplier_creditnote_no'],"Please Enter supplier creditnote no","supplier_creditnote_no")) return false;
+            if(validateService.blank($scope.addNoteData['query'],"Please Enter Query","query")) return false;
+        }
+        if(validateService.blank($scope.addNoteData['amount'],"Please Enter the amount","amount")) return false;
+        if(validateService.blank($scope.addNoteData['payable_month'],"Please Enter the payable_month","payable_month")) return false;
+
+        var service_details = {
+            method_name : "updateNoteDetails",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.addNoteData)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            { 
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Note Updated Successfully','');
+                $state.reload();
+                $('#debit_credit_note_modal').modal('hide');
+            }
+            else
+            {
+                validateService.displayMessage('error','Update Error',"");
+            }
+        });
+    }
    
 
     $scope.deleteAdvancePaymentDetails = function(data){
@@ -519,6 +570,12 @@ function deletePaymentList(data){
 function deleteDepositDetails(data){
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.deleteDepositDetailsFunction(data);
+    scope.$apply();
+}
+
+function editDepositDetails(data){
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editDepositDetails(data);
     scope.$apply();
 }
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-21 16:02:35
+/* Smarty version 3.1.30, created on 2018-10-27 22:24:55
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bcc55c37d9d84_30349968',
+  'unifunc' => 'content_5bd4985fe53d85_64949228',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa3495412a441ff44b2b9bd534762810a40954d4' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentBook.tpl',
-      1 => 1540117949,
+      1 => 1540658932,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bcc55c37d9d84_30349968 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bd4985fe53d85_64949228 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -176,8 +176,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 ?>
 		                        <tr>
 		                          <td style="text-align: center;">
+		                          	<a href="#" onclick='editDepositDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
+)'>
+							          <span class="glyphicon glyphicon-edit"></span>
+							        </a>
 			                      	<a href="#" onclick='deleteDepositDetails(<?php echo json_encode($_smarty_tpl->tpl_vars['v']->value);?>
-)''>
+)'>
 							          <span class="glyphicon glyphicon-trash"></span>
 							        </a>
 			                      </td>
@@ -223,14 +227,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Add Credit Note/Debit Note</h4>
+		        <h4 class="modal-title">{{depositDetailsModal.title}}</h4>
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Type</label>
-		                  <input type="hidden" ng-model="addNoteData.supplier_id" id="supplier_id">
 		                  <select class="form-control select2" style="width: 100%;" id="type" ng-model="addNoteData.type">
 		                  	  <option value="">Choose Type</option>
 		                  		<option value="D">DEBIT NOTE</option>
@@ -243,7 +246,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">Supplier Name</label>
-		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="addNoteData.supplier_id">
+		                    <select class="form-control select2" style="width: 100%;" id="addNoteData_supplier_name" ng-model="addNoteData.supplier_id">
 		                  	  	<option value="">Choose Supplier Name</option>
 		                  	    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['supplier_name_details']->value, 'v', false, 'k');
@@ -285,7 +288,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <input type="text" ng-model="addNoteData.debitnote_date" class="form-control" id="debitnote_date" placeholder="Choose Debit note date">
 		                </div>
 		            </div>
-		           
 		            <div class="col-lg-4">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Debit/Credit Note</label>
@@ -320,7 +322,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		    </div>
 	        <div class="modal-footer">
 	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" ng-click="update_note_details()">Add Note</button>
+        		<button type="button" class="btn btn-primary" ng-click="update_note_details()" ng-if="depositDetailsModal.button === 'Add'">Add Note</button>
+
+        		<button type="button" class="btn btn-primary" ng-click="edit_update_note_details()" ng-if="depositDetailsModal.button === 'Edit'">Update</button>
         		
 	        </div>
 	    </div>
