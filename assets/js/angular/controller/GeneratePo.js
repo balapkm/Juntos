@@ -66,14 +66,14 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
     $('.select2').select2();
     $('.select2_multiple').select2();
 
-    /*$(".select2_multiple").on("select2:select", function (evt) {
+    $(".select2_multiple").on("select2:select", function (evt) {
       var element = evt.params.data.element;
       var $element = $(element);
       
       $element.detach();
       $(this).append($element);
       $(this).trigger("change");
-    });*/
+    });
     
     $('.select2').next('.select2').find('.select2-selection').one('focus', select2Focus).on('blur', function () {
         $(this).one('focus', select2Focus)
@@ -242,7 +242,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
         $scope.generatePoData['quantity'] = [];
         $('#add_quantity_details').modal('show');
-        // console.log($scope.generatePoData);
+        console.log($scope.generatePoData);
         return false;
     }
 

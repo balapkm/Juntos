@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-03 20:16:21
+/* Smarty version 3.1.30, created on 2018-11-03 21:08:52
   from "/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bddb4bd171328_81475150',
+  'unifunc' => 'content_5bddc10c2848f0_68576635',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fad49f1289b2c7fcdb23a3de298e48e2992fc261' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Import.tpl',
-      1 => 1541256322,
+      1 => 1541256867,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bddb4bd171328_81475150 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bddc10c2848f0_68576635 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -170,8 +170,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 		         			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],4);?>
 <br/>
                             <?php if ($_smarty_tpl->tpl_vars['v']->value['price_status'] != 'FINAL') {?>
-		         			[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
- ]
+		         			<span style="font-size: 12px">[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
+ ]</span>
                             <?php }?>
 		         	</td>
 

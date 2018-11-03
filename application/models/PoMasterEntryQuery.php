@@ -439,7 +439,6 @@ class PoMasterEntryQuery extends CI_Model
 
     public function get_material_entry_in_array($material_id){
         $material_id = implode(",",$material_id);
-
         $sql = "SELECT
                    md.*,
                    mm.material_id as material_master_id
@@ -448,7 +447,9 @@ class PoMasterEntryQuery extends CI_Model
                    material_master mm
                 WHERE
                     md.material_master_id = mm.material_id AND
-                    md.material_id IN (".$material_id.")";
+                    md.material_id IN (".$material_id.")
+                    order by find_in_set(md.material_id,'".$material_id."')";
+
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
