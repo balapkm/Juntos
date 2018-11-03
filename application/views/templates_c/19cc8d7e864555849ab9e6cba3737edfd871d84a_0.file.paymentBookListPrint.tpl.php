@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-21 13:10:33
+/* Smarty version 3.1.30, created on 2018-11-03 20:47:21
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bcc2d7107c4f9_90401300',
+  'unifunc' => 'content_5bddbc017475c7_33419129',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19cc8d7e864555849ab9e6cba3737edfd871d84a' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl',
-      1 => 1540107607,
+      1 => 1541256121,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bcc2d7107c4f9_90401300 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bddbc017475c7_33419129 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <h2 class="text-center">Payment Book</h2>
@@ -160,8 +160,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 " class="datetd"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v4']->value['cheque_date'],"%d-%m-%Y");?>
 </td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
-" style="text-align: right;"><?php echo number_format($_smarty_tpl->tpl_vars['v4']->value['cheque_amount'],2);?>
-</td>
+" style="text-align: right;"></td>
 							          <!-- <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "></td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>

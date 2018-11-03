@@ -810,7 +810,9 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$scope.material_form_data['material_name'] = $('#material_name_select2').val().toUpperCase();
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
-    	
+
+    	delete $scope.material_form_data['$$hashKey'];
+    	console.log($scope.material_form_data);
     	var supplier_id = $scope.material_form_data['supplier_id'].split('|');
     	if(supplier_id[2] === "REGISTERED")
     	{

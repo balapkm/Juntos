@@ -114,7 +114,7 @@ class PaymentBookQuery extends CI_Model
             $sql.=  " AND prd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
                                         
-        $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc";
+        $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc,sd.supplier_name asc";
 
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;

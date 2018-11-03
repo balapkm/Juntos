@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-28 18:46:04
+/* Smarty version 3.1.30, created on 2018-11-03 20:12:06
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bd5b69448db06_07959026',
+  'unifunc' => 'content_5bddb3be4b6d95_16078939',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1540732555,
+      1 => 1541256103,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bd5b69448db06_07959026 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bddb3be4b6d95_16078939 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_smarty_tpl->_assignInScope('serialCount', 0);
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
@@ -190,8 +190,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 " class="datetd" style="text-align: center;"><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['v4']->value['cheque_date'],"%d-%m-%Y");?>
 </td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
-" style="text-align: right;"><?php echo number_format($_smarty_tpl->tpl_vars['v4']->value['cheque_amount'],2);?>
-</td>
+" style="text-align: right;"></td>
 							          <!-- <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>
 "></td>
 							          <td rowspan="<?php echo count($_smarty_tpl->tpl_vars['v3']->value);?>

@@ -284,7 +284,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             if(validateService.blank($scope.editMaterialPOData['received'],"Please Enter Received Data","received")) return false;
             if(validateService.blank($scope.editMaterialPOData['received_date'],"Please Choose Received Date","received_date")) return false;
 
-            if(parseInt($scope.editMaterialPOData['received']) === 0){
+            if(($scope.editMaterialPOData['received']) === 0){
                 validateService.displayMessage('error',"Must give received data","Validation Error");
                 validateService.addErrorTag(["received"]);
                 return false;

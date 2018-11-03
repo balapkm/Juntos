@@ -95,7 +95,7 @@
 							          <!-- <td rowspan="[[$v3|@count]]" >[[$v4.deduction]]</td> -->
 							          <td rowspan="[[$v3|@count]]" style="text-align: center;">[[$v4.cheque_no]]</td>
 							          <td rowspan="[[$v3|@count]]" class="datetd" style="text-align: center;">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
-							          <td rowspan="[[$v3|@count]]" style="text-align: right;">[[$v4.cheque_amount|number_format:2]]</td>
+							          <td rowspan="[[$v3|@count]]" style="text-align: right;"></td>
 							          <!-- <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td> -->

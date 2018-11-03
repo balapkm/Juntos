@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-27 18:43:50
+/* Smarty version 3.1.30, created on 2018-11-03 20:24:17
   from "/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bd4648e804df4_62438105',
+  'unifunc' => 'content_5bddb6990fe8c1_71489290',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cc0a00a3b4cab63e4b76372bd24edd246697ad7f' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/Indigenous.tpl',
-      1 => 1540646007,
+      1 => 1541256848,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bd4648e804df4_62438105 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bddb6990fe8c1_71489290 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <hr/>
@@ -178,11 +178,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars[
 		         	<td align="center" width="7%" class="own-td-2"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_uom'];?>
 </td>
 		         	<td align="center" width="8%" class="own-td-2">
-		         			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],2);?>
+		         			<?php echo number_format($_smarty_tpl->tpl_vars['v']->value['price'],4);?>
 <br/>
 		         			<?php if ($_smarty_tpl->tpl_vars['v']->value['price_status'] != 'FINAL') {?>
-		         			[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
- ]
+		         			<span style="font-size: 12px">[ <?php echo $_smarty_tpl->tpl_vars['v']->value['price_status'];?>
+ ]</span>
                             <?php }?>
 		         	</td>
 

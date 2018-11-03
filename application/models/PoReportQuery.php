@@ -225,7 +225,7 @@ class PoReportQuery extends CI_Model
             $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
         }
 
-        $sql .= "prd.outstanding_type = 'B' AND";
+        $sql .= "prd.outstanding_type = 'M' AND";
         $sql .= "(prd.received - prd.qty) > 0";
 
         $result  = $this->db->query($sql)->result_array();

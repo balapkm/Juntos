@@ -308,13 +308,15 @@ class PoGenerateQuery extends CI_Model
         $sql = "SELECT 
                     sd.supplier_name,
                     sd.state_code,
+                    mm.material_name as material_master_name,
                     prd.*,
-                    DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day,
-                    prd.material_name as material_master_name
+                    DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
+                    prd.material_master_id = mm.material_id AND
                     prd.supplier_id = sd.supplier_id AND ";
 
         if(!empty($data['division'])){

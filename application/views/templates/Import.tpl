@@ -116,9 +116,9 @@
 		         	<td align="center" width="5%"  class="own-td-2">[[$v.qty]]</td>
 		         	<td align="center" width="7%" class="own-td-2">[[$v.material_uom]]</td>
 		         	<td align="center" width="8%" class="own-td-2">
-		         			[[$v.price|number_format:2]]<br/>
+		         			[[$v.price|number_format:4]]<br/>
                             [[if $v.price_status neq 'FINAL']]
-		         			[ [[$v.price_status]] ]
+		         			<span style="font-size: 12px">[ [[$v.price_status]] ]</span>
                             [[/if]]
 		         	</td>
 

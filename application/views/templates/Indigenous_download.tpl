@@ -72,9 +72,9 @@ table tr td, table tr th {
      	<td width="5%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.qty]]</td>
      	<td width="7%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">[[$v.material_uom]]</td>
      	<td width="8%" align="right" style="font:normal arial,helvetica,verdana; color:#000;font-weight: bold;">
-     			[[$v.price|number_format:2]]<br/>
+     			[[$v.price|number_format:4]]<br/>
      			[[if $v.price_status neq 'FINAL']]
-     			[ [[$v.price_status]] ]
+     			<span style="font-size: 12px">[ [[$v.price_status]] ]</span>
                 [[/if]]
      	</td>
 
