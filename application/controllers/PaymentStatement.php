@@ -22,6 +22,7 @@ class PaymentStatement extends CI_Controller
 
 	public function searchAction()
 	{
+		$this->data['payment_statement_month'] = explode('/',$this->data['payment_statement_month']);
 		$data = $this->PaymentStatementQuery->getSearchActionAsPerRequest($this->data);
 		if(count($data) == 0)
 		{

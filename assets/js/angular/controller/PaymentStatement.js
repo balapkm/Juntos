@@ -5,18 +5,27 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#payment_statement_month').datepicker({
-      autoclose: true,
-      format: "yyyy-mm",
-      viewMode: "months", 
-      minViewMode: "months"
-    });
+    setTimeout(function(){
+        $('.select2').select2();
+        $('#payment_statement_month').daterangepicker({
+              autoUpdateInput: false,
+              locale: {
+                  cancelLabel: 'Clear'
+              }
+        });
+        $('#payment_statement_month').on('apply.daterangepicker', function(ev, picker) {
+              $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
+        });
+
+        $('#payment_statement_month').on('cancel.daterangepicker', function(ev, picker) {
+              $(this).val('');
+        });
+    },1500)
 
     $scope.paymentStatementObject    = {};
     $scope.showPaymentStatmentSearch = false;
     $scope.paymentStatmentSearchData = [];
     
-    $('.select2').select2();
     var dataTableVariable;
     $scope.exampleDataTable = function()
     {
@@ -40,8 +49,11 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
     $scope.searchAction = function()
     {
         dataTableVariable.destroy();
+        $scope.paymentStatementObject.payment_statement_month = $("#payment_statement_month").val();
 
         if(validateService.blank($scope.paymentStatementObject['division'],"Please Enter division","division")) return false;
+        if(validateService.blank($scope.paymentStatementObject['payment_statement_month'],"Please Choose date range","payment_statement_month")) return false;
+        
         var service_details = {
             method_name : "searchAction",
             controller_name : "PaymentStatement",

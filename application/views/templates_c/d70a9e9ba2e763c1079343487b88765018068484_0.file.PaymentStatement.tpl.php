@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-19 19:12:41
+/* Smarty version 3.1.30, created on 2018-11-05 18:49:43
   from "/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bc9df511df4d6_08421339',
+  'unifunc' => 'content_5be0436f47bab4_41423909',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd70a9e9ba2e763c1079343487b88765018068484' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/PaymentStatement.tpl',
-      1 => 1539956555,
+      1 => 1541423973,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bc9df511df4d6_08421339 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5be0436f47bab4_41423909 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -56,8 +56,8 @@ function content_5bc9df511df4d6_08421339 (Smarty_Internal_Template $_smarty_tpl)
 				                </div>
 					            <div class="col-lg-3">
 					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Month</label>
-					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Month">
+					                  <label for="exampleInputEmail1">Date Range</label>
+					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Date Range">
 					                </div>
 					            </div>
 					            <div class="col-lg-3"></div>
@@ -116,6 +116,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                       <th>S.NO</th>
                       <th>PAGE NO</th>
                       <th>SUPPLIER</th>
+                      <th>PAYABLE MONTH</th>
                       <th>ORIGIN</th>
                       <th>PAYMENT MODE</th>
                       <th>AMOUNT</th>
@@ -134,6 +135,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
                     	<td>{{x.page_no}}</td>
                     	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
                     	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
+                    	<td>{{x.payable_month}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
                     	<td style="font-weight: bold;">{{x.total_amount | number:2}}</td>

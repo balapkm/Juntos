@@ -32,8 +32,8 @@
 				                </div>
 					            <div class="col-lg-3">
 					                <div class="form-group">
-					                  <label for="exampleInputEmail1">Month</label>
-					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Month">
+					                  <label for="exampleInputEmail1">Date Range</label>
+					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Date Range">
 					                </div>
 					            </div>
 					            <div class="col-lg-3"></div>
@@ -81,6 +81,7 @@
                       <th>S.NO</th>
                       <th>PAGE NO</th>
                       <th>SUPPLIER</th>
+                      <th>PAYABLE MONTH</th>
                       <th>ORIGIN</th>
                       <th>PAYMENT MODE</th>
                       <th>AMOUNT</th>
@@ -99,6 +100,7 @@
                     	<td>{{x.page_no}}</td>
                     	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
                     	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
+                    	<td>{{x.payable_month}}</td>
                     	<td>{{x.origin}}</td>
                     	<td>{{x.payment_type}}</td>
                     	<td style="font-weight: bold;">{{x.total_amount | number:2}}</td>

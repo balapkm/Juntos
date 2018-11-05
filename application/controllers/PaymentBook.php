@@ -172,7 +172,23 @@ class PaymentBook extends CI_Controller
 		}
 
 		$finalResponse['result'] = $result;
-		// print_r($finalResponse);exit;
+
+		//check balance amount
+		
+		foreach ($finalResponse['result'] as $key => $value) {
+			$totalAmount = 0;
+			foreach ($value['paymentBookList'] as $k1 => $v1) {
+				$totalAmount += $v1[0]['bill_amount'];
+			}
+			foreach ($value['debitNoteList'] as $k2 => $v2) {
+				if($v2['type'] == 'D' || $v2['type'] == 'T')
+					$totalAmount -= $v1[0]['amount'];
+				if($v2['type'] == 'C' || $v2['type'] == 'B')
+					$totalAmount += $v1[0]['amount'];
+			}
+			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
+		}
+		print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}

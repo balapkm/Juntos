@@ -26,7 +26,7 @@ class PaymentStatementQuery extends CI_Model
                 WHERE
                     sd.supplier_id  = cnd.supplier_id AND
                     cnd.unit = '".$data['division']."' AND
-                    cnd.payable_month BETWEEN '".$data['payment_statement_month']."-01' AND '".$data['payment_statement_month']."-31'
+                    cnd.payable_month BETWEEN '".$data['payment_statement_month'][0]."' AND '".$data['payment_statement_month'][1]."'
                     group by cnd.supplier_id";
         $result  = $this->db->query($sql)->result_array();
         
