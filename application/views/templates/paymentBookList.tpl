@@ -34,8 +34,8 @@
 				          <th>SGST</th>
 				          <th>IGST</th>
 				          <th>Received QTY</th>
-				          <th style="padding-right: 150px;width: 20%">MATERIAL NAME</th>
 				          <th>UOM</th>
+				          <th style="padding-right: 150px;width: 20%">MATERIAL NAME</th>
 				          <th>RATE</th>
 				          <th>PO NUMBER</th>
 				          <th>DC Number</th>
@@ -76,8 +76,8 @@
 						          <td style="text-align: center;">[[$v4.SGST|number_format:2]]</td>
 						          <td style="text-align: center;">[[$v4.IGST|number_format:2]]</td>
 						          <td style="text-align: center;">[[$v4.received|number_format:2]]</td>
-						          <td width="20%" style="text-align: left;">[[$v4.material_name]]</td>
 						          <td style="text-align: center;">[[$v4.material_uom]]</td>
+						          <td width="20%" style="text-align: left;">[[$v4.material_name]]</td>
 						          <td style="text-align: right;">[[$v4.price|number_format:2]]</td>
 						          <td style="text-align: center;">[[$v4.po_number]]</td>
 						          <td style="text-align: center;">[[$v4.dc_number]]</td>
@@ -249,6 +249,28 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
+
+		            [[if !empty($v1['balanceAmount'])]]
+		            [[if $k2 eq 'balanceAmount']]
+		            [[assign var=totalAmount value=($totalAmount + $v1['balanceAmount']) ]]
+		    		<tbody>
+		                <tr style="font-weight: bold;">
+				        	<td colspan="16"><b>Balance Amount</b></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b>[[$v1['balanceAmount']|number_format:2]]</b></td>
+				        	<!-- <td>[[$v2[0].deduction]]</td> -->
+				        	<td style="text-align: center;"></td>
+				        	<td class="datetd" style="text-align: center;"></td>
+				        	<td style="text-align: right;"></td>
+				        	<!-- <td>[[$v2[0].dd_number]]</td>
+				        	<td class="datetd">[[$v2[0].dd_date]]</td>
+				        	<td>[[$v2[0].dd_amount|number_format:2]]</td> -->
+				        	<td style="text-align: right;"></td>
+				        </tr>
+		            </tbody>
+		            [[/if]]
+		            [[/if]]
+
 		            [[if !empty($v1['paymentBookList'])]]
 	        		[[if $k2 eq 'chequeNumberDetails']]
 		    		<tbody>
@@ -268,6 +290,8 @@
 		            </tbody>
 		            [[/if]]
 		            [[/if]]
+
+
             [[/foreach]]
 		</table>
 	</div>

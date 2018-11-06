@@ -86,7 +86,7 @@ class PaymentBookQuery extends CI_Model
         $result = $this->db->update('po_generated_request_details',$data, array('bill_number' => $id));
         return $result;
     }
-    public function getPaymentBookData($data)
+    public function getPaymentBookData($data,$status='N')
     {
         $sql = "SELECT 
                     sd.supplier_name,
@@ -115,7 +115,7 @@ class PaymentBookQuery extends CI_Model
         }
                                         
         $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc,sd.supplier_name asc";
-
+        
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

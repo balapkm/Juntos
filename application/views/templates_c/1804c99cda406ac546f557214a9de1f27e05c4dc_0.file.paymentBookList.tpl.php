@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-03 20:12:06
+/* Smarty version 3.1.30, created on 2018-11-06 19:40:32
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bddb3be4b6d95_16078939',
+  'unifunc' => 'content_5be1a0d8f25d87_95037163',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1541256103,
+      1 => 1541513415,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bddb3be4b6d95_16078939 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5be1a0d8f25d87_95037163 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_smarty_tpl->_assignInScope('serialCount', 0);
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
@@ -85,8 +85,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k2']->value => $_smarty_tpl->tpl_vars
 				          <th>SGST</th>
 				          <th>IGST</th>
 				          <th>Received QTY</th>
-				          <th style="padding-right: 150px;width: 20%">MATERIAL NAME</th>
 				          <th>UOM</th>
+				          <th style="padding-right: 150px;width: 20%">MATERIAL NAME</th>
 				          <th>RATE</th>
 				          <th>PO NUMBER</th>
 				          <th>DC Number</th>
@@ -146,9 +146,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k4']->value => $_smarty_tpl->tpl_vars
 </td>
 						          <td style="text-align: center;"><?php echo number_format($_smarty_tpl->tpl_vars['v4']->value['received'],2);?>
 </td>
-						          <td width="20%" style="text-align: left;"><?php echo $_smarty_tpl->tpl_vars['v4']->value['material_name'];?>
-</td>
 						          <td style="text-align: center;"><?php echo $_smarty_tpl->tpl_vars['v4']->value['material_uom'];?>
+</td>
+						          <td width="20%" style="text-align: left;"><?php echo $_smarty_tpl->tpl_vars['v4']->value['material_name'];?>
 </td>
 						          <td style="text-align: right;"><?php echo number_format($_smarty_tpl->tpl_vars['v4']->value['price'],2);?>
 </td>
@@ -401,6 +401,34 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+
+		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['balanceAmount'])) {?>
+		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'balanceAmount') {?>
+		            <?php $_smarty_tpl->_assignInScope('totalAmount', ($_smarty_tpl->tpl_vars['totalAmount']->value+$_smarty_tpl->tpl_vars['v1']->value['balanceAmount']));
+?>
+		    		<tbody>
+		                <tr style="font-weight: bold;">
+				        	<td colspan="16"><b>Balance Amount</b></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['balanceAmount'],2);?>
+</b></td>
+				        	<!-- <td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['deduction'];?>
+</td> -->
+				        	<td style="text-align: center;"></td>
+				        	<td class="datetd" style="text-align: center;"></td>
+				        	<td style="text-align: right;"></td>
+				        	<!-- <td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_number'];?>
+</td>
+				        	<td class="datetd"><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_date'];?>
+</td>
+				        	<td><?php echo number_format($_smarty_tpl->tpl_vars['v2']->value[0]['dd_amount'],2);?>
+</td> -->
+				        	<td style="text-align: right;"></td>
+				        </tr>
+		            </tbody>
+		            <?php }?>
+		            <?php }?>
+
 		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 	        		<?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
 		    		<tbody>
@@ -429,6 +457,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </tbody>
 		            <?php }?>
 		            <?php }?>
+
+
             <?php
 }
 }

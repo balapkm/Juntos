@@ -116,6 +116,7 @@ class PaymentBook extends CI_Controller
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 			}
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
@@ -165,11 +166,7 @@ class PaymentBook extends CI_Controller
 
 		}
 
-		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
-		foreach ($data as $key => $value) 
-		{
-			$result[$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
-		}
+		
 
 		$finalResponse['result'] = $result;
 
@@ -188,7 +185,66 @@ class PaymentBook extends CI_Controller
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}
-		print_r($finalResponse);exit;
+
+		foreach ($finalResponse['result'] as $key => $value) {
+			$data = array();
+			$data['supplier_name'] = $value['supplier_id'];
+			$data['division']    = $this->data['division'];
+			$data['date'][0] = date('Y-m-d',strtotime('first day of last month', strtotime($value['payable_month'])));
+			$data['date'][1] = date('Y-m-d',strtotime('last day of last month', strtotime($value['payable_month'])));
+
+			$paymentBookData   = $this->PaymentBookQuery->getPaymentBookData($data,'Y');
+			$result = array();
+			foreach ($paymentBookData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['paymentBookList'][$v1['bill_number']][] = $v1;
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['supplier_name'] = $v1['supplier_name'];
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['supplier_id']   = $v1['supplier_id'];
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['origin']        = $v1['origin'];
+			}
+
+			$getDebitNoteListData = $this->PaymentBookQuery->getDebitNoteListData($data);
+			foreach ($getDebitNoteListData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['debitNoteList'][] = $v1;
+			}
+
+			$chequeData = $this->PaymentBookQuery->select_all_cheque_number_details($data);
+			foreach ($chequeData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['chequeNumberDetails'][] = $v1;
+			}
+
+			foreach ($result as $k1 => $v1) {
+				$totalAmount = 0;
+				foreach ($v1['paymentBookList'] as $k2 => $v2) {
+					$totalAmount += $v2[0]['bill_amount'];
+				}
+				foreach ($v1['debitNoteList'] as $k2 => $v2) {
+					if($v2['type'] == 'D' || $v2['type'] == 'T')
+						$totalAmount -= $v1[0]['amount'];
+					if($v2['type'] == 'C' || $v2['type'] == 'B')
+						$totalAmount += $v1[0]['amount'];
+				}
+				$result[$k1]['totalAmount'] = $totalAmount;
+				$result[$k1]['balanceAmount'] = $totalAmount - $v1['chequeNumberDetails'][0]['cheque_amount'];
+			}
+			$finalResponse['result'][$key]['balanceAmount'] = 0;
+			foreach ($result as $k1 => $v1) {
+				if(!empty($v1['chequeNumberDetails'][0]['cheque_amount']) && !empty($v1['chequeNumberDetails'][0]['cheque_no'])){
+					$finalResponse['result'][$key]['balanceAmount'] += $v1['balanceAmount'];
+				}
+			}
+
+		}
+
+		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
+		foreach ($data as $key => $value) 
+		{
+			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
+		}
+
+		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -407,12 +463,13 @@ class PaymentBook extends CI_Controller
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 			}
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['debitNoteList'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
 		}
 
 		$advancePaymentDetails = array();
@@ -451,14 +508,79 @@ class PaymentBook extends CI_Controller
 				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
 		}
 
+		$finalResponse['result']          = $result;
+		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
+
+		foreach ($finalResponse['result'] as $key => $value) {
+			$totalAmount = 0;
+			foreach ($value['paymentBookList'] as $k1 => $v1) {
+				$totalAmount += $v1[0]['bill_amount'];
+			}
+			foreach ($value['debitNoteList'] as $k2 => $v2) {
+				if($v2['type'] == 'D' || $v2['type'] == 'T')
+					$totalAmount -= $v1[0]['amount'];
+				if($v2['type'] == 'C' || $v2['type'] == 'B')
+					$totalAmount += $v1[0]['amount'];
+			}
+			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
+		}
+
+		foreach ($finalResponse['result'] as $key => $value) {
+			$data = array();
+			$data['supplier_name'] = $value['supplier_id'];
+			$data['division']    = $this->data['division'];
+			$data['date'][0] = date('Y-m-d',strtotime('first day of last month', strtotime($value['payable_month'])));
+			$data['date'][1] = date('Y-m-d',strtotime('last day of last month', strtotime($value['payable_month'])));
+			$paymentBookData   = $this->PaymentBookQuery->getPaymentBookData($data);
+			$result = array();
+			foreach ($paymentBookData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['paymentBookList'][$v1['bill_number']][] = $v1;
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['supplier_name'] = $v1['supplier_name'];
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['supplier_id']   = $v1['supplier_id'];
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['origin']        = $v1['origin'];
+			}
+
+			$getDebitNoteListData = $this->PaymentBookQuery->getDebitNoteListData($data);
+			foreach ($getDebitNoteListData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['debitNoteList'][] = $v1;
+			}
+
+			$chequeData = $this->PaymentBookQuery->select_all_cheque_number_details($data);
+			foreach ($chequeData as $k1 => $v1) 
+			{
+				$result[$v1['payable_month']."_".$v1['supplier_id']]['chequeNumberDetails'][] = $v1;
+			}
+
+			foreach ($result as $k1 => $v1) {
+				$totalAmount = 0;
+				foreach ($v1['paymentBookList'] as $k2 => $v2) {
+					$totalAmount += $v2[0]['bill_amount'];
+				}
+				foreach ($v1['debitNoteList'] as $k2 => $v2) {
+					if($v2['type'] == 'D' || $v2['type'] == 'T')
+						$totalAmount -= $v1[0]['amount'];
+					if($v2['type'] == 'C' || $v2['type'] == 'B')
+						$totalAmount += $v1[0]['amount'];
+				}
+				$result[$k1]['totalAmount'] = $totalAmount;
+				$result[$k1]['balanceAmount'] = $totalAmount - $v1['chequeNumberDetails'][0]['cheque_amount'];
+			}
+			$finalResponse['result'][$key]['balanceAmount'] = 0;
+			foreach ($result as $k1 => $v1) {
+				if(!empty($v1['chequeNumberDetails'][0]['cheque_amount']) && !empty($v1['chequeNumberDetails'][0]['cheque_no'])){
+					$finalResponse['result'][$key]['balanceAmount'] += $v1['balanceAmount'];
+				}
+			}
+		}
+
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']]['chequeNumberDetails'][] = $value;
+			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
 
-		$finalResponse['result']          = $result;
-		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
 		$template_name = 'paymentBookListPrint.tpl';
 		$folder_name = realpath(APPPATH."../assets/po_html");
 		

@@ -23,8 +23,8 @@
 				          <th>SGST</th>
 				          <th>IGST</th>
 				          <th>QTY</th>
-				          <th>MATERIAL NAME</th>
 				          <th>UOM</th>
+				          <th>MATERIAL NAME</th>
 				          <th>RATE</th>
 				          <th>PO NUMBER</th>
 				          <th>DC Number</th>
@@ -57,8 +57,8 @@
 						          <td>[[$v4.SGST]]</td>
 						          <td>[[$v4.IGST]]</td>
 						          <td>[[$v4.received]]</td>
-						          <td style="text-align: left;">[[$v4.material_name]]</td>
 						          <td>[[$v4.material_uom]]</td>
+						          <td style="text-align: left;">[[$v4.material_name]]</td>
 						          <td>[[$v4.price]]</td>
 						          <td>[[$v4.po_number]]</td>
 						          <td>[[$v4.dc_number]]</td>
@@ -215,10 +215,31 @@
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
+
+		            [[if !empty($v1['balanceAmount'])]]
+		            [[if $k2 eq 'balanceAmount']]
+		            [[assign var=totalAmount value=($totalAmount + $v1['balanceAmount']) ]]
+		    		<tbody>
+		                <tr style="font-weight: bold;">
+				        	<td colspan="15"><b>Balance Amount</b></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b>[[$v1['balanceAmount']|number_format:2]]</b></td>
+				        	<!-- <td>[[$v2[0].deduction]]</td> -->
+				        	<td style="text-align: center;"></td>
+				        	<td class="datetd" style="text-align: center;"></td>
+				        	<td style="text-align: right;"></td>
+				        	<!-- <td>[[$v2[0].dd_number]]</td>
+				        	<td class="datetd">[[$v2[0].dd_date]]</td>
+				        	<td>[[$v2[0].dd_amount|number_format:2]]</td> -->
+				        	<td style="text-align: right;"></td>
+				        </tr>
+		            </tbody>
+		            [[/if]]
+		            [[/if]]
+		            
 		            [[if !empty($v1['paymentBookList'])]]
 		            [[if $k2 eq 'chequeNumberDetails']]
 		            <tbody>
-		            	[[foreach from=$v2 key=k3 item=v3]]
 		                <tr style="font-weight: bold;">
 				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
@@ -232,7 +253,6 @@
 				        	<td>[[$v3.dd_amount]]</td> -->
 				        	<td style="text-align: right;">[[($totalAmount - $v3.cheque_amount)|number_format:2]]</td>
 				        </tr>
-				        [[/foreach]]
 		            </tbody>
 		            [[/if]]
 		            [[/if]]
@@ -260,4 +280,14 @@
 	padding: 0px;
 	padding-left: 5px;
 }
+
+table tr td,
+    table tr th {
+        page-break-inside: avoid;
+    }
+
+    table { page-break-inside:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
 </style>

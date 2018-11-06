@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-03 20:47:21
+/* Smarty version 3.1.30, created on 2018-11-06 18:58:26
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bddbc017475c7_33419129',
+  'unifunc' => 'content_5be196faa4a616_12435053',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19cc8d7e864555849ab9e6cba3737edfd871d84a' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookListPrint.tpl',
-      1 => 1541256121,
+      1 => 1541510902,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bddbc017475c7_33419129 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5be196faa4a616_12435053 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 <h2 class="text-center">Payment Book</h2>
@@ -353,14 +353,37 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+
+		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['balanceAmount'])) {?>
+		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'balanceAmount') {?>
+		            <?php $_smarty_tpl->_assignInScope('totalAmount', ($_smarty_tpl->tpl_vars['totalAmount']->value+$_smarty_tpl->tpl_vars['v1']->value['balanceAmount']));
+?>
+		    		<tbody>
+		                <tr style="font-weight: bold;">
+				        	<td colspan="15"><b>Balance Amount</b></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b><?php echo number_format($_smarty_tpl->tpl_vars['v1']->value['balanceAmount'],2);?>
+</b></td>
+				        	<!-- <td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['deduction'];?>
+</td> -->
+				        	<td style="text-align: center;"></td>
+				        	<td class="datetd" style="text-align: center;"></td>
+				        	<td style="text-align: right;"></td>
+				        	<!-- <td><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_number'];?>
+</td>
+				        	<td class="datetd"><?php echo $_smarty_tpl->tpl_vars['v2']->value[0]['dd_date'];?>
+</td>
+				        	<td><?php echo number_format($_smarty_tpl->tpl_vars['v2']->value[0]['dd_amount'],2);?>
+</td> -->
+				        	<td style="text-align: right;"></td>
+				        </tr>
+		            </tbody>
+		            <?php }?>
+		            <?php }?>
+		            
 		            <?php if (!empty($_smarty_tpl->tpl_vars['v1']->value['paymentBookList'])) {?>
 		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'chequeNumberDetails') {?>
 		            <tbody>
-		            	<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['v2']->value, 'v3', false, 'k3');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars['v3']->value) {
-?>
 		                <tr style="font-weight: bold;">
 				        	<td colspan="15"></td>
 				        	<td><b>Total</b></td>
@@ -383,12 +406,6 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k3']->value => $_smarty_tpl->tpl_vars
 				        	<td style="text-align: right;"><?php echo number_format(($_smarty_tpl->tpl_vars['totalAmount']->value-$_smarty_tpl->tpl_vars['v3']->value['cheque_amount']),2);?>
 </td>
 				        </tr>
-				        <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
 		            </tbody>
 		            <?php }?>
 		            <?php }?>
@@ -426,5 +443,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 	padding: 0px;
 	padding-left: 5px;
 }
+
+table tr td,
+    table tr th {
+        page-break-inside: avoid;
+    }
+
+    table { page-break-inside:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
 </style><?php }
 }
