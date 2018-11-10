@@ -1,13 +1,13 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
-app.controller('PoMasterEntry',function($scope,httpService,validateService,$state){
+app.controller('PoMasterEntry',function($scope,httpService,validateService,$state,commonService){
 	
 	
 	$('.modal-backdrop').css('display','none');
-	$('body').removeClass('modal-open');
+	$('body').removeClass('modal-open');commonService
 	setTimeout(function(){
 		$('body').css('padding-right','0px');
-		$('#material_name_select2,#supplier_name').editableSelect();
+		$('#supplier_name').editableSelect();
 	},1000);
 	$('.select2').select2();
 
@@ -407,16 +407,48 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 			$scope.supplier_form_data.supplier_tax_status = 'NON_TAX';
 		}
 	}
-
+	$scope.getAllMasterMaterialDetails = [];
 	$scope.add_material_click = function(){
 		$scope.material_modal = {
 			title : "Add Material Details",
 			button : "Add"
 		}
+		$scope.getAllMasterMaterialDetails = [];
 		$scope.material_form_data.currency = "INR";
 		$scope.material_form_data.discount_price_status = "PERCENTAGE";
 		$scope.material_form_data.discount = 0;
-		$('#material_modal').modal('show');
+		var service_details = {
+	      method_name : "getAllMasterMaterialDetails",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify({})
+	    };
+		httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			$('#material_modal').modal('show');
+    			
+    			setTimeout(function(){$scope.getAllMasterMaterialDetails = data;$scope.$apply();$('#material_name_select2').editableSelect();},1000);
+    			
+    		}
+    	})
+		
+	}
+
+	$scope.get_all_master_material_list = function(){
+		commonService.showLoader();
+		setTimeout(function(){commonService.hideLoader();},30000);
+		$scope.getAllMasterMaterialDetails = [];
+		var service_details = {
+	      method_name : "getAllMasterMaterialDetails",
+	      controller_name : "PoMasterEntry",
+	      data : JSON.stringify({})
+	    };
+		httpService.callWebService(service_details).then(function(data){
+    		if(data)
+    		{
+    			setTimeout(function(){$scope.getAllMasterMaterialDetails = data;$scope.$apply();$('#material_name_select2').editableSelect();});
+    		}
+    	})
 	}
 
 	$scope.supplierEditClick = function(data){

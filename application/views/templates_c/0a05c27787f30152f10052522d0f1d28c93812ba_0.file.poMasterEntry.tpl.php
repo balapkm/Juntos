@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-10-21 20:54:09
+/* Smarty version 3.1.30, created on 2018-11-10 21:04:56
   from "/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bcc9a194bd633_80449333',
+  'unifunc' => 'content_5be6faa016f741_81589034',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0a05c27787f30152f10052522d0f1d28c93812ba' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/poMasterEntry.tpl',
-      1 => 1540135445,
+      1 => 1541864031,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bcc9a194bd633_80449333 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5be6faa016f741_81589034 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
     <h4>
@@ -35,7 +35,7 @@ function content_5bcc9a194bd633_80449333 (Smarty_Internal_Template $_smarty_tpl)
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
-	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
+	              <li><a href="#tab_2" data-toggle="tab" ng-click="get_all_master_material_list()">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab"  ng-click="search_material_master_name()">Material Master</a></li>
 	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
@@ -620,21 +620,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
 		                  	   <!-- <option value="">Choose Material Name</option> -->
 		                  	   <!-- <option value="ADD_NEW">ADD NEW</option> -->
-		                  	   <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['material_master_details']->value, 'v', false, 'k');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
-?>
-			                  		<option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-|<?php echo $_smarty_tpl->tpl_vars['v']->value['material_id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value['material_name'];?>
-</option>
-			                  	<?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
+		                  	   
 
+			                  	<option ng-repeat="x in getAllMasterMaterialDetails" value="{{x.material_name}}|{{x.material_id}}">{{x.material_name}}</option>
 		                  </select>
 		                </div>
 		            </div>

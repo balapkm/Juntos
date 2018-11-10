@@ -11,7 +11,7 @@
           	<div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
-	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
+	              <li><a href="#tab_2" data-toggle="tab" ng-click="get_all_master_material_list()">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab"  ng-click="search_material_master_name()">Material Master</a></li>
 	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
@@ -513,9 +513,9 @@
 		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
 		                  	   <!-- <option value="">Choose Material Name</option> -->
 		                  	   <!-- <option value="ADD_NEW">ADD NEW</option> -->
-		                  	   [[foreach from=$material_master_details key=k item=v]]
-			                  		<option value="[[$v.material_name]]|[[$v.material_id]]">[[$v.material_name]]</option>
-			                  	[[/foreach]]
+		                  	   
+
+			                  	<option ng-repeat="x in getAllMasterMaterialDetails" value="{{x.material_name}}|{{x.material_id}}">{{x.material_name}}</option>
 		                  </select>
 		                </div>
 		            </div>

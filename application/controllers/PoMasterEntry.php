@@ -19,11 +19,16 @@ class PoMasterEntry extends CI_Controller
 		$this->data['max_supplier_id'] = $this->PoMasterEntryQuery->get_max_supplier_id();
 		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
 		$this->data['unit_of_measurement'] = $this->PoMasterEntryQuery->select_uof_master();
-		$this->data['material_master_details'] = array();$this->PoMasterEntryQuery->select_material_master();
+		$this->data['material_master_details'] = array();
 		$this->data['group_master_details'] = $this->PoMasterEntryQuery->select_other_master(array('otherTypeValue'=>"GROUP"));
 		return $this->mysmarty->view('poMasterEntry.tpl',$this->data,TRUE);
 	}
 
+
+	public function getAllMasterMaterialDetails(){
+		$data = $this->PoMasterEntryQuery->select_material_master();
+		return $data;
+	}
 
 	public function supplierNameSearchDetails(){
 		$data = $this->PoMasterEntryQuery->search_supplier_name_details_new($this->data);
@@ -183,8 +188,8 @@ class PoMasterEntry extends CI_Controller
 
 	public function updateMaterialMasterAction()
 	{
-		// $count = count($this->PoMasterEntryQuery->select_material_master($this->data));
-		// if($count != 0)return false;
+		$count = count($this->PoMasterEntryQuery->select_material_master($this->data));
+		if($count != 0)return false;
 		return $this->PoMasterEntryQuery->update_material_master($this->data);
 	}
 
