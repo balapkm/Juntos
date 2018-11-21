@@ -151,6 +151,19 @@ class PaymentBookQuery extends CI_Model
         return $data;
     }
 
+    public function selectCreditDebitNoteDetailsAsPerType($data){
+        $sql = "SELECT * 
+                    FROM 
+                    debit_note_details dnd
+                    WHERE 
+                    dnd.type = 'B' AND dnd.payable_month = '".date('Y-m-d',strtotime('next month', strtotime($data['payable_month'])))."' AND dnd.supplier_id = '".$data['supplier_id']."'";
+        $data  = $this->db->query(trim($sql))->result_array();
+        if(count($data) > 0)
+        {
+            $result = $this->db->delete('debit_note_details',array('s_no' => $data[0]['s_no']));
+        }
+    }
+
     public function getDebitNoteListData($data){
         
         $sql = "SELECT * FROM debit_note_details WHERE division = '".$data['division']."'";

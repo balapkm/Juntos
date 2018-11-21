@@ -479,6 +479,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $scope.chequeNumberDetails = {};
         $scope.chequeNumberDetails = data;
         $scope.chequeNumberDetails['unit'] = $scope.generatePoData['division'];
+        console.log($scope.chequeNumberDetails,"center");
         var service_details = {
             method_name : "getChequeNumberDetailsAction",
             controller_name : "PaymentBook",
@@ -510,6 +511,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             controller_name : "PaymentBook",
             data : JSON.stringify($scope.chequeNumberDetails)
         };
+        console.log($scope.chequeNumberDetails,"center");
         httpService.callWebService(service_details).then(function(data){
             if(data)
             { 

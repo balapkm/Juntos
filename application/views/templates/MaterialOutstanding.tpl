@@ -158,7 +158,7 @@
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
-			                        	<td>{{x.received}}</td>
+			                        	<td>{{x.received|number:2}}</td>
 			                        	<td ng-if="(x.received_date !== '0000-00-00' && x.outstanding_type === 'B')">{{x.received_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td ng-if="(x.received_date === '0000-00-00' && x.outstanding_type === 'B')"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{(x.qty - x.received)|number:2}}</td>

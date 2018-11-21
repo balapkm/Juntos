@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-03 20:58:32
+/* Smarty version 3.1.30, created on 2018-11-21 19:45:21
   from "/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bddbea012b331_05785695',
+  'unifunc' => 'content_5bf56879d8aa94_82085985',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7eb18b74a13cee49017db917742787061e7a79dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/MaterialOutstanding.tpl',
-      1 => 1541257889,
+      1 => 1541909861,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bddbea012b331_05785695 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bf56879d8aa94_82085985 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="content-header">
   <h4>
@@ -218,7 +218,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 			                        	<td>{{x.material_master_name}}</td>
 			                        	<td>{{x.qty}}</td>
 			                        	<td>{{x.material_uom}}</td>
-			                        	<td>{{x.received}}</td>
+			                        	<td>{{x.received|number:2}}</td>
 			                        	<td ng-if="(x.received_date !== '0000-00-00' && x.outstanding_type === 'B')">{{x.received_date|date:'dd-MM-yyyy'}}</td>
 			                        	<td ng-if="(x.received_date === '0000-00-00' && x.outstanding_type === 'B')"></td>
 			                        	<td ng-if="x.outstanding_type === 'M'">{{(x.qty - x.received)|number:2}}</td>

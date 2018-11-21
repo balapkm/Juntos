@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-06 19:40:32
+/* Smarty version 3.1.30, created on 2018-11-21 19:06:54
   from "/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5be1a0d8f25d87_95037163',
+  'unifunc' => 'content_5bf55f763392c3_03674734',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1804c99cda406ac546f557214a9de1f27e05c4dc' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/paymentBookList.tpl',
-      1 => 1541513415,
+      1 => 1542807333,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5be1a0d8f25d87_95037163 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bf55f763392c3_03674734 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 $_smarty_tpl->_assignInScope('serialCount', 0);
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['result']->value, 'v1', false, 'k1');
@@ -44,7 +44,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 
 			<a style="right: 25px;cursor: pointer;position: absolute;" onClick='editChequeNumberDetails({"payable_month":"<?php echo $_smarty_tpl->tpl_vars['PMDate']->value;?>
 ","supplier_id":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_id"];?>
-"})'>Edit</a>
+","totalAmount":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["totalAmount"];?>
+" })'>Edit</a>
 			<a style="right: 60px;cursor: pointer;position: absolute;" onClick='downloadAsPdfCoverLetter({"payable_month":"<?php echo $_smarty_tpl->tpl_vars['PMDate']->value;?>
 ","supplier_id":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_id"];?>
 "})'>Covering Letter</a>
@@ -59,6 +60,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k1']->value => $_smarty_tpl->tpl_vars
 
 			<a style="right: 25px;cursor: pointer;position: absolute;" onClick='editChequeNumberDetails({"payable_month":"<?php echo $_smarty_tpl->tpl_vars['lastDateOfMonth']->value;?>
 ","supplier_id":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["supplier_id"];?>
+","totalAmount":"<?php echo $_smarty_tpl->tpl_vars['result']->value[$_smarty_tpl->tpl_vars['k1']->value]["totalAmount"];?>
 "})'>Edit</a>
 			</b>
 			<a style="right: 60px;cursor: pointer;position: absolute;" onClick='downloadAsPdfCoverLetter({"payable_month":"<?php echo $_smarty_tpl->tpl_vars['k1']->value;?>
@@ -318,6 +320,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		            </tbody>
 		            <?php }?>
+
+
 		            <?php if ($_smarty_tpl->tpl_vars['k2']->value == 'advancePaymentDetails' && count($_smarty_tpl->tpl_vars['v2']->value) != 0) {?>
 		            <thead >
 		            	<tr>
@@ -457,7 +461,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 		            </tbody>
 		            <?php }?>
 		            <?php }?>
-
 
             <?php
 }
