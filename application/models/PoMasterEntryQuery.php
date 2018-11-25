@@ -165,14 +165,24 @@ class PoMasterEntryQuery extends CI_Model
         return $this->objectToArray($data);
     }
 
-    public function select_material_master($where_condition = array())
+    public function select_material_master($where_condition = array(),$userQuerySearch="N",$userQuery="")
     {
         if(empty($where_condition))
         {   
-            $query = $this->db->get_where('material_master', 
-                                        array(
-                                            'status'     => 'Y'
-                                        ));
+            if($userQuerySearch == 'N'){
+                $query = $this->db->get_where('material_master', 
+                                            array(
+                                                'status'     => 'Y'
+                                            ));
+            }else{
+                $sql  = "  SELECT
+                               *
+                            FROM
+                                material_master
+                            WHERE 
+                                status = 'Y' AND material_name LIKE '".$userQuery."%'";
+                $data  = $this->db->query($sql)->result_array();
+            }
         }
         else
         {
@@ -182,13 +192,14 @@ class PoMasterEntryQuery extends CI_Model
                                             'material_name'     => $where_condition['material_name']
                                         ));
         }
-        
-        $data  = array();
-        foreach ($query->result() as $row)
-        {
-             $data[] = $row;
+        if($userQuerySearch == 'N'){
+            $data  = array();
+            foreach ($query->result() as $row)
+            {
+                 $data[] = $row;
+            }
+            $data = $this->objectToArray($data);
         }
-        $data = $this->objectToArray($data);
 
         $sql  ="SELECT
                    material_master_id

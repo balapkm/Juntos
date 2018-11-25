@@ -9,9 +9,10 @@
         <div class="col-md-12">
           <!-- Custom Tabs -->
           	<div class="nav-tabs-custom">
+
 	            <ul class="nav nav-tabs">
 	              <li class="active"><a href="#tab_1" data-toggle="tab">Supplier Entry</a></li>
-	              <li><a href="#tab_2" data-toggle="tab" ng-click="get_all_master_material_list()">Material Entry</a></li>
+	              <li><a href="#tab_2" data-toggle="tab">Material Entry</a></li>
 	              <li><a href="#tab_3" data-toggle="tab">UOM Entry</a></li>
 	              <li><a href="#tab_4" data-toggle="tab"  ng-click="search_material_master_name()">Material Master</a></li>
 	              <li><a href="#tab_5" data-toggle="tab">GROUP Master</a></li>
@@ -496,6 +497,7 @@
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
+
             		<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Name</label>
@@ -510,13 +512,9 @@
 		            <div class="col-lg-6">
 		                <div class="form-group" id="material_name_add">
 		                  <label for="exampleInputEmail1">Material Name</label>
-		                  <select id="material_name_select2" ng-model="material_form_data.material_name" class="form-control" ng-change="material_form_data.material_name = material_form_data.material_name.toUpperCase()">
-		                  	   <!-- <option value="">Choose Material Name</option> -->
-		                  	   <!-- <option value="ADD_NEW">ADD NEW</option> -->
-		                  	   
-
-			                  	<option ng-repeat="x in getAllMasterMaterialDetails" value="{{x.material_name}}|{{x.material_id}}">{{x.material_name}}</option>
-		                  </select>
+		                  <!-- <input type="text" class="form-control" id="material_name_select2" ng-model="material_form_data.material_name" placeholder="Enter Material Name"> -->
+		                  <input class="form-control" id="material_name_select2" placeholder="Enter Material Name"/>
+		                  <input class="form-control"  type="hidden" id="material_name_selected" placeholder="Enter Material Name"/>
 		                </div>
 		            </div>
 		            <!-- <div class="col-lg-3" ng-if="addNewMaterialNameInput">

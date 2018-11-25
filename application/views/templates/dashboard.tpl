@@ -24,13 +24,14 @@
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
   <!-- editable select -->
   <link rel="stylesheet" href="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.css">
+  <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
-  <link rel="stylesheet" href="assets/css/custom-style.css?version=49">
+  <link rel="stylesheet" href="assets/css/custom-style.css?version=50">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -166,12 +167,14 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
        <div ui-view="div1">
             <section class="content">
                 <div class="text-center" style="position: relative;top: 150px;width: 440px;margin: auto;">
                     <img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
                     <h3 style="border-bottom: 4px solid #3c8dbc; ">T.M.ABDUL RAHMAN & SONS</h3>
                     <p>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</p>
+
                 </div>
             </section>
        </div>      
@@ -268,8 +271,9 @@
 <script src="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.js"></script>
 <!-- Auto include -->
 [[foreach from=$jsPaths key=k item=v]]
-<script src="[[$v]]?version=129"></script>
+<script src="[[$v]]?version=151"></script>
 [[/foreach]]
+<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
@@ -289,6 +293,35 @@
         return false;
     });
   });
+  // $( function() {
+  //   var availableTags = [
+  //     "ActionScript",
+  //     "AppleScript",
+  //     "Asp",
+  //     "BASIC",
+  //     "C",
+  //     "C++",
+  //     "Clojure",
+  //     "COBOL",
+  //     "ColdFusion",
+  //     "Erlang",
+  //     "Fortran",
+  //     "Groovy",
+  //     "Haskell",
+  //     "Java",
+  //     "JavaScript",
+  //     "Lisp",
+  //     "Perl",
+  //     "PHP",
+  //     "Python",
+  //     "Ruby",
+  //     "Scala",
+  //     "Scheme"
+  //   ];
+  //   $( "#material_name_select2" ).autocomplete({
+  //     source: availableTags
+  //   });
+  // });
 </script>
 <!-- Insert this line after script imports -->
 <script>if (window.module) module = window.module;</script>

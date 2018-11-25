@@ -1,7 +1,21 @@
 var tab_switch_name = 'tab_1';
 var otherTypeValue = "";
+app.directive('autoComplete', function($timeout) {
+    return function(scope, iElement, iAttrs) {
+            iElement.autocomplete({
+                source: scope[iAttrs.uiItems],
+                select: function() {
+                    $timeout(function() {
+                      iElement.trigger('input');
+                    }, 0);
+                }
+            });
+    };
+});
+
 app.controller('PoMasterEntry',function($scope,httpService,validateService,$state,commonService){
 	
+	$scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
 	
 	$('.modal-backdrop').css('display','none');
 	$('body').removeClass('modal-open');commonService
@@ -417,26 +431,40 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		$scope.material_form_data.currency = "INR";
 		$scope.material_form_data.discount_price_status = "PERCENTAGE";
 		$scope.material_form_data.discount = 0;
-		var service_details = {
-	      method_name : "getAllMasterMaterialDetails",
-	      controller_name : "PoMasterEntry",
-	      data : JSON.stringify({})
-	    };
-		httpService.callWebService(service_details).then(function(data){
-    		if(data)
-    		{
-    			$('#material_modal').modal('show');
-    			
-    			setTimeout(function(){$scope.getAllMasterMaterialDetails = data;$scope.$apply();$('#material_name_select2').editableSelect();},1000);
-    			
-    		}
-    	})
+		
+	    
+	    setTimeout(function(){
+		    $( "#material_name_select2" ).autocomplete({
+		      	source: function( request, response ) {
+				   $.ajax({
+				    url: "PoMasterEntry/searchMaterial",
+				    type: 'post',
+				    dataType: "json",
+				    data: {
+				     q: request.term
+				    },
+				    success: function( data ) {
+				     response( data );
+				    }
+				   });
+				},
+				select: function (event, ui) {
+				   // Set selection
+				   console.log(ui.item,"ite");
+				   $('#material_name_select2').val(ui.item.label); // display the selected text
+				   $('#material_name_selected').val(ui.item.id); // display the selected text
+				   return false;
+			  	}
+		    });
+		    $( "#material_name_select2" ).autocomplete( "option", "appendTo", ".eventInsForm" );
+		    $('#material_modal').modal('show');
+	    },500);   
 		
 	}
 
 	$scope.get_all_master_material_list = function(){
-		commonService.showLoader();
-		setTimeout(function(){commonService.hideLoader();},30000);
+		// commonService.showLoader();
+		//setTimeout(function(){commonService.hideLoader();},30000);
 		$scope.getAllMasterMaterialDetails = [];
 		var service_details = {
 	      method_name : "getAllMasterMaterialDetails",
@@ -446,7 +474,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 		httpService.callWebService(service_details).then(function(data){
     		if(data)
     		{
-    			setTimeout(function(){$scope.getAllMasterMaterialDetails = data;$scope.$apply();$('#material_name_select2').editableSelect();});
+    			//setTimeout(function(){$scope.getAllMasterMaterialDetails = data;$scope.$apply();$('#material_name_select2').editableSelect();});
     		}
     	})
 	}
@@ -478,7 +506,32 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
             $('#material_name_select2').val(data.material_master_name);
             $('#supplier_name_select2').select2().val(data.supplier_id+"|"+data.state_code+"|"+data.supplier_status).trigger("change");
 	    },100);
-		$('#material_modal').modal('show');
+	    setTimeout(function(){
+		    $( "#material_name_select2" ).autocomplete({
+		      	source: function( request, response ) {
+				   $.ajax({
+				    url: "PoMasterEntry/searchMaterial",
+				    type: 'post',
+				    dataType: "json",
+				    data: {
+				     q: request.term
+				    },
+				    success: function( data ) {
+				     response( data );
+				    }
+				   });
+				},
+				select: function (event, ui) {
+				   // Set selection
+				   $('#material_name_select2').val(ui.item.label); // display the selected text
+				   $('#material_name_selected').val(ui.item.id); // display the selected text
+				   return false;
+			  	}
+		    });
+		    $( "#material_name_select2" ).autocomplete( "option", "appendTo", ".eventInsForm" );
+		    $('#material_modal').modal('show');
+	    },500);   
+		// $('#material_modal').modal('show');
 	}
 
 	$scope.supplierDeleteClick = function(data){
@@ -765,7 +818,7 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 
 	// function to add supplier data 
 	$scope.add_material_action = function(){
-		$scope.material_form_data['material_name'] = $('#material_name_select2').val().toUpperCase();
+		$scope.material_form_data['material_name'] = $('#material_name_selected').val().toUpperCase();
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
     	

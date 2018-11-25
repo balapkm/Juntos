@@ -229,24 +229,18 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     }
 
     $scope.editPaymentListAngular = function(data){
-
+        console.log(data);
         $scope.editPaymentList = {
-                s_no        : "",
-                avg_cost    : "",
-                query       : "",
-                deduction   : "",
-                cheque_date : "",
-                cheque_no   : "",
-                cheque_amount : "",
-                payable_month : ""
+                
         };
         $scope.editPaymentList.s_no          = data.s_no;
         $scope.editPaymentList.avg_cost      = data.avg_cost;
         $scope.editPaymentList.query         = data.query;
-        $scope.editPaymentList.deduction     = data.deduction;
-        $scope.editPaymentList.cheque_date   = data.cheque_date;
-        $scope.editPaymentList.cheque_no     = data.cheque_no;
-        $scope.editPaymentList.cheque_amount = data.cheque_amount;
+        $scope.editPaymentList.supplier_id   = data.supplier_id;
+        //$scope.editPaymentList.deduction     = data.deduction;
+        //$scope.editPaymentList.cheque_date   = data.cheque_date;
+        //$scope.editPaymentList.cheque_no     = data.cheque_no;
+        //$scope.editPaymentList.cheque_amount = data.cheque_amount;
         $scope.editPaymentList.payable_month = data.payable_month;
         $scope.editPaymentList.bill_number   = data.bill_number;
         $('#material_modal').modal('show');
@@ -260,6 +254,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     
     $scope.editPaymentBook = function(){
 
+        console.log($scope.editPaymentList,"next");
         var service_details = {
             method_name : "updatePaymentBookDetails",
             controller_name : "PaymentBook",

@@ -30,6 +30,15 @@ class PoMasterEntry extends CI_Controller
 		return $data;
 	}
 
+	public function searchMaterial(){
+		$data  = $this->PoMasterEntryQuery->select_material_master(array(),'Y',$_POST['q']);
+		$final = array();
+		foreach ($data as $key => $value) {
+			$final[] = array("value"=>$value['material_name'],"label"=>$value['material_name'],"id"=>$value['material_name']."|".$value['material_id']);
+		}
+		echo json_encode($final);
+	}
+
 	public function supplierNameSearchDetails(){
 		$data = $this->PoMasterEntryQuery->search_supplier_name_details_new($this->data);
 		return $data;

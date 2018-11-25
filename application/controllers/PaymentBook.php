@@ -315,7 +315,7 @@ class PaymentBook extends CI_Controller
 				"supplier_creditnote"   => "",
 				"supplier_creditnote_date"     =>"",
 				"query"     => "",
-				"payable_month"     => date('Y-m-d',strtotime('next month', strtotime($this->data['payable_month']))),
+				"payable_month"     => date('Y-m-d',strtotime('last day of next month', strtotime($this->data['payable_month']))),
 				"amount"     => $balanceAmt
 			);
 			$this->PaymentBookQuery->insert_debit_note_details($addData);

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-11-21 19:22:30
+/* Smarty version 3.1.30, created on 2018-11-25 21:39:55
   from "/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5bf5631e3ab7a0_87585737',
+  'unifunc' => 'content_5bfac9539b9232_18898470',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ba52c703d048f2ee549cc32481eb5875eae5cc20' => 
     array (
       0 => '/home/Staging/workSpace/Juntos/application/views/templates/dashboard.tpl',
-      1 => 1542808331,
+      1 => 1543162194,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5bf5631e3ab7a0_87585737 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5bfac9539b9232_18898470 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/workSpace/Juntos/application/third_party/smarty/libs/plugins/modifier.date_format.php';
 ?>
 
@@ -49,13 +49,14 @@ if (!is_callable('smarty_modifier_date_format')) require_once '/home/Staging/wor
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
   <!-- editable select -->
   <link rel="stylesheet" href="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.css">
+  <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="assets/css/skins/_all-skins.min.css">
 
-  <link rel="stylesheet" href="assets/css/custom-style.css?version=49">
+  <link rel="stylesheet" href="assets/css/custom-style.css?version=50">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -216,12 +217,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
        <div ui-view="div1">
             <section class="content">
                 <div class="text-center" style="position: relative;top: 150px;width: 440px;margin: auto;">
                     <img src="assets/img/TMAR LOGO.jpg" width="100" height="100"></img>
                     <h3 style="border-bottom: 4px solid #3c8dbc; ">T.M.ABDUL RAHMAN & SONS</h3>
                     <p>MANUFACTURES & EXPORTERS OF FINISHED LEATHER & SHOES</p>
+
                 </div>
             </section>
        </div>      
@@ -370,7 +373,7 @@ if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['v']->value) {
 echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
-?version=129"><?php echo '</script'; ?>
+?version=151"><?php echo '</script'; ?>
 >
 <?php
 }
@@ -378,6 +381,9 @@ echo '<script'; ?>
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
+<?php echo '<script'; ?>
+ src="assets/plugins/jquery-ui/jquery-ui.min.js"><?php echo '</script'; ?>
+>
 <?php echo '<script'; ?>
 >
   $(document).ready(function () {
@@ -398,6 +404,35 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         return false;
     });
   });
+  // $( function() {
+  //   var availableTags = [
+  //     "ActionScript",
+  //     "AppleScript",
+  //     "Asp",
+  //     "BASIC",
+  //     "C",
+  //     "C++",
+  //     "Clojure",
+  //     "COBOL",
+  //     "ColdFusion",
+  //     "Erlang",
+  //     "Fortran",
+  //     "Groovy",
+  //     "Haskell",
+  //     "Java",
+  //     "JavaScript",
+  //     "Lisp",
+  //     "Perl",
+  //     "PHP",
+  //     "Python",
+  //     "Ruby",
+  //     "Scala",
+  //     "Scheme"
+  //   ];
+  //   $( "#material_name_select2" ).autocomplete({
+  //     source: availableTags
+  //   });
+  // });
 <?php echo '</script'; ?>
 >
 <!-- Insert this line after script imports -->
