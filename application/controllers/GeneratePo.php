@@ -135,7 +135,6 @@ class GeneratePo extends CI_Controller
 			}
 			$count++;
 		}
-
 		if($this->data['type'] == 'Import' || $this->data['type'] == 'Sample_Import')
 		{
 			$this->PoGenerateQuery->insert_import_other_details($finalInsertData[0]);

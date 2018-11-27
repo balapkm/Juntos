@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css">
   <!-- editable select -->
   <link rel="stylesheet" href="assets/plugins/jquery-editable-select-master/dist/jquery-editable-select.min.css">
-  <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css">
+  <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css?v=10">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -273,7 +273,7 @@
 [[foreach from=$jsPaths key=k item=v]]
 <script src="[[$v]]?version=151"></script>
 [[/foreach]]
-<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="assets/plugins/jquery-ui/jquery-ui.min.js?v=10"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
