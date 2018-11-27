@@ -18,7 +18,7 @@ class PoReportQuery extends CI_Model
                     sd.supplier_name,
                     origin,
                     order_reference,
-                    material_name,
+                    mm.material_name,
                     po_description,
                     material_hsn_code,
                     qty,
@@ -32,9 +32,11 @@ class PoReportQuery extends CI_Model
                     delivery_date
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
-                    prd.supplier_id = sd.supplier_id AND ";
+                    prd.supplier_id = sd.supplier_id AND 
+                    mm.material_id = prd.material_master_id AND ";
 
         if(!empty($data['division'])){
             $sql .= "unit = '".$data['division']."' AND ";
@@ -97,7 +99,7 @@ class PoReportQuery extends CI_Model
     public function fetch_po_report_3($data)
     {
         $sql = "SELECT 
-                    material_name,
+                    mm.material_name,
                     material_hsn_code,
                     md.group,
                     material_uom,
@@ -110,7 +112,8 @@ class PoReportQuery extends CI_Model
                     price_status,
                     discount_price_status
                 FROM
-                    material_details md
+                    material_details md,
+                    material_master mm
                 WHERE ";
         if(!empty($data['supplier_id'])){
             $sql .= "supplier_id = ".$data['supplier_id']."";
@@ -128,7 +131,7 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    material_name,
+                    mm.material_name,
                     po_description,
                     qty,
                     material_uom,
@@ -138,9 +141,11 @@ class PoReportQuery extends CI_Model
                     delivery_date
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
-                    prd.supplier_id = sd.supplier_id AND ";
+                    prd.supplier_id = sd.supplier_id AND 
+                    mm.material_id = prd.material_master_id AND ";
 
         if(!empty($data['division'])){
             $sql .= "unit = '".$data['division']."' AND ";
@@ -185,7 +190,7 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    material_name,
+                    mm.material_name,
                     po_description,
                     qty,
                     material_uom,
@@ -194,9 +199,11 @@ class PoReportQuery extends CI_Model
                     (prd.received - prd.qty) as excess
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
-                    prd.supplier_id = sd.supplier_id AND ";
+                    prd.supplier_id = sd.supplier_id AND 
+                    mm.material_id = prd.material_master_id AND ";
 
         if(!empty($data['division'])){
             $sql .= "unit = '".$data['division']."' AND ";
@@ -242,7 +249,7 @@ class PoReportQuery extends CI_Model
                     po_date,
                     sd.supplier_name,
                     origin,
-                    material_name,
+                    mm.material_name,
                     po_description,
                     qty,
                     material_uom,
@@ -253,9 +260,11 @@ class PoReportQuery extends CI_Model
                     delivery_date
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
-                    prd.supplier_id = sd.supplier_id AND ";
+                    prd.supplier_id = sd.supplier_id AND 
+                    mm.material_id = prd.material_master_id AND ";
 
         if(!empty($data['division'])){
             $sql .= "unit = '".$data['division']."' AND ";

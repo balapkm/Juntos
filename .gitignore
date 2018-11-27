@@ -6,3 +6,5 @@
 !*/cache/.htaccess
 
 assets/po_html/
+
+application/views/templates_c/

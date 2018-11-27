@@ -118,7 +118,7 @@
 		         	<td align="center" width="8%" class="own-td-2">
 		         			[[$v.price|number_format:4]]<br/>
                             [[if $v.price_status neq 'FINAL']]
-		         			<span style="font-size: 12px">[ [[$v.price_status]] ]</span>
+		         			<span style="font-size: 10px">[ [[$v.price_status]] ]</span>
                             [[/if]]
 		         	</td>
 
