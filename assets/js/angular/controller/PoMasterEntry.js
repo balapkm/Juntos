@@ -819,6 +819,10 @@ app.controller('PoMasterEntry',function($scope,httpService,validateService,$stat
 	// function to add supplier data 
 	$scope.add_material_action = function(){
 		$scope.material_form_data['material_name'] = $('#material_name_selected').val().toUpperCase();
+		//if($scope.material_form_data['material_name'] === ""){
+			$scope.material_form_data['material_name'] = $('#material_name_select2').val().toUpperCase();
+		//}
+
 		if(validateService.blank($scope.material_form_data['supplier_id'],"Please Choose supplier name","supplier_name_select2")) return false;
 		if(validateService.blank($scope.material_form_data['material_name'],"Please Choose Material Name","material_name")) return false;
     	
