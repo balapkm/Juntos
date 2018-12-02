@@ -106,6 +106,7 @@ class MaterialOutstanding extends CI_Controller
 
 	public function updateMaterialOutstandingAction()
 	{
+
 		if($this->data['outstanding_type'] == 'M')
 		{
 			$received      = $this->data['received'];
@@ -148,6 +149,7 @@ class MaterialOutstanding extends CI_Controller
 			
 			$data    = array();
 			$data[0] = $this->data;
+			
 			$this->PoGenerateQuery->update_po_generated_request_details($editData);
 			return $this->PoGenerateQuery->insert_po_generated_request_details($data);
 		}

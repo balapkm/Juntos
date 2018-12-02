@@ -95,12 +95,15 @@ class PaymentBookQuery extends CI_Model
                     sd.state_code,
                     sd.origin,
                     prd.*,
+                    mm.material_name as material_name,
                     DATEDIFF('".date('Y-m-d')."',prd.delivery_date) AS delay_day
                 FROM
                     po_generated_request_details prd,
-                    supplier_details sd
+                    supplier_details sd,
+                    material_master mm
                 WHERE
                     prd.supplier_id = sd.supplier_id AND
+                    prd.material_master_id = mm.material_id AND
                     outstanding_type = 'B' AND 
                     prd.bill_amount!=0 AND 
                     prd.bill_number!='' AND 
