@@ -123,6 +123,9 @@ class PaymentBook extends CI_Controller
 		foreach ($data as $key => $value) 
 		{
 			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
 		}
 
 		$advancePaymentDetails = array();
@@ -191,6 +194,7 @@ class PaymentBook extends CI_Controller
 		{
 			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
+		// print_r($finalResponse);exit;
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}

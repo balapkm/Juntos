@@ -2,6 +2,7 @@
 [[foreach from=$result key=k1 item=v1]]
 	[[assign var=serialCount value=($serialCount + 1)]]
 	<div style="overflow-x:auto;margin-top: 50px;">
+		[[if !empty($v1['paymentBookList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>
 			[[assign var="dateValue" value="_"|explode:$k1]]
@@ -18,6 +19,7 @@
 			</b>
 			<a style="right: 60px;cursor: pointer;position: absolute;" onClick='downloadAsPdfCoverLetter({"payable_month":"[[$k1]]","supplier_id":"[[$result[$k1]["supplier_id"] ]]"})'>Covering Letter</a>
 		</h5>
+		[[/if]]
 		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
@@ -130,7 +132,6 @@
 		                  <th colspan="7" style="text-align: center;">QUERY</th>
 		                  <th style="background-color: yellow;">PAYABLE MONTH</th>
 		                  <th>AMOUNT</th>
-		                  [[if !empty($v1['paymentBookList'])]]
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
@@ -139,13 +140,6 @@
 		                  <th></th>
 		                  <th></th> -->
 		                  <th></th>
-		                  [[/if]]
-		                  [[if empty($v1['paymentBookList'])]]
-			            	<th>CHEQUE NUMBER</th>
-				          	<th>CHEQUE DATE</th>
-				          	<th>CHEQUE AMOUNT</th>
-					        <th>BALANCE</th>
-			              [[/if]]
 		            </thead>
 		            <tbody>
 		            	[[foreach from=$v2 key=k3 item=v3]]
@@ -253,7 +247,6 @@
 		            	<td></td>
 		            	<td></td> -->
 		            	<td></td>
-		            	
 		            	</tr>
 		            	[[/foreach]]
 		            </tbody>
@@ -280,6 +273,7 @@
 		            [[/if]]
 		            [[/if]]
 
+		            [[if !empty($v1['paymentBookList'])]]
 	        		[[if $k2 eq 'chequeNumberDetails']]
 		    		<tbody>
 		                <tr style="font-weight: bold;">
@@ -296,6 +290,7 @@
 				        	<td style="text-align: right;">[[($totalAmount - $v2[0].cheque_amount)|number_format:2]]</td>
 				        </tr>
 		            </tbody>
+		            [[/if]]
 		            [[/if]]
 
             [[/foreach]]

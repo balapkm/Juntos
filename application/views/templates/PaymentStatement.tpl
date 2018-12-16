@@ -18,8 +18,7 @@
 	              			<div class="col-lg-3"></div>
 				            <!-- Supplier Wise -->
 				            <div class="col-lg-12" style="margin-top: 10px;">
-				            	<div class="col-lg-3"></div>
-					            <div class="col-lg-3">
+					            <div class="col-lg-4">
 				                	<div class="form-group">
 					                  <label for="exampleInputEmail1">Division</label>
 					                  <select class="form-control" id="division" ng-model="paymentStatementObject.division">
@@ -30,14 +29,13 @@
 					                  </select>
 					                </div>
 				                </div>
-					            <div class="col-lg-3">
+					            <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Date Range</label>
 					                  <input type="text" ng-model="paymentStatementObject.payment_statement_month" class="form-control" id="payment_statement_month" placeholder="Choose Date Range">
 					                </div>
 					            </div>
-					            <div class="col-lg-3"></div>
-				                <!-- <div class="col-lg-4">
+				                <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Supplier Name</label>
 					                  <select class="form-control select2" style="width: 100%;" id="payment_statement_supplier_id" ng-model="paymentStatementObject.payment_statement_supplier_id" ng-change="clearRedMark('payment_statement_supplier_id')">
@@ -47,7 +45,7 @@
 					                  	  [[/foreach]]
 					                  </select>
 					                </div>
-					            </div> -->
+					            </div>
 					            <!-- <div class="col-lg-4">
 					                <div class="form-group">
 					                  <label for="exampleInputEmail1">Unit</label>
@@ -89,14 +87,14 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in paymentStatmentSearchData">
-                    	<td style="text-align: center;" ng-if="!$last">
+                    	<td style="text-align: center;">
 		            		<a href="#" ng-click='editpaymentStatment(x)'>
 					          <span class="glyphicon glyphicon-edit"></span>
 					        </a>
 						</td>
-                    	<td ng-if="!$last">{{$index+1}}</td>
-                    	<td ng-if="$last"></td>
-                    	<td ng-if="$last"></td>
+                    	<td>{{$index+1}}</td>
+                    	<!-- <td ng-if="$last"></td>
+                    	<td ng-if="$last"></td> -->
                     	<td>{{x.page_no}}</td>
                     	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
                     	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>

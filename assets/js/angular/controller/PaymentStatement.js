@@ -52,7 +52,7 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
         $scope.paymentStatementObject.payment_statement_month = $("#payment_statement_month").val();
 
         if(validateService.blank($scope.paymentStatementObject['division'],"Please Enter division","division")) return false;
-        if(validateService.blank($scope.paymentStatementObject['payment_statement_month'],"Please Choose date range","payment_statement_month")) return false;
+        // if(validateService.blank($scope.paymentStatementObject['payment_statement_month'],"Please Choose date range","payment_statement_month")) return false;
         
         var service_details = {
             method_name : "searchAction",

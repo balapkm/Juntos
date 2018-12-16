@@ -123,6 +123,8 @@ class PoReport extends CI_Controller
 			foreach ($data as $key => $value) {
 				$po_number_details           = $this->config->item('po_number_details', 'po_generate_details');
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
+				$data[$key]['balance']       = round($value['balance'],2);
+				$data[$key]['received']      = round($value['received'],2);
 				if($value['delivery_date'] != '0000-00-00'){
 					$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
 				}else{
@@ -154,6 +156,7 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				$data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				$data[$key]['excess']        = round($value['excess'],2);
+				$data[$key]['received']      = round($value['received'],2);
 				// $data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));\
 				
 				if($value['received_date'] != '0000-00-00'){
@@ -182,6 +185,7 @@ class PoReport extends CI_Controller
 				$data[$key]['po_date']       = date('d-m-Y',strtotime($value['po_date']));
 				// $data[$key]['excess']        = ($value['excess'] < 0) ? 0 : $value['excess'];
 				// $data[$key]['balance']       = ($value['balance'] < 0) ? 0 : $value['balance'];
+				$data[$key]['received']       = round($value['received'],2);
 				if($value['delivery_date'] != '0000-00-00'){
 					$data[$key]['delivery_date'] = date('d-m-Y',strtotime($value['delivery_date']));
 				}else{

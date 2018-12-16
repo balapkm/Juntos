@@ -171,16 +171,23 @@ class PaymentBookQuery extends CI_Model
 
     public function getDebitNoteListData($data){
         
-        $sql = "SELECT * FROM debit_note_details WHERE division = '".$data['division']."'";
+        $sql = "SELECT 
+                        dnd.*,
+                        sd.supplier_name,
+                        sd.origin
+                    FROM 
+                    debit_note_details dnd,
+                    supplier_details sd
+                WHERE sd.supplier_id = dnd.supplier_id AND division = '".$data['division']."'";
         
         if(!empty($data['supplier_name']))
         {
-            $sql.=  " AND supplier_id = ".$data['supplier_name']."";
+            $sql.=  " AND dnd.supplier_id = ".$data['supplier_name']."";
         }
 
         if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
-            $sql.=  " AND payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
+            $sql.=  " AND dnd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
 
         $data  = $this->db->query($sql)->result_array();

@@ -180,7 +180,7 @@ class PoMasterEntryQuery extends CI_Model
                             FROM
                                 material_master
                             WHERE 
-                                status = 'Y' AND material_name LIKE '".$userQuery."%'";
+                                status = 'Y' AND material_name LIKE '%".$userQuery."%'";
                 $data  = $this->db->query($sql)->result_array();
             }
         }

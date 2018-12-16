@@ -25,10 +25,19 @@ class PaymentStatementQuery extends CI_Model
                     supplier_details sd
                 WHERE
                     sd.supplier_id  = cnd.supplier_id AND
-                    cnd.unit = '".$data['division']."' AND
-                    cnd.payable_month BETWEEN '".$data['payment_statement_month'][0]."' AND '".$data['payment_statement_month'][1]."'
-                    group by cnd.supplier_id";
-        $result  = $this->db->query($sql)->result_array();
+                    cnd.unit = '".$data['division']."'";
+
+        if(!empty($data['payment_statement_month'][0]) && !empty($data['payment_statement_month'][1])){
+            $sql .= " AND cnd.payable_month BETWEEN '".$data['payment_statement_month'][0]."' AND '".$data['payment_statement_month'][1]."'";
+        }
+
+        if(!empty($data['payment_statement_supplier_id'])){
+            $sql .= " AND cnd.supplier_id = ".$data['payment_statement_supplier_id'];
+        }
+                    
+        $sql     .= " group by cnd.supplier_id,cnd.payable_month order by cnd.payable_month";
+        // print_r($sql);exit;
+        $result   = $this->db->query($sql)->result_array();
         
         foreach ($result as $key => $value) {
             $result[$key]['total_amount'] = 0;

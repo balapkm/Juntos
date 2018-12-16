@@ -29,7 +29,7 @@ class PaymentStatement extends CI_Controller
 			return false;
 		}
 
-		$data[]['cheque_amount'] = array_sum(array_column($data,'cheque_amount'));
+		// $data[]['cheque_amount'] = array_sum(array_column($data,'cheque_amount'));
 		return $data;
 	}
 
