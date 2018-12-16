@@ -1,5 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use PhpOffice\PhpSpreadsheet\Helper\Sample;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
+require_once APPPATH.'third_party/excel/src/Bootstrap.php';
 
 class PaymentBook extends CI_Controller 
 {
@@ -126,6 +131,7 @@ class PaymentBook extends CI_Controller
 			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
 			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
 		$advancePaymentDetails = array();
@@ -393,6 +399,7 @@ class PaymentBook extends CI_Controller
 		$this->data['date']               = empty($this->data['date']) ? "" : explode("/",$this->data['date']);
 		$this->data['supplier_name']      = empty($this->data['supplier_name']) ? "" : $this->data['supplier_name'];
 		$this->data['supplier_name']      = ($this->data['supplier_name'] == 'undefined') ? "" : $this->data['supplier_name'];
+		$this->data['download_type']      = empty($this->data['download_type']) ? "PDF" : $this->data['download_type'];
 
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
@@ -439,6 +446,10 @@ class PaymentBook extends CI_Controller
 		foreach ($data as $key => $value) 
 		{
 			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
 		$advancePaymentDetails = array();
@@ -487,9 +498,9 @@ class PaymentBook extends CI_Controller
 			}
 			foreach ($value['debitNoteList'] as $k2 => $v2) {
 				if($v2['type'] == 'D' || $v2['type'] == 'T')
-					$totalAmount -= $v1[0]['amount'];
+					$totalAmount -= $v2['amount'];
 				if($v2['type'] == 'C' || $v2['type'] == 'B')
-					$totalAmount += $v1[0]['amount'];
+					$totalAmount += $v2['amount'];
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}
@@ -499,43 +510,267 @@ class PaymentBook extends CI_Controller
 		{
 			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
+		if($this->data['download_type'] == 'PDF'){
+			$template_name = 'paymentBookListPrint.tpl';
+			$folder_name = realpath(APPPATH."../assets/po_html");
+			
+			$filename='paymentBookListPrint';
+			
+			file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$finalResponse,TRUE));
 
-		$template_name = 'paymentBookListPrint.tpl';
-		$folder_name = realpath(APPPATH."../assets/po_html");
-		
-		$filename='paymentBookListPrint';
-		
-		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$finalResponse,TRUE));
-
-		chmod($folder_name."/".$filename.".html", 0777);
+			chmod($folder_name."/".$filename.".html", 0777);
 	
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
-		{
-			$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --orientation '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+			{
+				$cmd = 'cd C:\Program Files\wkhtmltopdf\bin && wkhtmltopdf.exe --orientation '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			}
+			else
+			{
+				$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf --orientation landscape '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
+			}
+			$response = exec($cmd);
+
+			header("Content-Type: application/octet-stream");
+			$paymentBookList = 'paymentBookList';
+			$file = $folder_name.'/'.$filename.'.pdf';
+			header("Content-Disposition: attachment; filename=" .$paymentBookList.".pdf");   
+			header("Content-Type: application/octet-stream");
+			header("Content-Type: application/download");
+			header("Content-Description: File Transfer");            
+			header("Content-Length: " . filesize($file));
+			flush(); // this doesn't really matter.
+			$fp = fopen($file, "r");
+			while (!feof($fp))
+			{
+			    echo fread($fp, 65536);
+			    flush(); // this is essential for large downloads
+			} 
+			fclose($fp);
 		}
 		else
 		{
-			$cmd = 'xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf --orientation landscape '.$folder_name.'/'.$filename.'.html '.$folder_name.'/'.$filename.'.pdf  2>&1';
-		}
-		$response = exec($cmd);
-
-		// print_r($response);exit;
-		header("Content-Type: application/octet-stream");
-		$paymentBookList = 'paymentBookList';
-		$file = $folder_name.'/'.$filename.'.pdf';
-		header("Content-Disposition: attachment; filename=" .$paymentBookList.".pdf");   
-		header("Content-Type: application/octet-stream");
-		header("Content-Type: application/download");
-		header("Content-Description: File Transfer");            
-		header("Content-Length: " . filesize($file));
-		flush(); // this doesn't really matter.
-		$fp = fopen($file, "r");
-		while (!feof($fp))
-		{
-		    echo fread($fp, 65536);
-		    flush(); // this is essential for large downloads
+			$this->downloadAsExcelDetails($finalResponse);
 		} 
-		fclose($fp); 
+	}
+
+	public function downloadAsExcelDetails($finalResponse){
+		// echo "<pre>";
+		// print_r($finalResponse);exit;
+
+		$spreadsheet = new Spreadsheet();
+
+		// Set document properties
+		$spreadsheet->getProperties()->setCreator('T.M. ABDUL RAHMAN & SONS')
+		        ->setLastModifiedBy('T.M. ABDUL RAHMAN & SONS')
+		        ->setTitle('Office 2007 XLSX Test Document')
+		        ->setSubject('Office 2007 XLSX Test Document')
+		        ->setDescription('T.M. ABDUL RAHMAN & SONS')
+		        ->setKeywords('T.M. ABDUL RAHMAN & SONS')
+		        ->setCategory('T.M. ABDUL RAHMAN & SONS');
+
+		// Add some data
+		$getActiveSheet = $spreadsheet->getActiveSheet();
+		$spreadsheet->getDefaultStyle()->getFont()->setSize(11);
+		$alignStyleArray = array(
+		        'alignment' => array(
+		            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
+		        )
+		);
+		$rowCount   = 1;
+		$getActiveSheet->mergeCells('I'.(string)($rowCount).':K'.(string)($rowCount))
+					   ->setCellValue('I'.(string)($rowCount),"T.M. ABDUL RAHMAN & SONS ");
+		$rowCount++;
+		$getActiveSheet->mergeCells('J'.(string)($rowCount).':K'.(string)($rowCount))
+					   ->setCellValue('J'.(string)($rowCount),strtoupper($this->data['division']).' UNIT');
+		$rowCount++;
+		$getActiveSheet->mergeCells('J'.(string)($rowCount).':K'.(string)($rowCount))
+					   ->setCellValue('J'.(string)($rowCount),"RANIPET");
+
+		$alpha = range('A','U');
+		foreach ($alpha as $ak => $av) {
+			$getActiveSheet->getStyle((string)$av.(string)(1))->getFont()->setBold(true);
+			$getActiveSheet->getStyle((string)$av.(string)(2))->getFont()->setBold(true);
+			$getActiveSheet->getStyle((string)$av.(string)(3))->getFont()->setBold(true);
+			$getActiveSheet->getStyle($av.(string)(1))->applyFromArray($alignStyleArray);
+			$getActiveSheet->getStyle($av.(string)(2))->applyFromArray($alignStyleArray);
+			$getActiveSheet->getStyle($av.(string)(3))->applyFromArray($alignStyleArray);
+		}
+		//getDefaultStyle
+		$spreadsheet->getDefaultStyle()->getFont()->setSize(10);
+		$spreadsheet->getDefaultStyle()->getFont()->setName('MS Sans Serif');
+
+		$rowCount   = 5;
+		foreach ($finalResponse['result'] as $key => $value) {
+			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+				$startCount = $rowCount;
+				$getActiveSheet->setCellValue('A'.(string)($rowCount),"PAYABLE_MONTH");
+				$getActiveSheet->setCellValue('B'.(string)($rowCount),$value['payable_month']);
+				$getActiveSheet->setCellValue('C'.(string)($rowCount),"SUPPLIER NAME");
+				$getActiveSheet->setCellValue('D'.(string)($rowCount),$value['supplier_name']);
+				$getActiveSheet->setCellValue('E'.(string)($rowCount),"ORIGIN");
+				$getActiveSheet->setCellValue('F'.(string)($rowCount),$value['origin']);
+			}
+
+			foreach ($alpha as $ak => $av) {
+				$getActiveSheet->getStyle((string)$av.(string)($rowCount))->getFont()->setBold(true);
+				$getActiveSheet->getColumnDimension($av)->setAutoSize(true);
+			}
+			if(!empty($value['paymentBookList'])){
+				$rowCount++;
+				$getActiveSheet->setCellValue('A'.(string)($rowCount),"S.NO");
+				$getActiveSheet->setCellValue('B'.(string)($rowCount),"HSN CODE");
+				$getActiveSheet->setCellValue('C'.(string)($rowCount),"CGST");
+				$getActiveSheet->setCellValue('D'.(string)($rowCount),"SGST");
+				$getActiveSheet->setCellValue('E'.(string)($rowCount),"IGST");
+				$getActiveSheet->setCellValue('F'.(string)($rowCount),"RECEIVED QTY");
+				$getActiveSheet->setCellValue('G'.(string)($rowCount),"UOM");
+				$getActiveSheet->setCellValue('H'.(string)($rowCount),"MATERIAL NAME");
+				$getActiveSheet->setCellValue('I'.(string)($rowCount),"RATE");
+				$getActiveSheet->setCellValue('J'.(string)($rowCount),"PO NUMBER");
+				$getActiveSheet->setCellValue('K'.(string)($rowCount),"DC NUMBER");
+				$getActiveSheet->setCellValue('L'.(string)($rowCount),"AVG COST");
+				$getActiveSheet->setCellValue('M'.(string)($rowCount),"QUERY");
+				$getActiveSheet->setCellValue('N'.(string)($rowCount),"BILL NUMBER");
+				$getActiveSheet->setCellValue('O'.(string)($rowCount),"BILL DATE");
+				$getActiveSheet->setCellValue('P'.(string)($rowCount),"PAYABLE_MONTH");
+				$getActiveSheet->setCellValue('Q'.(string)($rowCount),"BILL AMOUNT");
+				$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
+				$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
+				$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
+				$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+
+				foreach ($alpha as $ak => $av) {
+					$getActiveSheet->getStyle((string)$av.(string)($rowCount))->getFont()->setBold(true);
+					$getActiveSheet->getColumnDimension($av)->setAutoSize(true);
+				}
+
+				foreach ($value['paymentBookList'] as $k1 => $v1) {
+					foreach ($v1 as $k2 => $v2) {
+						$rowCount++;
+						$getActiveSheet->setCellValue('A'.(string)($rowCount),$v2['s_no']);
+						$getActiveSheet->setCellValue('B'.(string)($rowCount),$v2['material_hsn_code']);
+						$getActiveSheet->setCellValue('C'.(string)($rowCount),$v2['CGST']);
+						$getActiveSheet->setCellValue('D'.(string)($rowCount),$v2['SGST']);
+						$getActiveSheet->setCellValue('E'.(string)($rowCount),$v2['IGST']);
+						$getActiveSheet->setCellValue('F'.(string)($rowCount),$v2['received']);
+						$getActiveSheet->setCellValue('G'.(string)($rowCount),$v2['material_uom']);
+						$getActiveSheet->setCellValue('H'.(string)($rowCount),$v2['material_name']);
+						$getActiveSheet->setCellValue('I'.(string)($rowCount),$v2['price']);
+						$getActiveSheet->setCellValue('J'.(string)($rowCount),$v2['po_number']);
+						$getActiveSheet->setCellValue('K'.(string)($rowCount),$v2['dc_number']);
+						$getActiveSheet->setCellValue('L'.(string)($rowCount),$v2['avg_cost']);
+						$getActiveSheet->setCellValue('M'.(string)($rowCount),$v2['query']);
+						$getActiveSheet->setCellValue('N'.(string)($rowCount),$v2['bill_number']);
+						$getActiveSheet->setCellValue('O'.(string)($rowCount),$v2['bill_date']);
+						$getActiveSheet->setCellValue('P'.(string)($rowCount),$v2['payable_month']);
+						$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v2['bill_amount']);
+					}
+				}
+			}
+
+			if(!empty($value['debitNoteList'])){
+				$rowCount++;
+				$getActiveSheet->setCellValue('A'.(string)($rowCount),"S.NO");
+				$getActiveSheet->mergeCells('B'.(string)($rowCount).':D'.(string)($rowCount))
+						       ->setCellValue('B'.(string)($rowCount),"TYPE");
+				$getActiveSheet->setCellValue('E'.(string)($rowCount),"DEBIT NOTE NO");
+				$getActiveSheet->setCellValue('F'.(string)($rowCount),"DATE");
+				$getActiveSheet->setCellValue('G'.(string)($rowCount),"SUPPLIER CREDIT NOTE	");
+				$getActiveSheet->setCellValue('H'.(string)($rowCount),"DATE");
+				$getActiveSheet->mergeCells('I'.(string)($rowCount).':O'.(string)($rowCount))
+						       ->setCellValue('I'.(string)($rowCount),"QUERY");
+				$getActiveSheet->setCellValue('P'.(string)($rowCount),"PAYABLE_MONTH");
+				$getActiveSheet->setCellValue('Q'.(string)($rowCount),"AMOUNT");
+				if(empty($value['paymentBookList'])){
+					$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
+					$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
+					$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+				}
+
+				$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
+				$getActiveSheet->getStyle('I'.(string)$rowCount)->applyFromArray($alignStyleArray);
+
+				foreach ($alpha as $ak => $av) {
+					$getActiveSheet->getStyle((string)$av.(string)($rowCount))->getFont()->setBold(true);
+					$getActiveSheet->getColumnDimension($av)->setAutoSize(true);
+				}
+
+				$debitNoteListCount = 0;
+				foreach ($value['debitNoteList'] as $k3 => $v3) {
+					$rowCount++;$debitNoteListCount++;
+					$getActiveSheet->setCellValue('A'.(string)($rowCount),$debitNoteList);
+
+					if($v3['type'] == 'D') $type = 'DEBIT NOTE';
+					if($v3['type'] == 'C') $type = 'CREDIT NOTE';
+					if($v3['type'] == 'T') $type = 'TDS';
+					if($v3['type'] == 'B') $type = 'BALANCE AMOUNT';
+					$getActiveSheet->mergeCells('B'.(string)($rowCount).':D'.(string)($rowCount))
+							       ->setCellValue('B'.(string)($rowCount),$type);
+
+					$getActiveSheet->setCellValue('E'.(string)($rowCount),$v3['debit_note_no']);
+					$getActiveSheet->setCellValue('F'.(string)($rowCount),$v3['debit_note_date']);
+					$getActiveSheet->setCellValue('G'.(string)($rowCount),$v3['supplier_creditnote']);
+					$getActiveSheet->setCellValue('H'.(string)($rowCount),$v3['supplier_creditnote_date']);
+					$getActiveSheet->mergeCells('I'.(string)($rowCount).':O'.(string)($rowCount))
+							       ->setCellValue('I'.(string)($rowCount),$v3['query']);
+					$getActiveSheet->setCellValue('P'.(string)($rowCount),$v3['payable_month']);
+					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['amount']);
+
+					$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
+					$getActiveSheet->getStyle('I'.(string)$rowCount)->applyFromArray($alignStyleArray);
+				}
+			}
+
+			if(!empty($value['chequeNumberDetails']) && (!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+				$rowCount++;
+				$getActiveSheet->setCellValue('P'.(string)($rowCount),"TOTAL");
+				$getActiveSheet->setCellValue('Q'.(string)($rowCount),$value['totalAmount']);
+				$getActiveSheet->setCellValue('R'.(string)($rowCount),$value['chequeNumberDetails'][0]['cheque_no']);
+				$getActiveSheet->setCellValue('S'.(string)($rowCount),$value['chequeNumberDetails'][0]['cheque_date']);
+				$getActiveSheet->setCellValue('T'.(string)($rowCount),$value['chequeNumberDetails'][0]['cheque_amount']);
+				$getActiveSheet->setCellValue('U'.(string)($rowCount),($value['totalAmount'] - $value['chequeNumberDetails'][0]['cheque_amount']));
+
+				$getActiveSheet->getStyle((string)'P'.(string)($rowCount))->getFont()->setBold(true);
+			}
+
+			$styleArray = array(
+			    'fill' => array(
+			        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+			        'color' => array('rgb' => 'FFFFFF00')
+			    )
+			);
+
+			$style = array(
+		        'borders' => array(
+			        'allBorders' => array(
+			            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+			        ),
+			    )
+		    );
+
+			$getActiveSheet->getStyle('P'.(string)($startCount+1).':P'.(string)($rowCount-1))->applyFromArray($styleArray);
+			$getActiveSheet->getStyle('A'.(string)($startCount+1).':U'.(string)($rowCount))->applyFromArray($style);
+			$rowCount = $rowCount+3;
+		}
+
+		//Download excel
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="PAYMENT_BOOK.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+
+		// If you're serving to IE over SSL, then the following may be needed
+		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+		header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header('Pragma: public'); // HTTP/1.0
+
+		$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+		$writer->save('php://output');
+		exit;
+
 	}
 
 }

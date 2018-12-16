@@ -55,7 +55,8 @@
 				        </div>
 			           	<div id="showAddNoteSearch" style="display: none;margin-top:20px;">
 			        		<p align="right">
-				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails()">Download as PDF</button> 
+				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails('PDF')">Download as PDF</button> 
+				        		<button class="btn btn-primary" type="button" onClick="downloadAsPdfPaymentBookDetails('EXCEL')">Download as EXCEL</button> 
 			        		</p>
 			       		</div>
 				        <div class="row" id="showPaymentBookSearch">	

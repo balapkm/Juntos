@@ -431,8 +431,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         });
     }
 
-    $scope.downloadAsPdfPaymentBookDetails = function(){
-        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&date='+$scope.generatePoData['date']+'&division='+$scope.generatePoData['division'];
+    $scope.downloadAsPdfPaymentBookDetails = function(download_type){
+        var url = 'PaymentBook/downloadAsPdfPaymentBookDetails?supplier_name='+$scope.generatePoData['supplier_name']+'&date='+$scope.generatePoData['date']+'&division='+$scope.generatePoData['division']+'&download_type='+download_type;
         window.open(url);
     }
 
@@ -588,9 +588,9 @@ function editAdvancePaymentDetails(data){
     scope.$apply();
 }
 
-function downloadAsPdfPaymentBookDetails(){
+function downloadAsPdfPaymentBookDetails(download_type){
     var scope = angular.element($('[ui-view=div1]')).scope();
-    scope.downloadAsPdfPaymentBookDetails();
+    scope.downloadAsPdfPaymentBookDetails(download_type);
     scope.$apply();
 }
 
