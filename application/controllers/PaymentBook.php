@@ -750,7 +750,9 @@ class PaymentBook extends CI_Controller
 		    );
 
 			$getActiveSheet->getStyle('P'.(string)($startCount+1).':P'.(string)($rowCount-1))->applyFromArray($styleArray);
-			$getActiveSheet->getStyle('A'.(string)($startCount+1).':U'.(string)($rowCount))->applyFromArray($style);
+			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+				$getActiveSheet->getStyle('A'.(string)($startCount+1).':U'.(string)($rowCount))->applyFromArray($style);
+			}
 			$rowCount = $rowCount+3;
 		}
 
