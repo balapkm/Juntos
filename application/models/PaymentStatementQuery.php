@@ -18,7 +18,7 @@ class PaymentStatementQuery extends CI_Model
                     cnd.cheque_amount,
                     cnd.supplier_id,
                     cnd.page_no,
-                    cnd.cheque_number_id,
+                    cnd.cheque_no,
                     cnd.payable_month
                 FROM
                     cheque_number_details cnd,
@@ -35,33 +35,36 @@ class PaymentStatementQuery extends CI_Model
             $sql .= " AND cnd.supplier_id = ".$data['payment_statement_supplier_id'];
         }
                     
-        $sql     .= " group by cnd.supplier_id,cnd.payable_month order by cnd.payable_month";
-        // print_r($sql);exit;
+        $sql     .= " group by cnd.supplier_id,cnd.payable_month order by cnd.payable_month ";
         $result   = $this->db->query($sql)->result_array();
         
         foreach ($result as $key => $value) {
-            $result[$key]['total_amount'] = 0;
-            $sql = "SELECT bill_amount FROM po_generated_request_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number";
-            $data  = $this->db->query($sql)->result_array();
-        
-            foreach ($data as $k1 => $v1) {
-                $result[$key]['total_amount'] += $v1['bill_amount'];
-            } 
+            if($value['cheque_amount'] == 0){
+                $result[$key]['total_amount'] = 0;
+                $sql = "SELECT bill_amount FROM po_generated_request_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number";
+                $data  = $this->db->query($sql)->result_array();
+            
+                foreach ($data as $k1 => $v1) {
+                    $result[$key]['total_amount'] += $v1['bill_amount'];
+                } 
 
-            $sql  = "SELECT (ad.amount) as ad_amount FROM po_generated_request_details prd,advance_payment_details ad WHERE prd.advance_payment_id=ad.advance_payment_id AND prd.payable_month='".$value['payable_month']."' AND prd.supplier_id = '".$value['supplier_id']."' GROUP BY prd.bill_number";
-            $data  = $this->db->query($sql)->result_array();
-        
-            foreach ($data as $k1 => $v1) {
-                $result[$key]['total_amount'] -= $v1['ad_amount'];
-            }
+                $sql  = "SELECT (ad.amount) as ad_amount FROM po_generated_request_details prd,advance_payment_details ad WHERE prd.advance_payment_id=ad.advance_payment_id AND prd.payable_month='".$value['payable_month']."' AND prd.supplier_id = '".$value['supplier_id']."' GROUP BY prd.bill_number";
+                $data  = $this->db->query($sql)->result_array();
+            
+                foreach ($data as $k1 => $v1) {
+                    $result[$key]['total_amount'] -= $v1['ad_amount'];
+                }
 
-            $sql  = "SELECT amount,type FROM debit_note_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."'";
-            $data  = $this->db->query($sql)->result_array();
-            foreach ($data as $k => $v) {
-                if($v['type']=='D' || $v['type']=='T')
-                    $result[$key]['total_amount'] -= $v['amount'];
-                else
-                    $result[$key]['total_amount'] += $v['amount'];
+                $sql  = "SELECT amount,type FROM debit_note_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."'";
+                $data  = $this->db->query($sql)->result_array();
+                foreach ($data as $k => $v) {
+                    if($v['type']=='D' || $v['type']=='T')
+                        $result[$key]['total_amount'] -= $v['amount'];
+                    else
+                        $result[$key]['total_amount'] += $v['amount'];
+                }
+            }else{
+                unset($result[$key]);
             }
         }
 
