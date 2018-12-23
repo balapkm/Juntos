@@ -32,6 +32,7 @@ app.controller('PaymentStatement',function($scope,httpService,validateService,$s
         dataTableVariable = $('#example').DataTable({
             dom: 'Brfrtip',
             ordering : false,
+            pageLength: 150,
             buttons: [
                 'copy', 
                 'csv',

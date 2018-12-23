@@ -87,20 +87,26 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in paymentStatmentSearchData">
-                    	<td style="text-align: center;">
+                    	<td style="text-align: center;" ng-if="!$last">
 		            		<a href="#" ng-click='editpaymentStatment(x)'>
 					          <span class="glyphicon glyphicon-edit"></span>
 					        </a>
 						</td>
-                    	<td>{{$index+1}}</td>
-                    	<!-- <td ng-if="$last"></td>
-                    	<td ng-if="$last"></td> -->
-                    	<td>{{x.page_no}}</td>
-                    	<td ng-if="x.payment_to === ''">{{x.supplier_name}}</td>
-                    	<td ng-if="x.payment_to !== ''">{{x.payment_to}}</td>
-                    	<td>{{x.payable_month}}</td>
-                    	<td>{{x.origin}}</td>
-                    	<td>{{x.payment_type}}</td>
+                    	<td ng-if="!$last">{{$index+1}}</td>
+                    	<td ng-if="!$last">{{x.page_no}}</td>
+                    	<td ng-if="(x.payment_to === '' && !$last)">{{x.supplier_name}}</td>
+                    	<td ng-if="(x.payment_to !== '' && !$last)">{{x.payment_to}}</td>
+                    	<td ng-if="!$last">{{x.payable_month}}</td>
+                    	<td ng-if="!$last">{{x.origin}}</td>
+                    	<td ng-if="!$last">{{x.payment_type}}</td>
+
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"></td>
+                    	<td ng-if="$last"><b>TOTAL AMOUNT</b></td>
                     	<td style="font-weight: bold;">{{x.total_amount | number:2}}</td>
                     </tr>
                 </tbody>
