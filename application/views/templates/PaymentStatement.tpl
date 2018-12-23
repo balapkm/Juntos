@@ -107,7 +107,7 @@
                     	<td ng-if="$last"></td>
                     	<td ng-if="$last"></td>
                     	<td ng-if="$last"><b>TOTAL AMOUNT</b></td>
-                    	<td style="font-weight: bold;">{{x.total_amount | number:2}}</td>
+                    	<td style="font-weight: bold;text-align: right;">{{x.total_amount | number:2}}</td>
                     </tr>
                 </tbody>
             </table>
