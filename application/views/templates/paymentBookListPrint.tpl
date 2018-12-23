@@ -3,11 +3,13 @@
 [[foreach from=$result key=k1 item=v1]]
 	[[assign var=serialCount value=($serialCount + 1)]]
 	<div style="margin-top: 50px;">
+		[[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>[[assign var="dateValue" value="_"|explode:$k1]]
 			<b><span class="badge">[[$serialCount]]</span> | Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
 		[[else]]
 		<h5><b><span class="badge">[[$serialCount]]</span> | Payable Date : [[$lastDateOfMonth|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
+		[[/if]]
 		[[/if]]
 		<table style="margin-bottom: 10px;" class="paymentBookListTable">
 			[[assign var=totalAmount value= 0]]
@@ -243,6 +245,7 @@
 		            [[/if]]
 		            [[/if]]
 		            
+		            [[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
 		            [[if $k2 eq 'chequeNumberDetails']]
 		            <tbody>
 		                <tr style="font-weight: bold;">
@@ -259,6 +262,7 @@
 				        	<td style="text-align: right;">[[($totalAmount - $v3.cheque_amount)|number_format:2]]</td>
 				        </tr>
 		            </tbody>
+		            [[/if]]
 		            [[/if]]
 	        [[/foreach]]
 		</table>
