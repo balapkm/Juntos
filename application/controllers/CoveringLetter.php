@@ -63,6 +63,9 @@ class CoveringLetter extends CI_Controller
 	public function downloadAsPdf()
 	{
 		$this->data = $_GET;
+		$this->data['supplier_name']  = $this->data['payment_statement_supplier_id'];
+		$this->data['payable_month']  = $this->data['payment_statement_date'];
+		// print_r($this->data);exit;
 
 		$data       = $this->PaymentStatementQuery->getCoverLetterData($this->data);
 		$extraData  = $this->PaymentStatementQuery->getExtraBillAmountData($this->data);
@@ -77,30 +80,23 @@ class CoveringLetter extends CI_Controller
 			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			$po_number_array[]         = $data[$key]['po_number'];
 		}
-		if(count($data) == 0)
+		
+		/*if(count($data) == 0)
 		{
 			echo "<script>alert('No Data found');window.close();</script>";exit;
-		}
+		}*/
 
-		foreach ($advancePaymentDetails as $key => $value) 
-		{
-			if(!in_array($value['full_po_number'],$po_number_array))
-			{
-				unset($advancePaymentDetails[$key]);
-			}
-		}
 
 		$finalResponse         = array();
 		$finalResponse['data']       = $data;
 		$finalResponse['extraData']  = $extraData;
 		$finalResponse['chequeData'] = $chequeData;
 		$finalResponse['advancePaymentData'] = $advancePaymentDetails;
-		$template_name = 'CoveringLetterPrint_download.tpl';
 
 		$folder_name = realpath(APPPATH."../assets/po_html");
 		
 		$filename='CoveringLetter';
-		
+		$template_name = 'CoveringLetterPrint_download.tpl';
 		file_put_contents($folder_name."/".$filename.".html",$this->mysmarty->view($template_name,$finalResponse,TRUE));
 
 		chmod($folder_name."/".$filename.".html", 0777);

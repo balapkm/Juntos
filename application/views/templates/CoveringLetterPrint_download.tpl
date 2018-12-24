@@ -25,11 +25,7 @@ table td
 	[[/if]]
 [[/foreach]]
 
-[[if $advancePaymentData|@count neq 0]]
-	[[foreach from=$advancePaymentData key=k1 item=v1]]
-		[[assign var=grandAmount value=$grandAmount - $v1.amount]]
-	[[/foreach]]
-[[/if]]
+
 
 <span style="display: none;" id="GrandTotal">[[$grandAmount]]</span>
 <span style="display: none;" id="ChequeTotal">[[$chequeData[0].cheque_amount]]</span>
@@ -89,10 +85,12 @@ table td
 		          <td align="right"><b>[[$v1.bill_amount|number_format:2]]</b></td>
 		        </tr>
 		        [[/foreach]]
+		        [[if $totalAmount neq 0]]
 		        <tr>
 		          <td colspan="2"><b>TOTAL AMOUNT</b></td>	
 		          <td align="right"><b>[[$totalAmount|number_format:2]]</b></td>
 		        </tr>
+		        [[/if]]
 		        [[if $extraData|@count neq 0]]
 			        [[foreach from=$extraData key=k1 item=v1]]
 			    	<tr>
@@ -116,11 +114,16 @@ table td
 			        </tr>
 		        [[/if]]
 		        [[if $advancePaymentData|@count neq 0]]
+					[[foreach from=$advancePaymentData key=k1 item=v1]]
+						[[assign var=grandAmount value=$grandAmount - $v1.pi_amount]]
+					[[/foreach]]
+				[[/if]]
+		        [[if $advancePaymentData|@count neq 0]]
 			        [[foreach from=$advancePaymentData key=k1 item=v1]]
 			    	<tr>
-			          <td>Advance Payment - [[$v1.full_po_number]]</td>	
+			          <td>Advance Payment - [[$v1.po_number]]</td>	
 			          <td>[[$v1.date|date_format:"%d-%m-%Y"]]</td>
-			          <td align="right"><b>[[$v1.amount|number_format:2]]</b></td>
+			          <td align="right"><b>[[$v1.pi_amount|number_format:2]]</b></td>
 			        </tr>
 			        [[/foreach]]
 			        <tr>

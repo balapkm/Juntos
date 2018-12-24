@@ -145,7 +145,7 @@ class PaymentBookQuery extends CI_Model
 
     public function getAdvancePaymentFullDetails()
     {
-        $sql   = "SELECT * FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id";                    
+        $sql   = "SELECT apd.*,sd.supplier_name,sd.origin FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id";                    
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }
@@ -203,23 +203,23 @@ class PaymentBookQuery extends CI_Model
         {
             $data['supplier_name'] = $data['payment_statement_supplier_id'];
         }*/
-        $sql = "SELECT * FROM advance_payment_details";
-        if(!empty($status))
-        {
-            $sql.=  " WHERE used_status = '".$status."'";
-        }
-        /*if(!empty($data['date'])) {
-            $date = explode("/",$data['date']);
-        }*/
-        /*if($data['type'] == 'specfic')
-        {
-            $sql.=  " supplier_id = ".$data['supplier_name'];
-        }
-        if($data['type'] == 'date')
-        {
-            $sql.=  " payable_month BETWEEN '".$date[0]."' AND '".$date[1]."'";
-        }*/
+        $sql = "SELECT apd.*,sd.* FROM advance_payment_details apd,supplier_details sd WHERE sd.supplier_id = apd.supplier_id AND division = '".$data['division']."'";
 
+        if(!empty($data['supplier_name']))
+        {
+            $sql.=  " AND apd.supplier_id = ".$data['supplier_name']."";
+        }
+
+        if(!empty($data['date'][0]) && !empty($data['date'][1]))
+        {
+            $sql.=  " AND apd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
+        }
+
+        if(!empty($data['payable_month']))
+        {
+            $sql.=  " AND apd.payable_month = '".$data['payable_month']."'";
+        }
+        
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }

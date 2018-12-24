@@ -39,25 +39,25 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 		deduction_query : ""
 	}
 
-	$scope.tabChange = function(report_type){
-		$scope.po_report.report_type = report_type;
+	$scope.po_report_show_func = function(){
+		$scope.po_report_show = {
+			division : true,
+			type : true,
+			date_range : true,
+			material_id : true,
+			supplier_id : true,
+			order_ref   : true,
+			tax_type : true,
+			po_number_show : true,
+			origin : true,
+			deduction_query : true
+		}
 	}
 
-	$scope.po_report_show = {
-		division : true,
-		type : true,
-		date_range : true,
-		material_id : true,
-		supplier_id : true,
-		order_ref   : true,
-		tax_type : true,
-		po_number_show : true,
-		origin : true,
-		deduction_query : true
-	}
-
+	$scope.po_report_show_func();
 	
 	$scope.chageReportType = function(){
+		$scope.po_report_show_func();
 		if($scope.po_report.report_type === "report_1"){
 			$scope.po_report_show = {
 				division : true,
@@ -91,7 +91,42 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 				tax_type : false
 			}
 		}
+
+		if($scope.po_report.report_type === "report_8"){
+			$scope.po_report_show = {
+				division : false,
+				type : false,
+				date_range : true,
+				material_id : false,
+				supplier_id : true,
+				order_ref : false,
+				tax_type : false,
+				origin : true,
+				deduction_query : true,
+				po_number_show : false
+			}
+		}
+
+		if($scope.po_report.report_type === "report_9"){
+			$scope.po_report_show = {
+				division : true,
+				type : false,
+				date_range : true,
+				material_id : false,
+				supplier_id : true,
+				order_ref : false,
+				tax_type : false,
+				origin : true,
+				deduction_query : false,
+				po_number_show : false
+			}
+		}
 		
+	}
+
+	$scope.tabChange = function(report_type){
+		$scope.po_report.report_type = report_type;
+		$scope.po_report_show_func();
 	}
 
 	$scope.poDownloadAction = function(){

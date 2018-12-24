@@ -5,7 +5,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     $('.modal-backdrop').css('display','none');
     $('body').removeClass('modal-open');
 
-    $('#debitnote_date,#creditnote_date,#cheque_date,#dd_date,#ap_date,#ap_supplier_date').datepicker({
+    $('#debitnote_date,#creditnote_date,#cheque_date,#dd_date,#ap_supplier_pi_date,#ap_cheque_date').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
@@ -76,12 +76,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             buttons: [
                 'copy', 
                 'csv',
-                'excel',
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL'
-                }
+                'excel'
             ]
         });
     }
@@ -131,25 +126,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $('#advance_payment_modal').modal();
         $scope.getPoNumberAsPerSupplierData = [];
         $('#ap_supplier_name').on('select2:select', function (e) {
-            $scope.getPoNumberAsPerSupplierData = [];
-            var data = e.params.data;
-            var service_details = {
-                method_name : "getPoNumberAsPerSupplier",
-                controller_name : "PaymentBook",
-                data : JSON.stringify($scope.advancePaymentData)
-            };
-            commonService.showLoader();
-            httpService.callWebService(service_details).then(function(data){
-                if(data)
-                { 
-                    $scope.getPoNumberAsPerSupplierData = data;
-                    commonService.hideLoader();
-                }
-                else
-                {
-                    commonService.hideLoader();
-                }
-            });
+            $scope.searchPoBasedOnYear();
         });
     }
 
@@ -160,32 +137,16 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         };
         $('#ap_supplier_name').select2().val(data.supplier_id).trigger("change");
         $scope.advancePaymentData = data;
-        var service_details = {
-            method_name : "getPoNumberAsPerSupplier",
-            controller_name : "PaymentBook",
-            data : JSON.stringify($scope.advancePaymentData)
-        };
-        commonService.showLoader();
-        httpService.callWebService(service_details).then(function(serviceData){
-            if(serviceData)
-            { 
-                $scope.getPoNumberAsPerSupplierData = serviceData;
-                commonService.hideLoader();
-                setTimeout(function(){
-                    $('#ap_full_po_number').select2().val(data.full_po_number).trigger("change");
-                },100);
-            }
-            else
-            {
-                commonService.hideLoader();
-            }
-        });
+        $scope.searchPoBasedOnYear();
+        setTimeout(function(){
+            $('#ap_full_po_number').select2().val(data.po_full_number.split(",")).trigger("change");
+        },500);
         $('#advance_payment_modal').modal();
     }
 
     $scope.add_advance_payment_action = function()
     {
-        console.log($scope.advancePaymentData);
+        if(validateService.blank($scope.advancePaymentData['used_status'],"Please select used_status","ap_used_status")) return false;
         var service_details = {
             method_name : "addAdvancePaymentAction",
             controller_name : "PaymentBook",
@@ -196,6 +157,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             { 
                 $('#modal-backdrop').css('display','none');
                 $scope.searchAction();
+                $state.reload();
                 validateService.displayMessage('success','Added Successfully','');
                 $('#advance_payment_modal').modal('hide');
             }
@@ -218,6 +180,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
             { 
                 $('#modal-backdrop').css('display','none');
                 $scope.searchAction();
+                $state.reload();
                 validateService.displayMessage('success','Updated Successfully','');
                 $('#advance_payment_modal').modal('hide');
             }
@@ -248,7 +211,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.downloadAsPdfCoverLetter = function(data)
     {
-        var url = 'CoveringLetter/downloadAsPdf?payment_statement_supplier_id='+data['supplier_id']+'&payment_statement_date='+data['payable_month'];
+        var url = 'CoveringLetter/downloadAsPdf?payment_statement_supplier_id='+data['supplier_id']+'&payment_statement_date='+data['payable_month']+'&division='+$scope.generatePoData['division'];
         window.open(url);
     }
     
@@ -419,7 +382,8 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
                 httpService.callWebService(service_details).then(function(data){
                     if(data)
                     { 
-                        $scope.searchAction();
+                        // $scope.searchAction();
+                        $state.reload();
                         validateService.displayMessage('success','Data Removed Successfully','');
                     }
                     else
@@ -531,21 +495,21 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $scope.searchPoBasedOnYear = function()
     {
-        if($scope.advancePaymentData.po_year !== "")
+        if($scope.advancePaymentData.po_year !== "" && $scope.advancePaymentData.supplier_id !== "" && $scope.advancePaymentData.division !== "")
         {
             $scope.searchPoBasedOnYearData = [];
             commonService.showLoader();
             var service_details = {
                 method_name : "searchPoBasedOnYear",
-                controller_name : "GeneratePo",
+                controller_name : "PaymentBook",
                 data : JSON.stringify($scope.advancePaymentData)
             };
             httpService.callWebService(service_details).then(function(data){
                 commonService.hideLoader();
                 if(data)
                 { 
-                    console.log(data);
                     $scope.searchPoBasedOnYearData = data;
+                    // setTimeout(function(){$('#ap_full_po_number').select2().val($scope.advancePaymentData.po_full_number.split(",")).trigger("change");},500);
                 }
             });
         }

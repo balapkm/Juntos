@@ -68,34 +68,57 @@
 				    	<p align="right">
 			        		<button type="button" class="btn btn-primary" ng-click="add_advance_payment()">Add Advanced Payment</button>
 		        		</p>
-	              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
-		                    <thead>
-		                        <tr>
-		                          <th>Supplier Name</th>
-		                          <th>PO Number</th>
-		                          <th>Supplier Date</th>
-		                          <th>Supplier PI Number</th>
-		                          <th>Date</th>
-		                          <th>Query</th>
-		                          <th>Payable Month</th>
-		                          <th>Amount</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-		                    	[[foreach from=$advancePaymentDetails key=k item=v]]
-		                        <tr>
-		                          <td>[[$v.supplier_name]]</td>
-		                          <td>[[$v.full_po_number]]</td>
-		                          <td>[[$v.supplier_date]]</td>
-		                          <td>[[$v.supplier_pi_number]]</td>
-		                          <td>[[$v.date]]</td>
-		                          <td>[[$v.query]]</td>
-		                          <td>[[$v.payable_month]]</td>
-		                          <td>[[$v.amount]]</td>
-		                        </tr>
-		                        [[/foreach]]
-		                    </tbody>
-		                </table>
+		        		<div class="table-responsive">
+		              		<table id="paymentBookExample" class="table table-bordered table-striped" style="margin-top: 10px;">
+			                    <thead>
+			                        <tr>
+			                          <th>ACTION</th>
+			                          <th>DIVISION</th>
+			                          <th>SUPPLIER NAME</th>
+			                          <th>ORIGIN</th>
+			                          <th>PO NUMBER</th>
+			                          <th>PO DATE</th>
+			                          <th>SUPPLIER PI DATE</th>
+			                          <th>SUPPLIER PI NUMBER</th>
+			                          <th>PI AMOUNT</th>
+			                          <th>QUERY</th>
+			                          <th>CHEQUE NO</th>
+			                          <th>CHEQUE DATE</th>
+			                          <th>CHEQUE AMOUNT</th>
+			                          <th>PAYABLE MONTH</th>
+			                          <th>STATUS</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    	[[foreach from=$advancePaymentDetails key=k item=v]]
+			                        <tr>
+			                          <td style="text-align: center;">
+					            		<a href="#" onclick='editAdvancePaymentDetails([[$v|@json_encode]])''>
+								          <span class="glyphicon glyphicon-edit"></span>
+								        </a>
+				                      	<a href="#" onclick='deleteAdvancePaymentDetails([[$v|@json_encode]])''>
+								          <span class="glyphicon glyphicon-trash"></span>
+								        </a>
+			                      	  </td>
+			                          <td>[[$v.division]]</td>
+			                          <td>[[$v.supplier_name]]</td>
+			                          <td>[[$v.origin]]</td>
+			                          <td>[[$v.po_number]]</td>
+			                          <td>[[$v.po_date]]</td>
+			                          <td>[[$v.pi_date]]</td>
+			                          <td>[[$v.supplier_pi_number]]</td>
+			                          <td>[[$v.pi_amount]]</td>
+			                          <td>[[$v.query]]</td>
+			                          <td>[[$v.cheque_no]]</td>
+			                          <td>[[$v.cheque_date]]</td>
+			                          <td>[[$v.cheque_amount]]</td>
+			                          <td>[[$v.payable_month]]</td>
+			                          <td>[[$v.used_status]]</td>
+			                        </tr>
+			                        [[/foreach]]
+			                    </tbody>
+			                </table>
+			            </div>
 				    </div>
 				    <div class="tab-pane" id="tab_3">
 				    	<p align="right">
@@ -260,7 +283,18 @@
 		    </div>
 		    <div class="modal-body">
 		        <div class="row">
-		            <!-- <div class="col-lg-4">
+		        	<div class="col-lg-4">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">Division</label>
+		                    <select class="form-control" style="width: 100%;" id="ap_division" ng-model="advancePaymentData.division" ng-change="searchPoBasedOnYear()">
+		                  	  	<option value="">Choose Division</option>
+		                  		<option value="UPPER">UPPER</option>
+		                  		<option value="FULL SHOE">FULL SHOE</option>
+		                  		<option value="SOLE">SOLE</option>
+			                </select>
+			            </div>
+		            </div>
+		            <div class="col-lg-4">
 		                <div class="form-group">
 		                    <label for="exampleInputEmail1">Supplier Name</label>
 		                    <select class="form-control select2" style="width: 100%;" id="ap_supplier_name" ng-model="advancePaymentData.supplier_id">
@@ -270,59 +304,81 @@
 		                  	    [[/foreach]]
 			                </select>
 			            </div>
-		            </div> -->
-		            <div class="col-lg-4">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Po Year</label>
-		                  <input type="text" class="form-control" id="search_year_po" ng-model="advancePaymentData.po_year" placeholder="Choose Po Date" ng-change="searchPoBasedOnYear()">
-		                </div>
 		            </div>
 		            <div class="col-lg-4">
 		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Po Year</label>
+		                  <input type="text" class="form-control" id="search_year_po" ng-model="advancePaymentData.po_year" placeholder="Choose Po year" ng-change="searchPoBasedOnYear()">
+		                </div>
+		            </div>
+		            <div class="col-lg-6">
+		                <div class="form-group">
 		                    <label for="exampleInputEmail1">PO Number</label>
-		                    <select class="form-control select2" style="width: 100%;" id="ap_full_po_number" ng-model="advancePaymentData.full_po_number">
+		                    <select class="form-control select2" style="width: 100%;" id="ap_full_po_number" ng-model="advancePaymentData.po_number" multiple="multiple">
 		                  	  	<option value="">Choose PO Number</option>
 		                  		<option ng-repeat="x in searchPoBasedOnYearData" value="{{x.full_po_number+'|'+x.po_date+'|'+x.unit+'|'+x.type
 		                  		+'|'+x.po_number}}">{{x.full_po_number}}</option>
 			                </select>
 			            </div>
 		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-3">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Date</label>
-		                  <input type="text" ng-model="advancePaymentData.supplier_date" class="form-control" id="ap_supplier_date" placeholder="Choose Date">
+		                  <label for="exampleInputEmail1">Supplier Pi Date</label>
+		                  <input type="text" ng-model="advancePaymentData.pi_date" class="form-control" id="ap_supplier_pi_date" placeholder="Choose Date">
 		                </div>
 		            </div>
 
-		         	<div class="col-lg-4">
+		         	<div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Supplier Pi Number</label>
 		                  <input type="text" ng-model="advancePaymentData.supplier_pi_number" class="form-control" id="ap_supplier_pi_number" placeholder="Enter Supplier Pi Number" ng-change="advancePaymentData.supplier_pi_number = advancePaymentData.supplier_pi_number.toUpperCase()">
 		                </div>
 		            </div>
-		            <div class="col-lg-4">
-		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Date</label>
-		                  <input type="text" ng-model="advancePaymentData.date" class="form-control" id="ap_date" placeholder="Choose Date">
-		                </div>
-		            </div>
-		            <div class="col-lg-4">
+		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Query</label>
 		                  <input type="text" ng-model="advancePaymentData.query" class="form-control" id="ap_query" placeholder="Enter Query" ng-change="advancePaymentData.query = advancePaymentData.query.toUpperCase()">
 		                </div>
 		            </div>
-		            <!-- <div class="col-lg-4">
+		            <div class="col-lg-3">
 		                <div class="form-group">
 		                  <label for="exampleInputEmail1">Payable Month</label>
 		                  <input type="text" ng-model="advancePaymentData.payable_month" class="form-control" id="ap_payable_month" placeholder="Choose Payable Month">
 		                </div>
-		            </div> -->
-		            <div class="col-lg-4">
+		            </div>
+		            <div class="col-lg-3">
 		                <div class="form-group">
-		                  <label for="exampleInputEmail1">Amount</label>
-		                  <input type="text" ng-model="advancePaymentData.amount" class="form-control" id="ap_amount" placeholder="Enter Amount">
+		                  <label for="exampleInputEmail1">PI Amount</label>
+		                  <input type="text" ng-model="advancePaymentData.pi_amount" class="form-control" id="ap_pi_amount" placeholder="Enter Amount">
 		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque No</label>
+		                  <input type="text" ng-model="advancePaymentData.cheque_no" class="form-control" id="ap_cheque_no" placeholder="Enter Cheque No">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque Date</label>
+		                  <input type="text" ng-model="advancePaymentData.cheque_date" class="form-control" id="ap_cheque_date" placeholder="Enter Cheque Date">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                  <label for="exampleInputEmail1">Cheque Amount</label>
+		                  <input type="text" ng-model="advancePaymentData.cheque_amount" class="form-control" id="ap_cheque_amount" placeholder="Enter Cheque Amount">
+		                </div>
+		            </div>
+		            <div class="col-lg-3">
+		                <div class="form-group">
+		                    <label for="exampleInputEmail1">Used Status</label>
+		                    <select class="form-control" style="width: 100%;" id="ap_used_status" ng-model="advancePaymentData.used_status">
+		                  	  	<option value="">Choose Used Status</option>
+		                  		<option value="PENDING">PENDING</option>
+		                  		<option value="CLOSED">CLOSED</option>
+			                </select>
+			            </div>
 		            </div>
 		        </div>
 		    </div>

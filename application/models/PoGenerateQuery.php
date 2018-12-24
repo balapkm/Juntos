@@ -61,7 +61,7 @@ class PoGenerateQuery extends CI_Model
         return ($data[0]['po_number']+1);
     }
 
-    public function getUniquePoNumber($year="")
+    public function getUniquePoNumber($year="",$data=array())
     {
         $sql = "SELECT 
                     unit,type,po_number,po_date
@@ -73,6 +73,14 @@ class PoGenerateQuery extends CI_Model
         if(!empty($year))
         {
             $sql .= " AND YEAR(po_date) = ".$year;
+        }
+
+        if(!empty($data['division'])){
+            $sql .= " AND unit = '".$data['division']."'";
+        }
+
+        if(!empty($data['supplier_id'])){
+            $sql .= " AND supplier_id = '".$data['supplier_id']."'";
         }
 
         $sql .= " GROUP BY po_number,unit,type 

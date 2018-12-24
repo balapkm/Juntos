@@ -54,17 +54,33 @@ class PaymentBook extends CI_Controller
 
 	public function addAdvancePaymentAction()
 	{
-		$full_po_number = explode("|",$this->data['full_po_number']);
-		$this->data['full_po_number']  = $full_po_number[0];
-		$this->data['po_date']         = $full_po_number[1];
-		$this->data['unit']            = $full_po_number[2];
-		$this->data['type']            = $full_po_number[3];
-		$this->data['po_number']       = $full_po_number[4];
-		unset($this->data['po_year']);
+		$po_number = $this->data['po_number'];
+		unset($this->data['po_number']);
+		foreach ($po_number as $key => $value) {
+			$this->data['po_number'][] = explode('|',$value)[0];
+			$this->data['po_date'][]   = explode('|',$value)[1];
+		}
+		$this->data['po_number']      = implode(',',$this->data['po_number']);
+		$this->data['po_date']        = implode(',',$this->data['po_date']);
+		$this->data['po_full_number'] = implode(',',$po_number);
+
+		// unset($this->data['po_year']);
 		return $this->PaymentBookQuery->addAdvancePayment($this->data);
 	}
 
 	public function editAdvancePaymentAction(){
+		$po_number = $this->data['po_number'];
+		unset($this->data['po_number']);
+		unset($this->data['supplier_name']);
+		unset($this->data['origin']);
+		$this->data['po_date'] = $this->data['po_number'] = array();
+		foreach ($po_number as $key => $value) {
+			$this->data['po_number'][] = explode('|',$value)[0];
+			$this->data['po_date'][]   = explode('|',$value)[1];
+		}
+		$this->data['po_number']      = implode(',',$this->data['po_number']);
+		$this->data['po_date']        = implode(',',$this->data['po_date']);
+		$this->data['po_full_number'] = implode(',',$po_number);
 		return $this->PaymentBookQuery->editAdvancePayment($this->data);
 	}
 
@@ -138,14 +154,15 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
-			$advancePaymentDetails[] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
-		// print_r($advancePaymentDetails);exit;
 		foreach ($result as $key1 => $value1) 
 		{
-			$po_number_array = array();
-			$advance_payment_array = array();
 			foreach ($value1 as $key2 => $value2) 
 			{
 				if($key2 == 'paymentBookList')
@@ -156,26 +173,11 @@ class PaymentBook extends CI_Controller
 						foreach ($value3 as $key4 => $value4)
 						{
 							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
-							$po_number_array[] = $value4['po_number'];
-							$advance_payment_array[] = $value4['advance_payment_id'];
 						}
 					} 
 				}
-				
-				foreach ($advancePaymentDetails as $Akey => $Avalue)
-				{
-					if(in_array($Avalue['advance_payment_id'],$advance_payment_array))
-					{
-						$result[$key1]['advancePaymentDetails'][] = $Avalue;
-					}
-				}
 			}
-			if(!empty($result[$key1]['advancePaymentDetails']))
-				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
-
 		}
-
-		
 
 		$finalResponse['result'] = $result;
 		
@@ -192,6 +194,9 @@ class PaymentBook extends CI_Controller
 					$totalAmount += $v2['amount'];
 				}
 			}
+			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
+				$totalAmount -= $v2['pi_amount'];
+			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}
 
@@ -207,7 +212,7 @@ class PaymentBook extends CI_Controller
 
 	public function searchPoBasedOnYear()
 	{
-		$data =  $this->PoGenerateQuery->getUniquePoNumber($this->data['po_year']);
+		$data =  $this->PoGenerateQuery->getUniquePoNumber($this->data['po_year'],$this->data);
 		$po_number_details = $this->config->item('po_number_details', 'po_generate_details');
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
@@ -456,12 +461,15 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
-			$advancePaymentDetails[] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
 		}
 
 		foreach ($result as $key1 => $value1) 
 		{
-			$po_number_array = array();
 			foreach ($value1 as $key2 => $value2) 
 			{
 				if($key2 == 'paymentBookList')
@@ -472,35 +480,29 @@ class PaymentBook extends CI_Controller
 						foreach ($value3 as $key4 => $value4)
 						{
 							$result[$key1][$key2][$key3][$key4]['avg_cost'] = $this->avgCostCalc($value4,$full_qty,$value3);
-							$po_number_array[] = $value4['po_number'];
 						}
 					} 
 				}
-				foreach ($advancePaymentDetails as $Akey => $Avalue)
-				{
-					if(in_array($Avalue['full_po_number'],$po_number_array))
-					{
-						$result[$key1]['advancePaymentDetails'][] = $Avalue;
-					}
-				}
 			}
-			if(!empty($result[$key1]['advancePaymentDetails']))
-				$result[$key1]['advancePaymentDetails'] = array_map("unserialize", array_unique(array_map("serialize",$result[$key1]['advancePaymentDetails'])));
 		}
 
-		$finalResponse['result']          = $result;
-		$finalResponse['lastDateOfMonth'] = date('Y-m-d',strtotime('last day of this month', time()));
-
+		$finalResponse['result'] = $result;
+		
 		foreach ($finalResponse['result'] as $key => $value) {
 			$totalAmount = 0;
 			foreach ($value['paymentBookList'] as $k1 => $v1) {
 				$totalAmount += $v1[0]['bill_amount'];
 			}
 			foreach ($value['debitNoteList'] as $k2 => $v2) {
-				if($v2['type'] == 'D' || $v2['type'] == 'T')
+				if($v2['type'] == 'D' || $v2['type'] == 'T'){
 					$totalAmount -= $v2['amount'];
-				if($v2['type'] == 'C' || $v2['type'] == 'B')
+				}
+				if($v2['type'] == 'C' || $v2['type'] == 'B'){
 					$totalAmount += $v2['amount'];
+				}
+			}
+			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
+				$totalAmount -= $v2['pi_amount'];
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}
@@ -601,7 +603,7 @@ class PaymentBook extends CI_Controller
 
 		$rowCount   = 5;
 		foreach ($finalResponse['result'] as $key => $value) {
-			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']) || !empty($value['advancePaymentDetails']))){
 				$startCount = $rowCount;
 				$getActiveSheet->setCellValue('A'.(string)($rowCount),"PAYABLE_MONTH");
 				$getActiveSheet->setCellValue('B'.(string)($rowCount),$value['payable_month']);
@@ -699,7 +701,7 @@ class PaymentBook extends CI_Controller
 				$debitNoteListCount = 0;
 				foreach ($value['debitNoteList'] as $k3 => $v3) {
 					$rowCount++;$debitNoteListCount++;
-					$getActiveSheet->setCellValue('A'.(string)($rowCount),$debitNoteList);
+					$getActiveSheet->setCellValue('A'.(string)($rowCount),$debitNoteListCount);
 
 					if($v3['type'] == 'D') $type = 'DEBIT NOTE';
 					if($v3['type'] == 'C') $type = 'CREDIT NOTE';
@@ -722,7 +724,55 @@ class PaymentBook extends CI_Controller
 				}
 			}
 
-			if(!empty($value['chequeNumberDetails']) && (!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+			if(!empty($value['advancePaymentDetails'])){
+				$rowCount++;
+				$getActiveSheet->setCellValue('A'.(string)($rowCount),"S.NO");
+				$getActiveSheet->mergeCells('B'.(string)($rowCount).':D'.(string)($rowCount))
+						       ->setCellValue('B'.(string)($rowCount),"TYPE");
+				$getActiveSheet->setCellValue('E'.(string)($rowCount),"PO NUMBER");
+				$getActiveSheet->setCellValue('F'.(string)($rowCount),"SUPPLIER PI NUMBER");
+				$getActiveSheet->setCellValue('G'.(string)($rowCount),"PI DATE");
+				$getActiveSheet->mergeCells('H'.(string)($rowCount).':O'.(string)($rowCount))
+						       ->setCellValue('H'.(string)($rowCount),"QUERY");
+				$getActiveSheet->setCellValue('P'.(string)($rowCount),"PAYABLE_MONTH");
+				$getActiveSheet->setCellValue('Q'.(string)($rowCount),"AMOUNT");
+				if(empty($value['paymentBookList'])){
+					$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
+					$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
+					$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+				}
+
+				$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
+				$getActiveSheet->getStyle('H'.(string)$rowCount)->applyFromArray($alignStyleArray);
+
+				foreach ($alpha as $ak => $av) {
+					$getActiveSheet->getStyle((string)$av.(string)($rowCount))->getFont()->setBold(true);
+					$getActiveSheet->getColumnDimension($av)->setAutoSize(true);
+				}
+
+				$debitNoteListCount = 0;
+				foreach ($value['advancePaymentDetails'] as $k3 => $v3) {
+					$rowCount++;$debitNoteListCount++;
+					$getActiveSheet->setCellValue('A'.(string)($rowCount),$debitNoteListCount);
+
+					$getActiveSheet->mergeCells('B'.(string)($rowCount).':D'.(string)($rowCount))
+							       ->setCellValue('B'.(string)($rowCount),"ADVANCE PAYMENT");
+
+					$getActiveSheet->setCellValue('E'.(string)($rowCount),$v3['po_number']);
+					$getActiveSheet->setCellValue('F'.(string)($rowCount),$v3['supplier_pi_number']);
+					$getActiveSheet->setCellValue('G'.(string)($rowCount),$v3['pi_date']);
+					$getActiveSheet->mergeCells('H'.(string)($rowCount).':O'.(string)($rowCount))
+							       ->setCellValue('H'.(string)($rowCount),$v3['query']);
+					$getActiveSheet->setCellValue('P'.(string)($rowCount),$v3['payable_month']);
+					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['pi_amount']);
+
+					$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
+					$getActiveSheet->getStyle('H'.(string)$rowCount)->applyFromArray($alignStyleArray);
+				}
+			}
+
+			if(!empty($value['chequeNumberDetails']) && (!empty($value['paymentBookList']) || !empty($value['debitNoteList']) || !empty($value['advancePaymentDetails']))){
 				$rowCount++;
 				$getActiveSheet->setCellValue('P'.(string)($rowCount),"TOTAL");
 				$getActiveSheet->setCellValue('Q'.(string)($rowCount),$value['totalAmount']);
@@ -749,7 +799,7 @@ class PaymentBook extends CI_Controller
 			    )
 		    );
 
-			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']))){
+			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']) || !empty($value['advancePaymentDetails']))){
 				$getActiveSheet->getStyle('P'.(string)($startCount+1).':P'.(string)($rowCount-1))->applyFromArray($styleArray);
 				$getActiveSheet->getStyle('A'.(string)($startCount+1).':U'.(string)($rowCount))->applyFromArray($style);
 			}

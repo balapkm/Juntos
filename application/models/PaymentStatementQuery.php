@@ -48,13 +48,6 @@ class PaymentStatementQuery extends CI_Model
                     $result[$key]['total_amount'] += $v1['bill_amount'];
                 } 
 
-                $sql  = "SELECT (ad.amount) as ad_amount FROM po_generated_request_details prd,advance_payment_details ad WHERE prd.advance_payment_id=ad.advance_payment_id AND prd.payable_month='".$value['payable_month']."' AND prd.supplier_id = '".$value['supplier_id']."' GROUP BY prd.bill_number";
-                $data  = $this->db->query($sql)->result_array();
-            
-                foreach ($data as $k1 => $v1) {
-                    $result[$key]['total_amount'] -= $v1['ad_amount'];
-                }
-
                 $sql  = "SELECT amount,type FROM debit_note_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."'";
                 $data  = $this->db->query($sql)->result_array();
                 foreach ($data as $k => $v) {
@@ -63,6 +56,16 @@ class PaymentStatementQuery extends CI_Model
                     else
                         $result[$key]['total_amount'] += $v['amount'];
                 }
+
+                $sql  = "SELECT * FROM advance_payment_details ad WHERE ad.payable_month='".$value['payable_month']."' AND ad.supplier_id = '".$value['supplier_id']."'";
+                $data  = $this->db->query($sql)->result_array();
+            
+                foreach ($data as $k1 => $v1) {
+                    $result[$key]['total_amount'] -= $v1['pi_amount'];
+                }
+
+                if(empty($result[$key]['total_amount']))
+                    unset($result[$key]);
             }else{
                 unset($result[$key]);
             }

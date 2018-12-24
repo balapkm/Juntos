@@ -3,7 +3,7 @@
 [[foreach from=$result key=k1 item=v1]]
 	[[assign var=serialCount value=($serialCount + 1)]]
 	<div style="margin-top: 50px;">
-		[[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
+		[[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList']) || !empty($v1['advancePaymentDetails'])]]
 		[[if $k1 neq '0000-00-00']]
 		<h5>[[assign var="dateValue" value="_"|explode:$k1]]
 			<b><span class="badge">[[$serialCount]]</span> | Payable Date : [[$dateValue[0]|date_format:"%d-%m-%Y"]] | Supplier Name : [[$result[$k1]["supplier_name"] ]] | Origin : [[$result[$k1]["origin"] ]]</b></h5>
@@ -92,10 +92,6 @@
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
-				        	<!-- <td></td> -->
-				        	<!-- <td></td>
-				        	<td></td>
-				        	<td></td> -->
 				        	<td></td>
 				        </tr>
 				    </tbody>
@@ -116,10 +112,6 @@
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
-		                  <!-- <th></th> -->
-		                  <!-- <th></th>
-		                  <th></th>
-		                  <th></th> -->
 		                  <th></th>
 		                  [[/if]]
 		                  [[if empty($v1['paymentBookList'])]]
@@ -160,39 +152,38 @@
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
-		                      <!-- <td></td> -->
-		                      <!-- <td></td>
-		                      <td></td>
-		                      <td></td> -->
 		                      <td></td>
 		                </tr>
 		                [[/foreach]]
 		            </tbody>
 		            [[/if]]
-		            [[if $k2 eq 'advancePaymentDetails' AND $v2|@count neq 0]]
+		            [[if $k2 eq 'advancePaymentDetails']]
+		            [[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
 		            <thead >
 		            	<tr>
-		            	<th colspan="25" style="text-align: center;">ADVANCE PAYMENT</th>
-		            	</tr>
+				        	<td colspan="15"></td>
+				        	<td style="text-align: center;"><b>Total</b></td>
+				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        	<td></td>
+				        </tr>
 		            </thead>
+		            [[/if]]
 		            <thead>
 		            <tr>
 		            	<th>S.NO</th>
 		            	<th colspan="3" style="text-align: center;">TYPE</th>
 		            	<th>PO NUMBER</th>
-		            	<th>DATE</th>
 		            	<th>SUPPLIER PI NUMBER</th>
-		            	<th>DATE</th>
-		            	<th colspan="7" style="text-align: center;">QUERY</th>
+		            	<th>PI DATE</th>
+		            	<th colspan="8" style="text-align: center;">QUERY</th>
 		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
 		            	<th>AMOUNT</th>
 		            	<th></th>
 		            	<th></th>
 		            	<th></th>
-		            	<!-- <th></th> -->
-		            	<!-- <th></th>
-		            	<th></th>
-		            	<th></th> -->
 		            	<th></th>
 		            </tr>
 		            </thead>
@@ -200,52 +191,26 @@
 		            	[[foreach from=$v2 key=k3 item=v3]]
 		            	<tr>
 
-                      	[[assign var=totalAmount value=$totalAmount - $v3.amount]]
+                      	[[assign var=totalAmount value=$totalAmount - $v3.pi_amount]]
 
 		            	<td>[[$k3+1]]</td>
-		            	<td colspan="3" style="text-align: center;">Advance Payment</td>
-		            	<td>[[$v3.full_po_number]]</td>
-		            	<td class="datetd">[[$v3.supplier_date|date_format:"%d-%m-%Y"]]</td>
+		            	<td colspan="3" style="text-align: center;">ADVANCE PAYMENT</td>
+		            	<td>[[$v3.po_number]]</td>
 		            	<td>[[$v3.supplier_pi_number]]</td>
-		            	<td class="datetd">[[$v3.date|date_format:"%d-%m-%Y"]]</td>
-		            	<td colspan="7" style="text-align: center;">[[$v3.query]]</td>
-		            	<td class="datetd" style="background-color: yellow;">[[$k1|date_format:"%d-%m-%Y"]]</td>
-		            	<td style="text-align: right;">[[$v3.amount|number_format:2]]</td>
+		            	<td class="datetd">[[$v3.pi_date|date_format:"%d-%m-%Y"]]</td>
+		            	<td colspan="8" style="text-align: center;">[[$v3.query]]</td>
+		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
+		            	<td>[[$v3.pi_amount|number_format:2]]</td>
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
-		            	<!-- <td></td> -->
-		            	<!-- <td></td>
-		            	<td></td>
-		            	<td></td> -->
 		            	<td></td>
 		            	</tr>
 		            	[[/foreach]]
 		            </tbody>
 		            [[/if]]
 
-		            [[if !empty($v1['balanceAmount'])]]
-		            [[if $k2 eq 'balanceAmount']]
-		            [[assign var=totalAmount value=($totalAmount + $v1['balanceAmount']) ]]
-		    		<tbody>
-		                <tr style="font-weight: bold;">
-				        	<td colspan="15"><b>Balance Amount</b></td>
-				        	<td style="text-align: center;"><b>Total</b></td>
-				        	<td style="text-align: right;"><b>[[$v1['balanceAmount']|number_format:2]]</b></td>
-				        	<!-- <td>[[$v2[0].deduction]]</td> -->
-				        	<td style="text-align: center;"></td>
-				        	<td class="datetd" style="text-align: center;"></td>
-				        	<td style="text-align: right;"></td>
-				        	<!-- <td>[[$v2[0].dd_number]]</td>
-				        	<td class="datetd">[[$v2[0].dd_date]]</td>
-				        	<td>[[$v2[0].dd_amount|number_format:2]]</td> -->
-				        	<td style="text-align: right;"></td>
-				        </tr>
-		            </tbody>
-		            [[/if]]
-		            [[/if]]
-		            
-		            [[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
+		            [[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList']) || !empty($v1['advancePaymentDetails'])]]
 		            [[if $k2 eq 'chequeNumberDetails']]
 		            <tbody>
 		                <tr style="font-weight: bold;">
@@ -289,13 +254,7 @@
 	padding-left: 5px;
 }
 
-table tr td,
-    table tr th {
-        page-break-inside: avoid;
-    }
-
-    table { page-break-inside:auto }
-    tr    { page-break-inside:avoid; page-break-after:auto }
-    thead { display:table-header-group }
-    tfoot { display:table-footer-group }
+table tr td, table tr th {
+    page-break-inside: avoid;
+}
 </style>
