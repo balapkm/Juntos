@@ -207,6 +207,25 @@ class PoReport extends CI_Controller
 			$columArray = array("UNIT","TYPE","PO NO","PO DATE","SUPPLIER NAME","ORIGIN","MATERIAL NAME","DESCRIPTION","QTY","UOM","RECEIVED","RECEIVED DATE","DC NO","DC DATE","DELIVERY DATE");
 		}
 
+		if($this->data['report_type'] == "report_7"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_7($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+			}
+			
+			$columArray = array("S NO","SUPPLIER_NAME","ORIGIN","BILL NO","BILL DATE","BILL AMOUNT","PAYABLE MONTH");
+		}
+
 		if($this->data['report_type'] == "report_8"){
 			$this->data['date_range'] = explode("/",$this->data['date_range']);
 			$data = $this->PoReportQuery->fetch_po_report_8($this->data);
@@ -233,6 +252,86 @@ class PoReport extends CI_Controller
 			}
 			
 			$columArray = array("SUPPLIER_NAME","ORIGIN","TYPE","DEBIT NOTE NO","DATE","SUPPLIER CREDIT NOTE","DATE","QUERY","PAYABLE MONTH","AMOUNT");
+		}
+
+		if($this->data['report_type'] == "report_9"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_9($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+			}
+			
+			$columArray = array("DIVISION","SUPPLIER_NAME","ORIGIN","S.NO","BILL NO","BILL DATE","BILL AMOUNT","DEBIT/CREDIT/TDS","DEBIT_CREDIT_AMOUNT","ADVANCE PAYMENT AMOUNT","TOTAL AMOUNT","CHEQUE NO","CHEQUE DATE","CHEQUE AMOUNT","BALANCE","PAYABLE MONTH");
+		}
+
+		if($this->data['report_type'] == "report_10"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_10($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+				$data[$key]['pi_date']       = date('d-m-Y',strtotime($value['pi_date']));
+				$data[$key]['cheque_date']   = date('d-m-Y',strtotime($value['cheque_date']));
+			}
+			
+			$columArray = array("DIVISION","SUPPLIER_NAME","ORIGIN","PO NUMBER","PO DATE","PI NUMBER","PI DATE","PI AMOUNT","QUERY","PAYABLE MONTH","CHEQUE AMOUNT","CHEQUE DATE","CHEQUE NUMBER");
+		}
+
+		if($this->data['report_type'] == "report_11"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_11($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+				$data[$key]['total_amount']  = round($value['total_amount'],2);
+			}
+			
+			$columArray = array("DIVISION","PAGE NO","SUPPLIER_NAME","ORIGIN","PAYMENT MODE","PAYABLE MONTH","AMOUNT");
+		}
+
+		if($this->data['report_type'] == "report_12"){
+			$this->data['date_range'] = explode("/",$this->data['date_range']);
+			$data = $this->PoReportQuery->fetch_po_report_12($this->data);
+			if(count($data) == 0){
+				if($this->data['action'] != 'view'){
+					echo "<script>alert('No Data found');window.close();</script>";exit;
+				}
+				else{
+					return false;
+				}
+			}
+
+			foreach ($data as $key => $value) {
+				$data[$key]['payable_month'] = date('d-m-Y',strtotime($value['payable_month']));
+				$data[$key]['total_amount']  = round($value['total_amount'],2);
+			}
+			
+			$columArray = array("DIVISION","PAGE NO","SUPPLIER_NAME","ORIGIN","PAYMENT MODE","PAYABLE MONTH","AMOUNT");
 		}
 
 		if($this->data['action'] == 'view')

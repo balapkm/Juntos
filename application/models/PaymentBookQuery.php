@@ -178,11 +178,21 @@ class PaymentBookQuery extends CI_Model
                     FROM 
                     debit_note_details dnd,
                     supplier_details sd
-                WHERE sd.supplier_id = dnd.supplier_id AND division = '".$data['division']."'";
+                WHERE sd.supplier_id = dnd.supplier_id";
+
+        if(!empty($data['division']))
+        {
+            $sql.=  " AND dnd.division = '".$data['division']."'";
+        }
         
         if(!empty($data['supplier_name']))
         {
             $sql.=  " AND dnd.supplier_id = ".$data['supplier_name']."";
+        }
+
+        if(!empty($data['supplier_id']))
+        {
+            $sql.=  " AND dnd.supplier_id = ".$data['supplier_id']."";
         }
 
         if(!empty($data['date'][0]) && !empty($data['date'][1]))
@@ -190,6 +200,10 @@ class PaymentBookQuery extends CI_Model
             $sql.=  " AND dnd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
 
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1]))
+        {
+            $sql.=  " AND dnd.payable_month BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."'";
+        }
         $data  = $this->db->query($sql)->result_array();
         return $data;
     }
@@ -203,16 +217,26 @@ class PaymentBookQuery extends CI_Model
         {
             $data['supplier_name'] = $data['payment_statement_supplier_id'];
         }*/
-        $sql = "SELECT apd.*,sd.* FROM advance_payment_details apd,supplier_details sd WHERE sd.supplier_id = apd.supplier_id AND division = '".$data['division']."'";
+        $sql = "SELECT apd.*,sd.* FROM advance_payment_details apd,supplier_details sd WHERE sd.supplier_id = apd.supplier_id";
 
-        if(!empty($data['supplier_name']))
+        if(!empty($data['division']))
         {
-            $sql.=  " AND apd.supplier_id = ".$data['supplier_name']."";
+            $sql.=  " AND apd.division = '".$data['division']."'";
+        }
+
+        if(!empty($data['supplier_id']))
+        {
+            $sql.=  " AND apd.supplier_id = ".$data['supplier_id']."";
         }
 
         if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
             $sql.=  " AND apd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1]))
+        {
+            $sql.=  " AND apd.payable_month BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."'";
         }
 
         if(!empty($data['payable_month']))
@@ -244,18 +268,31 @@ class PaymentBookQuery extends CI_Model
 
     public function select_all_cheque_number_details($data)
     {
-        $sql = "SELECT * FROM cheque_number_details WHERE";
+        $sql = "SELECT cnd.*,sd.* FROM cheque_number_details cnd,supplier_details sd WHERE sd.supplier_id = cnd.supplier_id";
         
-        $sql.=  " unit= '".$data['division']."'";
+        if(!empty($data['division']))
+        {
+            $sql.=  " AND unit = '".$data['division']."'";
+        }
 
         if(!empty($data['supplier_name']))
         {
-            $sql.=  " AND supplier_id = ".$data['supplier_name'];
+            $sql.=  " AND sd.supplier_id = ".$data['supplier_name'];
+        }
+
+        if(!empty($data['supplier_id']))
+        {
+            $sql.=  " AND sd.supplier_id = ".$data['supplier_id'];
         }
 
         if(!empty($data['date'][0]) && !empty($data['date'][1]))
         {
             $sql.=  " AND payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
+        }
+
+        if(!empty($data['date_range'][0]) && !empty($data['date_range'][1]))
+        {
+            $sql.=  " AND payable_month BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."'";
         }
 
         $data  = $this->db->query($sql)->result_array();

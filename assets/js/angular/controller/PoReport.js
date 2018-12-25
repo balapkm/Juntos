@@ -1,17 +1,17 @@
 app.controller('PoReport',function($scope,validateService,commonService,httpService){
 	setTimeout(function(){
 		$('.select2').select2();
-		$('#datePicker,#datePicker1,#datePicker2').daterangepicker({
+		$('#datePicker,#datePicker1,#datePicker2,#datePicker3').daterangepicker({
 		      autoUpdateInput: false,
 		      locale: {
 		          cancelLabel: 'Clear'
 		      }
 		});
-		$('#datePicker,#datePicker1,#datePicker2').on('apply.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1,#datePicker2,#datePicker3').on('apply.daterangepicker', function(ev, picker) {
 		      $(this).val(picker.startDate.format('YYYY-MM-DD')+'/'+ picker.endDate.format('YYYY-MM-DD'));
 		});
 
-		$('#datePicker,#datePicker1,#datePicker2').on('cancel.daterangepicker', function(ev, picker) {
+		$('#datePicker,#datePicker1,#datePicker2,#datePicker3').on('cancel.daterangepicker', function(ev, picker) {
 		      $(this).val('');
 		});
 
@@ -50,12 +50,11 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 			tax_type : true,
 			po_number_show : true,
 			origin : true,
-			deduction_query : true
+			deduction_query : true,
+			serial_number : false
 		}
 	}
 
-	$scope.po_report_show_func();
-	
 	$scope.chageReportType = function(){
 		$scope.po_report_show_func();
 		if($scope.po_report.report_type === "report_1"){
@@ -107,6 +106,22 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 			}
 		}
 
+		if($scope.po_report.report_type === "report_7"){
+			$scope.po_report_show = {
+				division : true,
+				type : false,
+				date_range : true,
+				material_id : false,
+				supplier_id : true,
+				order_ref : false,
+				tax_type : false,
+				origin : false,
+				deduction_query : false,
+				po_number_show : false,
+				serial_number : true
+			}
+		}
+
 		if($scope.po_report.report_type === "report_9"){
 			$scope.po_report_show = {
 				division : true,
@@ -121,12 +136,42 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 				po_number_show : false
 			}
 		}
-		
-	}
 
+		if($scope.po_report.report_type === "report_10"){
+			$scope.po_report_show = {
+				division : true,
+				type : false,
+				date_range : true,
+				material_id : false,
+				supplier_id : true,
+				order_ref : false,
+				tax_type : false,
+				origin : true,
+				deduction_query : false,
+				po_number_show : false
+			}
+		}
+
+		if($scope.po_report.report_type === "report_11" || $scope.po_report.report_type === "report_12"){
+			$scope.po_report_show = {
+				division : true,
+				type : false,
+				date_range : true,
+				material_id : false,
+				supplier_id : true,
+				order_ref : false,
+				tax_type : false,
+				origin : false,
+				deduction_query : false,
+				po_number_show : false
+			}
+		}
+
+	}
+    $scope.chageReportType();
 	$scope.tabChange = function(report_type){
 		$scope.po_report.report_type = report_type;
-		$scope.po_report_show_func();
+		$scope.chageReportType();
 	}
 
 	$scope.poDownloadAction = function(){
@@ -135,9 +180,13 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 			$scope.po_report.date_range = $("#datePicker1").val();
 		}	
 
-		if($scope.po_report.report_type === "report_8"){
+		if($scope.po_report.report_type === "report_8" || $scope.po_report.report_type === "report_9" || $scope.po_report.report_type === "report_7" || $scope.po_report.report_type === "report_10"){
 			$scope.po_report.date_range = $("#datePicker2").val();
-		}	
+		}
+
+		if($scope.po_report.report_type === "report_11" || $scope.po_report.report_type === "report_12"){
+			$scope.po_report.date_range = $("#datePicker3").val();
+		}		
 
 		if($scope.po_report.report_type === "report_2"){
 			if(validateService.blank($scope.po_report['material_id'],"Please Choose material","material_id")) return false;
@@ -209,8 +258,12 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 			$scope.po_report.date_range = $("#datePicker1").val();
 		}
 
-		if($scope.po_report.report_type === "report_8"){
+		if($scope.po_report.report_type === "report_8" || $scope.po_report.report_type === "report_9" || $scope.po_report.report_type === "report_7" || $scope.po_report.report_type === "report_10"){
 			$scope.po_report.date_range = $("#datePicker2").val();
+		}
+
+		if($scope.po_report.report_type === "report_11" || $scope.po_report.report_type === "report_12"){
+			$scope.po_report.date_range = $("#datePicker3").val();
 		}	
 
 		if($scope.po_report.report_type === "report_2"){

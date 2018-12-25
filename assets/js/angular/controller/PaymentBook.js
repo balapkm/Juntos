@@ -12,6 +12,10 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
       // startDate : new Date()
     });
 
+    setTimeout(function(){
+        $('body').css('padding-right','0px');
+    },1000);
+
     $('#example2').DataTable();
 
     $('#payable_month,#list_payable_month,#ap_payable_month').datepicker({

@@ -311,6 +311,13 @@
 					                  <input type="text" class="form-control" id="deduction_query" ng-model="po_report.deduction_query" placeholder="Enter Query">
 					                </div>
 					            </div>
+
+					            <div class="col-lg-4" ng-if="po_report_show.serial_number">
+					                <div class="form-group">
+					                  <label for="exampleInputEmail1">Serial Number</label>
+					                  <input type="text" class="form-control" id="serial_number" ng-model="po_report.serial_number" placeholder="Enter Serial Number">
+					                </div>
+					            </div>
 					        </div>
 					        <div class="row">
 					        	<div class="col-lg-12 text-center">
@@ -360,7 +367,7 @@
 					            <div class="col-lg-4" ng-if="po_report_show.date_range">
 					                <div class="form-group">
 					                  <label for="exampleInputPassword1">Date</label>
-					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker2">
+					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker3">
 					                </div>
 					            </div>
 					            <div class="col-lg-4" ng-if="po_report_show.material_id">
