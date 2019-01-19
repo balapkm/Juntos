@@ -120,11 +120,11 @@ class PaymentBook extends CI_Controller
 			if($value['payable_month'] == '0000-00-00')
 			{
 				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
-					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 				}
 				else
 				{
-					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 					$result[$value['payable_month']]."_".$value['supplier_id']['supplier_name'] = $value['supplier_name'];
 					$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 					$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
@@ -132,7 +132,7 @@ class PaymentBook extends CI_Controller
 			}
 			else
 			{
-				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
@@ -143,22 +143,27 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			if($value['amount'] != 0){
+				$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			}
 		}
 
 		$advancePaymentDetails = array();
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			if($value['pi_amount'] != 0)
+			{
+				$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			}
 		}
 
 		foreach ($result as $key1 => $value1) 
@@ -427,11 +432,11 @@ class PaymentBook extends CI_Controller
 			if($value['payable_month'] == '0000-00-00')
 			{
 				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
-					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 				}
 				else
 				{
-					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 					$result[$value['payable_month']]."_".$value['supplier_id']['supplier_name'] = $value['supplier_name'];
 					$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 					$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
@@ -439,7 +444,7 @@ class PaymentBook extends CI_Controller
 			}
 			else
 			{
-				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
 				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
@@ -450,22 +455,26 @@ class PaymentBook extends CI_Controller
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			if($value['amount'] != 0){
+				$result[$value['payable_month']."_".$value['supplier_id']]['debitNoteList'][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			}
 		}
 
 		$advancePaymentDetails = array();
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
-			$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
-			$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			if($value['pi_amount'] != 0){
+				$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			}
 		}
 
 		foreach ($result as $key1 => $value1) 

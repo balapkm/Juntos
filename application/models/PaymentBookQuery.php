@@ -147,6 +147,7 @@ class PaymentBookQuery extends CI_Model
     {
         $sql   = "SELECT apd.*,sd.supplier_name,sd.origin FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id";                    
         $data  = $this->db->query(trim($sql))->result_array();
+        // print_r($data);exit;
         return $data;
     }
 
