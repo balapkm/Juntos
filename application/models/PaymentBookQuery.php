@@ -119,7 +119,7 @@ class PaymentBookQuery extends CI_Model
             $sql.=  " AND prd.payable_month BETWEEN '".$data['date'][0]."' AND '".$data['date'][1]."'";
         }
                                         
-        $sql.= " ORDER BY date(prd.payable_month) desc,prd.bill_number asc,sd.supplier_name asc";
+        $sql.= " ORDER BY date(prd.payable_month) asc,prd.bill_number asc,sd.supplier_name asc";
         
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
@@ -225,9 +225,9 @@ class PaymentBookQuery extends CI_Model
             $sql.=  " AND apd.division = '".$data['division']."'";
         }
 
-        if(!empty($data['supplier_id']))
+        if(!empty($data['supplier_name']))
         {
-            $sql.=  " AND apd.supplier_id = ".$data['supplier_id']."";
+            $sql.=  " AND apd.supplier_id = ".$data['supplier_name']."";
         }
 
         if(!empty($data['date'][0]) && !empty($data['date'][1]))

@@ -147,9 +147,9 @@
 		                          	<a href="#" onclick='editDepositDetails([[$v|@json_encode]])'>
 							          <span class="glyphicon glyphicon-edit"></span>
 							        </a>
-			                      	<!-- <a href="#" onclick='deleteDepositDetails([[$v|@json_encode]])'>
+			                      	<a href="#" onclick='deleteDepositDetails([[$v|@json_encode]])'>
 							          <span class="glyphicon glyphicon-trash"></span>
-							        </a> -->
+							        </a>
 			                      </td>
 		                          <td>[[$v.supplier_name]]</td>
 		                          <td>[[$v.type]]</td>

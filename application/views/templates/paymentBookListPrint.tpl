@@ -181,10 +181,18 @@
 		            	<th colspan="8" style="text-align: center;">QUERY</th>
 		            	<th style="background-color: yellow;">PAYABLE MONTH</th>
 		            	<th>AMOUNT</th>
-		            	<th></th>
-		            	<th></th>
-		            	<th></th>
-		            	<th></th>
+		            	[[if !empty($v1['paymentBookList'])]]
+		                  <th></th>
+		                  <th></th>
+		                  <th></th>
+		                  <th></th>
+		                  [[/if]]
+		                  [[if empty($v1['paymentBookList'])]]
+			            	<th>CHEQUE NUMBER</th>
+				          	<th>CHEQUE DATE</th>
+				          	<th>CHEQUE AMOUNT</th>
+					        <th>BALANCE</th>
+			              [[/if]]
 		            </tr>
 		            </thead>
 		            <tbody>
@@ -201,9 +209,9 @@
 		            	<td colspan="8" style="text-align: center;">[[$v3.query]]</td>
 		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
 		            	<td>[[$v3.pi_amount|number_format:2]]</td>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>
+		            	<td>[[$v3.cheque_no]]</td>
+		            	<td>[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
+		            	<td>[[$v3.cheque_amount]]</td>
 		            	<td></td>
 		            	</tr>
 		            	[[/foreach]]

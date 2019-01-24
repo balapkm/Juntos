@@ -60,10 +60,10 @@ class PaymentBook extends CI_Controller
 			$this->data['po_number'][] = explode('|',$value)[0];
 			$this->data['po_date'][]   = explode('|',$value)[1];
 		}
-		$this->data['po_number']      = implode(',',$this->data['po_number']);
-		$this->data['po_date']        = implode(',',$this->data['po_date']);
-		$this->data['po_full_number'] = implode(',',$po_number);
-
+		$this->data['po_number']      = empty(implode(',',$this->data['po_number'])) ? "" : implode(',',$this->data['po_number']);
+		$this->data['po_date']        = empty(implode(',',$this->data['po_date'])) ? "" : implode(',',$this->data['po_date']);
+		$this->data['po_full_number'] = empty(implode(',',$po_number)) ? "" : implode(',',$po_number)	;
+		// var_dump($this->data);exit;
 		// unset($this->data['po_year']);
 		return $this->PaymentBookQuery->addAdvancePayment($this->data);
 	}
@@ -775,6 +775,9 @@ class PaymentBook extends CI_Controller
 							       ->setCellValue('H'.(string)($rowCount),$v3['query']);
 					$getActiveSheet->setCellValue('P'.(string)($rowCount),$v3['payable_month']);
 					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['pi_amount']);
+					$getActiveSheet->setCellValue('R'.(string)($rowCount),$v3['cheque_no']);
+					$getActiveSheet->setCellValue('S'.(string)($rowCount),$v3['cheque_date']);
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),$v3['cheque_amount']);
 
 					$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
 					$getActiveSheet->getStyle('H'.(string)$rowCount)->applyFromArray($alignStyleArray);
