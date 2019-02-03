@@ -10,6 +10,7 @@ class PaymentStatementQuery extends CI_Model
 
     public function getSearchActionAsPerRequest($data)
     {
+        // print_r($data);exit;
         $sql = "SELECT
                     sd.origin,
                     sd.supplier_name,
@@ -41,14 +42,14 @@ class PaymentStatementQuery extends CI_Model
         foreach ($result as $key => $value) {
             if($value['cheque_amount'] == 0){
                 $result[$key]['total_amount'] = 0;
-                $sql = "SELECT bill_amount FROM po_generated_request_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number";
+                $sql = "SELECT bill_amount FROM po_generated_request_details WHERE unit = '".$data['division']."' AND supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number";
                 $data  = $this->db->query($sql)->result_array();
             
                 foreach ($data as $k1 => $v1) {
                     $result[$key]['total_amount'] += $v1['bill_amount'];
                 } 
 
-                $sql  = "SELECT amount,type FROM debit_note_details WHERE supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."'";
+                $sql  = "SELECT amount,type FROM debit_note_details WHERE division = '".$data['division']."' AND supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."'";
                 $data  = $this->db->query($sql)->result_array();
                 foreach ($data as $k => $v) {
                     if($v['type']=='D' || $v['type']=='T')
@@ -57,7 +58,7 @@ class PaymentStatementQuery extends CI_Model
                         $result[$key]['total_amount'] += $v['amount'];
                 }
 
-                $sql  = "SELECT * FROM advance_payment_details ad WHERE ad.payable_month='".$value['payable_month']."' AND ad.supplier_id = '".$value['supplier_id']."'";
+                $sql  = "SELECT * FROM advance_payment_details ad WHERE division = '".$data['division']."' AND ad.payable_month='".$value['payable_month']."' AND ad.supplier_id = '".$value['supplier_id']."'";
                 $data  = $this->db->query($sql)->result_array();
             
                 foreach ($data as $k1 => $v1) {

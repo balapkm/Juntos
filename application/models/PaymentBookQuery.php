@@ -80,12 +80,15 @@ class PaymentBookQuery extends CI_Model
 
     public function updatePaymentListData($data)
     {
+        // print_r($data);exit;
         $id = $data['bill_number'];
         $supplier_id = $data['supplier_id'];
+        $bill_date = $data['bill_date'];
         unset($data['bill_number']);
         unset($data['avg_cost']);
         unset($data['supplier_id']);
-        $result = $this->db->update('po_generated_request_details',$data, array('bill_number' => $id,'supplier_id' => $supplier_id));
+        unset($data['bill_date']);
+        $result = $this->db->update('po_generated_request_details',$data, array('bill_number' => $id,'supplier_id' => $supplier_id,"bill_date" => $bill_date));
         return $result;
     }
     public function getPaymentBookData($data,$status='N')

@@ -76,6 +76,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     $scope.exampleDataTable = function()
     {
         dataTableVariable = $('#paymentBookExample,#paymentBookExample1').DataTable({
+            iDisplayLength: 100,
             dom: 'Brfrtip',
             buttons: [
                 'copy', 
@@ -205,7 +206,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $scope.editPaymentList.query         = data.query;
         $scope.editPaymentList.supplier_id   = data.supplier_id;
         //$scope.editPaymentList.deduction     = data.deduction;
-        //$scope.editPaymentList.cheque_date   = data.cheque_date;
+        $scope.editPaymentList.bill_date     = data.bill_date;
         //$scope.editPaymentList.cheque_no     = data.cheque_no;
         //$scope.editPaymentList.cheque_amount = data.cheque_amount;
         $scope.editPaymentList.payable_month = data.payable_month;

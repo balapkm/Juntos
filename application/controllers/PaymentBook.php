@@ -101,11 +101,9 @@ class PaymentBook extends CI_Controller
 		$this->data['date']               = empty($this->data['date']) ? "" : explode("/",$this->data['date']);
 
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
+
 		$result = array();
-		if(count($data) == 0)
-		{
-			return false;
-		}
+		
 
 		foreach ($data as $key => $value) {
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
@@ -154,6 +152,7 @@ class PaymentBook extends CI_Controller
 
 		$advancePaymentDetails = array();
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
+		// print_r($data);exit;
 		foreach ($data as $key => $value) 
 		{
 			if($value['pi_amount'] != 0)
@@ -210,7 +209,12 @@ class PaymentBook extends CI_Controller
 		{
 			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
-		// print_r($finalResponse);exit;
+
+		if(empty($finalResponse['result']))	
+		{
+			return false;
+		}
+
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -414,10 +418,7 @@ class PaymentBook extends CI_Controller
 		$data   = $this->PaymentBookQuery->getPaymentBookData($this->data);
 		$result = array();
 
-		if(count($data) == 0)
-		{
-			echo "<script>alert('No Data found');window.close();</script>";exit;
-		}
+		
 
 		foreach ($data as $key => $value) {
 			$po_number_details       = $this->config->item('po_number_details', 'po_generate_details');
@@ -521,6 +522,12 @@ class PaymentBook extends CI_Controller
 		{
 			$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']]['chequeNumberDetails'][] = $value;
 		}
+
+		if(empty($finalResponse['result']))
+		{
+			echo "<script>alert('No Data found');window.close();</script>";exit;
+		}
+		
 		if($this->data['download_type'] == 'PDF'){
 			$template_name = 'paymentBookListPrint.tpl';
 			$folder_name = realpath(APPPATH."../assets/po_html");
@@ -774,10 +781,10 @@ class PaymentBook extends CI_Controller
 					$getActiveSheet->mergeCells('H'.(string)($rowCount).':O'.(string)($rowCount))
 							       ->setCellValue('H'.(string)($rowCount),$v3['query']);
 					$getActiveSheet->setCellValue('P'.(string)($rowCount),$v3['payable_month']);
-					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['pi_amount']);
+					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['cheque_amount']);
 					$getActiveSheet->setCellValue('R'.(string)($rowCount),$v3['cheque_no']);
 					$getActiveSheet->setCellValue('S'.(string)($rowCount),$v3['cheque_date']);
-					$getActiveSheet->setCellValue('T'.(string)($rowCount),$v3['cheque_amount']);
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),$v3['pi_amount']."(Pi Amount)");
 
 					$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
 					$getActiveSheet->getStyle('H'.(string)$rowCount)->applyFromArray($alignStyleArray);

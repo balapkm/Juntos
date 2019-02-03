@@ -249,10 +249,10 @@
 		            	<td class="datetd">[[$v3.pi_date|date_format:"%d-%m-%Y"]]</td>
 		            	<td colspan="8" style="text-align: center;">[[$v3.query]]</td>
 		            	<td class="datetd" style="background-color: yellow;">[[$v3.payable_month|date_format:"%d-%m-%Y"]]</td>
-		            	<td>[[$v3.pi_amount|number_format:2]]</td>
+		            	<td>[[$v3.cheque_amount|number_format:2]]</td>
 		            	<td>[[$v3.cheque_no]]</td>
 		            	<td>[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
-		            	<td>[[$v3.cheque_amount]]</td>
+		            	<td>[[$v3.pi_amount]] <br/> PI Amount</td>
 		            	<td></td>
 		            	</tr>
 		            	[[/foreach]]
