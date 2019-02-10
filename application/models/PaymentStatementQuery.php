@@ -38,7 +38,8 @@ class PaymentStatementQuery extends CI_Model
                     
         $sql     .= " group by cnd.supplier_id,cnd.payable_month order by cnd.payable_month ";
         $result   = $this->db->query($sql)->result_array();
-        
+        // print_r($sql);exit;
+        // print_r($result);exit;
         foreach ($result as $key => $value) {
             if($value['cheque_amount'] == 0){
                 $result[$key]['total_amount'] = 0;

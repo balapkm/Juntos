@@ -48,6 +48,7 @@
 				          <!-- <th>DEDC.</th> -->
 				          <th>CHEQUE NUMBER</th>
 				          <th>CHEQUE DATE</th>
+				          <th>PI AMOUNT</th>
 				          <th>CHEQUE AMOUNT</th>
 				          <!-- th>DD Number</th>
 				          <th>DD Date</th>
@@ -96,6 +97,7 @@
 							          <td rowspan="[[$v3|@count]]" style="text-align: center;">[[$v4.cheque_no]]</td>
 							          <td rowspan="[[$v3|@count]]" class="datetd" style="text-align: center;">[[$v4.cheque_date|date_format:"%d-%m-%Y"]]</td>
 							          <td rowspan="[[$v3|@count]]" style="text-align: right;"></td>
+							          <td rowspan="[[$v3|@count]]" style="text-align: right;"></td>
 							          <!-- <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td>
 							          <td rowspan="[[$v3|@count]]"></td> -->
@@ -108,6 +110,7 @@
 				        	<td colspan="16"></td>
 				        	<td style="text-align: center;"><b>Total</b></td>
 				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
+				        	<td></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
@@ -141,6 +144,7 @@
 		                  [[if empty($v1['paymentBookList'])]]
 			            	<th>CHEQUE NUMBER</th>
 				          	<th>CHEQUE DATE</th>
+				          	<th>PI AMOUNT</th>
 				          	<th>CHEQUE AMOUNT</th>
 					        <th>BALANCE</th>
 			              [[/if]]
@@ -182,6 +186,7 @@
 		                      <td></td>
 		                      <td></td>
 		                      <td></td>
+		                      <td></td>
 		                </tr>
 		                [[/foreach]]
 		            </tbody>
@@ -195,6 +200,7 @@
 				        	<td colspan="16"></td>
 				        	<td style="text-align: center;"><b>Total</b></td>
 				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
+				        	<td></td>
 				        	<td></td>
 				        	<td></td>
 				        	<td></td>
@@ -219,9 +225,11 @@
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
+		                  <th></th>
 		                  [[/if]]
 		                  [[if empty($v1['paymentBookList'])]]
 			            	<th>CHEQUE NUMBER</th>
+			            	<th>PI AMOUNT</th>
 				          	<th>CHEQUE DATE</th>
 				          	<th>CHEQUE AMOUNT</th>
 					        <th>BALANCE</th>
@@ -252,8 +260,9 @@
 		            	<td>[[$v3.cheque_amount|number_format:2]]</td>
 		            	<td>[[$v3.cheque_no]]</td>
 		            	<td>[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
-		            	<td>[[$v3.pi_amount]] <br/> PI Amount</td>
+		            	<td>[[$v3.pi_amount]]</td>
 		            	<td></td>
+		            	<td></td> 	
 		            	</tr>
 		            	[[/foreach]]
 		            </tbody>
@@ -269,6 +278,7 @@
 				        	<!-- <td>[[$v2[0].deduction]]</td> -->
 				        	<td style="text-align: center;">[[$v2[0].cheque_no]]</td>
 				        	<td class="datetd" style="text-align: center;">[[$v2[0].cheque_date|date_format:"%d-%m-%Y"]]</td>
+				        	<td class="datetd" style="text-align: center;"></td>
 				        	<td style="text-align: right;">[[$v2[0].cheque_amount|number_format:2]]</td>
 				        	<!-- <td>[[$v2[0].dd_number]]</td>
 				        	<td class="datetd">[[$v2[0].dd_date]]</td>

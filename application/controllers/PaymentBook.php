@@ -604,7 +604,7 @@ class PaymentBook extends CI_Controller
 		$getActiveSheet->mergeCells('J'.(string)($rowCount).':K'.(string)($rowCount))
 					   ->setCellValue('J'.(string)($rowCount),"RANIPET");
 
-		$alpha = range('A','U');
+		$alpha = range('A','V');
 		foreach ($alpha as $ak => $av) {
 			$getActiveSheet->getStyle((string)$av.(string)(1))->getFont()->setBold(true);
 			$getActiveSheet->getStyle((string)$av.(string)(2))->getFont()->setBold(true);
@@ -654,8 +654,9 @@ class PaymentBook extends CI_Controller
 				$getActiveSheet->setCellValue('Q'.(string)($rowCount),"BILL AMOUNT");
 				$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
 				$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
-				$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
-				$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+				$getActiveSheet->setCellValue('T'.(string)($rowCount),"PI AMOUNT");
+				$getActiveSheet->setCellValue('U'.(string)($rowCount),"CHEQUE AMOUNT");
+				$getActiveSheet->setCellValue('V'.(string)($rowCount),"BALANCE");
 
 				foreach ($alpha as $ak => $av) {
 					$getActiveSheet->getStyle((string)$av.(string)($rowCount))->getFont()->setBold(true);
@@ -702,8 +703,9 @@ class PaymentBook extends CI_Controller
 				if(empty($value['paymentBookList'])){
 					$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
 					$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
+					$getActiveSheet->setCellValue('U'.(string)($rowCount),"PI AMOUNT");
 					$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
-					$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+					$getActiveSheet->setCellValue('V'.(string)($rowCount),"BALANCE");
 				}
 
 				$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
@@ -755,8 +757,9 @@ class PaymentBook extends CI_Controller
 				if(empty($value['paymentBookList'])){
 					$getActiveSheet->setCellValue('R'.(string)($rowCount),"CHEQUE NUMBER");
 					$getActiveSheet->setCellValue('S'.(string)($rowCount),"CHEQUE DATE");
-					$getActiveSheet->setCellValue('T'.(string)($rowCount),"CHEQUE AMOUNT");
-					$getActiveSheet->setCellValue('U'.(string)($rowCount),"BALANCE");
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),"PI AMOUNT");
+					$getActiveSheet->setCellValue('U'.(string)($rowCount),"CHEQUE AMOUNT");
+				    $getActiveSheet->setCellValue('V'.(string)($rowCount),"BALANCE");
 				}
 
 				$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
@@ -784,7 +787,8 @@ class PaymentBook extends CI_Controller
 					$getActiveSheet->setCellValue('Q'.(string)($rowCount),$v3['cheque_amount']);
 					$getActiveSheet->setCellValue('R'.(string)($rowCount),$v3['cheque_no']);
 					$getActiveSheet->setCellValue('S'.(string)($rowCount),$v3['cheque_date']);
-					$getActiveSheet->setCellValue('T'.(string)($rowCount),$v3['pi_amount']."(Pi Amount)");
+					$getActiveSheet->setCellValue('T'.(string)($rowCount),$v3['cheque_amount']);
+					$getActiveSheet->setCellValue('U'.(string)($rowCount),$v3['pi_amount']);
 
 					$getActiveSheet->getStyle('B'.(string)$rowCount)->applyFromArray($alignStyleArray);
 					$getActiveSheet->getStyle('H'.(string)$rowCount)->applyFromArray($alignStyleArray);
@@ -820,7 +824,7 @@ class PaymentBook extends CI_Controller
 
 			if((!empty($value['paymentBookList']) || !empty($value['debitNoteList']) || !empty($value['advancePaymentDetails']))){
 				$getActiveSheet->getStyle('P'.(string)($startCount+1).':P'.(string)($rowCount-1))->applyFromArray($styleArray);
-				$getActiveSheet->getStyle('A'.(string)($startCount+1).':U'.(string)($rowCount))->applyFromArray($style);
+				$getActiveSheet->getStyle('A'.(string)($startCount+1).':V'.(string)($rowCount))->applyFromArray($style);
 			}
 			$rowCount = $rowCount+3;
 		}
