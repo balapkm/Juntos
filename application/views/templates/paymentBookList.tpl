@@ -140,6 +140,7 @@
 		                  <th></th>
 		                  <th></th>
 		                  <th></th>
+		                  <th></th>
 		                  [[/if]]
 		                  [[if empty($v1['paymentBookList'])]]
 			            	<th>CHEQUE NUMBER</th>
