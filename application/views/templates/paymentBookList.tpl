@@ -230,8 +230,8 @@
 		                  [[/if]]
 		                  [[if empty($v1['paymentBookList'])]]
 			            	<th>CHEQUE NUMBER</th>
-			            	<th>PI AMOUNT</th>
 				          	<th>CHEQUE DATE</th>
+			            	<th>PI AMOUNT</th>
 				          	<th>CHEQUE AMOUNT</th>
 					        <th>BALANCE</th>
 			              [[/if]]
