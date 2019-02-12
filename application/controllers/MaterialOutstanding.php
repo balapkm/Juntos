@@ -173,26 +173,26 @@ class MaterialOutstanding extends CI_Controller
 			foreach ($data as $key => $value) {
 				$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 			}
-			foreach ($advancePaymentDetails as $k2 => $v2) {
-				foreach ($data as $k1 => $v1) {
-					if($v1['full_po_number'] == $v2['full_po_number']){
+			// foreach ($advancePaymentDetails as $k2 => $v2) {
+			// 	foreach ($data as $k1 => $v1) {
+			// 		if($v1['full_po_number'] == $v2['full_po_number']){
 
-						$Udata['advance_payment_id'] = $v2['advance_payment_id'];
-						$Udata['used_status']        = 'Y';
+			// 			$Udata['advance_payment_id'] = $v2['advance_payment_id'];
+			// 			$Udata['used_status']        = 'Y';
 
-						$this->PaymentBookQuery->editAdvancePayment($Udata);
-						$data[$k1]['advance_payment_id'] = $v2['advance_payment_id'];
-						continue 2;
-					}
-				}
-			}
+			// 			$this->PaymentBookQuery->editAdvancePayment($Udata);
+			// 			$data[$k1]['advance_payment_id'] = $v2['advance_payment_id'];
+			// 			continue 2;
+			// 		}
+			// 	}
+			// }
 			// print_r($advancePaymentDetails);//exit;
 			// print_r($data);exit;
 			$this->data['checkEditBoxBillOutStandingArray'] = $data;
 			foreach ($this->data['checkEditBoxBillOutStandingArray'] as $key => $value) 
 			{
 				$this->data['id']                 = $value['po_generated_request_id'];
-				$this->data['advance_payment_id'] = empty($value['advance_payment_id'])?0:$value['advance_payment_id'];
+				// $this->data['advance_payment_id'] = empty($value['advance_payment_id'])?0:$value['advance_payment_id'];
 				unset($this->data['checkEditBoxBillOutStandingArray']);
 				$this->PoGenerateQuery->update_po_generated_request_details($this->data);
 			}
