@@ -261,8 +261,8 @@
 		            	<td>[[$v3.cheque_amount|number_format:2]]</td>
 		            	<td>[[$v3.cheque_no]]</td>
 		            	<td>[[$v3.cheque_date|date_format:"%d-%m-%Y"]]</td>
-		            	<td>[[$v3.pi_amount]]</td>
-		            	<td></td>
+		            	<td>[[$v3.pi_amount|number_format:2]]</td>
+		            	<td>[[$v3.cheque_amount|number_format:2]]</td>
 		            	<td></td> 	
 		            	</tr>
 		            	[[/foreach]]
