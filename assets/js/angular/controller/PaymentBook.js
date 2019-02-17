@@ -221,8 +221,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
     }
     
     $scope.editPaymentBook = function(){
-
-        console.log($scope.editPaymentList,"next");
+        $scope.editPaymentList.unit = $scope.generatePoData['division'];
         var service_details = {
             method_name : "updatePaymentBookDetails",
             controller_name : "PaymentBook",

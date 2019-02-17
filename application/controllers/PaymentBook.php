@@ -298,7 +298,18 @@ class PaymentBook extends CI_Controller
 
 	public function updatePaymentBookDetails()
 	{
+		$selectData = $this->PaymentBookQuery->select_cheque_number_details($this->data);
+		if(count($selectData) == 0)
+		{
+			$cData = array(
+				"supplier_id" => $this->data['supplier_id'],
+				"unit" => $this->data['unit'],
+				"payable_month" => $this->data['payable_month']
+			);
+		    $this->PaymentBookQuery->insert_cheque_number_details($cData);
+		}
 		return $this->PaymentBookQuery->updatePaymentListData($this->data);
+
 	}
 
 	public function deleteDepositDetails()
