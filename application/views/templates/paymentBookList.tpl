@@ -249,7 +249,7 @@
 					        </a> -->
                       	</td>
 
-                      	[[assign var=totalAmount value=$totalAmount - $v3.pi_amount]]
+                      	[[assign var=totalAmount value=$totalAmount - $v3.cheque_amount]]
 
 		            	<td>[[$k3+1]]</td>
 		            	<td colspan="3" style="text-align: center;">ADVANCE PAYMENT</td>
