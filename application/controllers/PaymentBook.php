@@ -199,7 +199,7 @@ class PaymentBook extends CI_Controller
 				}
 			}
 			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
-				$totalAmount -= $v2['pi_amount'];
+				$totalAmount -= $v2['cheque_amount'];
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}
@@ -354,6 +354,24 @@ class PaymentBook extends CI_Controller
 				"amount"     => $balanceAmt
 			);
 			$this->PaymentBookQuery->insert_debit_note_details($addData);
+
+			$balanceAmtCheck = array(
+				"supplier_id" => $this->data['supplier_id'],
+				"unit" => $this->data['unit'],
+				"payable_month"     => date('Y-m-d',strtotime('last day of next month', strtotime($this->data['payable_month'])))
+			);
+			$selectData = $this->PaymentBookQuery->select_cheque_number_details($balanceAmtCheck);
+			if(count($selectData) == 0)
+			{
+				$this->PaymentBookQuery->insert_cheque_number_details($balanceAmtCheck);
+			}
+			else
+			{
+				foreach ($selectData as $key => $value) {
+					$balanceAmtCheck['cheque_number_id'] = $value['cheque_number_id'];
+					$this->PaymentBookQuery->update_cheque_number_details($balanceAmtCheck);
+				}
+			}
 		}
 		unset($this->data['totalAmount']);
 		$selectData = $this->PaymentBookQuery->select_cheque_number_details($this->data);
@@ -523,7 +541,7 @@ class PaymentBook extends CI_Controller
 				}
 			}
 			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
-				$totalAmount -= $v2['pi_amount'];
+				$totalAmount -= $v2['cheque_amount'];
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 		}

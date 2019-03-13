@@ -148,14 +148,14 @@ class PaymentBookQuery extends CI_Model
 
     public function getAdvancePaymentFullDetails()
     {
-        $sql   = "SELECT apd.*,sd.supplier_name,sd.origin FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id";                    
+        $sql   = "SELECT apd.*,sd.supplier_name,sd.origin FROM advance_payment_details apd,supplier_details sd WHERE apd.supplier_id=sd.supplier_id order by advance_payment_id desc";                    
         $data  = $this->db->query(trim($sql))->result_array();
         // print_r($data);exit;
         return $data;
     }
 
     public function getCreditDebitNoteDetails(){
-        $sql   = "SELECT * FROM debit_note_details dnd,supplier_details sd WHERE dnd.supplier_id=sd.supplier_id";                    
+        $sql   = "SELECT * FROM debit_note_details dnd,supplier_details sd WHERE dnd.supplier_id=sd.supplier_id order by s_no desc";                    
         $data  = $this->db->query(trim($sql))->result_array();
         return $data;
     }

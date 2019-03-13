@@ -63,7 +63,7 @@ class PaymentStatementQuery extends CI_Model
                 $data1  = $this->db->query($sql)->result_array();
             
                 foreach ($data1 as $k1 => $v1) {
-                    $result[$key]['total_amount'] -= $v1['pi_amount'];
+                    $result[$key]['total_amount'] -= $v1['cheque_amount'];
                 }
 
                 if(empty($result[$key]['total_amount']))
