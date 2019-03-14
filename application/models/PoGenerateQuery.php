@@ -326,25 +326,30 @@ class PoGenerateQuery extends CI_Model
                 WHERE
                     prd.material_master_id = mm.material_id AND
                     prd.supplier_id = sd.supplier_id AND ";
-
+        $sqlC = 2;
         if(!empty($data['division'])){
             $sql .= "unit = '".$data['division']."' AND ";
+            $sqlC++;
         }
 
         if(!empty($data['type'])){
             $sql .= "type = '".$data['type']."' AND ";
+            $sqlC++;
         }
 
         if(!empty($data['date_range'][0]) && !empty($data['date_range'][1])){
             $sql .= "po_date BETWEEN '".$data['date_range'][0]."' AND '".$data['date_range'][1]."' AND ";
+            $sqlC++;
         }
 
         if(!empty($data['material_id'])){
             $sql .= "material_master_id = ".$data['material_id']." AND ";
+            $sqlC++;
         }
 
         if(!empty($data['supplier_id'])){
             $sql .= "prd.supplier_id = ".$data['supplier_id']." AND ";
+            $sqlC++;
         }
 
         if(!empty($data['po_number'])){
@@ -352,6 +357,7 @@ class PoGenerateQuery extends CI_Model
             $sql .= "prd.type = '".$data['po_number'][1]."' AND ";
             $sql .= "prd.po_number = '".$data['po_number'][2]."' AND ";
             $sql .= "YEAR(prd.po_date) = '".$data['po_year']."' AND ";
+            $sqlC++;
         }
 
         if($data['outstanding_type'] == 'B')
@@ -376,6 +382,19 @@ class PoGenerateQuery extends CI_Model
 
             $explode[0] .= ",sum(prd.received) as total_received ";
             $sql      = implode("FROM",$explode);
+
+            $explode = explode("AND",$sql);
+            $sql  = "";
+            $sql .= $explode[0]." AND ";
+            $sql .= $explode[1]." AND ";
+            if(!empty($sqlC))
+            {
+                for ($i=($sqlC-1); $i < $sqlC ; $i++) { 
+                    $sql .= $explode[$i]." AND ";
+                }
+            }
+            $sql .= $explode[(count($explode)-1)];
+
             $result2  = $this->db->query(trim($sql))->result_array();
             foreach ($result1 as $key1 => $value1) 
             {
