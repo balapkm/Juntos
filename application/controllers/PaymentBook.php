@@ -215,6 +215,18 @@ class PaymentBook extends CI_Controller
 			return false;
 		}
 
+		$result = $finalResponse['result'];
+		usort($result, function($a,$b){
+			return strtotime($a['payable_month']) - strtotime($b['payable_month']);
+		});
+
+		$finalResponse['result'] =array();
+		foreach ($result as $key => $value) {
+			if(!empty($value['payable_month'])){
+				$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']] = $value;
+			}
+		}
+
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
 	}
@@ -431,7 +443,32 @@ class PaymentBook extends CI_Controller
 				"payable_month"     => $this->data['payable_month'],
 				"amount"     => $this->data['amount']
 			);
-		return $this->PaymentBookQuery->update_debit_note_details($addData);
+		$this->PaymentBookQuery->update_debit_note_details($addData);
+
+		$addData['unit'] = $addData['division'];
+		unset($addData['debit_note_no']);
+		unset($addData['debit_note_date']);
+		unset($addData['type']);
+		unset($addData['supplier_creditnote']);
+		unset($addData['supplier_creditnote_date']);
+		unset($addData['query']);
+		unset($addData['amount']);
+		unset($addData['division']);
+		unset($addData['id']);
+		$selectData = $this->PaymentBookQuery->select_cheque_number_details($addData);
+		if(count($selectData) == 0)
+		{
+
+			return $this->PaymentBookQuery->insert_cheque_number_details($addData);
+		}
+		else
+		{
+			foreach ($selectData as $key => $value) {
+				$this->data['cheque_number_id'] = $value['cheque_number_id'];
+				$this->PaymentBookQuery->update_cheque_number_details($addData);
+			}
+			return true;
+		}
 	}
 
 	public function downloadAsPdfPaymentBookDetails()
