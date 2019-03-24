@@ -349,8 +349,7 @@ class PaymentBook extends CI_Controller
 	public function editChequeNumberDetailsAction()
 	{
 		$balanceAmt = $this->data['totalAmount'] - $this->data['cheque_amount'];
-		
-		if(($balanceAmt > 0) && ($this->data['cheque_amount'] != 0))
+		if($this->data['cheque_amount'] != 0)
 		{
 			$this->PaymentBookQuery->selectCreditDebitNoteDetailsAsPerType($this->data);
 			$addData = array(
