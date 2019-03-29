@@ -161,7 +161,7 @@
 					                  <input type="text" class="form-control" placeholder="Choose Date Range" id="datePicker1">
 					                </div>
 					            </div>
-					            <div class="col-lg-4" ng-if="po_report_show.material_id">
+					            <div class="col-lg-4" >
 					                <div class="form-group">
 					                	<label for="exampleInputPassword1">Material Name</label>
 					                  	<select class="form-control select2" style="width: 100%;" ng-model="po_report.material_id" id="material_id">
