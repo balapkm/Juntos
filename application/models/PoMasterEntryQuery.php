@@ -186,11 +186,14 @@ class PoMasterEntryQuery extends CI_Model
         }
         else
         {
-            $query = $this->db->get_where('material_master', 
-                                        array(
-                                            'status'     => 'Y',
-                                            'material_name'     => $where_condition['material_name']
-                                        ));
+            $sql  ="SELECT
+                   *
+                FROM
+                    material_master prd
+                WHERE 
+                    material_name = '".$where_condition['material_name']."' AND status='Y'";
+                    
+            $query  = $this->db->query($sql);
         }
         if($userQuerySearch == 'N'){
             $data  = array();
