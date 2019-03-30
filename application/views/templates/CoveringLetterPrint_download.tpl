@@ -37,8 +37,9 @@ table td
 				<tr>
 					<td align="center" width="15%" style="border:0px;"><img src="../../assets/img/TMAR LOGO.jpg" width="100" height="100"/>
                     </td>
-                    <td width="40%" style="border:0px;"><h2 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h2>
-					<td width="40%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
+                    <td width="40%" style="border:0px;"><h1 style="margin-bottom: 2px">T.M.ABDUL RAHMAN & SONS</h1>
+                    <h3 style="font-weight: normal;margin-top:2px">FINISHED LEATHER & SHOES</h3></td>
+					<td width="25%" style="border:0px;"><font style="font:bold arial,helvetica,verdana; color:#000;">45J / 46C Ammoor Road,RANIPET - 632-401</br>
         			Tel : 91-4172-272470,272480</br>
         			Email : purchasedept@tmargroup.in </br>
         			Email : soles@tmargroup.in</font><br/><br/>
@@ -100,9 +101,9 @@ table td
 	                    [[elseif $v1.type==='C']] 
 	                    	CREDIT NOTE [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] DEBIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
 	                    [[elseif $v1.type==='B']] 
-	                    	BALANCE AMOUNT [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]
+	                    	BALANCE AMOUNT <!--[[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date]]-->
 	                    [[elseif $v1.type==='T']] 
-	                    	TDS [[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]
+	                    	TDS <!--[[$v1.debit_note_no]] DT [[$v1.debit_note_date|date_format:"%d-%m-%Y"]] CREDIT NOTE [[$v1.supplier_creditnote]] DT [[$v1.supplier_creditnote_date|date_format:"%d-%m-%Y"]]-->
 	                    [[/if]]</td>	
 			          <td>[[$v1.debit_note_date|date_format:"%d-%m-%Y"]]</td>
 			          <td align="right"><b>[[$v1.amount|number_format:2]]</b></td>
