@@ -115,10 +115,11 @@ class PoReportQuery extends CI_Model
                 FROM
                     material_details md,
                     material_master mm
-                WHERE ";
+                WHERE mm.material_id = md.material_id";
         if(!empty($data['supplier_id'])){
-            $sql .= "supplier_id = ".$data['supplier_id']."";
+            $sql .= " AND supplier_id = ".$data['supplier_id']."";
         }
+        
         $result  = $this->db->query($sql)->result_array();
         return $result;
     }
