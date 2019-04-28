@@ -38,11 +38,12 @@ class PaymentStatementQuery extends CI_Model
                     
         $sql     .= " group by cnd.supplier_id,cnd.payable_month order by cnd.payable_month ";
         $result   = $this->db->query($sql)->result_array();
-        // print_r($result);
+        // print_r($sql);
+        // print_r($result);exit;
         foreach ($result as $key => $value) {
             if($value['cheque_amount'] == 0){
                 $result[$key]['total_amount'] = 0;
-                $sql = "SELECT bill_amount FROM po_generated_request_details WHERE unit = '".$data['division']."' AND supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number";
+                $sql = "SELECT bill_amount FROM po_generated_request_details WHERE unit = '".$data['division']."' AND supplier_id = '".$value['supplier_id']."' AND payable_month='".$value['payable_month']."' GROUP BY bill_number,bill_date";
                 $data1  = $this->db->query($sql)->result_array();
                 foreach ($data1 as $k1 => $v1) {
                     $result[$key]['total_amount'] += $v1['bill_amount'];

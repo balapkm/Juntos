@@ -63,9 +63,18 @@ class PaymentBook extends CI_Controller
 		$this->data['po_number']      = empty(implode(',',$this->data['po_number'])) ? "" : implode(',',$this->data['po_number']);
 		$this->data['po_date']        = empty(implode(',',$this->data['po_date'])) ? "" : implode(',',$this->data['po_date']);
 		$this->data['po_full_number'] = empty(implode(',',$po_number)) ? "" : implode(',',$po_number)	;
-		// var_dump($this->data);exit;
-		// unset($this->data['po_year']);
-		return $this->PaymentBookQuery->addAdvancePayment($this->data);
+		
+		$this->PaymentBookQuery->addAdvancePayment($this->data);
+		$data = array();
+		$data['unit'] = $this->data['division'];
+		$data['supplier_id'] = $this->data['supplier_id'];
+		$data['payable_month'] = $this->data['payable_month'];
+		$selectData = $this->PaymentBookQuery->select_cheque_number_details($data);
+		if(count($selectData) == 0)
+		{
+			return $this->PaymentBookQuery->insert_cheque_number_details($data);
+		}
+		
 	}
 
 	public function editAdvancePaymentAction(){
@@ -82,6 +91,16 @@ class PaymentBook extends CI_Controller
 		$this->data['po_date']        = implode(',',$this->data['po_date']);
 		$this->data['po_full_number'] = implode(',',$po_number);
 		return $this->PaymentBookQuery->editAdvancePayment($this->data);
+
+		$data = array();
+		$data['unit'] = $this->data['division'];
+		$data['supplier_id'] = $this->data['supplier_id'];
+		$data['payable_month'] = $this->data['payable_month'];
+		$selectData = $this->PaymentBookQuery->select_cheque_number_details($data);
+		if(count($selectData) == 0)
+		{
+			return $this->PaymentBookQuery->insert_cheque_number_details($data);
+		}
 	}
 
 	public function deleteAdvancePaymentDetails()
