@@ -21,7 +21,7 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
             viewMode: "years", 
             minViewMode: "years"
         });
-	},1500)  
+	},2500)  
 
 	$scope.po_report = {
 		report_type : "report_7",
@@ -56,6 +56,9 @@ app.controller('PoReport',function($scope,validateService,commonService,httpServ
 	}
 
 	$scope.chageReportType = function(){
+		setTimeout(function(){
+			$('.select2').select2();
+		},1000);
 		$scope.po_report_show_func();
 		if($scope.po_report.report_type === "report_1"){
 			$scope.po_report_show = {

@@ -171,7 +171,6 @@ class PaymentBook extends CI_Controller
 
 		$advancePaymentDetails = array();
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
-		// print_r($data);exit;
 		foreach ($data as $key => $value) 
 		{
 			if($value['pi_amount'] != 0)
@@ -203,6 +202,91 @@ class PaymentBook extends CI_Controller
 		}
 
 		$finalResponse['result'] = $result;
+		
+		foreach ($finalResponse['result'] as $key => $value) {
+			$totalAmount = 0;
+			$billAmount  = 0;
+			foreach ($value['paymentBookList'] as $k1 => $v1) {
+				$totalAmount += $v1[0]['bill_amount'];
+				$billAmount += $v1[0]['bill_amount'];
+			}
+			foreach ($value['debitNoteList'] as $k2 => $v2) {
+				if($v2['type'] == 'D' || $v2['type'] == 'T'){
+					$totalAmount -= $v2['amount'];
+				}
+				if($v2['type'] == 'C' || $v2['type'] == 'B'){
+					$totalAmount += $v2['amount'];
+				}
+			}
+			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
+				$totalAmount -= $v2['cheque_amount'];
+			}
+			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
+
+			if($totalAmount < 0 && $billAmount != 0) {
+				$amount = str_replace("-","",$totalAmount);
+
+				$advanceEditData = array(
+					"advance_payment_id" => $value['advancePaymentDetails'][0]['advance_payment_id'],
+					"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
+					"division" => $value['advancePaymentDetails'][0]['division'],
+					"po_number" => $value['advancePaymentDetails'][0]['po_number'],
+					"po_date" => $value['advancePaymentDetails'][0]['po_date'],
+					"po_year" => $value['advancePaymentDetails'][0]['po_year'],
+					"po_full_number" => $value['advancePaymentDetails'][0]['po_full_number'],
+					"supplier_pi_number" => $value['advancePaymentDetails'][0]['supplier_pi_number'],
+					"pi_date" => $value['advancePaymentDetails'][0]['pi_date'],
+					"pi_amount" => $value['advancePaymentDetails'][0]['pi_amount'],
+					"query" => $value['advancePaymentDetails'][0]['query'],
+					"cheque_no" => $value['advancePaymentDetails'][0]['cheque_no'],
+					"cheque_date" => $value['advancePaymentDetails'][0]['cheque_date'],
+					"cheque_amount" => ($value['advancePaymentDetails'][0]['cheque_amount'] - $amount),//,
+					"payable_month" => $value['advancePaymentDetails'][0]['payable_month'],
+					"used_status" => $value['advancePaymentDetails'][0]['used_status'],
+				);
+
+				$this->PaymentBookQuery->editAdvancePayment($advanceEditData);
+
+				unset($advanceEditData['advance_payment_id']);
+
+				$advanceEditData['cheque_amount'] = $amount;
+				$advanceEditData['payable_month'] = $payable_month = date('Y-m-d',strtotime('+1 month',strtotime ($advanceEditData['payable_month'])));
+				$this->PaymentBookQuery->addAdvancePayment($advanceEditData);
+
+				$advanceEditData = array(
+					"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
+					"unit" => $value['advancePaymentDetails'][0]['division'],
+					"payable_month" => $payable_month
+				);
+
+				$selectData = $this->PaymentBookQuery->select_cheque_number_details($advanceEditData);
+				if(count($selectData) == 0)
+				{
+					$this->PaymentBookQuery->insert_cheque_number_details($advanceEditData);
+				}
+			}
+		}
+
+		$advancePaymentDetails = array();
+		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
+		foreach ($result as $key => $value) {
+			$result[$key]['advancePaymentDetails'] = array();
+		}
+
+		foreach ($data as $key => $value) 
+		{
+			if($value['pi_amount'] != 0)
+			{
+				$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+			}
+		}
+
+		$finalResponse['result'] = $result;
+		// print_r($finalResponse);exit;
 		
 		foreach ($finalResponse['result'] as $key => $value) {
 			$totalAmount = 0;
