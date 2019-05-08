@@ -163,7 +163,7 @@
 		                [[/foreach]]
 		            </tbody>
 		            [[/if]]
-		            [[if $k2 eq 'advancePaymentDetails']]
+		            [[if ($k2 eq 'advancePaymentDetails') && !empty($v2)]]
 		            [[if !empty($v1['paymentBookList']) || !empty($v1['debitNoteList'])]]
 		            <thead >
 		            	<tr>

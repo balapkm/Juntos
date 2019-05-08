@@ -286,7 +286,6 @@ class PaymentBook extends CI_Controller
 		}
 
 		$finalResponse['result'] = $result;
-		// print_r($finalResponse);exit;
 		
 		foreach ($finalResponse['result'] as $key => $value) {
 			$totalAmount = 0;
