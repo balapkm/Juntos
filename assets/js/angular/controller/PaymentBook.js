@@ -18,7 +18,7 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
 
     $('#example2').DataTable();
 
-    $('#payable_month,#list_payable_month,#ap_payable_month').datepicker({
+    $('#payable_month,#list_payable_month,#ap_payable_month,#ard_payable_month').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd',
       todayHighlight : true,
@@ -466,6 +466,34 @@ app.controller('PaymentBook',function($scope,httpService,validateService,$state,
         $('#cheque_number_modal').modal('show');
     }
 
+    $scope.editAdvancePaymentRemaining = function(data){
+        $scope.advancePaymentRemain = {};
+        $scope.advancePaymentRemain.amount = data[0];
+        $scope.advancePaymentRemain.data = data[1];
+        $scope.advancePaymentRemain.division = $scope.generatePoData['division'];
+        $scope.advancePaymentRemain.supplier_id = $scope.generatePoData['supplier_name'];
+        $('#advance_payment_remain_modal').modal('show');
+    }
+
+    $scope.editAdvancePaymentRemainingAction = function(){
+        console.log($scope.advancePaymentRemain);
+        if(validateService.blank($scope.advancePaymentRemain['payable_month'],"Please select payable_month","type")) return false;
+        var service_details = {
+            method_name : "editAdvancePaymentRemainingAction",
+            controller_name : "PaymentBook",
+            data : JSON.stringify($scope.advancePaymentRemain)
+        };
+        httpService.callWebService(service_details).then(function(data){
+            if(data)
+            {
+                $('#modal-backdrop').css('display','none');
+                validateService.displayMessage('success','Updated..','');
+                $scope.searchAction();
+                $('#advance_payment_remain_modal').modal('hide');
+            }
+        });
+    }
+
     $scope.editChequeNumberDetailsAction = function()
     {
         $scope.chequeNumberDetails['unit'] = $scope.generatePoData['division'];
@@ -572,5 +600,12 @@ function downloadAsPdfCoverLetter(data)
 {
     var scope = angular.element($('[ui-view=div1]')).scope();
     scope.downloadAsPdfCoverLetter(data);
+    scope.$apply();
+}
+
+function editAdvancePaymentRemaining(data)
+{
+    var scope = angular.element($('[ui-view=div1]')).scope();
+    scope.editAdvancePaymentRemaining(data);
     scope.$apply();
 }

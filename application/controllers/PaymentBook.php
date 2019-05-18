@@ -203,89 +203,89 @@ class PaymentBook extends CI_Controller
 
 		$finalResponse['result'] = $result;
 		
-		foreach ($finalResponse['result'] as $key => $value) {
-			$totalAmount = 0;
-			$billAmount  = 0;
-			foreach ($value['paymentBookList'] as $k1 => $v1) {
-				$totalAmount += $v1[0]['bill_amount'];
-				$billAmount += $v1[0]['bill_amount'];
-			}
-			foreach ($value['debitNoteList'] as $k2 => $v2) {
-				if($v2['type'] == 'D' || $v2['type'] == 'T'){
-					$totalAmount -= $v2['amount'];
-				}
-				if($v2['type'] == 'C' || $v2['type'] == 'B'){
-					$totalAmount += $v2['amount'];
-				}
-			}
-			foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
-				$totalAmount -= $v2['cheque_amount'];
-			}
-			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
+		// foreach ($finalResponse['result'] as $key => $value) {
+		// 	$totalAmount = 0;
+		// 	$billAmount  = 0;
+		// 	foreach ($value['paymentBookList'] as $k1 => $v1) {
+		// 		$totalAmount += $v1[0]['bill_amount'];
+		// 		$billAmount += $v1[0]['bill_amount'];
+		// 	}
+		// 	foreach ($value['debitNoteList'] as $k2 => $v2) {
+		// 		if($v2['type'] == 'D' || $v2['type'] == 'T'){
+		// 			$totalAmount -= $v2['amount'];
+		// 		}
+		// 		if($v2['type'] == 'C' || $v2['type'] == 'B'){
+		// 			$totalAmount += $v2['amount'];
+		// 		}
+		// 	}
+		// 	foreach ($value['advancePaymentDetails'] as $k2 => $v2) {
+		// 		$totalAmount -= $v2['cheque_amount'];
+		// 	}
+		// 	$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
 
-			if($totalAmount < 0 && $billAmount != 0) {
-				$amount = str_replace("-","",$totalAmount);
+		// 	if($totalAmount < 0 && $billAmount != 0) {
+		// 		$amount = str_replace("-","",$totalAmount);
 
-				$advanceEditData = array(
-					"advance_payment_id" => $value['advancePaymentDetails'][0]['advance_payment_id'],
-					"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
-					"division" => $value['advancePaymentDetails'][0]['division'],
-					"po_number" => $value['advancePaymentDetails'][0]['po_number'],
-					"po_date" => $value['advancePaymentDetails'][0]['po_date'],
-					"po_year" => $value['advancePaymentDetails'][0]['po_year'],
-					"po_full_number" => $value['advancePaymentDetails'][0]['po_full_number'],
-					"supplier_pi_number" => $value['advancePaymentDetails'][0]['supplier_pi_number'],
-					"pi_date" => $value['advancePaymentDetails'][0]['pi_date'],
-					"pi_amount" => $value['advancePaymentDetails'][0]['pi_amount'],
-					"query" => $value['advancePaymentDetails'][0]['query'],
-					"cheque_no" => $value['advancePaymentDetails'][0]['cheque_no'],
-					"cheque_date" => $value['advancePaymentDetails'][0]['cheque_date'],
-					"cheque_amount" => ($value['advancePaymentDetails'][0]['cheque_amount'] - $amount),//,
-					"payable_month" => $value['advancePaymentDetails'][0]['payable_month'],
-					"used_status" => $value['advancePaymentDetails'][0]['used_status'],
-				);
+		// 		$advanceEditData = array(
+		// 			"advance_payment_id" => $value['advancePaymentDetails'][0]['advance_payment_id'],
+		// 			"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
+		// 			"division" => $value['advancePaymentDetails'][0]['division'],
+		// 			"po_number" => $value['advancePaymentDetails'][0]['po_number'],
+		// 			"po_date" => $value['advancePaymentDetails'][0]['po_date'],
+		// 			"po_year" => $value['advancePaymentDetails'][0]['po_year'],
+		// 			"po_full_number" => $value['advancePaymentDetails'][0]['po_full_number'],
+		// 			"supplier_pi_number" => $value['advancePaymentDetails'][0]['supplier_pi_number'],
+		// 			"pi_date" => $value['advancePaymentDetails'][0]['pi_date'],
+		// 			"pi_amount" => $value['advancePaymentDetails'][0]['pi_amount'],
+		// 			"query" => $value['advancePaymentDetails'][0]['query'],
+		// 			"cheque_no" => $value['advancePaymentDetails'][0]['cheque_no'],
+		// 			"cheque_date" => $value['advancePaymentDetails'][0]['cheque_date'],
+		// 			"cheque_amount" => ($value['advancePaymentDetails'][0]['cheque_amount'] - $amount),//,
+		// 			"payable_month" => $value['advancePaymentDetails'][0]['payable_month'],
+		// 			"used_status" => $value['advancePaymentDetails'][0]['used_status'],
+		// 		);
 
-				$this->PaymentBookQuery->editAdvancePayment($advanceEditData);
+		// 		$this->PaymentBookQuery->editAdvancePayment($advanceEditData);
 
-				unset($advanceEditData['advance_payment_id']);
+		// 		unset($advanceEditData['advance_payment_id']);
 
-				$advanceEditData['cheque_amount'] = $amount;
-				$advanceEditData['payable_month'] = $payable_month = date('Y-m-d',strtotime('+1 month',strtotime ($advanceEditData['payable_month'])));
-				$this->PaymentBookQuery->addAdvancePayment($advanceEditData);
+		// 		$advanceEditData['cheque_amount'] = $amount;
+		// 		$advanceEditData['payable_month'] = $payable_month = date('Y-m-d',strtotime('+1 month',strtotime ($advanceEditData['payable_month'])));
+		// 		$this->PaymentBookQuery->addAdvancePayment($advanceEditData);
 
-				$advanceEditData = array(
-					"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
-					"unit" => $value['advancePaymentDetails'][0]['division'],
-					"payable_month" => $payable_month
-				);
+		// 		$advanceEditData = array(
+		// 			"supplier_id" => $value['advancePaymentDetails'][0]['supplier_id'],
+		// 			"unit" => $value['advancePaymentDetails'][0]['division'],
+		// 			"payable_month" => $payable_month
+		// 		);
 
-				$selectData = $this->PaymentBookQuery->select_cheque_number_details($advanceEditData);
-				if(count($selectData) == 0)
-				{
-					$this->PaymentBookQuery->insert_cheque_number_details($advanceEditData);
-				}
-			}
-		}
+		// 		$selectData = $this->PaymentBookQuery->select_cheque_number_details($advanceEditData);
+		// 		if(count($selectData) == 0)
+		// 		{
+		// 			$this->PaymentBookQuery->insert_cheque_number_details($advanceEditData);
+		// 		}
+		// 	}
+		// }
 
-		$advancePaymentDetails = array();
-		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
-		foreach ($result as $key => $value) {
-			$result[$key]['advancePaymentDetails'] = array();
-		}
+		// $advancePaymentDetails = array();
+		// $data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
+		// foreach ($result as $key => $value) {
+		// 	$result[$key]['advancePaymentDetails'] = array();
+		// }
 
-		foreach ($data as $key => $value) 
-		{
-			if($value['pi_amount'] != 0)
-			{
-				$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
-				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
-				$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
-				$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
-				$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
-			}
-		}
+		// foreach ($data as $key => $value) 
+		// {
+		// 	if($value['pi_amount'] != 0)
+		// 	{
+		// 		$result[$value['payable_month']."_".$value['supplier_id']]['advancePaymentDetails'][] = $value;
+		// 		$result[$value['payable_month']."_".$value['supplier_id']]['supplier_name'] = $value['supplier_name'];
+		// 		$result[$value['payable_month']."_".$value['supplier_id']]['supplier_id']   = $value['supplier_id'];
+		// 		$result[$value['payable_month']."_".$value['supplier_id']]['origin']        = $value['origin'];
+		// 		$result[$value['payable_month']."_".$value['supplier_id']]['payable_month'] = $value['payable_month'];
+		// 	}
+		// }
 
-		$finalResponse['result'] = $result;
+		// $finalResponse['result'] = $result;
 		
 		foreach ($finalResponse['result'] as $key => $value) {
 			$totalAmount = 0;
@@ -304,6 +304,11 @@ class PaymentBook extends CI_Controller
 				$totalAmount -= $v2['cheque_amount'];
 			}
 			$finalResponse['result'][$key]['totalAmount'] = $totalAmount;
+			$finalResponse['result'][$key]['RAmount'] = 0;
+			if($totalAmount < 0) {
+				$amount = str_replace("-","",$totalAmount);
+				$finalResponse['result'][$key]['RAmount'] = $amount;
+			}
 		}
 
 		$data = $this->PaymentBookQuery->select_all_cheque_number_details($this->data);
@@ -328,9 +333,55 @@ class PaymentBook extends CI_Controller
 				$finalResponse['result'][$value['payable_month']."_".$value['supplier_id']] = $value;
 			}
 		}
-
 		$template_name = 'paymentBookList.tpl';
 		return $this->mysmarty->view($template_name,$finalResponse,TRUE);
+	}
+
+	public function editAdvancePaymentRemainingAction($data){
+		// print_r($this->data);exit;
+		$advanceEditData = array(
+			"advance_payment_id" => $this->data['data']['advance_payment_id'],
+			"cheque_amount" => ($this->data['data']['cheque_amount'] - $this->data['amount']),//,
+		);
+				
+		$this->PaymentBookQuery->editAdvancePayment($advanceEditData);
+
+		$advanceEditData = $this->data['data'];
+		unset($advanceEditData['advance_payment_id']);
+		unset($advanceEditData['supplier_name']);
+		unset($advanceEditData['supplier_code']);
+		unset($advanceEditData['alt_supplier_name']);
+		unset($advanceEditData['supplier_address']);
+		unset($advanceEditData['alt_supplier_address']);
+		unset($advanceEditData['contact_no']);
+		unset($advanceEditData['email_id']);
+		unset($advanceEditData['origin']);
+		unset($advanceEditData['gst_no']);
+		unset($advanceEditData['state_code']);
+		unset($advanceEditData['supplier_tax_status']);
+		unset($advanceEditData['supplier_status']);
+		unset($advanceEditData['bank_details']);
+		unset($advanceEditData['alternative_origin']);
+		unset($advanceEditData['payment_to']);
+		unset($advanceEditData['payment_type']);
+		unset($advanceEditData['status']);
+		$advanceEditData['cheque_amount'] = $this->data['amount'];
+		$advanceEditData['payable_month'] = $this->data['payable_month'];
+
+		$this->PaymentBookQuery->addAdvancePayment($advanceEditData);
+
+		$advanceEditData = array(
+			"supplier_id" => $this->data['supplier_id'],
+			"unit" => $this->data['division'],
+			"payable_month" => $this->data['payable_month']
+		);
+
+		$selectData = $this->PaymentBookQuery->select_cheque_number_details($advanceEditData);
+		if(count($selectData) == 0)
+		{
+			return $this->PaymentBookQuery->insert_cheque_number_details($advanceEditData);
+		}
+		return true;
 	}
 
 	public function searchPoBasedOnYear()

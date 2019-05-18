@@ -273,7 +273,11 @@
 	        		[[if $k2 eq 'chequeNumberDetails']]
 		    		<tbody>
 		                <tr style="font-weight: bold;">
+		                	[[if $v1.RAmount neq 0]]
+				        	<td colspan="16"><a href="" onClick='editAdvancePaymentRemaining([ [[$v1.RAmount]],[[$v1["advancePaymentDetails"][0]|@json_encode ]] ])'><b>Move</b></a></td>
+				        	[[else]]
 				        	<td colspan="16"></td>
+				        	[[/if]]
 				        	<td style="text-align: center;"><b>Total</b></td>
 				        	<td style="text-align: right;"><b>[[$totalAmount|number_format:2]]</b></td>
 				        	<!-- <td>[[$v2[0].deduction]]</td> -->
