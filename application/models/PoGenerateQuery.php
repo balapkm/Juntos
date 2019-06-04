@@ -57,12 +57,16 @@ class PoGenerateQuery extends CI_Model
                     unit = '".$unit."' AND 
                     outstanding_type = 'M' AND 
                     type = '".$type."'";
+        // echo $sql;exit;
         $data  = $this->db->query($sql)->result_array();
         return ($data[0]['po_number']+1);
     }
 
     public function getUniquePoNumber($year="",$data=array())
     {
+        $startDate = $year.'-04-01';
+        $endDate   = ($year+1).'-03-31';
+
         $sql = "SELECT 
                     unit,type,po_number,po_date
                 FROM
@@ -72,7 +76,7 @@ class PoGenerateQuery extends CI_Model
 
         if(!empty($year))
         {
-            $sql .= " AND YEAR(po_date) = ".$year;
+            $sql .= " AND (DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."')";
         }
 
         if(!empty($data['division'])){
@@ -146,6 +150,9 @@ class PoGenerateQuery extends CI_Model
     }
 
     public function getPoDataAsPerPONumber($data){
+        $year = $data['po_year'];
+        $startDate = $year.'-04-01';
+        $endDate   = ($year+1).'-03-31';
 
         $sql = "SELECT 
                     prd.*,
@@ -162,7 +169,7 @@ class PoGenerateQuery extends CI_Model
                     unit = '".$data['unit']."' AND
                     type = '".$data['type']."' AND
                     po_number = '".$data['po_number']."' AND
-                    YEAR(po_date) = '".$data['po_year']."'";
+                    (DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."')";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;
@@ -189,6 +196,11 @@ class PoGenerateQuery extends CI_Model
 
     public function getOtherChargeUsingPoNumber($data){
 
+        $year = $data['po_year'];
+        $startDate = $year.'-04-01';
+        $endDate   = ($year+1).'-03-31';
+
+
         $sql = "SELECT 
                     *
                 FROM
@@ -197,7 +209,7 @@ class PoGenerateQuery extends CI_Model
                     unit = '".$data['unit']."' AND
                     type = '".$data['type']."' AND
                     po_number = '".$data['po_number']."' AND
-                    YEAR(po_date) = '".$data['po_year']."'";
+                    (DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."')";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;
@@ -205,6 +217,10 @@ class PoGenerateQuery extends CI_Model
 
     public function getImportChargeUsingPoNumber($data,$status = 'Y')
     {
+        $year = $data['po_year'];
+        $startDate = $year.'-04-01';
+        $endDate   = ($year+1).'-03-31';
+
         $sql = "SELECT 
                     *
                 FROM
@@ -214,7 +230,7 @@ class PoGenerateQuery extends CI_Model
                     type = '".$data['type']."' AND
                     po_number = '".$data['po_number']."'";
         if($status == 'Y')
-        $sql .= "AND YEAR(po_date) = '".$data['po_year']."'";
+        $sql .= "AND (DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."')";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;
@@ -222,6 +238,10 @@ class PoGenerateQuery extends CI_Model
 
     public function getOverAllDiscountDetails($data)
     {
+        $year = $data['po_year'];
+        $startDate = $year.'-04-01';
+        $endDate   = ($year+1).'-03-31';
+
         $sql = "SELECT 
                     *
                 FROM
@@ -230,7 +250,7 @@ class PoGenerateQuery extends CI_Model
                     unit = '".$data['unit']."' AND
                     type = '".$data['type']."' AND
                     po_number = '".$data['po_number']."' AND
-                    YEAR(po_date) = '".$data['po_year']."'";
+                    (DATE(po_date) BETWEEN '".$startDate."' AND '".$endDate."')";
 
         $data  = $this->db->query($sql)->result_array();
         return $data;
