@@ -96,9 +96,9 @@ table tr td, table tr th {
 
      	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 	     	[[if $searchPoData[0]['state_code'] eq 33]]
-	         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+	         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * ($v.price*$v.qty)) ]]
 	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
-	         		[[$v.CGST]]% 
+	         		[[$v.CGST]]%
 	         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
 	         	</td>
 	         	[[if $k eq 0]]
@@ -106,7 +106,7 @@ table tr td, table tr th {
 	         	[[assign var=DcolspanCalc value=$DcolspanCalc+2]]
 	         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+2]]
 	         	[[/if]]
-	         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+	         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * ($v.price*$v.qty)) ]]
 	         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
 	         		[[$v.SGST]]% 
 	         		</br>[ [[$SGSTTotalValue|number_format:2]] ]

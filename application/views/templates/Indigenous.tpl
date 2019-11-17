@@ -150,13 +150,13 @@
 		         	</td>
 		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
 			         	[[if $searchPoData[0]['state_code'] eq 33]]
-				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * ($v.price*$v.qty))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.CGST]]%
 				         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
 				         	</td>
 
-				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * ($v.price*$v.qty))]]
 				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.SGST]]% 
 				         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
