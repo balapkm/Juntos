@@ -48,7 +48,7 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
 
             $('a[href="#'+tab_switch_name+'"]').trigger('click');
         }
-    },500);
+    },1000);
 
 
     $('#search_year_po').datepicker({
@@ -133,6 +133,10 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
           po_number : "",
           final_po_data : {}
         };
+
+        if(po_year !== "") {
+            $scope.searchPoData['po_year'] = po_year
+        }
         $scope.searchPoBasedOnYear();
     }
 
@@ -259,6 +263,13 @@ app.controller('GeneratePo',function($scope,httpService,validateService,$state,c
         };
         po_number = $scope.generatePoData['unit']+"|"+$scope.generatePoData['type']+"|"+$scope.generatePoData['po_raw_number']+"|"+$scope.generatePoData['po_number'];
         po_year   = new Date($scope.generatePoData['po_date']).getFullYear();
+
+        var po_month = new Date($scope.generatePoData['po_date']).getMonth();
+        if(po_month < 3) {
+            po_year = po_year - 1;
+        }
+        console.log(po_year,"po_year");
+        // return false;
         httpService.callWebService(service_details).then(function(data){
             if(data)
             { 
