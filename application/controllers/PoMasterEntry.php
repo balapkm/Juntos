@@ -9,12 +9,14 @@ class PoMasterEntry extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('Mysmarty');
+		$this->load->library('Logwrite');
 		$this->load->model('PoMasterEntryQuery');
 		$this->load->config('application');
 	}
 
 	public function index()
 	{
+		//print_r($this->logwrite->logWrite());
 		$this->data['supplier_entry'] = $this->PoMasterEntryQuery->select_supplier_entry();
 		$this->data['max_supplier_id'] = $this->PoMasterEntryQuery->get_max_supplier_id();
 		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
