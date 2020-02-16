@@ -161,6 +161,7 @@ class PaymentBook extends CI_Controller
 		}
 
 		$data = $this->PaymentBookQuery->getDebitNoteListData($this->data);
+		$this->logwrite->logWrite("getDebitNoteListData",print_r($data,1),"searchPaymentBookAction","a+");
 		foreach ($data as $key => $value) 
 		{
 			if($value['amount'] != 0){
@@ -173,6 +174,7 @@ class PaymentBook extends CI_Controller
 		}
 
 		$advancePaymentDetails = array();
+		$this->logwrite->logWrite("getAdvancePaymentDetails",print_r($this->data,1),"searchPaymentBookAction","a+");
 		$data = $this->PaymentBookQuery->getAdvancePaymentDetails($this->data,"Y");
 		foreach ($data as $key => $value) 
 		{
@@ -547,10 +549,13 @@ class PaymentBook extends CI_Controller
 		$selectData = $this->PaymentBookQuery->select_cheque_number_details($this->data);
 		if(count($selectData) == 0)
 		{
+			$this->logwrite->logWrite("editChequeNumberDetailsAction",print_r($this->data,1),"editChequeNumberDetailsAction","a+");
+
 			return $this->PaymentBookQuery->insert_cheque_number_details($this->data);
 		}
 		else
 		{
+			$this->logwrite->logWrite("editChequeNumberDetailsAction",print_r($this->data,1),"editChequeNumberDetailsAction","a+");
 			foreach ($selectData as $key => $value) {
 				$this->data['cheque_number_id'] = $value['cheque_number_id'];
 				$this->PaymentBookQuery->update_cheque_number_details($this->data);
@@ -661,6 +666,7 @@ class PaymentBook extends CI_Controller
 			{
 				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
 					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
+				}
 						else
 				{
 					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
