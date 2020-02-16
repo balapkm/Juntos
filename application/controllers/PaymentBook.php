@@ -14,6 +14,7 @@ class PaymentBook extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('Mysmarty');
+		$this->load->library('Logwrite');
 		$this->load->model('PoGenerateQuery');
 		$this->load->model('PaymentBookQuery');
 		$this->load->config('application');
@@ -33,6 +34,7 @@ class PaymentBook extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("getUniquePoNumber",print_r($data,1),"getUniquePoNumber","a+");
 		return $data;
 	}
 
@@ -49,6 +51,7 @@ class PaymentBook extends CI_Controller
 			$data[$key]['po_raw_number'] = $data[$key]['po_number'];
 			$data[$key]['po_number']     = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("getPoNumberAsPerSupplier",print_r($data,1),"getPoNumberAsPerSupplier","a+");
 		return $data;
 	}
 
@@ -379,6 +382,7 @@ class PaymentBook extends CI_Controller
 		$selectData = $this->PaymentBookQuery->select_cheque_number_details($advanceEditData);
 		if(count($selectData) == 0)
 		{
+	        // $this->logwrite->logWrite("editAdvancePaymentRemainingAction",print_r($data,1),"editAdvancePaymentRemainingAction","a+");
 			return $this->PaymentBookQuery->insert_cheque_number_details($advanceEditData);
 		}
 		return true;
@@ -391,6 +395,7 @@ class PaymentBook extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+	        // $this->logwrite->logWrite("editAdvancePaymentRemainingAction",print_r($data,1),"editAdvancePaymentRemainingAction","a+");
 		return $data;
 	}
 
@@ -473,6 +478,7 @@ class PaymentBook extends CI_Controller
 			);
 		    $this->PaymentBookQuery->insert_cheque_number_details($cData);
 		}
+		$this->logwrite->logWrite("updatePaymentBookDetails",print_r($this->data,1),"updatePaymentBookDetails","a+");
 		return $this->PaymentBookQuery->updatePaymentListData($this->data);
 
 	}
@@ -577,6 +583,7 @@ class PaymentBook extends CI_Controller
 				"payable_month"     => $this->data['payable_month'],
 				"amount"     => $this->data['amount']
 			);
+		$this->logwrite->logWrite("addNoteDetails",print_r($addData,1),"addNoteDetails","a+");
 		return $this->PaymentBookQuery->insert_debit_note_details($addData);
 	}
 
@@ -611,6 +618,7 @@ class PaymentBook extends CI_Controller
 		if(count($selectData) == 0)
 		{
 
+			$this->logwrite->logWrite("updateNoteDetails",print_r($addData,1),"updateNoteDetails","a+");
 			return $this->PaymentBookQuery->insert_cheque_number_details($addData);
 		}
 		else
@@ -618,6 +626,7 @@ class PaymentBook extends CI_Controller
 			foreach ($selectData as $key => $value) {
 				$this->data['cheque_number_id'] = $value['cheque_number_id'];
 				$this->PaymentBookQuery->update_cheque_number_details($addData);
+				$this->logwrite->logWrite("updateNoteDetails",print_r($addData,1),"updateNoteDetails","a+");
 			}
 			return true;
 		}
@@ -652,8 +661,7 @@ class PaymentBook extends CI_Controller
 			{
 				if(in_array($finalResponse['lastDateOfMonth'],$payable_month_array)){
 					$result[$finalResponse['lastDateOfMonth']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
-				}
-				else
+						else
 				{
 					$result[$value['payable_month']."_".$value['supplier_id']]['paymentBookList'][$value['bill_number']."_".$value['bill_date']][] = $value;
 					$result[$value['payable_month']]."_".$value['supplier_id']['supplier_name'] = $value['supplier_name'];

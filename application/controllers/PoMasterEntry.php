@@ -16,7 +16,6 @@ class PoMasterEntry extends CI_Controller
 
 	public function index()
 	{
-		//print_r($this->logwrite->logWrite());
 		$this->data['supplier_entry'] = $this->PoMasterEntryQuery->select_supplier_entry();
 		$this->data['max_supplier_id'] = $this->PoMasterEntryQuery->get_max_supplier_id();
 		$this->data['material_entry'] = $this->PoMasterEntryQuery->select_material_entry();
@@ -34,6 +33,7 @@ class PoMasterEntry extends CI_Controller
 
 	public function searchMaterial(){
 		$data  = $this->PoMasterEntryQuery->select_material_master(array(),'Y',$_POST['q']);
+		$this->logwrite->logWrite("searchMaterial",print_r($data,1),"searchMaterial","a+");
 		$final = array();
 		foreach ($data as $key => $value) {
 			$final[] = array("value"=>$value['material_name'],"label"=>$value['material_name'],"id"=>$value['material_name']."|".$value['material_id']);
@@ -79,6 +79,7 @@ class PoMasterEntry extends CI_Controller
 		  		$data[] = fgetcsv($file);
 		  	}
 			fclose($file);
+				$this->logwrite->logWrite("importData",print_r($data,1),"importData","a+");
 
 			foreach ($data as $key => $value) 
 			{
@@ -162,12 +163,14 @@ class PoMasterEntry extends CI_Controller
 				$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
 				$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
 				$this->data['material_master_id'] = $selectData[0]['material_id'];
+				$this->logwrite->logWrite("addMaterialAction",print_r($data,1),"addMaterialAction","a+");
 				$newMaterial= true;
 			}
 			else
 			{
 				$newMaterial= false;
 				$this->data['material_master_id'] = $selectData[0]['material_id'];
+				$this->logwrite->logWrite("addMaterialAction",print_r($data,1),"addMaterialAction","a+");
 			}
 			unset($this->data['add_material_name']);
 		// }
@@ -217,10 +220,14 @@ class PoMasterEntry extends CI_Controller
 			$this->PoMasterEntryQuery->insert_supplier_entry($data,'material_master');
 			$selectData = $this->PoMasterEntryQuery->select_material_master($this->data);
 			$this->data['material_master_id'] = $selectData[0]['material_id'];
+				$this->logwrite->logWrite("updateMaterialAction",print_r($data,1),"updateMaterialAction","a+");
+
 		}
 		else
 		{
 			$this->data['material_master_id'] = $selectData[0]['material_id'];
+				$this->logwrite->logWrite("updateMaterialAction",print_r($data,1),"updateMaterialAction","a+");
+			
 		}
 		unset($this->data['add_material_name']);
 		unset($this->data['state_code']);
