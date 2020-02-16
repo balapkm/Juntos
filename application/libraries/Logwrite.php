@@ -15,11 +15,11 @@ class Logwrite {
         $dirName = date('Y-m-d');
         // fopen(APPPATH.'/logs/QueryFile/'.$dirName."/asasa.txt","a+");
         // print_r(APPPATH.'logs\QueryFile\/'.$dirName.'\/'.$fileName.".txt");exit;
-        if (!is_dir(APPPATH.'/logs/QueryFile/'.$dirName)) {
-            mkdir(APPPATH.'/logs/QueryFile/'.$dirName);
-            chmod(APPPATH.'/logs/QueryFile/'.$dirName, 0777);
+        if (!is_dir(APPPATH.'/logs/'.$dirName)) {
+            mkdir(APPPATH.'/logs/'.$dirName);
+            chmod(APPPATH.'/logs/'.$dirName, 0777);
         }
-        $file = fopen(APPPATH.'logs\QueryFile\/'.$dirName.'\/'.$fileName.".txt",$mode);
+        $file = fopen(APPPATH.'logs\/'.$dirName.'\/'.$fileName.".txt",$mode);
         // chmod($filename.".txt", 0777);
         // print_r($file);
         fwrite($file, "\n".date('Y-m-d h:i:s')."\n"."functionName:".$funcName."\n".$data);
