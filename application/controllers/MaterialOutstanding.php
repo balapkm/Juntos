@@ -9,6 +9,7 @@ class MaterialOutstanding extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('Mysmarty');
+		$this->load->library('Logwrite');
 		$this->load->model('PoGenerateQuery');
 		$this->load->model('PoMasterEntryQuery');
 		$this->load->model('PaymentBookQuery');
@@ -30,6 +31,7 @@ class MaterialOutstanding extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("getTrashData",print_r($data,1),"getTrashData","a+");
 		return $data;
 	}
 
@@ -39,6 +41,7 @@ class MaterialOutstanding extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("getUniquePoNumber",print_r($data,1),"getUniquePoNumber","a+");
 		return $data;
 	}
 
@@ -86,6 +89,7 @@ class MaterialOutstanding extends CI_Controller
 
 			$data[$key]['totalAmount'] = ($value['price'] * $value['qty']) + $CGSTTotalAmt + $SGSTTotalAmt + $IGSTTotalAmt - $discountTotalAmt;
 		}
+		$this->logwrite->logWrite("searchMaterialOutstandingAction",print_r($data,1),"searchMaterialOutstandingAction","a+");
 		return $data;
 	}
 
@@ -151,6 +155,8 @@ class MaterialOutstanding extends CI_Controller
 			$data[0] = $this->data;
 			
 			$this->PoGenerateQuery->update_po_generated_request_details($editData);
+			$this->logwrite->logWrite("updateMaterialOutstandingAction",print_r($editData,1),"updateMaterialOutstandingAction","a+");
+			$this->logwrite->logWrite("updateMaterialOutstandingAction",print_r($data,1),"insertMaterialOutstandingAction","a+");
 			return $this->PoGenerateQuery->insert_po_generated_request_details($data);
 		}
 		else
@@ -200,6 +206,7 @@ class MaterialOutstanding extends CI_Controller
 			$data['payable_month'] = $lastDateOfMonth;
 			$data['unit'] = $po_data[0]['unit'];
 			$data['supplier_id'] = $po_data[0]['supplier_id'];
+			$this->logwrite->logWrite("insert_cheque_number_details",print_r($data,1),"MaterialOutstandingAction","a+");
 			$this->PaymentBookQuery->insert_cheque_number_details($data);
 			return true;
 		}
