@@ -149,38 +149,30 @@
 		         		[[/if]]
 		         	</td>
 		         	[[if $searchPoData[0]['supplier_status'] neq 'UNREGISTERED']]
-				     	[[if $searchPoData[0]['state_code'] eq 33]]
-				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price + $DISCOUNTTotalValue)*$v.qty)) ]]
-				         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+			         	[[if $searchPoData[0]['state_code'] eq 33]]
+				         	[[assign var=CGSTTotalValue value=(($v.CGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.CGST]]%
 				         		</br>[ [[$CGSTTotalValue|number_format:2]] ]
 				         	</td>
-				         	[[if $k eq 0]]
-				         	[[assign var=TcolspanCalc value=$TcolspanCalc+2]]
-				         	[[assign var=DcolspanCalc value=$DcolspanCalc+2]]
-				         	[[assign var=TCcolspanCalc value=$TCcolspanCalc+2]]
-				         	[[/if]]
-				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price + $DISCOUNTTotalValue)*$v.qty)) ]]
-				         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+
+				         	[[assign var=SGSTTotalValue value=(($v.SGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.SGST]]% 
 				         		</br>[ [[$SGSTTotalValue|number_format:2]] ]
 				         	</td>
-				     	[[/if]]
+			         	[[/if]]
 
 
-				     	[[if $searchPoData[0]['state_code'] neq 33]]
-				     		[[if $k eq 0]]
-				     		[[assign var=TcolspanCalc value=$TcolspanCalc+1]]
-				     		[[assign var=DcolspanCalc value=$DcolspanCalc+1]]
-				     		[[assign var=TCcolspanCalc value=$TCcolspanCalc+1]]
-				     		[[/if]]
-				         	[[assign var=IGSTTotalValue value=[[(($v.IGST/100) * ($v.price + $DISCOUNTTotalValue) ) * $v.qty]]]]
-				         	<td width="10%" align="center" style="font:normal arial,helvetica,verdana; color:#000;">
+			         	[[if $searchPoData[0]['state_code'] neq 33]]
+				         	[[assign var=IGSTTotalValue value=(($v.IGST/100) * (($v.price*$v.qty) - $DISCOUNTTotalValue))]]
+				         	<td align="center" width="10%" class="own-td-2">
 				         		[[$v.IGST]]% 
 				         		</br>[ [[$IGSTTotalValue|number_format:2]] ]
 				         	</td>
-				     	[[/if]]
-			     	[[/if]]
+			         	[[/if]]
+
+		         	[[/if]]
 
 		         	[[assign var=totalPriceValue value=[[($v.qty*$v.price) + $IGSTTotalValue + $SGSTTotalValue + $CGSTTotalValue - $DISCOUNTTotalValue]]]]
 
