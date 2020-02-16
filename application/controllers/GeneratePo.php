@@ -9,6 +9,7 @@ class GeneratePo extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('Mysmarty');
+		$this->load->library('Logwrite');
 		$this->load->model('PoMasterEntryQuery');
 		$this->load->model('PoGenerateQuery');
 		$this->load->config('application');
@@ -29,6 +30,7 @@ class GeneratePo extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("getUniquePoNumber",print_r($data,1),"getUniquePoNumber","a+");
 		return $data;
 	}
 
@@ -52,6 +54,7 @@ class GeneratePo extends CI_Controller
 		$format            = $po_number_details[$this->data['unit']][$this->data['type']]['format'];
 		$data['po_number']     = $format.$number;
 		$data['po_raw_number'] = $number;
+		$this->logwrite->logWrite("getPONumberHighestBasedPODate",print_r($data,1),"getPONumberHighestBasedPODate","a+");
 		return $data;
 	}
 
@@ -73,6 +76,7 @@ class GeneratePo extends CI_Controller
 		foreach ($data as $key => $value) {
 			$data[$key]['full_po_number'] = $po_number_details[$value['unit']][$value['type']]['format'].$value['po_number'];
 		}
+		$this->logwrite->logWrite("searchPoBasedOnYear",print_r($data,1),"searchPoBasedOnYear","a+");
 		return $data;
 	}
 
@@ -107,7 +111,7 @@ class GeneratePo extends CI_Controller
 			$quantity = $this->data['quantity'];
 			unset($this->data['quantity']);
 		}
-
+		$this->logwrite->logWrite("generatePoData",print_r($material_id,1),"generatePoData","a+");	
 		$getMaterialdetails = $this->PoMasterEntryQuery->get_material_entry_in_array($material_id);
 		$count = 0;
 		foreach ($getMaterialdetails as $key => $value) {
@@ -139,6 +143,7 @@ class GeneratePo extends CI_Controller
 		{
 			$this->PoGenerateQuery->insert_import_other_details($finalInsertData[0]);
 		}
+		$this->logwrite->logWrite("generatePoData--insert",print_r($finalInsertData,1),"generatePoData","a+");	
 		return $this->PoGenerateQuery->insert_po_generated_request_details($finalInsertData);
 
 	}
