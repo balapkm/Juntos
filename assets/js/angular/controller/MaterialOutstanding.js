@@ -46,7 +46,11 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.materialOutStanding = "";
 
-    setTimeout(function(){$scope.exampleDataTable();},100);
+    setTimeout(function(){
+        if(dataTableVariable)
+            dataTableVariable.destroy();
+        $scope.exampleDataTable();
+    },1000);
 
     $scope.clearRedMark = function(id)
     {
@@ -83,6 +87,8 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
 
     $scope.exampleDataTable = function()
     {
+        dataTableVariable.destroy();
+        
         dataTableVariable = $('#example,#trashTable').DataTable({
             iDisplayLength: 100,
             dom: 'Brfrtip',
@@ -152,7 +158,9 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
                      $scope.totalAmountData['id'+data[i]['po_generated_request_id']] = data[i]['totalAmount'];
                 } 
                 $scope.showMaterialOutStandingTable = true;
-                setTimeout(function(){$scope.exampleDataTable();},100);
+                setTimeout(function(){
+                    $scope.exampleDataTable();
+                },2000);
             }
         });
     }
@@ -330,7 +338,7 @@ app.controller('MaterialOutstanding',function($scope,httpService,validateService
             { 
                 $('#modal-backdrop').css('display','none');
                 validateService.displayMessage('success','Updated Successfully','');
-                
+                dataTableVariable.destroy();
                 if($scope.editMaterialPOData['editType'] === 'TRASH')
                 {
                     $state.reload();
