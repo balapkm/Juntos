@@ -53,6 +53,29 @@ class CommonQuery extends CI_Model
         return $this->db->update('user_login_details',$update,array('user_login_id'=>$_SESSION['user_login_id']));
     }
 
+    public function getActions()
+    {
+        $user_group_id = $_SESSION['user_group_id'];
+
+        $this->db->select('user_actions');
+        $this->db->from('user_actions ua');
+        $this->db->join('user_action_group_mapping uagm', 'ua.user_action_id = uagm.user_action_id',"inner");
+        $this->db->where('uagm.group_id',$user_group_id);
+        $this->db->where('ua.status',"Y");
+
+        $query = $this->db->get();
+        $_SESSION['ACTIONS'] = [];
+        if($query->num_rows() > 0)
+        {
+            $data = $query->result();
+            $data = $this->objectToArray($data);
+
+            foreach ($data as $key => $value) {
+                $_SESSION['ACTIONS'][$value['user_actions']] = 'Y';
+            }
+        }
+    }
+
     private function objectToArray($data)
     {
     	return json_decode(json_encode($data),1);

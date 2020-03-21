@@ -22,6 +22,8 @@ class MaterialOutstanding extends CI_Controller
 		$this->data['trash_details']         = $this->getTrashData();
 		$this->data['material_name_details'] = $this->PoMasterEntryQuery->select_material_master();
 		$this->data['po_unique_number']      = $this->getUniquePoNumber();
+		$this->data['action_details'] = $_SESSION['ACTIONS'];
+		
 		return $this->mysmarty->view('MaterialOutstanding.tpl',$this->data,TRUE);
 	}
 

@@ -22,7 +22,9 @@
 				                  <select class="form-control" id="outstanding_type" ng-model="generatePoData.outstanding_type">
 				                  	  <option value="">Choose Outstanding Type</option>
 				                  	  <option value="M">Material</option>
+				                  	  [[if !isset($action_details.DONT_SHOW_BILL_OUTSTANDING) ]]
 				                  	  <option value="B">Bill</option>
+				                  	  [[/if]]
 				                  </select>
 				                </div>
 				            </div>

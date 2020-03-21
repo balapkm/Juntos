@@ -34,6 +34,7 @@ class Login extends CI_Controller {
 			$_SESSION['user_login_id']   = $data[0]['user_login_id'];
 			$data[0]['session_id'] = session_id();
 
+			$this->commonQuery->getActions();
 			return $data[0];
 		}
 		else
